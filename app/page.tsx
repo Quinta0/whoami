@@ -19,17 +19,17 @@ export default function Home() {
     {
       name: "Google IT Support Professional Certificate",
       issuer: "Google",
-      image: "certificates/Coursera_RZ1V4RU6JP2D.png"
+      image: "./certificates/Coursera_RZ1V4RU6JP2D.png"
     },
     {
       name: "Google Data Analytics Professional Certificate",
       issuer: "Google",
-      image: "certificates/Coursera_EN181NFH7VYT.png"
+      image: "./certificates/Coursera_EN181NFH7VYT.png"
     },
     {
       name: "IBM Python for Data Science, AI & Development",
       issuer: "IBM",
-      image: "certificates/Coursera_QT9WT5VCHJNU.png"
+      image: "./certificates/Coursera_QT9WT5VCHJNU.png"
     }
   ];
   return (
