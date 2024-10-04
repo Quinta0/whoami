@@ -147,10 +147,10 @@ export default function Home() {
                   githubLink: "https://github.com/Quinta0/ForestFire"
                 },
                 {
-                  title: "Network Monitoring Tool",
-                  description: "A tool for monitoring and analyzing network traffic, demonstrating networking skills and data visualization.",
-                  technologies: ["Python", "Scapy", "Matplotlib"],
-                  githubLink: "#"
+                  title: "AequitasIQ",
+                  description: "An intelligent financial analysis tool that creates an interactive dashboard to visualize personal income and expenses.",
+                  technologies: ["Python", "Pandas", "LLM", "Ollama", "Plotly", "NumPy", "LangChain"],
+                  githubLink: "https://github.com/Quinta0/AequitasIQ-.git"
                 }
               ].map((project, index) => (
                   <div key={index} className="bg-[#0000b3] rounded-md p-4">
