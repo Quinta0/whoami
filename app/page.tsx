@@ -118,12 +118,17 @@ const Portfolio = () => {
     'Python for Data Science, AI & Development'
   ];
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     setActiveSection(sectionId);
   };
 
-  const ProjectGallery = ({ project, onClose }) => (
+  type Project = typeof projects[number];
+  interface ProjectGalleryProps {
+    project: Project;
+    onClose: () => void;
+  }
+  const ProjectGallery: React.FC<ProjectGalleryProps> = ({ project, onClose }) => (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       style={{ backgroundColor: 'rgba(46, 52, 64, 0.95)' }}
