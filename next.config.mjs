@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
+  output: 'export',
+  distDir: 'out',
+  trailingSlash: true,
   images: {
-    domains: ['via.placeholder.com'],
-  },
+    unoptimized: true,
+    domains: ['via.placeholder.com']
+  }
 }
 
-module.exports = nextConfig
+export default nextConfig
