@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Mail, ExternalLink, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon } from 'lucide-react';
 
@@ -123,12 +124,12 @@ const Portfolio = () => {
   };
 
   const ProjectGallery = ({ project, onClose }) => (
-    <div 
+    <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       style={{ backgroundColor: 'rgba(46, 52, 64, 0.95)' }}
       onClick={onClose}
     >
-      <div 
+      <div
         className="max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-lg"
         style={{ backgroundColor: nordColors.bgLight }}
         onClick={(e) => e.stopPropagation()}
@@ -143,18 +144,18 @@ const Portfolio = () => {
                 <span className="text-sm" style={{ color: nordColors.blue }}>
                   {project.period}
                 </span>
-                <span 
+                <span
                   className="px-3 py-1 rounded-full text-xs"
-                  style={{ 
-                    backgroundColor: nordColors.darkBlue, 
-                    color: nordColors.text 
+                  style={{
+                    backgroundColor: nordColors.darkBlue,
+                    color: nordColors.text
                   }}
                 >
                   {project.status}
                 </span>
               </div>
             </div>
-            <button 
+            <button
               onClick={onClose}
               className="text-2xl hover:opacity-70"
               style={{ color: nordColors.textMuted }}
@@ -167,8 +168,8 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             {project.images.map((image, idx) => (
               <div key={idx} className="aspect-video rounded-lg overflow-hidden">
-                <img 
-                  src={image} 
+                <img
+                  src={image}
                   alt={`${project.title} screenshot ${idx + 1}`}
                   className="w-full h-full object-cover"
                 />
@@ -194,7 +195,7 @@ const Portfolio = () => {
             <div className="grid md:grid-cols-2 gap-2">
               {project.features.map((feature, idx) => (
                 <div key={idx} className="flex items-center">
-                  <div 
+                  <div
                     className="w-2 h-2 rounded-full mr-3"
                     style={{ backgroundColor: nordColors.accent }}
                   ></div>
@@ -211,12 +212,12 @@ const Portfolio = () => {
             </h4>
             <div className="flex flex-wrap gap-2">
               {project.tech.map((tech) => (
-                <span 
-                  key={tech} 
+                <span
+                  key={tech}
                   className="px-3 py-1 rounded text-sm"
-                  style={{ 
-                    backgroundColor: nordColors.bg, 
-                    color: nordColors.accent 
+                  style={{
+                    backgroundColor: nordColors.bg,
+                    color: nordColors.accent
                   }}
                 >
                   {tech}
@@ -228,7 +229,7 @@ const Portfolio = () => {
           {/* Links */}
           <div className="flex gap-4">
             {project.github && (
-              <a 
+              <a
                 href={project.github}
                 className="flex items-center gap-2 px-4 py-2 rounded hover:opacity-80 transition-opacity"
                 style={{ backgroundColor: nordColors.bgLighter, color: nordColors.text }}
@@ -238,7 +239,7 @@ const Portfolio = () => {
               </a>
             )}
             {project.demo && (
-              <a 
+              <a
                 href={project.demo}
                 className="flex items-center gap-2 px-4 py-2 rounded hover:opacity-80 transition-opacity"
                 style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
@@ -256,7 +257,7 @@ const Portfolio = () => {
   return (
     <div className="min-h-screen font-sans" style={{ backgroundColor: nordColors.bg, color: nordColors.text }}>
       {/* Navigation */}
-      <nav 
+      <nav
         className="fixed top-0 w-full z-40 transition-all duration-300"
         style={{
           backgroundColor: scrolled ? 'rgba(46, 52, 64, 0.95)' : 'transparent',
@@ -275,8 +276,8 @@ const Portfolio = () => {
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
                   className="transition-colors hover:opacity-80"
-                  style={{ 
-                    color: activeSection === item.toLowerCase() ? nordColors.accent : nordColors.text 
+                  style={{
+                    color: activeSection === item.toLowerCase() ? nordColors.accent : nordColors.text
                   }}
                 >
                   {item}
@@ -302,31 +303,31 @@ const Portfolio = () => {
               Passionate about the intersection of economics and technology, exploring how data and code can solve real-world problems.
             </p>
           </div>
-          
+
           <div className="flex justify-center space-x-6 mb-12">
-            <a 
-              href="https://github.com/Quinta0" 
+            <a
+              href="https://github.com/Quinta0"
               className="p-3 rounded-full transition-colors hover:opacity-80"
               style={{ backgroundColor: nordColors.bgLight }}
             >
               <Github className="w-6 h-6" style={{ color: nordColors.text }} />
             </a>
-            <a 
-              href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" 
+            <a
+              href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
               className="p-3 rounded-full transition-colors hover:opacity-80"
               style={{ backgroundColor: nordColors.bgLight }}
             >
               <Linkedin className="w-6 h-6" style={{ color: nordColors.text }} />
             </a>
-            <a 
-              href="mailto:0pietroquintavalle0@gmail.com" 
+            <a
+              href="mailto:0pietroquintavalle0@gmail.com"
               className="p-3 rounded-full transition-colors hover:opacity-80"
               style={{ backgroundColor: nordColors.bgLight }}
             >
               <Mail className="w-6 h-6" style={{ color: nordColors.text }} />
             </a>
-            <a 
-              href="https://quinta0.github.io/whoami/" 
+            <a
+              href="https://quinta0.github.io/whoami/"
               className="p-3 rounded-full transition-colors hover:opacity-80"
               style={{ backgroundColor: nordColors.bgLight }}
             >
@@ -334,7 +335,7 @@ const Portfolio = () => {
             </a>
           </div>
         </div>
-        
+
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <ChevronDown className="w-6 h-6" style={{ color: nordColors.blue }} />
         </div>
@@ -346,31 +347,31 @@ const Portfolio = () => {
           <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
             About Me
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
-                I'm an Economics student at USI with extensive experience in data analytics and web development. 
+                I'm an Economics student at USI with extensive experience in data analytics and web development.
                 My journey combines analytical thinking with technical skills to create meaningful solutions.
               </p>
               <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
-                Google-certified in Data Analytics and IT Support, I bring proven expertise in Python, R, SQL, 
+                Google-certified in Data Analytics and IT Support, I bring proven expertise in Python, R, SQL,
                 and modern web technologies like Next.js and React.
               </p>
               <div className="flex flex-wrap gap-3">
-                <span 
+                <span
                   className="px-3 py-1 rounded-full text-sm"
                   style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
                 >
                   Italian (Native)
                 </span>
-                <span 
+                <span
                   className="px-3 py-1 rounded-full text-sm"
                   style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
                 >
                   English (C2)
                 </span>
-                <span 
+                <span
                   className="px-3 py-1 rounded-full text-sm"
                   style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
                 >
@@ -378,15 +379,15 @@ const Portfolio = () => {
                 </span>
               </div>
             </div>
-            
+
             <div className="space-y-6">
               {Object.entries(skills).map(([category, skillList]) => (
-                <div 
-                  key={category} 
+                <div
+                  key={category}
                   className="p-6 rounded-lg border"
-                  style={{ 
-                    backgroundColor: nordColors.bg, 
-                    borderColor: nordColors.bgLight 
+                  style={{
+                    backgroundColor: nordColors.bg,
+                    borderColor: nordColors.bgLight
                   }}
                 >
                   <h3 className="text-xl font-semibold mb-3" style={{ color: nordColors.blue }}>
@@ -394,12 +395,12 @@ const Portfolio = () => {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {skillList.map((skill) => (
-                      <span 
-                        key={skill} 
+                      <span
+                        key={skill}
                         className="px-3 py-1 rounded text-sm"
-                        style={{ 
-                          backgroundColor: nordColors.bgLighter, 
-                          color: nordColors.text 
+                        style={{
+                          backgroundColor: nordColors.bgLighter,
+                          color: nordColors.text
                         }}
                       >
                         {skill}
@@ -419,20 +420,20 @@ const Portfolio = () => {
           <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
             Featured Projects
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="p-6 rounded-lg border transition-colors hover:opacity-90 cursor-pointer"
-                style={{ 
-                  backgroundColor: nordColors.bgLight, 
-                  borderColor: nordColors.bgLighter 
+                style={{
+                  backgroundColor: nordColors.bgLight,
+                  borderColor: nordColors.bgLighter
                 }}
                 onClick={() => setShowProjectGallery(project)}
               >
                 <div className="flex items-center mb-4">
-                  <div 
+                  <div
                     className="p-2 rounded-lg mr-3"
                     style={{ backgroundColor: nordColors.darkBlue }}
                   >
@@ -447,19 +448,19 @@ const Portfolio = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <p className="leading-relaxed mb-4" style={{ color: nordColors.textMuted }}>
                   {project.description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech) => (
-                    <span 
-                      key={tech} 
+                    <span
+                      key={tech}
                       className="px-2 py-1 rounded text-xs"
-                      style={{ 
-                        backgroundColor: nordColors.bg, 
-                        color: nordColors.accent 
+                      style={{
+                        backgroundColor: nordColors.bg,
+                        color: nordColors.accent
                       }}
                     >
                       {tech}
@@ -468,18 +469,18 @@ const Portfolio = () => {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <span 
+                  <span
                     className="text-sm flex items-center gap-2"
                     style={{ color: nordColors.blue }}
                   >
                     <Image className="w-4 h-4" />
                     View Gallery
                   </span>
-                  <span 
+                  <span
                     className="px-2 py-1 rounded text-xs"
-                    style={{ 
-                      backgroundColor: nordColors.darkBlue, 
-                      color: nordColors.text 
+                    style={{
+                      backgroundColor: nordColors.darkBlue,
+                      color: nordColors.text
                     }}
                   >
                     {project.status}
@@ -497,7 +498,7 @@ const Portfolio = () => {
           <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
             Education & Certifications
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-12">
             {/* Education */}
             <div>
@@ -505,15 +506,15 @@ const Portfolio = () => {
                 <GraduationCap className="w-6 h-6 mr-2" />
                 Education
               </h3>
-              
+
               <div className="space-y-6">
                 {education.map((edu, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="p-6 rounded-lg border"
-                    style={{ 
-                      backgroundColor: nordColors.bg, 
-                      borderColor: nordColors.bgLight 
+                    style={{
+                      backgroundColor: nordColors.bg,
+                      borderColor: nordColors.bgLight
                     }}
                   >
                     <h4 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>
@@ -526,7 +527,7 @@ const Portfolio = () => {
                       <span className="text-sm" style={{ color: nordColors.textMuted }}>
                         {edu.period}
                       </span>
-                      <span 
+                      <span
                         className="px-2 py-1 rounded text-xs"
                         style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
                       >
@@ -537,25 +538,25 @@ const Portfolio = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Certificates */}
             <div>
               <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: nordColors.blue }}>
                 <Award className="w-6 h-6 mr-2" />
                 Certifications
               </h3>
-              
+
               <div className="space-y-4">
                 {certificates.map((cert, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="p-4 rounded-lg border flex items-center"
-                    style={{ 
-                      backgroundColor: nordColors.bg, 
-                      borderColor: nordColors.bgLight 
+                    style={{
+                      backgroundColor: nordColors.bg,
+                      borderColor: nordColors.bgLight
                     }}
                   >
-                    <div 
+                    <div
                       className="w-2 h-2 rounded-full mr-4"
                       style={{ backgroundColor: nordColors.accent }}
                     ></div>
@@ -563,12 +564,12 @@ const Portfolio = () => {
                   </div>
                 ))}
               </div>
-              
-              <div 
+
+              <div
                 className="mt-8 p-6 rounded-lg border"
-                style={{ 
-                  backgroundColor: nordColors.bg, 
-                  borderColor: nordColors.bgLight 
+                style={{
+                  backgroundColor: nordColors.bg,
+                  borderColor: nordColors.bgLight
                 }}
               >
                 <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
@@ -576,12 +577,12 @@ const Portfolio = () => {
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {['Computer Hardware', 'Web Development', 'Finance', 'Economics', 'Literature'].map((interest) => (
-                    <span 
-                      key={interest} 
+                    <span
+                      key={interest}
                       className="px-3 py-1 rounded text-sm"
-                      style={{ 
-                        backgroundColor: nordColors.bgLighter, 
-                        color: nordColors.text 
+                      style={{
+                        backgroundColor: nordColors.bgLighter,
+                        color: nordColors.text
                       }}
                     >
                       {interest}
@@ -603,10 +604,10 @@ const Portfolio = () => {
           <p className="text-lg mb-12 max-w-2xl mx-auto" style={{ color: nordColors.textMuted }}>
             I'm always interested in discussing new opportunities, collaborations, or just having a chat about technology and economics.
           </p>
-          
+
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            <a 
-              href="mailto:0pietroquintavalle0@gmail.com" 
+            <a
+              href="mailto:0pietroquintavalle0@gmail.com"
               className="p-6 rounded-lg transition-colors hover:opacity-80 group"
               style={{ backgroundColor: nordColors.bgLight }}
             >
@@ -614,9 +615,9 @@ const Portfolio = () => {
               <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>Email</h3>
               <p className="text-sm" style={{ color: nordColors.textMuted }}>Drop me a line</p>
             </a>
-            
-            <a 
-              href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" 
+
+            <a
+              href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
               className="p-6 rounded-lg transition-colors hover:opacity-80 group"
               style={{ backgroundColor: nordColors.bgLight }}
             >
@@ -624,9 +625,9 @@ const Portfolio = () => {
               <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>LinkedIn</h3>
               <p className="text-sm" style={{ color: nordColors.textMuted }}>Let's connect professionally</p>
             </a>
-            
-            <a 
-              href="https://github.com/Quinta0" 
+
+            <a
+              href="https://github.com/Quinta0"
               className="p-6 rounded-lg transition-colors hover:opacity-80 group"
               style={{ backgroundColor: nordColors.bgLight }}
             >
@@ -649,9 +650,9 @@ const Portfolio = () => {
 
       {/* Project Gallery Modal */}
       {showProjectGallery && (
-        <ProjectGallery 
-          project={showProjectGallery} 
-          onClose={() => setShowProjectGallery(false)} 
+        <ProjectGallery
+          project={showProjectGallery}
+          onClose={() => setShowProjectGallery(false)}
         />
       )}
     </div>
