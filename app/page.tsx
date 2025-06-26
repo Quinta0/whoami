@@ -50,13 +50,11 @@ const Portfolio = () => {
       icon: <Code className="w-6 h-6" />,
       status: 'Live',
       images: [
-        'https://via.placeholder.com/600x400/81A1C1/2E3440?text=Algorithm+Visualizer',
-        'https://via.placeholder.com/600x400/88C0D0/2E3440?text=Sorting+Demo',
-        'https://via.placeholder.com/600x400/5E81AC/2E3440?text=Interactive+UI'
+        'valgo.png',
       ],
       features: ['Real-time algorithm visualization', 'Multiple sorting algorithms', 'Step-by-step breakdown', 'Performance comparison'],
       github: 'https://github.com/Quinta0/valgo',
-      demo: 'https://valgo-demo.vercel.app'
+      demo: 'https://quinta0.github.io/valgo/'
     },
     {
       title: 'Boston Housing Price Prediction',
@@ -64,14 +62,12 @@ const Portfolio = () => {
       description: 'Machine learning model to predict housing prices in the Boston area based on various features such as crime rate, average number of rooms per dwelling, and accessibility to radial highways.',
       tech: ['Python', 'Machine Learning', 'Data Analysis', 'Statistical Modeling'],
       icon: <BarChart3 className="w-6 h-6" />,
-      status: 'In Progress',
-      images: [
-        'https://via.placeholder.com/600x400/A3BE8C/2E3440?text=Data+Visualization',
-        'https://via.placeholder.com/600x400/EBCB8B/2E3440?text=ML+Model',
-        'https://via.placeholder.com/600x400/D08770/2E3440?text=Results+Analysis'
+      status: 'Academic Project',
+      images:[
+        'Housing.jpeg',
       ],
       features: ['Predictive modeling', 'Feature engineering', 'Data visualization', 'Statistical analysis'],
-      github: 'https://github.com/Quinta0/boston-housing'
+      github: 'https://github.com/Quinta0/BostonHousing'
     },
     {
       title: 'Forest Fire Simulation',
@@ -81,12 +77,10 @@ const Portfolio = () => {
       icon: <Database className="w-6 h-6" />,
       status: 'Academic Project',
       images: [
-        'https://via.placeholder.com/600x400/BF616A/2E3440?text=Fire+Simulation',
-        'https://via.placeholder.com/600x400/B48EAD/2E3440?text=Statistical+Model',
-        'https://via.placeholder.com/600x400/8FBCBB/2E3440?text=Data+Analysis'
+        'forestfire.jpg',
       ],
       features: ['Monte Carlo simulation', 'Environmental factors modeling', 'Statistical analysis', 'Visualization tools'],
-      github: 'https://github.com/Quinta0/forest-fire-sim'
+      github: 'https://github.com/Quinta0/ForestFire'
     }
   ];
 
