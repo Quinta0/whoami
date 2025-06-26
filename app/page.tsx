@@ -5,7 +5,7 @@ import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
-  const [showProjectGallery, setShowProjectGallery] = useState(false);
+  const [showProjectGallery, setShowProjectGallery] = useState<Project | null>(null);
 
   // Nord Color Palette
   const nordColors = {
@@ -657,7 +657,7 @@ const Portfolio = () => {
       {showProjectGallery && (
         <ProjectGallery
           project={showProjectGallery}
-          onClose={() => setShowProjectGallery(false)}
+          onClose={() => setShowProjectGallery(null)}
         />
       )}
     </div>
