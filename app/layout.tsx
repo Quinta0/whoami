@@ -1,36 +1,33 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import React from "react";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import type { Metadata } from 'next'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Quintavalle Pietro",
-  description: "My personal website",
-};
+  title: 'Pietro Quintavalle - Economics Student & Developer',
+  description: 'Economics student at USI with extensive data analytics and web development expertise. Google-certified in Data Analytics and IT Support.',
+  keywords: ['Pietro Quintavalle', 'Economics', 'Data Analytics', 'Web Development', 'Switzerland', 'USI'],
+  authors: [{ name: 'Pietro Quintavalle' }],
+  openGraph: {
+    title: 'Pietro Quintavalle - Economics Student & Developer',
+    description: 'Economics student at USI with extensive data analytics and web development expertise.',
+    url: 'https://your-domain.com',
+    siteName: 'Pietro Quintavalle Portfolio',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pietro Quintavalle - Economics Student & Developer',
+    description: 'Economics student at USI with extensive data analytics and web development expertise.',
+  },
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiasing`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
-  );
+  )
 }
