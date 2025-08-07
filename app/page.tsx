@@ -73,64 +73,56 @@ const Portfolio = () => {
     {
       title: 'Enterprise Proxmox Infrastructure',
       period: 'Professional Client Project',
-      description: 'Deployed a full single-node virtualization environment using Proxmox VE, with structured rack cabling, DDNS, and NGINX reverse proxy for secure service exposure. Integrated Tailscale VPN for remote management.',
+      description: 'Deployed a full single-node virtualization environment using Proxmox VE, with structured rack cabling, DDNS, and NGINX reverse proxy for secure service exposure. Integrated Tailscale VPN for remote management. Configured Docker containers and LXC instances to run Nextcloud, Jellyfin, and TrueNAS. Enabled centralized infrastructure visibility using Grafana, Prometheus, and a Homarr dashboard.',
       tech: ['Proxmox VE', 'NGINX', 'Docker', 'LXC', 'Grafana', 'Tailscale', 'DDNS', 'TrueNAS', 'Linux'],
-      icon: <Server className="w-6 h-6" />,
+      icon: <Code className="w-6 h-6" />,
       status: 'Production',
-      images: [
-        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Proxmox+Dashboard',
-      ],
+      images: [],
       features: ['Centralized infrastructure visibility using Grafana', 'Docker containers and LXC instances', 'Nextcloud, Jellyfin, and TrueNAS integration', 'Secure remote access via VPN'],
       category: 'Infrastructure'
     },
     {
       title: 'Multi-User NAS Solution',
       period: 'Professional Client Project',
-      description: 'Designed and deployed a RAID 10-based NAS system supporting 9 users as a self-hosted cloud storage alternative. Configured SMB/NFS shares, access control lists (ACLs), and failover mechanisms.',
+      description: 'Designed and deployed a RAID 10-based NAS system supporting 9 users as a self-hosted cloud storage alternative to Google/iCloud. Configured SMB/NFS shares, access control lists (ACLs), and failover mechanisms. Automated snapshotting and rsync-based backups for a reliable, high-availability storage solution.',
       tech: ['RAID', 'TrueNAS', 'rsync', 'SMB/NFS', 'systemd timers', 'ACLs', 'Linux'],
       icon: <Database className="w-6 h-6" />,
       status: 'Production',
-      images: [
-        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=NAS+Dashboard',
-      ],
+      images: [],
       features: ['Automated snapshotting and rsync-based backups', 'High-availability storage solution', 'Multi-user access control', 'Failover mechanisms'],
       category: 'Storage'
     },
     {
       title: 'Custom Gaming Systems',
       period: 'Professional Client Project',
-      description: 'Engineered and delivered 12+ custom PC builds, including high-performance gaming rigs and workstation-grade machines. Focused on component compatibility analysis, PSU sizing, and thermal management.',
+      description: 'Engineered and delivered 12+ custom PC builds, including high-performance gaming rigs and workstation-grade machines. Focused on component compatibility analysis, PSU sizing, airflow and thermal management, and BIOS/driver optimization for performance tuning.',
       tech: ['Hardware Engineering', 'BIOS Configuration', 'Thermal Management', 'Performance Tuning'],
-      icon: <Settings className="w-6 h-6" />,
+      icon: <Code className="w-6 h-6" />,
       status: 'Delivered',
-      images: [
-        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Custom+PC+Build',
-      ],
+      images: [],
       features: ['Component compatibility analysis', 'PSU sizing and airflow optimization', 'BIOS/driver optimization', 'System benchmarking'],
       category: 'Hardware'
     },
     {
       title: 'Personal Homelab Infrastructure',
       period: 'Personal Project',
-      description: 'Replicated enterprise-level infrastructure architecture in a personal homelab, using Proxmox, Docker, and LXC. Focused on Infrastructure as Code (IaC) principles and container orchestration.',
+      description: 'Replicated enterprise-level infrastructure architecture in a personal homelab, using Proxmox, Docker, and LXC. Focused on Infrastructure as Code (IaC) principles, virtual machine provisioning, monitoring, and container orchestration. Demonstrated ability to standardize and document reproducible deployment procedures.',
       tech: ['Proxmox VE', 'Docker', 'LXC', 'Bash', 'Tailscale', 'Grafana', 'IaC'],
       icon: <Code className="w-6 h-6" />,
       status: 'Ongoing',
-      images: [
-        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Homelab+Setup',
-      ],
+      images: [],
       features: ['Infrastructure as Code (IaC) principles', 'Virtual machine provisioning', 'Monitoring and container orchestration', 'Standardized deployment procedures'],
       category: 'Infrastructure'
     },
     {
       title: 'Valgo - Algorithm Visualizer',
-      period: 'Personal Development Project',
+      period: 'Jun 2024 - Present',
       description: 'Interactive web application designed to help users understand and visualize various sorting algorithms. Built with Next.js and React to make learning algorithms more engaging and intuitive.',
-      tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+      tech: ['Next.js', 'React', 'JavaScript', 'Algorithm Visualization'],
       icon: <Globe className="w-6 h-6" />,
       status: 'Live',
       images: [
-        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Algorithm+Visualizer',
+        'valgo.png',
       ],
       features: ['Real-time algorithm visualization', 'Multiple sorting algorithms', 'Step-by-step breakdown', 'Performance comparison'],
       github: 'https://github.com/Quinta0/valgo',
@@ -138,15 +130,41 @@ const Portfolio = () => {
       category: 'Development'
     },
     {
+      title: 'Boston Housing Price Prediction',
+      period: 'May 2024 - Present',
+      description: 'Machine learning model to predict housing prices in the Boston area based on various features such as crime rate, average number of rooms per dwelling, and accessibility to radial highways.',
+      tech: ['Python', 'Machine Learning', 'Data Analysis', 'Statistical Modeling'],
+      icon: <BarChart3 className="w-6 h-6" />,
+      status: 'Academic Project',
+      images: [
+        'Housing.jpeg',
+      ],
+      features: ['Predictive modeling', 'Feature engineering', 'Data visualization', 'Statistical analysis'],
+      github: 'https://github.com/Quinta0/BostonHousing',
+      category: 'Data Science'
+    },
+    {
+      title: 'Forest Fire Simulation',
+      period: 'Mar 2024 - Present',
+      description: 'Probability & Statistics course project modeling the spread of forest fires over a grid. Accounts for vegetation types, terrain elevation, wind patterns, humidity levels, and spontaneous ignition.',
+      tech: ['Python', 'Statistical Modeling', 'Simulation', 'Data Science'],
+      icon: <Database className="w-6 h-6" />,
+      status: 'Academic Project',
+      images: [
+        'forestfire.jpg',
+      ],
+      features: ['Monte Carlo simulation', 'Environmental factors modeling', 'Statistical analysis', 'Visualization tools'],
+      github: 'https://github.com/Quinta0/ForestFire',
+      category: 'Data Science'
+    },
+    {
       title: 'Finance Tracker Application',
       period: 'In Development',
-      description: 'Designing a simple and intuitive personal finance app built with Django (Python) and SQLite, focused on clarity, control, and peace of mind. Features category-based expense tracking and budget summaries.',
+      description: 'Designing a simple and intuitive personal finance app built with Django (Python) and SQLite, focused on clarity, control, and peace of mind. Features category-based expense tracking, budget summaries, and clear data visualizations.',
       tech: ['Django', 'Python', 'SQLite', 'Chart.js', 'HTML/CSS', 'JavaScript'],
       icon: <BarChart3 className="w-6 h-6" />,
       status: 'In Development',
-      images: [
-        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Finance+Tracker',
-      ],
+      images: [],
       features: ['Category-based expense tracking', 'Budget summaries', 'Data visualizations', '50/30/20 budgeting framework'],
       category: 'Development'
     }
@@ -155,11 +173,11 @@ const Portfolio = () => {
   const education = [
     {
       id: 1,
-      institution: 'Scuola cantonale di commercio, Bellinzona',
-      degree: 'Maturità Cantonale & AFC Economics',
-      period: 'September 2018 - June 2022',
-      status: '4.5/6 (Maturità), 5/6 (AFC)',
-      description: 'Completed secondary education with focus on economics and business administration.'
+      institution: 'USI Università della Svizzera italiana, Lugano',
+      degree: "Bachelor's Degree in Economics (English Stream)",
+      period: 'September 2024 - Present',
+      status: 'Current',
+      description: 'Pursuing coursework in microeconomics, macroeconomics, statistics, accounting, and quantitative methods with particular interest in finance.'
     },
     {
       id: 2,
@@ -171,11 +189,11 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      institution: 'USI Università della Svizzera italiana, Lugano',
-      degree: "Bachelor's Degree in Economics (English Stream)",
-      period: 'September 2024 - Present',
-      status: 'Current',
-      description: 'Pursuing coursework in microeconomics, macroeconomics, statistics, accounting, and quantitative methods with particular interest in finance.'
+      institution: 'Scuola cantonale di commercio, Bellinzona',
+      degree: 'Maturità Cantonale & AFC Economics',
+      period: 'September 2018 - June 2022',
+      status: '4.5/6 (Maturità), 5/6 (AFC)',
+      description: 'Completed secondary education with focus on economics and business administration.'
     }
   ];
 
@@ -246,17 +264,34 @@ const Portfolio = () => {
           </div>
 
           {/* Project Images */}
-          <div className="grid md:grid-cols-2 gap-4 mb-6">
-            {project.images.map((image, idx) => (
-              <div key={idx} className="aspect-video rounded-lg overflow-hidden">
-                <img
-                  src={image}
-                  alt={`${project.title} screenshot ${idx + 1}`}
-                  className="w-full h-full object-cover"
-                />
+          {project.images && project.images.length > 0 ? (
+            <div className="grid md:grid-cols-2 gap-4 mb-6">
+              {project.images.map((image, idx) => (
+                <div key={idx} className="aspect-video rounded-lg overflow-hidden">
+                  <img
+                    src={image}
+                    alt={`${project.title} screenshot ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div 
+              className="p-8 rounded-lg border mb-6 text-center"
+              style={{
+                backgroundColor: nordColors.bg,
+                borderColor: nordColors.bgLighter
+              }}
+            >
+              <div className="mb-4" style={{ color: nordColors.blue }}>
+                {project.icon}
               </div>
-            ))}
-          </div>
+              <p className="text-sm" style={{ color: nordColors.textMuted }}>
+                Infrastructure/Hardware Project - No visual interface
+              </p>
+            </div>
+          )}
 
           {/* Description */}
           <div className="mb-6">
@@ -688,23 +723,79 @@ const Portfolio = () => {
                 Education Timeline
               </h3>
 
-              <Timeline defaultValue={3} orientation="horizontal">
-                {education.map((edu) => (  // ← Changed from 'education' to 'edu'
-                  <TimelineItem
-                    key={edu.id}            // ← Now using 'edu' consistently
-                    step={edu.id}
-                    className="group-data-[orientation=horizontal]/timeline:mt-0"
-                  >
-                    <TimelineHeader>
-                      <TimelineSeparator className="group-data-[orientation=horizontal]/timeline:top-8" />
-                      <TimelineDate className="mb-10">{edu.period}</TimelineDate>
-                      <TimelineTitle>{edu.degree}</TimelineTitle>
-                      <TimelineIndicator className="group-data-[orientation=horizontal]/timeline:top-8" />
-                    </TimelineHeader>
-                    <TimelineContent>{edu.description}</TimelineContent>
-                  </TimelineItem>
-                ))}
-              </Timeline>
+              <div className="relative">
+                {/* Timeline Line */}
+                <div 
+                  className="absolute left-4 top-0 bottom-0 w-0.5" 
+                  style={{ backgroundColor: nordColors.bgLighter }}
+                ></div>
+                
+                <div className="space-y-8">
+                  {education.map((edu, index) => (
+                    <div key={index} className="relative flex items-start">
+                      {/* Timeline Indicator */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div
+                          className="w-8 h-8 rounded-full border-4 flex items-center justify-center"
+                          style={{
+                            backgroundColor: nordColors.bg,
+                            borderColor: index === 0 ? nordColors.accent : nordColors.blue
+                          }}
+                        >
+                          <div
+                            className="w-3 h-3 rounded-full"
+                            style={{
+                              backgroundColor: index === 0 ? nordColors.accent : nordColors.blue
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+
+                      {/* Timeline Content */}
+                      <div 
+                        className="ml-6 p-6 rounded-lg border flex-1"
+                        style={{
+                          backgroundColor: nordColors.bg,
+                          borderColor: nordColors.bgLight
+                        }}
+                      >
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h4 className="text-lg font-semibold mb-1" style={{ color: nordColors.text }}>
+                              {edu.degree}
+                            </h4>
+                            <p className="font-medium" style={{ color: nordColors.blue }}>
+                              {edu.institution}
+                            </p>
+                          </div>
+                          <span
+                            className="px-3 py-1 rounded-full text-xs font-medium"
+                            style={{ 
+                              backgroundColor: index === 0 ? nordColors.accent : nordColors.darkBlue, 
+                              color: index === 0 ? nordColors.bg : nordColors.text 
+                            }}
+                          >
+                            {edu.status}
+                          </span>
+                        </div>
+                        
+                        {edu.description && (
+                          <p className="text-sm mb-3 leading-relaxed" style={{ color: nordColors.textMuted }}>
+                            {edu.description}
+                          </p>
+                        )}
+                        
+                        <div className="flex items-center text-sm" style={{ color: nordColors.textMuted }}>
+                          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          {edu.period}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Certificates */}
