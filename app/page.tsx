@@ -1,6 +1,16 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon } from 'lucide-react';
+import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon, Server, Shield, Settings, Briefcase, Calendar } from 'lucide-react';
+import {
+  Timeline,
+  TimelineContent,
+  TimelineDate,
+  TimelineHeader,
+  TimelineIndicator,
+  TimelineItem,
+  TimelineSeparator,
+  TimelineTitle,
+} from "@/components/ui/timeline"
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -35,81 +45,143 @@ const Portfolio = () => {
   }, []);
 
   const skills = {
-    'Data & Analytics': ['Python', 'R', 'SQL', 'Statistical Analysis', 'Data Visualization', 'Business Intelligence'],
-    'Web Development': ['JavaScript', 'TypeScript', 'React', 'Next.js', 'HTML5', 'CSS3', 'Tailwind CSS'],
-    'Backend & Tools': ['Flask', 'Express', 'MongoDB', 'SQLite', 'Git', 'Linux'],
-    'Other': ['Java', 'LaTeX', 'Project Planning', 'Financial Analysis']
+    'System Administration': ['Linux/Windows Server', 'Active Directory', 'Group Policy', 'Office 365', 'PowerShell', 'Bash Scripting'],
+    'Virtualization & Cloud': ['Proxmox VE', 'Hyper-V', 'Docker', 'LXC', 'Infrastructure as Code', 'NGINX'],
+    'Networking & Security': ['VLAN Configuration', 'Firewall Management', 'VPN (Tailscale)', 'Network Troubleshooting', 'DDNS'],
+    'Development & Analytics': ['Python', 'JavaScript', 'React', 'Next.js', 'SQL', 'Data Analysis'],
+    'Monitoring & Tools': ['Grafana', 'Prometheus', 'Git', 'Backup & Recovery', 'RAID Systems']
   };
+
+  const experience = [
+    {
+      title: 'Systems Engineering Consultant',
+      company: 'Freelance',
+      period: 'January 2020 - Present',
+      location: 'Ticino, Switzerland',
+      description: 'Delivered end-to-end IT infrastructure and systems engineering services to multiple clients, with a focus on server deployment, virtualization platforms, and network architecture.',
+      achievements: [
+        'Built and maintained 6-10 production-grade servers with 90%+ uptime',
+        'Designed VLAN-based network topologies and firewall policies',
+        'Implemented secure remote access via VPN (Tailscale)',
+        'Created automation scripts for routine maintenance and monitoring',
+        'Managed Windows Server environments with Active Directory integration'
+      ]
+    }
+  ];
 
   const projects = [
     {
-      title: 'Valgo - Algorithm Visualizer',
-      period: 'Jun 2024 - Present',
-      description: 'Interactive web application designed to help users understand and visualize various sorting algorithms. Built with Next.js and React to make learning algorithms more engaging and intuitive.',
-      tech: ['Next.js', 'React', 'JavaScript', 'Algorithm Visualization'],
+      title: 'Enterprise Proxmox Infrastructure',
+      period: 'Professional Client Project',
+      description: 'Deployed a full single-node virtualization environment using Proxmox VE, with structured rack cabling, DDNS, and NGINX reverse proxy for secure service exposure. Integrated Tailscale VPN for remote management.',
+      tech: ['Proxmox VE', 'NGINX', 'Docker', 'LXC', 'Grafana', 'Tailscale', 'DDNS', 'TrueNAS', 'Linux'],
+      icon: <Server className="w-6 h-6" />,
+      status: 'Production',
+      images: [
+        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Proxmox+Dashboard',
+      ],
+      features: ['Centralized infrastructure visibility using Grafana', 'Docker containers and LXC instances', 'Nextcloud, Jellyfin, and TrueNAS integration', 'Secure remote access via VPN'],
+      category: 'Infrastructure'
+    },
+    {
+      title: 'Multi-User NAS Solution',
+      period: 'Professional Client Project',
+      description: 'Designed and deployed a RAID 10-based NAS system supporting 9 users as a self-hosted cloud storage alternative. Configured SMB/NFS shares, access control lists (ACLs), and failover mechanisms.',
+      tech: ['RAID', 'TrueNAS', 'rsync', 'SMB/NFS', 'systemd timers', 'ACLs', 'Linux'],
+      icon: <Database className="w-6 h-6" />,
+      status: 'Production',
+      images: [
+        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=NAS+Dashboard',
+      ],
+      features: ['Automated snapshotting and rsync-based backups', 'High-availability storage solution', 'Multi-user access control', 'Failover mechanisms'],
+      category: 'Storage'
+    },
+    {
+      title: 'Custom Gaming Systems',
+      period: 'Professional Client Project',
+      description: 'Engineered and delivered 12+ custom PC builds, including high-performance gaming rigs and workstation-grade machines. Focused on component compatibility analysis, PSU sizing, and thermal management.',
+      tech: ['Hardware Engineering', 'BIOS Configuration', 'Thermal Management', 'Performance Tuning'],
+      icon: <Settings className="w-6 h-6" />,
+      status: 'Delivered',
+      images: [
+        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Custom+PC+Build',
+      ],
+      features: ['Component compatibility analysis', 'PSU sizing and airflow optimization', 'BIOS/driver optimization', 'System benchmarking'],
+      category: 'Hardware'
+    },
+    {
+      title: 'Personal Homelab Infrastructure',
+      period: 'Personal Project',
+      description: 'Replicated enterprise-level infrastructure architecture in a personal homelab, using Proxmox, Docker, and LXC. Focused on Infrastructure as Code (IaC) principles and container orchestration.',
+      tech: ['Proxmox VE', 'Docker', 'LXC', 'Bash', 'Tailscale', 'Grafana', 'IaC'],
       icon: <Code className="w-6 h-6" />,
+      status: 'Ongoing',
+      images: [
+        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Homelab+Setup',
+      ],
+      features: ['Infrastructure as Code (IaC) principles', 'Virtual machine provisioning', 'Monitoring and container orchestration', 'Standardized deployment procedures'],
+      category: 'Infrastructure'
+    },
+    {
+      title: 'Valgo - Algorithm Visualizer',
+      period: 'Personal Development Project',
+      description: 'Interactive web application designed to help users understand and visualize various sorting algorithms. Built with Next.js and React to make learning algorithms more engaging and intuitive.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+      icon: <Globe className="w-6 h-6" />,
       status: 'Live',
       images: [
-        'valgo.png',
+        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Algorithm+Visualizer',
       ],
       features: ['Real-time algorithm visualization', 'Multiple sorting algorithms', 'Step-by-step breakdown', 'Performance comparison'],
       github: 'https://github.com/Quinta0/valgo',
-      demo: 'https://quinta0.github.io/valgo/'
+      demo: 'https://quinta0.github.io/valgo/',
+      category: 'Development'
     },
     {
-      title: 'Boston Housing Price Prediction',
-      period: 'May 2024 - Present',
-      description: 'Machine learning model to predict housing prices in the Boston area based on various features such as crime rate, average number of rooms per dwelling, and accessibility to radial highways.',
-      tech: ['Python', 'Machine Learning', 'Data Analysis', 'Statistical Modeling'],
+      title: 'Finance Tracker Application',
+      period: 'In Development',
+      description: 'Designing a simple and intuitive personal finance app built with Django (Python) and SQLite, focused on clarity, control, and peace of mind. Features category-based expense tracking and budget summaries.',
+      tech: ['Django', 'Python', 'SQLite', 'Chart.js', 'HTML/CSS', 'JavaScript'],
       icon: <BarChart3 className="w-6 h-6" />,
-      status: 'Academic Project',
-      images:[
-        'Housing.jpeg',
-      ],
-      features: ['Predictive modeling', 'Feature engineering', 'Data visualization', 'Statistical analysis'],
-      github: 'https://github.com/Quinta0/BostonHousing'
-    },
-    {
-      title: 'Forest Fire Simulation',
-      period: 'Mar 2024 - Present',
-      description: 'Probability & Statistics course project modeling the spread of forest fires over a grid. Accounts for vegetation types, terrain elevation, wind patterns, humidity levels, and spontaneous ignition.',
-      tech: ['Python', 'Statistical Modeling', 'Simulation', 'Data Science'],
-      icon: <Database className="w-6 h-6" />,
-      status: 'Academic Project',
+      status: 'In Development',
       images: [
-        'forestfire.jpg',
+        'https://via.placeholder.com/600x400/434C5E/D8DEE9?text=Finance+Tracker',
       ],
-      features: ['Monte Carlo simulation', 'Environmental factors modeling', 'Statistical analysis', 'Visualization tools'],
-      github: 'https://github.com/Quinta0/ForestFire'
+      features: ['Category-based expense tracking', 'Budget summaries', 'Data visualizations', '50/30/20 budgeting framework'],
+      category: 'Development'
     }
   ];
 
   const education = [
     {
-      institution: 'USI Università della Svizzera italiana',
-      degree: "Bachelor's degree Economics",
-      period: 'Sep 2024 - Jun 2027',
-      status: 'Current'
+      id: 1,
+      institution: 'Scuola cantonale di commercio, Bellinzona',
+      degree: 'Maturità Cantonale & AFC Economics',
+      period: 'September 2018 - June 2022',
+      status: '4.5/6 (Maturità), 5/6 (AFC)',
+      description: 'Completed secondary education with focus on economics and business administration.'
     },
     {
-      institution: 'USI Università della Svizzera italiana',
-      degree: 'Bachelor of Science - BS Informatics',
-      period: 'Jan 2022 - Jan 2024',
-      status: 'Completed'
+      id: 2,
+      institution: 'USI Università della Svizzera italiana, Lugano',
+      degree: 'Bachelor of Science in Informatics (English Stream)',
+      period: 'September 2022 - June 2024',
+      status: '2 years completed',
+      description: 'Completed comprehensive coursework in software engineering, AGILE methodologies, data structures and algorithms, and database systems.'
     },
     {
-      institution: 'Scuola cantonale di commercio',
-      degree: 'Maturità Cantonale e AFC Economics',
-      period: 'Sep 2017 - Jun 2021',
-      status: 'GPA: 4.5/5'
+      id: 3,
+      institution: 'USI Università della Svizzera italiana, Lugano',
+      degree: "Bachelor's Degree in Economics (English Stream)",
+      period: 'September 2024 - Present',
+      status: 'Current',
+      description: 'Pursuing coursework in microeconomics, macroeconomics, statistics, accounting, and quantitative methods with particular interest in finance.'
     }
   ];
 
   const certificates = [
     'Google Data Analytics Professional Certificate',
-    'Google IT Support Professional Certificate',
-    'IT Security: Defense against the digital dark arts',
-    'Python for Data Science, AI & Development'
+    'Google IT Support Professional Certificate'
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -122,6 +194,7 @@ const Portfolio = () => {
     project: Project;
     onClose: () => void;
   }
+  
   const ProjectGallery: React.FC<ProjectGalleryProps> = ({ project, onClose }) => (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -151,6 +224,15 @@ const Portfolio = () => {
                   }}
                 >
                   {project.status}
+                </span>
+                <span
+                  className="px-2 py-1 rounded text-xs"
+                  style={{
+                    backgroundColor: nordColors.accent,
+                    color: nordColors.bg
+                  }}
+                >
+                  {project.category}
                 </span>
               </div>
             </div>
@@ -270,7 +352,7 @@ const Portfolio = () => {
               Pietro Quintavalle
             </div>
             <div className="hidden md:flex space-x-8">
-              {['Home', 'About', 'Projects', 'Education', 'Contact'].map((item) => (
+              {['Home', 'About', 'Experience', 'Projects', 'Education', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
@@ -296,10 +378,12 @@ const Portfolio = () => {
               <span className="ml-4" style={{ color: nordColors.accent }}>Quintavalle</span>
             </h1>
             <div className="text-xl md:text-2xl mb-6" style={{ color: nordColors.blue }}>
-              Economics Student • Data Analytics • Web Development
+              IT Systems Engineer • Economics Student • Infrastructure Specialist
             </div>
             <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: nordColors.textMuted }}>
-              Passionate about the intersection of economics and technology, exploring how data and code can solve real-world problems.
+              Certified IT Support professional with 5+ years of hands-on experience in system administration, 
+              virtualization, and network infrastructure. Seeking Junior SysAdmin roles to contribute reliable, 
+              scalable solutions in enterprise systems.
             </p>
           </div>
 
@@ -325,13 +409,6 @@ const Portfolio = () => {
             >
               <Mail className="w-6 h-6" style={{ color: nordColors.text }} />
             </a>
-            <a
-              href="https://quinta0.github.io/whoami/"
-              className="p-3 rounded-full transition-colors hover:opacity-80"
-              style={{ backgroundColor: nordColors.bgLight }}
-            >
-              <Globe className="w-6 h-6" style={{ color: nordColors.text }} />
-            </a>
           </div>
         </div>
 
@@ -350,31 +427,42 @@ const Portfolio = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
-                I'm an Economics student at USI with extensive experience in data analytics and web development.
-                My journey combines analytical thinking with technical skills to create meaningful solutions.
+                I'm an IT Support–certified Economics student with 5+ years of hands-on experience in system 
+                administration, virtualization (Proxmox, Hyper-V), and network infrastructure.
               </p>
               <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
-                Google-certified in Data Analytics and IT Support, I bring proven expertise in Python, R, SQL,
-                and modern web technologies like Next.js and React.
+                Skilled in scripting, automation, and server deployment across Windows and Linux environments. 
+                I've built and maintained 6-10 production-grade servers with 90%+ uptime using automation tools 
+                and Infrastructure as Code (IaC) principles.
+              </p>
+              <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
+                Currently pursuing Economics at USI while continuing to deliver scalable, secure, and 
+                high-availability infrastructure solutions to clients.
               </p>
               <div className="flex flex-wrap gap-3">
                 <span
                   className="px-3 py-1 rounded-full text-sm"
                   style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
                 >
-                  Italian (Native)
+                  🇮🇹 Italian (Native)
                 </span>
                 <span
                   className="px-3 py-1 rounded-full text-sm"
                   style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
                 >
-                  English (C2)
+                  🇺🇸 English (Fluent)
                 </span>
                 <span
                   className="px-3 py-1 rounded-full text-sm"
                   style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
                 >
-                  Switzerland 🇨🇭
+                  🇩🇪 German (Conversational)
+                </span>
+                <span
+                  className="px-3 py-1 rounded-full text-sm"
+                  style={{ backgroundColor: nordColors.green, color: nordColors.bg }}
+                >
+                  📍 Switzerland 🇨🇭
                 </span>
               </div>
             </div>
@@ -413,8 +501,79 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* Experience Section */}
+      <section id="experience" className="py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
+            Professional Experience
+          </h2>
+
+          <div className="max-w-4xl mx-auto">
+            {experience.map((exp, index) => (
+              <div
+                key={index}
+                className="p-8 rounded-lg border mb-8"
+                style={{
+                  backgroundColor: nordColors.bgLight,
+                  borderColor: nordColors.bgLighter
+                }}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center mb-4">
+                    <div
+                      className="p-3 rounded-lg mr-4"
+                      style={{ backgroundColor: nordColors.darkBlue }}
+                    >
+                      <Briefcase className="w-6 h-6" style={{ color: nordColors.text }} />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold" style={{ color: nordColors.text }}>
+                        {exp.title}
+                      </h3>
+                      <div className="flex items-center gap-4 mt-1">
+                        <span className="text-lg" style={{ color: nordColors.blue }}>
+                          {exp.company}
+                        </span>
+                        <span className="text-sm" style={{ color: nordColors.textMuted }}>
+                          {exp.location}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center text-sm" style={{ color: nordColors.blue }}>
+                    <Calendar className="w-4 h-4 mr-2" />
+                    {exp.period}
+                  </div>
+                </div>
+
+                <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.textMuted }}>
+                  {exp.description}
+                </p>
+
+                <div>
+                  <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
+                    Key Achievements:
+                  </h4>
+                  <div className="space-y-2">
+                    {exp.achievements.map((achievement, idx) => (
+                      <div key={idx} className="flex items-start">
+                        <div
+                          className="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
+                          style={{ backgroundColor: nordColors.accent }}
+                        ></div>
+                        <span style={{ color: nordColors.text }}>{achievement}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
-      <section id="projects" className="py-20">
+      <section id="projects" className="py-20" style={{ backgroundColor: 'rgba(59, 66, 82, 0.3)' }}>
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
             Featured Projects
@@ -438,22 +597,33 @@ const Portfolio = () => {
                   >
                     {project.icon}
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <h3 className="text-xl font-semibold" style={{ color: nordColors.text }}>
                       {project.title}
                     </h3>
-                    <p className="text-sm" style={{ color: nordColors.blue }}>
-                      {project.period}
-                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <p className="text-sm" style={{ color: nordColors.blue }}>
+                        {project.period}
+                      </p>
+                      <span
+                        className="px-2 py-0.5 rounded text-xs"
+                        style={{
+                          backgroundColor: nordColors.accent,
+                          color: nordColors.bg
+                        }}
+                      >
+                        {project.category}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <p className="leading-relaxed mb-4" style={{ color: nordColors.textMuted }}>
+                <p className="leading-relaxed mb-4 text-sm" style={{ color: nordColors.textMuted }}>
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
+                <div className="flex flex-wrap gap-1 mb-4">
+                  {project.tech.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
                       className="px-2 py-1 rounded text-xs"
@@ -465,6 +635,17 @@ const Portfolio = () => {
                       {tech}
                     </span>
                   ))}
+                  {project.tech.length > 3 && (
+                    <span
+                      className="px-2 py-1 rounded text-xs"
+                      style={{
+                        backgroundColor: nordColors.bgLighter,
+                        color: nordColors.textMuted
+                      }}
+                    >
+                      +{project.tech.length - 3} more
+                    </span>
+                  )}
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -473,13 +654,14 @@ const Portfolio = () => {
                     style={{ color: nordColors.blue }}
                   >
                     <Image className="w-4 h-4" />
-                    View Gallery
+                    View Details
                   </span>
                   <span
                     className="px-2 py-1 rounded text-xs"
                     style={{
-                      backgroundColor: nordColors.darkBlue,
-                      color: nordColors.text
+                      backgroundColor: project.status === 'Production' ? nordColors.green : 
+                                     project.status === 'Live' ? nordColors.blue : nordColors.yellow,
+                      color: nordColors.bg
                     }}
                   >
                     {project.status}
@@ -492,50 +674,37 @@ const Portfolio = () => {
       </section>
 
       {/* Education & Certificates Section */}
-      <section id="education" className="py-20" style={{ backgroundColor: 'rgba(59, 66, 82, 0.3)' }}>
+      <section id="education" className="py-20">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
             Education & Certifications
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12">
-            {/* Education */}
+            {/* Education Timeline */}
             <div>
               <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: nordColors.blue }}>
                 <GraduationCap className="w-6 h-6 mr-2" />
-                Education
+                Education Timeline
               </h3>
 
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <div
-                    key={index}
-                    className="p-6 rounded-lg border"
-                    style={{
-                      backgroundColor: nordColors.bg,
-                      borderColor: nordColors.bgLight
-                    }}
+              <Timeline defaultValue={3} orientation="horizontal">
+                {education.map((edu) => (  // ← Changed from 'education' to 'edu'
+                  <TimelineItem
+                    key={edu.id}            // ← Now using 'edu' consistently
+                    step={edu.id}
+                    className="group-data-[orientation=horizontal]/timeline:mt-0"
                   >
-                    <h4 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>
-                      {edu.degree}
-                    </h4>
-                    <p className="mb-2" style={{ color: nordColors.blue }}>
-                      {edu.institution}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm" style={{ color: nordColors.textMuted }}>
-                        {edu.period}
-                      </span>
-                      <span
-                        className="px-2 py-1 rounded text-xs"
-                        style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
-                      >
-                        {edu.status}
-                      </span>
-                    </div>
-                  </div>
+                    <TimelineHeader>
+                      <TimelineSeparator className="group-data-[orientation=horizontal]/timeline:top-8" />
+                      <TimelineDate className="mb-10">{edu.period}</TimelineDate>
+                      <TimelineTitle>{edu.degree}</TimelineTitle>
+                      <TimelineIndicator className="group-data-[orientation=horizontal]/timeline:top-8" />
+                    </TimelineHeader>
+                    <TimelineContent>{edu.description}</TimelineContent>
+                  </TimelineItem>
                 ))}
-              </div>
+              </Timeline>
             </div>
 
             {/* Certificates */}
@@ -572,10 +741,10 @@ const Portfolio = () => {
                 }}
               >
                 <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
-                  Interests
+                  Interests & Specialties
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {['Computer Hardware', 'Web Development', 'Finance', 'Economics', 'Literature'].map((interest) => (
+                  {['Computer Hardware', 'Economics & Finance', 'Web Development', 'Literature', 'Photography', 'Virtualization', 'Network Security'].map((interest) => (
                     <span
                       key={interest}
                       className="px-3 py-1 rounded text-sm"
@@ -589,19 +758,22 @@ const Portfolio = () => {
                   ))}
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
+      <section id="contact" className="py-20" style={{ backgroundColor: 'rgba(59, 66, 82, 0.3)' }}>
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold mb-8" style={{ color: nordColors.accent }}>
             Let's Connect
           </h2>
           <p className="text-lg mb-12 max-w-2xl mx-auto" style={{ color: nordColors.textMuted }}>
-            I'm always interested in discussing new opportunities, collaborations, or just having a chat about technology and economics.
+            I'm always interested in discussing new opportunities, collaborations, or Junior SysAdmin positions. 
+            Let's connect and explore how my infrastructure expertise can benefit your organization.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -612,7 +784,7 @@ const Portfolio = () => {
             >
               <Mail className="w-8 h-8 mx-auto mb-4" style={{ color: nordColors.blue }} />
               <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>Email</h3>
-              <p className="text-sm" style={{ color: nordColors.textMuted }}>Drop me a line</p>
+              <p className="text-sm" style={{ color: nordColors.textMuted }}>Professional inquiries</p>
             </a>
 
             <a
@@ -622,7 +794,7 @@ const Portfolio = () => {
             >
               <Linkedin className="w-8 h-8 mx-auto mb-4" style={{ color: nordColors.blue }} />
               <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>LinkedIn</h3>
-              <p className="text-sm" style={{ color: nordColors.textMuted }}>Let's connect professionally</p>
+              <p className="text-sm" style={{ color: nordColors.textMuted }}>Professional network</p>
             </a>
 
             <a
@@ -632,8 +804,24 @@ const Portfolio = () => {
             >
               <Github className="w-8 h-8 mx-auto mb-4" style={{ color: nordColors.blue }} />
               <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>GitHub</h3>
-              <p className="text-sm" style={{ color: nordColors.textMuted }}>Check out my code</p>
+              <p className="text-sm" style={{ color: nordColors.textMuted }}>Code repositories</p>
             </a>
+          </div>
+
+          {/* Download CV Button */}
+          <div className="mb-8">
+            <button
+              className="inline-flex items-center px-6 py-3 rounded-lg font-medium transition-colors hover:opacity-90"
+              style={{ 
+                backgroundColor: nordColors.accent, 
+                color: nordColors.bg 
+              }}
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download CV
+            </button>
           </div>
         </div>
       </section>
@@ -641,8 +829,36 @@ const Portfolio = () => {
       {/* Footer */}
       <footer className="py-8 border-t" style={{ borderColor: nordColors.bgLight }}>
         <div className="max-w-6xl mx-auto px-6 text-center">
+          <div className="mb-4">
+            <div className="flex justify-center items-center gap-6 mb-4">
+              <a
+                href="https://github.com/Quinta0"
+                className="text-sm hover:opacity-80"
+                style={{ color: nordColors.blue }}
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
+                className="text-sm hover:opacity-80"
+                style={{ color: nordColors.blue }}
+              >
+                LinkedIn
+              </a>
+              <a
+                href="mailto:0pietroquintavalle0@gmail.com"
+                className="text-sm hover:opacity-80"
+                style={{ color: nordColors.blue }}
+              >
+                Email
+              </a>
+            </div>
+          </div>
           <p style={{ color: nordColors.textMuted }}>
             Built with ❄️ using React & Nord theme • Pietro Quintavalle © 2025
+          </p>
+          <p className="text-sm mt-2" style={{ color: nordColors.textMuted }}>
+            IT Support Professional | Systems Engineer | Economics Student
           </p>
         </div>
       </footer>
