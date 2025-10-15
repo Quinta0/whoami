@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon, Server, Shield, Settings, Briefcase, Calendar, Moon, Sun } from 'lucide-react';
+import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon, Briefcase, Calendar, Moon, Sun } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
