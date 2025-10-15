@@ -2,34 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Nord theme custom styles */
+/* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Modern theme custom styles */
 :root {
-  --nord-bg: #2E3440;
-  --nord-bg-light: #3B4252;
-  --nord-bg-lighter: #434C5E;
-  --nord-text: #D8DEE9;
-  --nord-text-muted: rgba(216, 222, 233, 0.6);
-  --nord-accent: #88C0D0;
-  --nord-blue: #81A1C1;
-  --nord-dark-blue: #5E81AC;
+  --modern-bg: #0A0E27;
+  --modern-bg-light: #1A1F3A;
+  --modern-bg-card: #151932;
+  --modern-bg-hover: #1F2544;
+  --modern-text: #E4E9F7;
+  --modern-text-muted: #9CA3C3;
+  --modern-primary: #6C5CE7;
+  --modern-secondary: #00D4FF;
+  --modern-accent: #FF6B9D;
+  --modern-success: #00E676;
+  --modern-warning: #FFB800;
 }
 
-/* Custom scrollbar for Nord theme */
+/* Custom scrollbar for modern theme */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--nord-bg);
+  background: var(--modern-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--nord-bg-lighter);
-  border-radius: 4px;
+  background: linear-gradient(135deg, #6C5CE7 0%, #00D4FF 100%);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--nord-dark-blue);
+  background: linear-gradient(135deg, #5B4BD6 0%, #00B8E6 100%);
 }
 
 /* Smooth scrolling */
@@ -45,10 +51,21 @@ html {
 }
 
 body {
-  background-color: var(--nord-bg);
-  color: var(--nord-text);
-  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--modern-bg);
+  color: var(--modern-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
 }
 
 /* Custom animations */
@@ -63,25 +80,70 @@ body {
   }
 }
 
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(108, 92, 231, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(108, 92, 231, 0.6);
+  }
+}
+
 .animate-fadeInUp {
   animation: fadeInUp 0.6s ease-out;
 }
 
-/* Utility classes for Nord theme */
-.nord-bg {
-  background-color: var(--nord-bg);
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
 }
 
-.nord-bg-light {
-  background-color: var(--nord-bg-light);
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
 }
 
-.nord-text {
-  color: var(--nord-text);
+/* Utility classes for modern theme */
+.modern-bg {
+  background-color: var(--modern-bg);
 }
 
-.nord-accent {
-  color: var(--nord-accent);
+.modern-bg-light {
+  background-color: var(--modern-bg-light);
+}
+
+.modern-text {
+  color: var(--modern-text);
+}
+
+.modern-accent {
+  color: var(--modern-primary);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, #6C5CE7 0%, #00D4FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(26, 31, 58, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(228, 233, 247, 0.1);
 }
 
 

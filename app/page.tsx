@@ -1,40 +1,70 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon, Server, Shield, Settings, Briefcase, Calendar } from 'lucide-react';
-import {
-  Timeline,
-  TimelineContent,
-  TimelineDate,
-  TimelineHeader,
-  TimelineIndicator,
-  TimelineItem,
-  TimelineSeparator,
-  TimelineTitle,
-} from "@/components/ui/timeline"
+import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon, Server, Shield, Settings, Briefcase, Calendar, Moon, Sun } from 'lucide-react';
 
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
   const [showProjectGallery, setShowProjectGallery] = useState<Project | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState(true);
 
-  // Nord Color Palette
-  const nordColors = {
-    bg: '#2E3440',
-    bgLight: '#3B4252',
-    bgLighter: '#434C5E',
-    bgLightest: '#4C566A',
-    text: '#D8DEE9',
-    textMuted: 'rgba(216, 222, 233, 0.6)',
-    accent: '#88C0D0',
-    blue: '#81A1C1',
-    darkBlue: '#5E81AC',
-    cyan: '#8FBCBB',
-    green: '#A3BE8C',
-    yellow: '#EBCB8B',
-    orange: '#D08770',
-    red: '#BF616A',
-    purple: '#B48EAD'
+  // Dark Mode Colors - Improved readability
+  const darkColors = {
+    bg: '#0B0F1F',           // Darker for better contrast
+    bgLight: '#1A1F3A',      
+    bgLighter: '#252B48',    
+    bgCard: '#161B33',       
+    bgHover: '#1F2544',      
+    text: '#F0F4FF',         // Brighter white for readability
+    textMuted: '#B8C1E3',    // Lighter muted text
+    primary: '#7C6CE7',      
+    secondary: '#00D4FF',    
+    accent: '#FF6B9D',       
+    blue: '#00D4FF',         
+    darkBlue: '#5B4BD6',     
+    cyan: '#00F2FE',         
+    green: '#00E676',        
+    yellow: '#FFB800',       
+    orange: '#FF9500',       
+    red: '#FF6B9D',          
+    purple: '#B48EAD',       
+    success: '#00E676',      
+    warning: '#FFB800',      
+    gradient1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    gradient2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    gradient3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    gradientHero: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
   };
+
+  // Light Mode Colors
+  const lightColors = {
+    bg: '#FFFFFF',           // Pure white
+    bgLight: '#F8F9FC',      // Very light gray-blue
+    bgLighter: '#EEF1F8',    // Light gray
+    bgCard: '#FAFBFF',       // Off-white card
+    bgHover: '#E8ECFA',      // Hover state
+    text: '#1A1F3A',         // Dark blue-gray for text
+    textMuted: '#5E6B8C',    // Muted blue-gray
+    primary: '#6C5CE7',      // Keep vibrant purple
+    secondary: '#0099CC',    // Darker cyan for contrast
+    accent: '#E94B7A',       // Slightly darker pink
+    blue: '#0099CC',         
+    darkBlue: '#5B4BD6',     
+    cyan: '#00A8CC',         
+    green: '#00C853',        
+    yellow: '#FF9800',       
+    orange: '#FF6B00',       
+    red: '#E94B7A',          
+    purple: '#9C4D97',       
+    success: '#00C853',      
+    warning: '#FF9800',      
+    gradient1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    gradient2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    gradient3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    gradientHero: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
+  };
+
+  const colors = isDarkMode ? darkColors : lightColors;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -173,11 +203,11 @@ const Portfolio = () => {
   const education = [
     {
       id: 1,
-      institution: 'Scuola cantonale di commercio, Bellinzona',
-      degree: 'Maturità Cantonale & AFC Economics',
-      period: 'September 2018 - June 2022',
-      status: '4.5/6 (Maturità), 5/6 (AFC)',
-      description: 'Completed secondary education with focus on economics and business administration.'
+      institution: 'USI Università della Svizzera italiana, Lugano',
+      degree: "Bachelor's Degree in Economics (English Stream)",
+      period: 'September 2024 - Present',
+      status: 'Current',
+      description: 'Pursuing coursework in microeconomics, macroeconomics, statistics, accounting, and quantitative methods with particular interest in finance.'
     },
     {
       id: 2,
@@ -189,11 +219,11 @@ const Portfolio = () => {
     },
     {
       id: 3,
-      institution: 'USI Università della Svizzera italiana, Lugano',
-      degree: "Bachelor's Degree in Economics (English Stream)",
-      period: 'September 2024 - Present',
-      status: 'Current',
-      description: 'Pursuing coursework in microeconomics, macroeconomics, statistics, accounting, and quantitative methods with particular interest in finance.'
+      institution: 'Scuola cantonale di commercio, Bellinzona',
+      degree: 'Maturità Cantonale & AFC Economics',
+      period: 'September 2018 - June 2022',
+      status: '4.5/6 (Maturità), 5/6 (AFC)',
+      description: 'Completed secondary education with focus on economics and business administration.'
     }
   ];
 
@@ -215,39 +245,43 @@ const Portfolio = () => {
   
   const ProjectGallery: React.FC<ProjectGalleryProps> = ({ project, onClose }) => (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ backgroundColor: 'rgba(46, 52, 64, 0.95)' }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+      style={{ backgroundColor: isDarkMode ? 'rgba(11, 15, 31, 0.95)' : 'rgba(0, 0, 0, 0.75)' }}
       onClick={onClose}
     >
       <div
-        className="max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-lg"
-        style={{ backgroundColor: nordColors.bgLight }}
+        className="max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl"
+        style={{ backgroundColor: colors.bgCard, border: `2px solid ${colors.primary}` }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-6">
+        <div className="p-8">
           <div className="flex justify-between items-start mb-6">
             <div>
-              <h3 className="text-2xl font-bold mb-2" style={{ color: nordColors.text }}>
+              <h3 className="text-3xl font-bold mb-3 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                 {project.title}
               </h3>
-              <div className="flex items-center gap-4">
-                <span className="text-sm" style={{ color: nordColors.blue }}>
+              <div className="flex items-center gap-4 flex-wrap">
+                <span className="text-sm px-3 py-1 rounded-lg" style={{ 
+                  background: colors.gradient3,
+                  color: colors.text,
+                  fontFamily: "'JetBrains Mono', monospace"
+                }}>
                   {project.period}
                 </span>
                 <span
-                  className="px-3 py-1 rounded-full text-xs"
+                  className="px-4 py-1 rounded-xl text-sm font-medium"
                   style={{
-                    backgroundColor: nordColors.darkBlue,
-                    color: nordColors.text
+                    background: colors.gradient1,
+                    color: colors.text
                   }}
                 >
                   {project.status}
                 </span>
                 <span
-                  className="px-2 py-1 rounded text-xs"
+                  className="px-3 py-1 rounded-lg text-sm font-medium"
                   style={{
-                    backgroundColor: nordColors.accent,
-                    color: nordColors.bg
+                    background: colors.gradient2,
+                    color: colors.text
                   }}
                 >
                   {project.category}
@@ -256,8 +290,8 @@ const Portfolio = () => {
             </div>
             <button
               onClick={onClose}
-              className="text-2xl hover:opacity-70"
-              style={{ color: nordColors.textMuted }}
+              className="text-3xl hover:opacity-70 transition-all hover:scale-110 px-3"
+              style={{ color: colors.textMuted }}
             >
               ×
             </button>
@@ -267,7 +301,7 @@ const Portfolio = () => {
           {project.images && project.images.length > 0 ? (
             <div className="grid md:grid-cols-2 gap-4 mb-6">
               {project.images.map((image, idx) => (
-                <div key={idx} className="aspect-video rounded-lg overflow-hidden">
+                <div key={idx} className="aspect-video rounded-xl overflow-hidden border" style={{ borderColor: colors.bgLight }}>
                   <img
                     src={image}
                     alt={`${project.title} screenshot ${idx + 1}`}
@@ -278,16 +312,16 @@ const Portfolio = () => {
             </div>
           ) : (
             <div 
-              className="p-8 rounded-lg border mb-6 text-center"
+              className="p-8 rounded-2xl border mb-6 text-center"
               style={{
-                backgroundColor: nordColors.bg,
-                borderColor: nordColors.bgLighter
+                backgroundColor: colors.bg,
+                borderColor: colors.bgLight
               }}
             >
-              <div className="mb-4" style={{ color: nordColors.blue }}>
+              <div className="mb-4" style={{ color: colors.primary }}>
                 {project.icon}
               </div>
-              <p className="text-sm" style={{ color: nordColors.textMuted }}>
+              <p className="text-sm" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
                 Infrastructure/Hardware Project - No visual interface
               </p>
             </div>
@@ -295,27 +329,27 @@ const Portfolio = () => {
 
           {/* Description */}
           <div className="mb-6">
-            <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
+            <h4 className="text-xl font-semibold mb-3" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
               About This Project
             </h4>
-            <p className="leading-relaxed" style={{ color: nordColors.textMuted }}>
+            <p className="leading-relaxed text-lg" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
               {project.description}
             </p>
           </div>
 
           {/* Features */}
           <div className="mb-6">
-            <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
+            <h4 className="text-xl font-semibold mb-4" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
               Key Features
             </h4>
-            <div className="grid md:grid-cols-2 gap-2">
+            <div className="grid md:grid-cols-2 gap-3">
               {project.features.map((feature, idx) => (
                 <div key={idx} className="flex items-center">
                   <div
                     className="w-2 h-2 rounded-full mr-3"
-                    style={{ backgroundColor: nordColors.accent }}
+                    style={{ background: colors.gradient1 }}
                   ></div>
-                  <span style={{ color: nordColors.text }}>{feature}</span>
+                  <span style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>{feature}</span>
                 </div>
               ))}
             </div>
@@ -323,17 +357,18 @@ const Portfolio = () => {
 
           {/* Tech Stack */}
           <div className="mb-6">
-            <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
+            <h4 className="text-xl font-semibold mb-4" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
               Technology Stack
             </h4>
             <div className="flex flex-wrap gap-2">
               {project.tech.map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1 rounded text-sm"
+                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
                   style={{
-                    backgroundColor: nordColors.bg,
-                    color: nordColors.accent
+                    backgroundColor: colors.bgHover,
+                    color: colors.primary,
+                    fontFamily: "'JetBrains Mono', monospace"
                   }}
                 >
                   {tech}
@@ -347,20 +382,20 @@ const Portfolio = () => {
             {project.github && (
               <a
                 href={project.github}
-                className="flex items-center gap-2 px-4 py-2 rounded hover:opacity-80 transition-opacity"
-                style={{ backgroundColor: nordColors.bgLighter, color: nordColors.text }}
+                className="flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all hover:scale-105 font-medium"
+                style={{ background: colors.gradient1, color: colors.text }}
               >
-                <Github className="w-4 h-4" />
+                <Github className="w-5 h-5" />
                 View Code
               </a>
             )}
             {project.demo && (
               <a
                 href={project.demo}
-                className="flex items-center gap-2 px-4 py-2 rounded hover:opacity-80 transition-opacity"
-                style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
+                className="flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all hover:scale-105 font-medium"
+                style={{ background: colors.gradient3, color: colors.text }}
               >
-                <LinkIcon className="w-4 h-4" />
+                <LinkIcon className="w-5 h-5" />
                 Live Demo
               </a>
             )}
@@ -371,131 +406,173 @@ const Portfolio = () => {
   );
 
   return (
-    <div className="min-h-screen font-sans" style={{ backgroundColor: nordColors.bg, color: nordColors.text }}>
+    <div className="min-h-screen" style={{ backgroundColor: colors.bg, color: colors.text }}>
+      {/* Animated background gradient */}
+      <div className="fixed inset-0 pointer-events-none" style={{ opacity: isDarkMode ? 0.2 : 0.1 }}>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
       {/* Navigation */}
       <nav
         className="fixed top-0 w-full z-40 transition-all duration-300"
         style={{
-          backgroundColor: scrolled ? 'rgba(46, 52, 64, 0.95)' : 'transparent',
-          borderBottom: scrolled ? `1px solid ${nordColors.bgLight}` : 'none',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none'
+          backgroundColor: scrolled ? (isDarkMode ? 'rgba(11, 15, 31, 0.95)' : 'rgba(255, 255, 255, 0.95)') : 'transparent',
+          borderBottom: scrolled ? `1px solid ${colors.bgLight}` : 'none',
+          backdropFilter: scrolled ? 'blur(20px)' : 'none'
         }}
       >
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-xl font-bold" style={{ color: nordColors.accent }}>
+            <div className="text-xl font-bold gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
               Pietro Quintavalle
             </div>
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex items-center space-x-8">
               {['Home', 'About', 'Experience', 'Projects', 'Education', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className="transition-colors hover:opacity-80"
+                  className="transition-all hover:scale-105 relative group"
                   style={{
-                    color: activeSection === item.toLowerCase() ? nordColors.accent : nordColors.text
+                    color: activeSection === item.toLowerCase() ? colors.primary : colors.text,
+                    fontFamily: "'Inter', sans-serif",
+                    fontWeight: 500
                   }}
                 >
                   {item}
+                  <span 
+                    className="absolute -bottom-1 left-0 w-full h-0.5 transition-transform origin-left"
+                    style={{
+                      background: colors.gradient1,
+                      transform: activeSection === item.toLowerCase() ? 'scaleX(1)' : 'scaleX(0)'
+                    }}
+                  />
                 </button>
               ))}
+              {/* Dark Mode Toggle */}
+              <button
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className="p-2 rounded-xl transition-all hover:scale-110"
+                style={{
+                  background: colors.gradient1,
+                  color: colors.text
+                }}
+                aria-label="Toggle dark mode"
+              >
+                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative">
-        <div className="text-center max-w-4xl mx-auto px-6">
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4">
-              <span style={{ color: nordColors.text }}>Pietro</span>
-              <span className="ml-4" style={{ color: nordColors.accent }}>Quintavalle</span>
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="text-center max-w-4xl mx-auto px-6 relative z-10">
+          <div className="mb-8 animate-fadeInUp">
+            <h1 className="text-6xl md:text-8xl font-bold mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              <span style={{ color: colors.text }}>Pietro</span>
+              <br />
+              <span className="gradient-text">Quintavalle</span>
             </h1>
-            <div className="text-xl md:text-2xl mb-6" style={{ color: nordColors.blue }}>
+            <div className="text-xl md:text-3xl mb-8 font-medium" style={{ 
+              color: colors.secondary,
+              fontFamily: "'Inter', sans-serif",
+              letterSpacing: '-0.01em'
+            }}>
               IT Systems Engineer • Economics Student • Infrastructure Specialist
             </div>
-            <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: nordColors.textMuted }}>
+            <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style={{ 
+              color: colors.textMuted,
+              fontFamily: "'Inter', sans-serif"
+            }}>
               Certified IT Support professional with 5+ years of hands-on experience in system administration, 
               virtualization, and network infrastructure. Seeking Junior SysAdmin roles to contribute reliable, 
               scalable solutions in enterprise systems.
             </p>
           </div>
 
-          <div className="flex justify-center space-x-6 mb-12">
+          <div className="flex justify-center space-x-6 mb-16">
             <a
               href="https://github.com/Quinta0"
-              className="p-3 rounded-full transition-colors hover:opacity-80"
-              style={{ backgroundColor: nordColors.bgLight }}
+              className="p-4 rounded-xl transition-all hover:scale-110 hover:shadow-2xl group"
+              style={{ 
+                background: colors.gradient1,
+              }}
             >
-              <Github className="w-6 h-6" style={{ color: nordColors.text }} />
+              <Github className="w-6 h-6" style={{ color: colors.text }} />
             </a>
             <a
               href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
-              className="p-3 rounded-full transition-colors hover:opacity-80"
-              style={{ backgroundColor: nordColors.bgLight }}
+              className="p-4 rounded-xl transition-all hover:scale-110 hover:shadow-2xl group"
+              style={{ 
+                background: colors.gradient3,
+              }}
             >
-              <Linkedin className="w-6 h-6" style={{ color: nordColors.text }} />
+              <Linkedin className="w-6 h-6" style={{ color: colors.text }} />
             </a>
             <a
               href="mailto:0pietroquintavalle0@gmail.com"
-              className="p-3 rounded-full transition-colors hover:opacity-80"
-              style={{ backgroundColor: nordColors.bgLight }}
+              className="p-4 rounded-xl transition-all hover:scale-110 hover:shadow-2xl group"
+              style={{ 
+                background: colors.gradient2,
+              }}
             >
-              <Mail className="w-6 h-6" style={{ color: nordColors.text }} />
+              <Mail className="w-6 h-6" style={{ color: colors.text }} />
             </a>
           </div>
         </div>
 
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-6 h-6" style={{ color: nordColors.blue }} />
+          <ChevronDown className="w-8 h-8" style={{ color: colors.secondary }} />
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20" style={{ backgroundColor: 'rgba(59, 66, 82, 0.3)' }}>
+      <section id="about" className="py-20 relative">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
+          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             About Me
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
+              <p className="text-lg md:text-xl leading-relaxed mb-6" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
                 I'm an IT Support–certified Economics student with 5+ years of hands-on experience in system 
                 administration, virtualization (Proxmox, Hyper-V), and network infrastructure.
               </p>
-              <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
+              <p className="text-lg md:text-xl leading-relaxed mb-6" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
                 Skilled in scripting, automation, and server deployment across Windows and Linux environments. 
                 I've built and maintained 6-10 production-grade servers with 90%+ uptime using automation tools 
                 and Infrastructure as Code (IaC) principles.
               </p>
-              <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.text }}>
+              <p className="text-lg md:text-xl leading-relaxed mb-8" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
                 Currently pursuing Economics at USI while continuing to deliver scalable, secure, and 
                 high-availability infrastructure solutions to clients.
               </p>
               <div className="flex flex-wrap gap-3">
                 <span
-                  className="px-3 py-1 rounded-full text-sm"
-                  style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
+                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
+                  style={{ background: colors.gradient1, color: colors.text }}
                 >
                   🇮🇹 Italian (Native)
                 </span>
                 <span
-                  className="px-3 py-1 rounded-full text-sm"
-                  style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
+                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
+                  style={{ background: colors.gradient3, color: colors.text }}
                 >
                   🇺🇸 English (Fluent)
                 </span>
                 <span
-                  className="px-3 py-1 rounded-full text-sm"
-                  style={{ backgroundColor: nordColors.darkBlue, color: nordColors.text }}
+                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
+                  style={{ background: colors.gradient2, color: colors.text }}
                 >
                   🇩🇪 German (Conversational)
                 </span>
                 <span
-                  className="px-3 py-1 rounded-full text-sm"
-                  style={{ backgroundColor: nordColors.green, color: nordColors.bg }}
+                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
+                  style={{ backgroundColor: colors.success, color: colors.bg }}
                 >
                   📍 Switzerland 🇨🇭
                 </span>
@@ -506,23 +583,25 @@ const Portfolio = () => {
               {Object.entries(skills).map(([category, skillList]) => (
                 <div
                   key={category}
-                  className="p-6 rounded-lg border"
+                  className="p-6 rounded-2xl border transition-all hover:scale-105 hover:shadow-2xl group"
                   style={{
-                    backgroundColor: nordColors.bg,
-                    borderColor: nordColors.bgLight
+                    backgroundColor: colors.bgCard,
+                    borderColor: colors.bgLight,
+                    borderWidth: '1px'
                   }}
                 >
-                  <h3 className="text-xl font-semibold mb-3" style={{ color: nordColors.blue }}>
+                  <h3 className="text-xl font-semibold mb-4" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
                     {category}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {skillList.map((skill) => (
                       <span
                         key={skill}
-                        className="px-3 py-1 rounded text-sm"
+                        className="px-3 py-1 rounded-lg text-sm transition-all hover:scale-105"
                         style={{
-                          backgroundColor: nordColors.bgLighter,
-                          color: nordColors.text
+                          backgroundColor: colors.bgHover,
+                          color: colors.text,
+                          fontFamily: "'JetBrains Mono', monospace"
                         }}
                       >
                         {skill}
@@ -539,7 +618,7 @@ const Portfolio = () => {
       {/* Experience Section */}
       <section id="experience" className="py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
+          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Professional Experience
           </h2>
 
@@ -547,56 +626,61 @@ const Portfolio = () => {
             {experience.map((exp, index) => (
               <div
                 key={index}
-                className="p-8 rounded-lg border mb-8"
+                className="p-8 rounded-2xl border mb-8 transition-all hover:scale-[1.02] hover:shadow-2xl group"
                 style={{
-                  backgroundColor: nordColors.bgLight,
-                  borderColor: nordColors.bgLighter
+                  backgroundColor: colors.bgCard,
+                  borderColor: colors.primary,
+                  borderWidth: '2px'
                 }}
               >
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center mb-4">
                     <div
-                      className="p-3 rounded-lg mr-4"
-                      style={{ backgroundColor: nordColors.darkBlue }}
+                      className="p-4 rounded-xl mr-4 transition-all group-hover:scale-110"
+                      style={{ background: colors.gradient1 }}
                     >
-                      <Briefcase className="w-6 h-6" style={{ color: nordColors.text }} />
+                      <Briefcase className="w-7 h-7" style={{ color: colors.text }} />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold" style={{ color: nordColors.text }}>
+                      <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>
                         {exp.title}
                       </h3>
-                      <div className="flex items-center gap-4 mt-1">
-                        <span className="text-lg" style={{ color: nordColors.blue }}>
+                      <div className="flex items-center gap-4 mt-2">
+                        <span className="text-lg font-medium" style={{ color: colors.secondary }}>
                           {exp.company}
                         </span>
-                        <span className="text-sm" style={{ color: nordColors.textMuted }}>
+                        <span className="text-sm" style={{ color: colors.textMuted }}>
                           {exp.location}
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center text-sm" style={{ color: nordColors.blue }}>
+                  <div className="flex items-center text-sm px-4 py-2 rounded-xl" style={{ 
+                    background: colors.gradient3,
+                    color: colors.text,
+                    fontFamily: "'JetBrains Mono', monospace"
+                  }}>
                     <Calendar className="w-4 h-4 mr-2" />
                     {exp.period}
                   </div>
                 </div>
 
-                <p className="text-lg leading-relaxed mb-6" style={{ color: nordColors.textMuted }}>
+                <p className="text-lg leading-relaxed mb-6" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
                   {exp.description}
                 </p>
 
                 <div>
-                  <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
+                  <h4 className="text-lg font-semibold mb-4" style={{ color: colors.primary, fontFamily: "'Space Grotesk', sans-serif" }}>
                     Key Achievements:
                   </h4>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {exp.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start">
+                      <div key={idx} className="flex items-start group/item">
                         <div
-                          className="w-2 h-2 rounded-full mt-2 mr-3 flex-shrink-0"
-                          style={{ backgroundColor: nordColors.accent }}
+                          className="w-2 h-2 rounded-full mt-2 mr-4 flex-shrink-0 transition-all group-hover/item:scale-150"
+                          style={{ background: colors.gradient2 }}
                         ></div>
-                        <span style={{ color: nordColors.text }}>{achievement}</span>
+                        <span style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>{achievement}</span>
                       </div>
                     ))}
                   </div>
@@ -608,9 +692,9 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20" style={{ backgroundColor: 'rgba(59, 66, 82, 0.3)' }}>
+      <section id="projects" className="py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
+          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Featured Projects
           </h2>
 
@@ -618,33 +702,34 @@ const Portfolio = () => {
             {projects.map((project, index) => (
               <div
                 key={index}
-                className="p-6 rounded-lg border transition-colors hover:opacity-90 cursor-pointer"
+                className="p-6 rounded-2xl border transition-all hover:scale-105 hover:shadow-2xl cursor-pointer group"
                 style={{
-                  backgroundColor: nordColors.bgLight,
-                  borderColor: nordColors.bgLighter
+                  backgroundColor: colors.bgCard,
+                  borderColor: colors.bgLight,
+                  borderWidth: '1px'
                 }}
                 onClick={() => setShowProjectGallery(project)}
               >
                 <div className="flex items-center mb-4">
                   <div
-                    className="p-2 rounded-lg mr-3"
-                    style={{ backgroundColor: nordColors.darkBlue }}
+                    className="p-3 rounded-xl mr-3 transition-all group-hover:scale-110"
+                    style={{ background: colors.gradient1 }}
                   >
                     {project.icon}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-semibold" style={{ color: nordColors.text }}>
+                    <h3 className="text-xl font-semibold" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>
                       {project.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <p className="text-sm" style={{ color: nordColors.blue }}>
+                      <p className="text-sm" style={{ color: colors.secondary, fontFamily: "'JetBrains Mono', monospace" }}>
                         {project.period}
                       </p>
                       <span
-                        className="px-2 py-0.5 rounded text-xs"
+                        className="px-2 py-0.5 rounded-lg text-xs font-medium"
                         style={{
-                          backgroundColor: nordColors.accent,
-                          color: nordColors.bg
+                          background: colors.gradient3,
+                          color: colors.bg
                         }}
                       >
                         {project.category}
@@ -653,18 +738,19 @@ const Portfolio = () => {
                   </div>
                 </div>
 
-                <p className="leading-relaxed mb-4 text-sm" style={{ color: nordColors.textMuted }}>
+                <p className="leading-relaxed mb-4 text-sm" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-1 mb-4">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 rounded text-xs"
+                      className="px-3 py-1 rounded-lg text-xs font-medium transition-all hover:scale-105"
                       style={{
-                        backgroundColor: nordColors.bg,
-                        color: nordColors.accent
+                        backgroundColor: colors.bgHover,
+                        color: colors.secondary,
+                        fontFamily: "'JetBrains Mono', monospace"
                       }}
                     >
                       {tech}
@@ -672,10 +758,10 @@ const Portfolio = () => {
                   ))}
                   {project.tech.length > 3 && (
                     <span
-                      className="px-2 py-1 rounded text-xs"
+                      className="px-3 py-1 rounded-lg text-xs"
                       style={{
-                        backgroundColor: nordColors.bgLighter,
-                        color: nordColors.textMuted
+                        backgroundColor: colors.bgLighter,
+                        color: colors.textMuted
                       }}
                     >
                       +{project.tech.length - 3} more
@@ -685,18 +771,18 @@ const Portfolio = () => {
 
                 <div className="flex items-center justify-between">
                   <span
-                    className="text-sm flex items-center gap-2"
-                    style={{ color: nordColors.blue }}
+                    className="text-sm flex items-center gap-2 font-medium"
+                    style={{ color: colors.primary }}
                   >
                     <Image className="w-4 h-4" />
                     View Details
                   </span>
                   <span
-                    className="px-2 py-1 rounded text-xs"
+                    className="px-3 py-1 rounded-lg text-xs font-medium"
                     style={{
-                      backgroundColor: project.status === 'Production' ? nordColors.green : 
-                                     project.status === 'Live' ? nordColors.blue : nordColors.yellow,
-                      color: nordColors.bg
+                      background: project.status === 'Production' ? colors.gradient3 : 
+                                     project.status === 'Live' ? colors.gradient1 : colors.gradient2,
+                      color: colors.text
                     }}
                   >
                     {project.status}
@@ -711,15 +797,15 @@ const Portfolio = () => {
       {/* Education & Certificates Section */}
       <section id="education" className="py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16" style={{ color: nordColors.accent }}>
+          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Education & Certifications
           </h2>
 
           <div className="grid md:grid-cols-2 gap-12">
             {/* Education Timeline */}
             <div>
-              <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: nordColors.blue }}>
-                <GraduationCap className="w-6 h-6 mr-2" />
+              <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
+                <GraduationCap className="w-7 h-7 mr-3" />
                 Education Timeline
               </h3>
 
@@ -727,25 +813,25 @@ const Portfolio = () => {
                 {/* Timeline Line */}
                 <div 
                   className="absolute left-4 top-0 bottom-0 w-0.5" 
-                  style={{ backgroundColor: nordColors.bgLighter }}
+                  style={{ background: colors.gradient1 }}
                 ></div>
                 
                 <div className="space-y-8">
                   {education.map((edu, index) => (
-                    <div key={index} className="relative flex items-start">
+                    <div key={index} className="relative flex items-start group">
                       {/* Timeline Indicator */}
                       <div className="relative z-10 flex-shrink-0">
                         <div
-                          className="w-8 h-8 rounded-full border-4 flex items-center justify-center"
+                          className="w-8 h-8 rounded-full border-4 flex items-center justify-center transition-all group-hover:scale-125"
                           style={{
-                            backgroundColor: nordColors.bg,
-                            borderColor: index === 0 ? nordColors.accent : nordColors.blue
+                            backgroundColor: colors.bgCard,
+                            borderColor: index === 0 ? colors.primary : colors.secondary
                           }}
                         >
                           <div
                             className="w-3 h-3 rounded-full"
                             style={{
-                              backgroundColor: index === 0 ? nordColors.accent : nordColors.blue
+                              backgroundColor: index === 0 ? colors.primary : colors.secondary
                             }}
                           ></div>
                         </div>
@@ -753,26 +839,27 @@ const Portfolio = () => {
 
                       {/* Timeline Content */}
                       <div 
-                        className="ml-6 p-6 rounded-lg border flex-1"
+                        className="ml-6 p-6 rounded-2xl border flex-1 transition-all hover:scale-105 hover:shadow-2xl"
                         style={{
-                          backgroundColor: nordColors.bg,
-                          borderColor: nordColors.bgLight
+                          backgroundColor: colors.bgCard,
+                          borderColor: colors.bgLight,
+                          borderWidth: '1px'
                         }}
                       >
                         <div className="flex justify-between items-start mb-3">
                           <div>
-                            <h4 className="text-lg font-semibold mb-1" style={{ color: nordColors.text }}>
+                            <h4 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>
                               {edu.degree}
                             </h4>
-                            <p className="font-medium" style={{ color: nordColors.blue }}>
+                            <p className="font-medium" style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif" }}>
                               {edu.institution}
                             </p>
                           </div>
                           <span
-                            className="px-3 py-1 rounded-full text-xs font-medium"
+                            className="px-3 py-1 rounded-xl text-xs font-medium"
                             style={{ 
-                              backgroundColor: index === 0 ? nordColors.accent : nordColors.darkBlue, 
-                              color: index === 0 ? nordColors.bg : nordColors.text 
+                              background: index === 0 ? colors.gradient1 : colors.gradient3,
+                              color: colors.text
                             }}
                           >
                             {edu.status}
@@ -780,12 +867,12 @@ const Portfolio = () => {
                         </div>
                         
                         {edu.description && (
-                          <p className="text-sm mb-3 leading-relaxed" style={{ color: nordColors.textMuted }}>
+                          <p className="text-sm mb-3 leading-relaxed" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
                             {edu.description}
                           </p>
                         )}
                         
-                        <div className="flex items-center text-sm" style={{ color: nordColors.textMuted }}>
+                        <div className="flex items-center text-sm" style={{ color: colors.textMuted, fontFamily: "'JetBrains Mono', monospace" }}>
                           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
@@ -800,8 +887,8 @@ const Portfolio = () => {
 
             {/* Certificates */}
             <div>
-              <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: nordColors.blue }}>
-                <Award className="w-6 h-6 mr-2" />
+              <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
+                <Award className="w-7 h-7 mr-3" />
                 Certifications
               </h3>
 
@@ -809,39 +896,72 @@ const Portfolio = () => {
                 {certificates.map((cert, index) => (
                   <div
                     key={index}
-                    className="p-4 rounded-lg border flex items-center"
+                    className="p-6 rounded-2xl border flex items-center transition-all hover:scale-105 hover:shadow-2xl group"
                     style={{
-                      backgroundColor: nordColors.bg,
-                      borderColor: nordColors.bgLight
+                      backgroundColor: colors.bgCard,
+                      borderColor: colors.bgLight,
+                      borderWidth: '1px'
                     }}
                   >
                     <div
-                      className="w-2 h-2 rounded-full mr-4"
-                      style={{ backgroundColor: nordColors.accent }}
+                      className="w-3 h-3 rounded-full mr-4 transition-all group-hover:scale-150"
+                      style={{ background: colors.gradient2 }}
                     ></div>
-                    <span style={{ color: nordColors.text }}>{cert}</span>
+                    <span style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>{cert}</span>
                   </div>
                 ))}
               </div>
 
               <div
-                className="mt-8 p-6 rounded-lg border"
+                className="mt-6 p-6 rounded-2xl border transition-all hover:scale-105 hover:shadow-2xl"
                 style={{
-                  backgroundColor: nordColors.bg,
-                  borderColor: nordColors.bgLight
+                  backgroundColor: colors.bgCard,
+                  borderColor: colors.bgLight,
+                  borderWidth: '1px'
                 }}
               >
-                <h4 className="text-lg font-semibold mb-3" style={{ color: nordColors.blue }}>
+                <h4 className="text-lg font-semibold mb-4 flex items-center" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
+                  <span className="mr-2">🎨</span>
+                  Self-Learning & Hobbies
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <div
+                      className="w-2 h-2 rounded-full mt-2 mr-4 flex-shrink-0"
+                      style={{ background: colors.gradient1 }}
+                    ></div>
+                    <div>
+                      <p className="font-medium" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
+                        CAD Design & 3D Printing
+                      </p>
+                      <p className="text-sm mt-1" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
+                        Learning CAD via Fusion 360 for 3D design and printing projects as a creative hobby
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="mt-8 p-6 rounded-2xl border transition-all hover:shadow-2xl"
+                style={{
+                  backgroundColor: colors.bgCard,
+                  borderColor: colors.bgLight,
+                  borderWidth: '1px'
+                }}
+              >
+                <h4 className="text-lg font-semibold mb-4" style={{ color: colors.primary, fontFamily: "'Space Grotesk', sans-serif" }}>
                   Interests & Specialties
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {['Computer Hardware', 'Economics & Finance', 'Web Development', 'Literature', 'Photography', 'Virtualization', 'Network Security'].map((interest) => (
+                  {['Computer Hardware', 'Economics & Finance', 'Web Development', 'CAD & 3D Design', '3D Printing', 'Literature', 'Photography', 'Virtualization', 'Network Security'].map((interest) => (
                     <span
                       key={interest}
-                      className="px-3 py-1 rounded text-sm"
+                      className="px-3 py-1 rounded-lg text-sm transition-all hover:scale-105"
                       style={{
-                        backgroundColor: nordColors.bgLighter,
-                        color: nordColors.text
+                        backgroundColor: colors.bgHover,
+                        color: colors.text,
+                        fontFamily: "'Inter', sans-serif"
                       }}
                     >
                       {interest}
@@ -857,100 +977,82 @@ const Portfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20" style={{ backgroundColor: 'rgba(59, 66, 82, 0.3)' }}>
+      <section id="contact" className="py-20 relative">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-8" style={{ color: nordColors.accent }}>
+          <h2 className="text-5xl md:text-6xl font-bold mb-8 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
             Let's Connect
           </h2>
-          <p className="text-lg mb-12 max-w-2xl mx-auto" style={{ color: nordColors.textMuted }}>
+          <p className="text-xl mb-16 max-w-2xl mx-auto" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
             I'm always interested in discussing new opportunities, collaborations, or Junior SysAdmin positions. 
             Let's connect and explore how my infrastructure expertise can benefit your organization.
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="grid md:grid-cols-3 gap-8 mb-16">
             <a
               href="mailto:0pietroquintavalle0@gmail.com"
-              className="p-6 rounded-lg transition-colors hover:opacity-80 group"
-              style={{ backgroundColor: nordColors.bgLight }}
+              className="p-8 rounded-2xl transition-all hover:scale-110 hover:shadow-2xl group"
+              style={{ background: colors.gradient2 }}
             >
-              <Mail className="w-8 h-8 mx-auto mb-4" style={{ color: nordColors.blue }} />
-              <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>Email</h3>
-              <p className="text-sm" style={{ color: nordColors.textMuted }}>Professional inquiries</p>
+              <Mail className="w-10 h-10 mx-auto mb-4 transition-all group-hover:scale-110" style={{ color: colors.text }} />
+              <h3 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>Email</h3>
+              <p className="text-sm" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>Professional inquiries</p>
             </a>
 
             <a
               href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
-              className="p-6 rounded-lg transition-colors hover:opacity-80 group"
-              style={{ backgroundColor: nordColors.bgLight }}
+              className="p-8 rounded-2xl transition-all hover:scale-110 hover:shadow-2xl group"
+              style={{ background: colors.gradient3 }}
             >
-              <Linkedin className="w-8 h-8 mx-auto mb-4" style={{ color: nordColors.blue }} />
-              <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>LinkedIn</h3>
-              <p className="text-sm" style={{ color: nordColors.textMuted }}>Professional network</p>
+              <Linkedin className="w-10 h-10 mx-auto mb-4 transition-all group-hover:scale-110" style={{ color: colors.text }} />
+              <h3 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>LinkedIn</h3>
+              <p className="text-sm" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>Professional network</p>
             </a>
 
             <a
               href="https://github.com/Quinta0"
-              className="p-6 rounded-lg transition-colors hover:opacity-80 group"
-              style={{ backgroundColor: nordColors.bgLight }}
+              className="p-8 rounded-2xl transition-all hover:scale-110 hover:shadow-2xl group"
+              style={{ background: colors.gradient1 }}
             >
-              <Github className="w-8 h-8 mx-auto mb-4" style={{ color: nordColors.blue }} />
-              <h3 className="text-lg font-semibold mb-2" style={{ color: nordColors.text }}>GitHub</h3>
-              <p className="text-sm" style={{ color: nordColors.textMuted }}>Code repositories</p>
-            </a>
-          </div>
-
-          {/* Download CV Button */}
-          <div className="mb-8">
-            <a
-              href="/Pietro_Quintavalle_CV.pdf"
-              download="Pietro_Quintavalle_CV.pdf"
-              className="inline-flex items-center px-6 py-3 rounded-lg font-medium transition-colors hover:opacity-90"
-              style={{ 
-                backgroundColor: nordColors.accent, 
-                color: nordColors.bg 
-              }}
-            >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Download CV
+              <Github className="w-10 h-10 mx-auto mb-4 transition-all group-hover:scale-110" style={{ color: colors.text }} />
+              <h3 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>GitHub</h3>
+              <p className="text-sm" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>Code repositories</p>
             </a>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t" style={{ borderColor: nordColors.bgLight }}>
+      <footer className="py-12 border-t" style={{ borderColor: colors.bgLight }}>
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="mb-4">
-            <div className="flex justify-center items-center gap-6 mb-4">
+          <div className="mb-6">
+            <div className="flex justify-center items-center gap-8 mb-6">
               <a
                 href="https://github.com/Quinta0"
-                className="text-sm hover:opacity-80"
-                style={{ color: nordColors.blue }}
+                className="text-sm hover:opacity-80 transition-all hover:scale-105"
+                style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
               >
                 GitHub
               </a>
               <a
                 href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
-                className="text-sm hover:opacity-80"
-                style={{ color: nordColors.blue }}
+                className="text-sm hover:opacity-80 transition-all hover:scale-105"
+                style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
               >
                 LinkedIn
               </a>
               <a
                 href="mailto:0pietroquintavalle0@gmail.com"
-                className="text-sm hover:opacity-80"
-                style={{ color: nordColors.blue }}
+                className="text-sm hover:opacity-80 transition-all hover:scale-105"
+                style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
               >
                 Email
               </a>
             </div>
           </div>
-          <p style={{ color: nordColors.textMuted }}>
-            Built with ❄️ using React & Nord theme • Pietro Quintavalle © 2025
+          <p className="mb-3" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
+            Built with ⚡ using React & Modern Design • Pietro Quintavalle © 2025
           </p>
-          <p className="text-sm mt-2" style={{ color: nordColors.textMuted }}>
+          <p className="text-sm" style={{ color: colors.textMuted, fontFamily: "'JetBrains Mono', monospace" }}>
             IT Support Professional | Systems Engineer | Economics Student
           </p>
         </div>
