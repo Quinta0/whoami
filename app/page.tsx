@@ -1,1072 +1,602 @@
 "use client"
+
 import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ChevronDown, Code, Database, BarChart3, Globe, Award, GraduationCap, Image, ExternalLink as LinkIcon, Briefcase, Calendar, Moon, Sun } from 'lucide-react';
+import { 
+  Terminal, 
+  Server, 
+  Network, 
+  Code, 
+  Database, 
+  Cpu, 
+  Globe, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Menu, 
+  X,
+  Linkedin,
+  Github,
+  Briefcase,
+  GraduationCap,
+  Calendar
+} from 'lucide-react';
 
-const Portfolio = () => {
-  const [activeSection, setActiveSection] = useState('home');
-  const [scrolled, setScrolled] = useState(false);
-  const [showProjectGallery, setShowProjectGallery] = useState<Project | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+// --- Data Constants ---
 
-  // Dark Mode Colors - Improved readability
-  const darkColors = {
-    bg: '#0B0F1F',           // Darker for better contrast
-    bgLight: '#1A1F3A',      
-    bgLighter: '#252B48',    
-    bgCard: '#161B33',       
-    bgHover: '#1F2544',      
-    text: '#F0F4FF',         // Brighter white for readability
-    textMuted: '#B8C1E3',    // Lighter muted text
-    primary: '#7C6CE7',      
-    secondary: '#00D4FF',    
-    accent: '#FF6B9D',       
-    blue: '#00D4FF',         
-    darkBlue: '#5B4BD6',     
-    cyan: '#00F2FE',         
-    green: '#00E676',        
-    yellow: '#FFB800',       
-    orange: '#FF9500',       
-    red: '#FF6B9D',          
-    purple: '#B48EAD',       
-    success: '#00E676',      
-    warning: '#FFB800',      
-    gradient1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    gradient2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    gradient3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    gradientHero: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
-  };
-
-  // Light Mode Colors
-  const lightColors = {
-    bg: '#FFFFFF',           // Pure white
-    bgLight: '#F8F9FC',      // Very light gray-blue
-    bgLighter: '#EEF1F8',    // Light gray
-    bgCard: '#FAFBFF',       // Off-white card
-    bgHover: '#E8ECFA',      // Hover state
-    text: '#1A1F3A',         // Dark blue-gray for text
-    textMuted: '#5E6B8C',    // Muted blue-gray
-    primary: '#6C5CE7',      // Keep vibrant purple
-    secondary: '#0099CC',    // Darker cyan for contrast
-    accent: '#E94B7A',       // Slightly darker pink
-    blue: '#0099CC',         
-    darkBlue: '#5B4BD6',     
-    cyan: '#00A8CC',         
-    green: '#00C853',        
-    yellow: '#FF9800',       
-    orange: '#FF6B00',       
-    red: '#E94B7A',          
-    purple: '#9C4D97',       
-    success: '#00C853',      
-    warning: '#FF9800',      
-    gradient1: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    gradient2: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    gradient3: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    gradientHero: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%)',
-  };
-
-  const colors = isDarkMode ? darkColors : lightColors;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const skills = {
-    'System Administration': ['Linux/Windows Server', 'Active Directory', 'Group Policy', 'Office 365', 'PowerShell', 'Bash Scripting'],
-    'Virtualization & Cloud': ['Proxmox VE', 'Hyper-V', 'Docker', 'LXC', 'Infrastructure as Code', 'NGINX'],
-    'Networking & Security': ['VLAN Configuration', 'Firewall Management', 'VPN (Tailscale)', 'Network Troubleshooting', 'DDNS'],
-    'Development & Analytics': ['Python', 'JavaScript', 'React', 'Next.js', 'SQL', 'Data Analysis'],
-    'Monitoring & Tools': ['Grafana', 'Prometheus', 'Git', 'Backup & Recovery', 'RAID Systems']
-  };
-
-  const experience = [
-    {
-      title: 'Systems Engineering Consultant',
-      company: 'Freelance',
-      period: 'January 2020 - Present',
-      location: 'Ticino, Switzerland',
-      description: 'Delivered end-to-end IT infrastructure and systems engineering services to multiple clients, with a focus on server deployment, virtualization platforms, and network architecture.',
-      achievements: [
-        'Built and maintained 6-10 production-grade servers with 90%+ uptime',
-        'Designed VLAN-based network topologies and firewall policies',
-        'Implemented secure remote access via VPN (Tailscale)',
-        'Created automation scripts for routine maintenance and monitoring',
-        'Managed Windows Server environments with Active Directory integration'
-      ]
+const DATA = {
+  profile: {
+    name: "Pietro Quintavalle",
+    role: "System Administrator | IT Consultant | Economics Student",
+    tagline: "Bridging Enterprise Infrastructure with Economic Strategy",
+    summary: "I am a Systems Administrator with a strategic edge. Combining 5+ years of bare-metal virtualization and network engineering experience with an academic foundation in Economics, I don't just 'keep the lights on'—I build cost-efficient, scalable infrastructure that drives business value. My expertise spans from deploying complex Proxmox clusters to optimizing IT budgets.",
+    location: "Switzerland",
+    email: "0pietroquintavalle0@gmail.com",
+    links: {
+      github: "https://github.com/Quinta0",
+      linkedin: "https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
     }
-  ];
-
-  const projects = [
-    {
-      title: 'Enterprise Proxmox Infrastructure',
-      period: 'Professional Client Project',
-      description: 'Deployed a full single-node virtualization environment using Proxmox VE, with structured rack cabling, DDNS, and NGINX reverse proxy for secure service exposure. Integrated Tailscale VPN for remote management. Configured Docker containers and LXC instances to run Nextcloud, Jellyfin, and TrueNAS. Enabled centralized infrastructure visibility using Grafana, Prometheus, and a Homarr dashboard.',
-      tech: ['Proxmox VE', 'NGINX', 'Docker', 'LXC', 'Grafana', 'Tailscale', 'DDNS', 'TrueNAS', 'Linux'],
-      icon: <Code className="w-6 h-6" />,
-      status: 'Production',
-      images: [],
-      features: ['Centralized infrastructure visibility using Grafana', 'Docker containers and LXC instances', 'Nextcloud, Jellyfin, and TrueNAS integration', 'Secure remote access via VPN'],
-      category: 'Infrastructure'
+  },
+  skills: [
+    { 
+      category: "Infrastructure & Virtualization", 
+      icon: <Server className="w-6 h-6" />, 
+      items: ["Proxmox VE (Clustering)", "Hyper-V", "Windows Server (AD/DNS/GP)", "Linux (Debian/Ubuntu/Alpine)", "Office 365 Administration", "Bare Metal Deployment"] 
     },
-    {
-      title: 'Multi-User NAS Solution',
-      period: 'Professional Client Project',
-      description: 'Designed and deployed a RAID 10-based NAS system supporting 9 users as a self-hosted cloud storage alternative to Google/iCloud. Configured SMB/NFS shares, access control lists (ACLs), and failover mechanisms. Automated snapshotting and rsync-based backups for a reliable, high-availability storage solution.',
-      tech: ['RAID', 'TrueNAS', 'rsync', 'SMB/NFS', 'systemd timers', 'ACLs', 'Linux'],
-      icon: <Database className="w-6 h-6" />,
-      status: 'Production',
-      images: [],
-      features: ['Automated snapshotting and rsync-based backups', 'High-availability storage solution', 'Multi-user access control', 'Failover mechanisms'],
-      category: 'Storage'
+    { 
+      category: "Network Engineering", 
+      icon: <Network className="w-6 h-6" />, 
+      items: ["VLANs & Subnetting", "Firewall Policy Management", "Tailscale Mesh VPNs", "Reverse Proxies (NGINX)", "Network Topology Design", "Secure Remote Access"] 
     },
-    {
-      title: 'Custom Gaming Systems',
-      period: 'Professional Client Project',
-      description: 'Engineered and delivered 12+ custom PC builds, including high-performance gaming rigs and workstation-grade machines. Focused on component compatibility analysis, PSU sizing, airflow and thermal management, and BIOS/driver optimization for performance tuning.',
-      tech: ['Hardware Engineering', 'BIOS Configuration', 'Thermal Management', 'Performance Tuning'],
-      icon: <Code className="w-6 h-6" />,
-      status: 'Delivered',
-      images: [],
-      features: ['Component compatibility analysis', 'PSU sizing and airflow optimization', 'BIOS/driver optimization', 'System benchmarking'],
-      category: 'Hardware'
+    { 
+      category: "DevOps & Automation", 
+      icon: <Code className="w-6 h-6" />, 
+      items: ["Infrastructure as Code (IaC)", "Bash & PowerShell Scripting", "Docker Containerization", "LXC Management", "Git Version Control", "Python Automation"] 
     },
-    {
-      title: 'Personal Homelab Infrastructure',
-      period: 'Personal Project',
-      description: 'Replicated enterprise-level infrastructure architecture in a personal homelab, using Proxmox, Docker, and LXC. Focused on Infrastructure as Code (IaC) principles, virtual machine provisioning, monitoring, and container orchestration. Demonstrated ability to standardize and document reproducible deployment procedures.',
-      tech: ['Proxmox VE', 'Docker', 'LXC', 'Bash', 'Tailscale', 'Grafana', 'IaC'],
-      icon: <Code className="w-6 h-6" />,
-      status: 'Ongoing',
-      images: [],
-      features: ['Infrastructure as Code (IaC) principles', 'Virtual machine provisioning', 'Monitoring and container orchestration', 'Standardized deployment procedures'],
-      category: 'Infrastructure'
+    { 
+      category: "Analytics & Web", 
+      icon: <Database className="w-6 h-6" />, 
+      items: ["Grafana & Prometheus", "Disaster Recovery Planning", "React & Next.js", "SQL/SQLite", "Hardware Benchmarking", "Google Data Analytics"] 
     },
-    {
-      title: 'Valgo - Algorithm Visualizer',
-      period: 'Jun 2024 - Present',
-      description: 'Interactive web application designed to help users understand and visualize various sorting algorithms. Built with Next.js and React to make learning algorithms more engaging and intuitive.',
-      tech: ['Next.js', 'React', 'JavaScript', 'Algorithm Visualization'],
-      icon: <Globe className="w-6 h-6" />,
-      status: 'Live',
-      images: [
-        'valgo.png',
-      ],
-      features: ['Real-time algorithm visualization', 'Multiple sorting algorithms', 'Step-by-step breakdown', 'Performance comparison'],
-      github: 'https://github.com/Quinta0/valgo',
-      demo: 'https://quinta0.github.io/valgo/',
-      category: 'Development'
-    },
-    {
-      title: 'Boston Housing Price Prediction',
-      period: 'May 2024 - Present',
-      description: 'Machine learning model to predict housing prices in the Boston area based on various features such as crime rate, average number of rooms per dwelling, and accessibility to radial highways.',
-      tech: ['Python', 'Machine Learning', 'Data Analysis', 'Statistical Modeling'],
-      icon: <BarChart3 className="w-6 h-6" />,
-      status: 'Academic Project',
-      images: [
-        'Housing.jpeg',
-      ],
-      features: ['Predictive modeling', 'Feature engineering', 'Data visualization', 'Statistical analysis'],
-      github: 'https://github.com/Quinta0/BostonHousing',
-      category: 'Data Science'
-    },
-    {
-      title: 'Forest Fire Simulation',
-      period: 'Mar 2024 - Present',
-      description: 'Probability & Statistics course project modeling the spread of forest fires over a grid. Accounts for vegetation types, terrain elevation, wind patterns, humidity levels, and spontaneous ignition.',
-      tech: ['Python', 'Statistical Modeling', 'Simulation', 'Data Science'],
-      icon: <Database className="w-6 h-6" />,
-      status: 'Academic Project',
-      images: [
-        'forestfire.jpg',
-      ],
-      features: ['Monte Carlo simulation', 'Environmental factors modeling', 'Statistical analysis', 'Visualization tools'],
-      github: 'https://github.com/Quinta0/ForestFire',
-      category: 'Data Science'
-    },
-    {
-      title: 'Finance Tracker Application',
-      period: 'In Development',
-      description: 'Designing a simple and intuitive personal finance app built with Django (Python) and SQLite, focused on clarity, control, and peace of mind. Features category-based expense tracking, budget summaries, and clear data visualizations.',
-      tech: ['Django', 'Python', 'SQLite', 'Chart.js', 'HTML/CSS', 'JavaScript'],
-      icon: <BarChart3 className="w-6 h-6" />,
-      status: 'In Development',
-      images: [],
-      features: ['Category-based expense tracking', 'Budget summaries', 'Data visualizations', '50/30/20 budgeting framework'],
-      category: 'Development'
-    }
-  ];
-
-  const education = [
+  ],
+  experience: [
     {
       id: 1,
-      institution: 'USI Università della Svizzera italiana, Lugano',
-      degree: "Bachelor's Degree in Economics (English Stream)",
-      period: 'September 2024 - Present',
-      status: 'Current',
-      description: 'Pursuing coursework in microeconomics, macroeconomics, statistics, accounting, and quantitative methods with particular interest in finance.'
-    },
-    {
-      id: 2,
-      institution: 'USI Università della Svizzera italiana, Lugano',
-      degree: 'Bachelor of Science in Informatics (English Stream)',
-      period: 'September 2022 - June 2024',
-      status: '2 years completed',
-      description: 'Completed comprehensive coursework in software engineering, AGILE methodologies, data structures and algorithms, and database systems.'
-    },
-    {
-      id: 3,
-      institution: 'Scuola cantonale di commercio, Bellinzona',
-      degree: 'Maturità Cantonale & AFC Economics',
-      period: 'September 2018 - June 2022',
-      status: '4.5/6 (Maturità), 5/6 (AFC)',
-      description: 'Completed secondary education with focus on economics and business administration.'
+      role: "Systems Engineering Consultant",
+      company: "Freelance",
+      location: "Ticino, Switzerland",
+      period: "Jan 2020 - Present",
+      description: "Delivering end-to-end IT infrastructure services.",
+      achievements: [
+        "Built and maintained 6-10 production-grade servers with 90%+ uptime using automation tools.",
+        "Designed VLAN-based network topologies and firewall policies.",
+        "Managed Windows Server environments including AD and Disaster Recovery.",
+        "Implemented secure remote access via Tailscale VPN."
+      ]
     }
+  ],
+  education: [
+    {
+      degree: "Bachelor's Degree in Economics",
+      institution: "USI Università della Svizzera italiana",
+      period: "Sep 2024 - Present",
+      status: "Current",
+      details: "Microeconomics, Macroeconomics, Statistics, Accounting, Quantitative Methods."
+    },
+    {
+      degree: "Bachelor of Science in Informatics",
+      institution: "USI Università della Svizzera italiana",
+      period: "Sep 2022 - June 2024",
+      status: "2 Years Completed",
+      details: "Software Engineering, Agile, Data Structures, OOP (Java, C++), Web Dev."
+    },
+    {
+      degree: "Maturità Cantonale & AFC Economics",
+      institution: "Scuola cantonale di commercio",
+      period: "Sep 2018 - June 2022",
+      status: "Completed",
+      details: "Achieved 4.5/6 (Maturità), 5/6 (AFC). Above average performance."
+    }
+  ],
+  projects: [
+    {
+      title: "Enterprise Proxmox Infrastructure",
+      type: "Professional Client Project",
+      tech: ["Proxmox", "Docker", "LXC", "NGINX", "Tailscale"],
+      description: "Deployed a full single-node virtualization environment with structured cabling, reverse proxy, and centralized monitoring via Grafana and Prometheus."
+    },
+    {
+      title: "Multi-User NAS Solution",
+      type: "Professional Client Project",
+      tech: ["TrueNAS", "RAID 10", "ZFS", "Linux", "ACLs"],
+      description: "Designed a RAID 10-based NAS supporting 9 users, serving as a self-hosted cloud alternative with automated rsync backups and strict access controls."
+    },
+    {
+      title: "Valgo - Algo Visualizer",
+      type: "Personal Project",
+      tech: ["React", "Next.js", "TypeScript", "Tailwind"],
+      description: "Developed a web-based algorithm visualization tool focusing on front-end performance and real-time UI interactivity to demonstrate logic."
+    },
+    {
+      title: "Finance Tracker App",
+      type: "In Development",
+      tech: ["Django", "Python", "SQLite", "Chart.js"],
+      description: "Building a personal finance tool implementing the 50/30/20 rule, focusing on clarity and data visualization for budget management."
+    },
+    {
+      title: "Personal Homelab",
+      type: "Personal Project",
+      tech: ["IaC", "Bash", "Virtualization", "Networking"],
+      description: "Replicated enterprise-level infrastructure using IaC principles to standardize and document reproducible deployment procedures."
+    }
+  ],
+  languages: [
+    { lang: "Italian", level: "Native" },
+    { lang: "English", level: "Fluent" },
+    { lang: "German", level: "Conversational" },
+    { lang: "Spanish", level: "Basic" },
+    { lang: "Norwegian", level: "Basic" }
+  ]
+};
+
+// --- Components ---
+
+const SwissMap = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 800 500" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path 
+      d="M 461.4 1.65 461.78 3.29 463.99 2.53 464.81 3.54 466.38 2.46 468.58 2.93 469.42 3.65 469.28 4.28 470.02 4.61 469.73 6.15 468.9 6.6 468.78 7.16 469.26 8.39 469.46 8.98 470.22 9.18 469.53 11.74 471.01 13.85 471.69 14.11 471.99 13.62 473.6 12.31 474.15 12.35 474.53 11.84 474.16 11.44 475.47 10.17 474.59 10.02 474.93 8.1 474.15 6.65 474.33 4.61 474.72 4.6 474.84 3.61 476.17 3.12 476.74 4.27 476.24 5.41 477.01 5.4 477.96 6.43 479.54 6.95 480.38 6.7 480.71 9.18 481.67 10.1 480.78 10.91 481.57 13.83 482.44 14.66 483.33 14.5 483.56 13.72 486.23 12.22 488.33 12.95 489.13 13.76 488.81 14.21 490.96 15.78 490.67 17.2 487.87 17.38 487.28 18.59 486.26 19.21 485.72 21.46 486.93 23.72 488.05 23.74 488.03 24.08 489.58 24.52 490.12 25.09 489.35 26.32 488.38 30.17 488.66 31.21 493.68 32 498.81 35.44 500.57 35.66 500.16 34.53 500.99 31.98 501.29 31.46 503.08 31.06 502.42 30.23 500.94 30 500.93 28.7 500.17 28.16 495.96 27.55 496.55 25.86 496.03 24.62 497.28 23.89 497.13 23.38 497.95 23.64 498.7 22.22 499.67 22.18 499.89 21.77 501.15 22.19 500.7 20.26 502.46 19.32 502.82 21.2 503.51 21.37 502.2 22.93 503.55 23.08 504.6 24.7 505.93 24.63 504.65 25.95 505.57 26.46 507.18 25.5 508.9 26.11 509.34 26.43 509.86 28.39 513.89 28.01 514.13 28.24 513.59 28.86 514.7 30.15 514.44 30.76 512.4 31.28 512.96 30.22 512.47 29.64 511.88 30.23 511.56 29.63 510.36 29.91 510.18 30.74 511.39 31.17 511.19 32.15 510.3 33.03 510.4 34.27 511.94 34.36 514.25 37 514.52 40.77 514.5 41.11 515.83 41.11 518.35 42.89 526.05 40.67 530.25 38.4 533.34 35.92 540.35 32.79 546.47 33.38 549.25 34.78 553.21 34.8 555.21 35.78 557.2 37.53 560.86 38.61 561.6 38.51 562.53 37.75 564.26 38.16 565.2 39.6 566.51 41.1 567.36 40.83 567.44 41.3 568.56 40.8 569.43 40.39 574.31 41 581.65 40.06 605.96 50.05 623.7 67.96 625.7 68.41 634.81 70.45 635.23 81.54 635.76 82.99 637.92 84.8 639.15 86.2 641.16 90.77 642.22 91.29 642.7 91.09 643.35 89.03 644.11 89.26 646 92.36 651.65 93.2 652.53 93.94 652.27 94.87 651.01 96.18 649.87 98.13 651.02 103 651.15 106.06 651.64 106.12 652.64 107.9 655.01 109.52 654.98 112.05 654.43 113.11 653.05 114.75 650.79 115.69 648.3 115.71 646.7 116.31 646.38 116.03 645.53 116.99 642.2 121.01 641.43 123.44 640.01 128.61 638.83 130.27 636.04 132.07 634.9 133.1 632.12 138.78 629.89 140.75 629.72 141.06 629.66 142.82 628.05 147.61 626.3 150.78 624.96 153.1 623.79 157.25 622.76 159.44 622.3 161.49 622.05 164.67 623.67 170.09 625.13 172.6 626.1 174.45 627.15 179.12 627.49 180.88 628.05 184.73 626.63 188.54 620.06 193.56 619.59 194.74 620.26 197.19 620.31 196.36 621.36 195.98 621.39 196.89 622.02 197.73 623.13 195.78 624.04 196.48 624.53 195.68 626.57 195.79 627.51 194.9 629.85 194.29 631.47 193.75 633.56 195.37 634.04 197.52 634.48 197.82 634.99 198.02 636.65 197 638.24 196.62 638.75 196.93 639.91 196.32 641.37 195.31 642.03 195.34 642.56 194.59 643.31 194.88 645.1 196.71 646.7 197.31 648.5 197.21 649.34 196.64 650 195.13 652.31 195.54 656.47 194.53 656.5 195.34 657.59 196.3 659.24 197.03 660.95 196.66 660.9 198.15 662.87 199.35 666.94 199.55 667.62 199.94 668.12 201.01 674.32 200.62 675.83 202.36 677.5 203.03 679.43 204.92 679.98 204.71 681.5 205.47 682.66 206.83 683.61 207.29 684.47 206.62 686.53 206.29 687.93 204.52 689.08 205.03 690.67 205.05 691.39 205.88 689.77 207.15 689.7 208.03 690.09 208.83 692.87 210.32 693.5 212.99 691.86 214.81 692.13 215.44 690.58 217.29 690.55 218.87 689.79 220 691.11 221.55 690.43 223.26 690.73 225.75 691.46 225.9 690.65 227.31 691.46 227.21 693.88 228.08 695.96 229.71 697.02 229.51 698.64 231.37 701.46 232.8 702.96 233.03 705.24 232.09 705.95 233.02 706.56 233.07 708.55 232.13 709.06 232.77 709.35 234.61 710.7 235.58 711.71 235.62 713.48 236.51 715.58 235.79 717.1 237.28 718.54 239.65 719.36 239.85 719.91 241.22 721.7 242.43 721.45 245.45 722.92 246.27 727.81 246.16 728.73 246.93 728.68 248.59 729.47 249.34 730.94 251.36 733.4 250.53 733.54 249.7 734.1 249.42 736.97 249.7 738.35 248.67 739.64 248.95 740.13 249.58 741.06 248.78 742.18 248.86 742.66 248.09 744.28 247.76 746.51 244.81 747.45 244.77 748.3 245.28 751.01 244.6 753.37 244.85 753.05 244.05 753.4 243.49 753.76 240.13 752.48 238.72 752.15 237.25 753.49 235.78 754.14 232.17 755.02 231.37 754.76 228.18 757.74 228.56 764.09 230.61 764.67 231.08 765.36 229.87 768.04 229.74 768.24 228.26 766.3 225.9 766.87 223.31 770.11 222.34 770.43 219.79 772.38 216.07 772.25 215.32 773.06 214.96 773.4 213.19 774.89 212.48 777.89 212.91 779.89 210.7 780.93 210.38 782.58 211.32 783.19 212.87 785.01 214.98 787.49 216.77 787.65 217.53 786.85 219.38 786.75 220.81 787.85 221.79 788.61 221.75 791.46 222.77 792.57 222.63 794.92 224.11 796.28 225.66 798.53 226.5 797.82 228.13 798.35 229.46 797.98 232.24 796.63 233.49 796.02 237.67 794.19 240.24 794.99 241.05 795.35 243.14 794.77 245.93 795.44 249.35 794.06 251.23 794.51 252.65 793.91 253.11 793.39 252.96 792.78 254.1 793.43 255.56 792.65 256.2 792.97 257.63 791.74 260.76 789.67 262.45 788.01 262.67 787.51 263.33 787.5 264.56 786.81 264.86 788.76 266.49 788.99 267.58 790.14 269.04 790.51 272.79 790.15 274.11 789.05 273.98 782.84 279.05 784.39 280.16 784.74 281.35 786.1 282.57 785.62 285.14 784.57 286.05 783.39 286.04 781.63 290.2 779.92 290.69 779.61 291.46 781.47 294.76 781.23 297.96 781.77 299.04 782.86 301.25 783.11 302.63 782.78 303.14 783.21 303.59 784.41 304.04 786.36 303.21 790.45 302.94 790.91 302.45 793.82 304.55 797.63 308.54 799 309.07 798.84 310.17 797.67 311.71 798.18 313.5 797.57 315.01 798.27 315.68 797.51 317.86 797.73 318.81 795.96 321.55 795.84 322.54 796.49 323.93 795.31 326.17 795.51 327.4 794.36 327.97 793.21 327.96 793.11 329.18 792.1 330.67 789.26 328.96 786 325.41 782.34 327.29 780.04 325.73 779.16 325.75 777.62 324.74 774.38 324.3 774.05 325.89 771.98 327.61 769.58 325.32 767.09 326.61 766.51 325.89 764.41 325.77 764.12 325.3 764.62 324.44 764.37 323.52 763.21 322.02 762.87 320.58 760.14 319.64 759.71 318.73 758.71 318.87 757.05 320.33 755.7 319.47 755.29 318.65 754.93 315.14 757.98 310.32 755.52 307.35 754.52 303.97 751.84 305.59 750.32 308.67 748.74 307.69 746.46 307.08 746.35 306.37 744.64 306.87 740.99 308.98 736.61 310.24 736.45 311.01 735.04 311.58 732.36 311.18 731.21 310.27 730.44 310.25 729.83 311.6 730.27 312.74 729.52 314.73 730.23 315.8 730.07 317.37 729.21 318.77 726.27 319.33 726.45 320.3 727.44 321.37 726.1 323.01 724.96 323.54 724.35 325.66 723.26 326.8 720.66 327.26 720.16 328.92 721.8 330.38 721.33 331.17 721.93 332.71 721.49 335.09 719.89 335.93 720.36 338.01 721.07 338.53 720.34 340.1 720.38 340.94 720.97 341.59 720.16 342.8 720.39 344.36 721.54 345.68 721.9 347.7 721.67 348.57 719.82 350.61 719.89 351.52 719.36 352.02 719.82 353.1 721.69 353.84 722.34 353.55 723.04 356.72 723.77 357.36 726.04 356.81 726.53 357.34 726.59 358.59 728.71 358.18 730.12 358.51 731.45 356.74 733.06 357.33 733.4 356.54 735.17 355.87 735.83 356.54 737.63 356.75 738.31 358.1 738.42 360.32 738.72 360.68 740.08 359.91 740.77 360.01 741.76 362 740.94 363.06 741.26 366.33 740.94 367.08 739.89 367.75 738.37 367.28 737.53 367.44 734.84 369.62 735.05 370.48 734.63 371.6 735.17 373.86 733.44 374.79 732.42 375.97 731.8 375.84 731.44 376.44 731.69 377.59 731.1 378.62 730.78 380.8 732.27 383.38 732.91 385.76 736.78 388.18 736.63 389.07 738.04 390.47 739.58 391.2 739.99 392.07 739.67 393.21 741.01 393.83 740.8 395.14 741.17 396.6 742.68 397.82 743.49 399.93 743.21 400.86 738.98 404.66 738.11 406.98 735.72 408.4 735.06 408.22 734.12 408.68 731.64 408.19 730.64 407.47 728.55 407.56 726.54 408.43 724.86 410.37 723.53 409.59 722.75 408.38 720.12 407.17 721.75 405.78 721.84 404.18 722.46 403.53 722.53 402.75 723.09 402.48 721.89 397.71 717.55 395.08 714.06 394.26 711.73 393.21 710.98 390.33 712.54 388.98 712.6 388.45 711.79 387.45 712.47 386.03 711.54 385.78 708.96 383.47 709.91 380.64 711.75 378.6 711.55 377.07 711.87 376.41 711.34 376.04 709.84 376.2 706.2 373.14 704.7 370.69 705.27 369.5 704.2 369.24 700.88 370.33 700.08 371.18 700.23 372.12 699.2 372.61 698.81 371.41 697.79 371.43 696.24 368.86 692.04 370.7 691.44 371.96 689.25 373.5 688.72 372.93 687.15 373.4 685.96 372.94 685.38 373.64 682.89 373.86 682.69 374.59 680.77 376.48 678.91 377.02 677.67 378.12 674.52 378.94 673.48 380.34 671.91 380.23 669.8 378.07 667.99 377.18 667.32 376.19 665.96 376.57 664.35 378.11 663.73 379 664.42 381.04 663.76 381.41 662.71 383.26 662.87 383.85 664.23 384.35 664.2 385.98 663.96 386.8 662.86 387.75 662.2 391.14 661.44 391.44 660.13 391.68 658.62 390.88 657.66 390.91 656.46 390.08 656.36 389.35 655.53 388.57 654.38 389.37 654.25 390.28 652.62 390.35 651.04 391.24 650.81 391.93 648.97 392.86 646.38 392.28 645.38 392.55 643.9 390.7 641.94 390.43 640.79 390.99 640.3 390.63 638.42 390.64 637.33 389.59 635.41 388.66 635 387.75 634.04 387.83 633.19 388.74 631.36 387.29 627.76 382.53 627.41 381.07 626.98 381.13 625.96 376.27 624.57 375.08 623.84 373.07 621.49 372.24 620.84 371.25 620.26 371.4 617.58 370.05 617.93 369.27 617.74 368.14 618.34 367.94 618.96 366.75 617.71 360.84 616.79 359.89 616.43 358.66 616.92 354.6 617.55 353.12 617.27 347.83 618.39 346.22 617.83 343.46 615.62 343.59 615.52 342.47 617.62 342.35 617.93 339.09 617.62 337.09 618.2 336.5 617.18 336.36 616.57 337.13 612.89 339 611.25 341.39 611.53 342.07 611.18 344.43 609.28 346.84 608.78 346.94 605.08 345.34 604.27 343.04 602.97 342.58 601.82 341.18 601.32 339.9 602.19 338.55 602.21 337.58 600.26 336.07 598.98 337.4 598.28 337.12 596.16 337.52 595.89 336.96 591.23 337.43 587.65 339.23 586.25 339.33 585.59 341.68 584.78 342.64 585.34 343.81 584.65 347.11 585.4 348.42 583.34 350.83 580.98 351.35 579.96 352.03 580.46 356.05 582.4 357.58 582.87 358.7 583.95 359.32 584.81 359.15 585.85 360.62 586.14 362.64 585.52 363.07 586.07 363.55 584.96 365.22 585.5 366.72 586.39 367.42 586.39 368.1 584.92 370.69 585.27 371.2 585.08 372.12 585.56 372.43 586.21 374.66 588.67 375.21 588.91 376.28 588.61 376.87 589.28 378.26 587.93 380.23 588.15 381.25 589.31 382.63 588.56 383.44 588.36 384.97 586.7 385.69 586.05 387 586.66 390.13 584.35 392 583.62 393.87 582.11 394.79 581.73 397.1 580.86 397.62 581.04 398.89 580.33 400.46 580.73 401.67 580.2 402.66 580.46 404.64 579.86 406.58 577.94 406.24 575.37 407.38 575.74 408.66 575.01 411.09 574.23 411.98 572.08 412.6 570.79 416.32 571.36 417.99 570.8 418.74 570.64 420.17 568.37 422.51 566.9 422.06 566.49 421.86 566.18 421.96 564.55 422.4 564.05 424.29 560.17 426.52 557.88 431.21 557.11 431.06 554.93 431.93 554.06 433.26 552.2 433.49 550.35 434.64 549.27 435.44 552.19 442.53 552.24 443.63 551.32 445.39 550.42 446.11 550.29 448.81 549.51 449.49 547.14 449.96 545.34 449.53 544.39 450.39 543.44 450.4 541.58 451.89 540.5 451.97 539.54 452.72 539.49 454.38 538.18 455.87 537.84 457.76 540.49 461.27 540.82 465.05 541.51 466.89 540.53 467.11 540.47 467.92 539.69 468.4 538.51 468.34 538.47 469.53 537.8 470.26 535.69 470.2 535.77 472.14 534.94 472.44 534.49 472.11 535.46 473.72 538.96 475.24 539.54 478.11 538.67 479.45 538.89 480.04 540.46 481.14 539.88 483.33 541.11 483.26 541.75 483.84 544.03 483.57 545.2 484.94 545.14 485.35 547.05 485.22 546.9 486.35 548.56 487.28 548.44 487.82 549.29 487.27 549.98 487.63 549.94 489.65 550.04 490.68 551.78 489.95 552.17 490.34 552.13 491.28 551.49 491.52 550.87 492.57 550.22 492.51 550.49 493.41 550.2 494.26 549.08 495.1 548.19 496.7 546.58 496.76 546.15 497.16 545.95 498.56 545.16 499.92 545.54 501.71 544.99 502.29 545.44 502.54 544.49 503.2 544.21 503.95 543.65 503.98 543.31 505.1 542.74 505.7 543.16 506.74 541.95 509.47 542.57 509.89 542.03 510.44 540.44 510.16 540.26 510.47 539.41 511.16 536.23 509.91 535.44 510.15 535.47 509.08 536.06 506.89 534.73 506.79 534.18 505.96 533.23 506.69 532.31 506.46 531.97 507.36 531.23 507.54 529.73 506.53 529.82 505.83 528.73 504.88 527.15 504.91 524.7 505.89 524.02 507.28 522.52 507.07 521.05 508.02 521.42 505.05 524.64 500.34 525.84 499.64 526.88 498.82 526.31 497.97 525.43 498.74 524.92 497.91 524.53 494.26 522.7 491.57 523.28 489.57 522.48 488.24 521.76 486.87 521.43 486.02 520.17 486.03 517.64 482.18 518.7 478.46 517.82 475.62 515.68 476.17 513.03 474.66 512.74 474.01 511.87 473.8 510.77 472.76 509.56 471.29 508.98 471 508.83 469.96 508.38 469.91 508.24 469.29 507.34 469.02 506.89 468.32 505.47 468.39 505.17 468.49 503.77 467.71 500.58 467.29 499.99 467.33 499.71 468.16 498.84 468.04 500.11 463.23 500.81 462.2 502.36 459.74 504.78 458.84 506.28 456.64 506.61 454.77 507.08 455.04 507.56 454.23 506.39 453.55 507.4 452.31 509.1 453.03 510.93 449.73 510.49 446.17 509.68 446.15 508.61 444.95 507.26 444.35 504.02 440.7 502.38 439.69 501.28 441.35 498.34 441.49 495.75 439.83 494.33 439.66 493.52 438.71 491.18 434.39 488.02 437.4 486.18 440.71 483.38 439.61 481.24 439.48 480.08 437.39 478.46 437.78 476.29 436.81 474.56 434.31 474.59 434.11 471.22 434.37 468.22 434.53 468.1 433.81 467.85 431.7 465.38 429.19 464.89 429.14 464.93 428.38 466.07 427.48 466.12 426.57 466.73 426.47 466.67 426.01 464.02 425.67 463.91 424.43 461.99 424.16 461.23 423.08 460.81 420.51 459.76 418.81 458.05 418.21 457.97 416.72 456.01 415.37 454.95 413.62 454.25 410.07 452.36 409.17 451.21 409.59 447.2 407.33 444.59 407.01 443.04 406.37 442.23 403.41 439.27 402.56 438.55 401.87 438.39 400.98 439.38 399.99 439.48 399.14 440.78 398.54 439.71 395.86 437.34 392.98 436.93 391.42 435.83 389.77 436.76 388.78 438.08 388.3 437.83 387.3 438.3 386.77 438.64 384.39 440.43 383.95 440.74 382.42 441.58 382.13 442.45 380.77 442.09 380 442.28 378 441.78 375.82 443.31 373.46 442.71 371.99 442.65 369.01 441.66 367.32 443.47 364.97 442.05 362.7 442.97 360.95 440.96 358.04 441.64 356.71 441.07 355.1 442.61 353.08 441.78 352.17 441.86 351.05 440.24 349.85 439.75 348.2 439 347.73 437.75 347.99 437.73 347.58 433.96 348.99 432.43 348.99 431.35 350.01 430.24 350.06 429.71 350.82 428.26 350.67 427.26 351.01 426.61 350.42 425.14 350.73 423.17 351.99 422.59 353.34 417.84 357.4 415.99 357.93 414.68 357.36 413.17 359.5 413.17 360.31 411.41 361.87 413.98 363.31 414.52 363.42 415.06 362.91 416.13 364.2 416.4 365.46 415.85 366.52 416.65 367.38 415.99 368.02 415.63 369.77 413.36 370.53 411.56 371.78 410.59 373.18 408.62 372.36 406.99 373.08 406.46 373.89 407.21 374.84 407.36 376.18 406.31 376.99 406.83 377.67 405.08 377.55 404.57 378.99 402 379.09 399.99 380.6 400.17 381 399.57 381.66 400.18 382.64 398.34 384.35 398.39 385.22 397.74 386.15 397.88 386.99 396.71 387.81 395.55 388.77 394.53 388.27 392.05 390 388.98 390.39 386.44 388.95 385.41 388.85 384.78 388.89 383.25 390.67 381.84 391.4 380.56 394.13 379.13 394.51 378.26 396.02 375.7 397.81 375.72 398.96 374.73 399.33 375.75 400.94 378.41 401.42 378.46 402.16 379.96 402.15 380.47 404.88 380.87 405.58 381.78 405.57 382.44 407.19 385.01 408.07 385.83 411.76 387.21 413.99 387.55 416.96 389.7 419.2 389.64 420.55 388.48 421.27 386.95 424.2 386.92 425.61 387.91 427.96 385.98 430.7 382.6 431.09 380.89 432.34 380.6 435.6 379.62 437.07 378.15 437.23 377.67 437.89 374.97 438.64 372.76 438.5 370.13 439.69 369.22 439.44 368.16 440.03 366.62 439.8 366.54 441.21 365.78 442.64 365.7 444.84 364.54 446.41 364.39 447.76 364.9 448.22 364.78 449.37 366.81 454.16 364.46 455.44 362.67 457.4 363.66 459.04 362.47 460.52 362.91 461.27 362.76 462.26 360.77 462.2 359.51 465.31 358.66 466.31 356.55 465.42 353.07 466.27 351.69 465.88 348.73 466.29 344.52 466.05 341.91 470.67 339.02 471.88 339.79 474.36 338.57 475.89 339.28 476.79 338.98 478.12 337.78 478.56 337.45 481.34 338.95 483.67 338.25 485.34 337.07 485.57 336.58 486.29 335.69 485.24 331.85 485.02 330.93 484.21 328.98 483.71 325.31 486.12 324.34 485.46 323.78 484.21 321.27 482.67 319.99 481.14 316.2 480.16 315.86 481.71 314.29 483.37 313.98 484.45 311.4 484.5 310.68 483.51 310.03 483.39 309.79 482.2 309.1 481.73 309.52 478.36 307.75 476.88 305.62 476.66 304.22 475.93 303.75 474.1 302.2 471.84 300.32 471.18 297.16 472.82 293.66 472.25 291.97 473 288.24 472.72 286.99 471.74 286.45 468.81 285.76 468.42 283.52 468.89 281.44 468.67 280.66 469.38 279.92 471.29 280.84 474.58 280.14 476.14 279.38 476.65 278.86 476.16 277.54 476.26 275.72 474.79 273.94 475.89 272.47 474.76 271.46 476.46 270.41 476.43 268.73 477.29 267.6 478.6 268.21 481.27 267.63 481.91 265.36 481.54 264.86 482.4 262.87 482.5 261.08 485.4 259.78 486.62 256.92 488.3 255.99 488.21 255.33 487.61 254.65 488.36 254.53 489.27 252.62 491.22 251.92 491.38 249.05 489.46 248.2 489.66 247.36 488.67 247.36 487.82 246.32 487.58 245.22 486.66 242.84 487.85 241.61 487.92 240.62 487.56 240.28 486.32 237.7 486.16 236.47 485.01 234.85 486.53 233.34 490.33 232.41 490.54 229.84 493.47 229.19 493.4 228.54 492.23 226.97 493 224.82 492.51 224.36 493.08 222.73 493.33 222.6 494.56 220.91 495.49 220.47 496.42 219.86 496.67 219.43 497.97 219.98 499.8 219.24 500.5 218.18 500.91 216.13 499.69 215.48 499.86 213.11 497.68 213.52 496.37 211.66 495.73 208.45 497.37 207.77 498.88 205.39 500.78 202.45 500.76 200.86 497.54 201.42 496.59 198.72 494.2 198.1 492.97 198.13 491.71 195.95 490.52 195.99 488.14 195.31 487.13 194 486.58 192.55 484.85 192.01 482.7 190.93 480.82 191.43 479.21 191.27 476.82 187.88 475.33 186.24 473 186.54 472.02 188.34 471.27 188.57 470.19 187.39 468.63 186.77 468.47 186.51 465.97 185.64 464.97 184.6 465.5 181.97 463.98 181.3 460.17 179.57 458.76 178.77 457.4 178.13 457.57 175.81 452.21 174.63 452.41 173.37 451.35 173.68 449.1 172.89 448.42 172.06 449.07 171.24 448.93 168.64 452.49 166.12 453.13 165.41 454.55 164.07 454.04 162.77 453.23 162.32 451.24 163.69 447.73 165.56 446.61 165.01 445.4 165.61 443.79 164.06 441.22 166.23 437.93 165.87 436.74 166.97 433.93 165.37 433.59 163.94 434.21 162.88 433.49 158.51 433.29 157.05 432.68 156.78 431.91 152.87 432.15 152.15 432.59 150.87 430.88 149.63 431.06 149.1 430.7 147.78 426.27 148.12 424.02 150.46 421.59 150.76 420.31 151.65 419.41 150.69 415.59 150.09 413.9 151.24 411.18 153.28 408.75 153.12 407.1 153.22 406.54 154.84 406.02 155.98 404.38 156.53 402.45 159.16 400.85 159.06 399.77 160.02 398 159.86 395.99 160.87 394.26 159.83 391.77 159.01 391.27 157.76 391.88 155.51 389.39 154.84 389.38 154.43 388.63 154.75 387.8 152.87 385.45 150.63 384.1 149.58 384.3 148.85 381.01 146.72 380.98 145.83 378.06 145.02 377.33 144.27 375.32 144.48 373.8 146.09 372.46 148.02 372.29 150.14 369.86 150.5 368.23 149.78 367.25 150.38 365.44 153.17 357.03 128.68 350.11 100.05 349.59 83.6 359.91 67.7 362.99 53.23 373.99 51.19 378.27 49.49 381.87 47.35 386.32 51.19 388.18 52.5 388.94 52.21 389.27 52.44 390.75 53.04 391.45 52.92 392.41 51.7 393.12 50.57 393.96 50.55 395.27 52.72 398.91 54.62 400.79 54.5 401.59 55.61 402.61 58.8 400.88 58.7 400.44 60.6 398.32 60.9 398.55 60.67 400.51 61.66 400.79 63.31 400.46 63.01 400.75 62.57 401.71 63.15 402.03 63.3 403.53 60.53 408.38 60.05 408.75 57.35 410.83 55.44 411.3 52.49 413.43 51.83 413.04 51.55 413.48 49.92 413.09 49.21 413.79 48.11 414.34 46.42 416.27 45.11 416.68 43.63 418.81 41.99 419.4 41.47 420.21 41.95 423.26 39.59 425.3 35.51 426.97 34.53 428.39 34.22 428.67 33.64 428.12 32.57 429.6 31 429.77 30.04 429.21 26.17 428.89 24.88 426.94 21.84 427.53 17.86 427.04 17.29 428.01 17.14 429.65 16.28 429.62 15.01 431.21 14.35 430.05 13.02 429.71 11.41 429.14 9.39 429.4 7.67 428.77 5.69 429.35 5.27 430.93 4.57 431.76 2.62 432.53 1.85 432.34 1.22 432.94 1 431.89 2.73 430.6 2.51 428.7 4.04 425.8 4.54 424.75 5.54 421.62 6.06 421.39 6.67 422.11 7.37 420.56 7.26 419.93 7.88 419.03 7.2 417.88 2.34 415.47 2.43 415.2 3.97 414.06 3.32 413.01 4.22 410.96 4.92 410.41 7.52 410.77 7.22 409.02 8.08 409.02 8.74 409.6 9.93 408.75 10.49 407.31 11.1 407.35 10.99 406.95 11.66 406.63 13.16 406.27 14.66 404.96 16.18 406.31 16.88 406.73 19.48 403.25 19.89 403.14 20.97 404.29 24.23 402.77 26.64 405.18 27.43 404.38 27.9 404.64 30.47 401.88 29.85 399.2 29.52 398.58 29.86 398.28 29.14 398.05 28.15 396.9 28.69 396.33 26.96 394.82 27.12 393.41 26.73 393.18 28.65 390.81 29.65 390.78 30.04 390.06 29.68 387.38 29.8 386.19 30.61 384.95 30.85 384.89 31.02 383.96 31.85 383.08 32.95 380.93 33.22 380.54 32.87 380.3 33.11 379.36 34.97 378.49 35.39 377.33 36.53 376.4 36.76 374.71 38.66 372.47 36.62 369.13 36.29 369.62 35.09 369.68 32.63 367.03 28.71 363.95 28.8 364.77 27.29 364 26.01 361.74 19.99 359.81 21.9 355.83 23.53 353.87 23.9 352.96 23.58 351.88 21.9 350.37 22.24 349.35 21.65 348.68 21.54 347.2 25.82 343.17 28.6 335.96 32.92 330.69 34.1 331.34 35.72 329.15 34.86 328.45 36.26 326.95 28.25 318.94 30.14 317.06 30.91 315.67 33.15 313.72 35.78 312.02 37.09 310.45 40.24 308.85 40.46 307.82 43.21 305.79 43.89 304.23 45.33 303.77 47.33 301.52 48.79 300.69 49.82 298.95 55.8 293.45 56.32 292.74 56.13 291.85 58.53 289.87 62.81 287.8 65.75 285.89 68.9 284.78 70.73 283.56 72.1 281.53 72.85 281.83 74.13 281.2 74.08 280.06 73.49 279.95 73.83 279.67 76.54 279.22 77.62 277.67 77.07 276.38 78.13 275.19 79.22 274.46 79.85 274.64 82.11 273.93 84.52 272.83 86.03 271.42 85.94 270.45 88.19 268.5 88.21 267.33 89.38 264.83 85.19 261.32 84.55 258.68 86.26 257.67 86.07 255.66 86.58 253.67 89.66 248.63 90.15 242.47 90.44 238.66 89.27 235.94 85.39 230.64 84.86 228.89 86.97 227.62 89.56 225.14 91.7 221.91 94.23 218.95 96.11 217.14 97.74 219.21 99.96 218.01 107.86 215.8 112.86 212.87 113.61 212.43 117.26 212.66 120.21 210.91 121.98 208.82 124.57 203.73 128 201.44 131.69 200.52 135.35 197.04 134.07 196.75 133.44 195.58 132.05 195.35 130.43 193.42 132.89 191.5 133.2 190.14 132.37 189.53 134.66 187.73 136.44 186.88 137.39 187.44 138.75 187.22 139.51 186.73 139.98 185.68 138.91 182.54 139.64 182.29 143.34 179.53 145.13 179.34 148.12 177.8 150.35 176.98 150.99 175.65 152.12 175.62 154.5 172.82 156.44 171.79 156.8 170.77 158.26 170.21 159.83 167.94 157.43 167.65 156.74 166.36 160.69 164.14 161.36 162.78 162.47 162.76 162.44 161.67 163.53 158.97 165.21 157.67 168.88 154.28 171.26 153.26 171.91 151.62 172.87 151 174 150.96 174.58 150.06 174.67 149.12 176.82 147.88 175.25 145.17 176.05 143.57 176.2 141.15 174.23 136.63 176.43 135.11 179.12 135.02 179.96 135.36 180.54 134.08 184.05 134.14 185.24 132.78 185.96 132.81 187.51 129.52 187.05 127.99 186.37 127.75 186.37 126.84 190.72 125.79 192.7 126.23 194.62 124.24 193.97 123.6 195.06 122.82 195.5 121.83 193.44 120.92 193.91 119.77 193.26 117.14 192.28 116.57 190.72 116.69 190.58 115.58 190.52 115.15 188.25 114.95 187.81 114.28 187.02 114.64 186.83 114.3 185.73 115.66 183.95 116.72 181.68 116.71 180.16 117.65 176.11 117.68 174.41 118.25 172.87 118.03 170.78 118.83 167.39 117.77 166.93 118.21 166.32 117.98 166.09 118.55 164.38 119.48 163.51 119.57 163.36 118.28 164.4 115.8 164.19 114.21 166.29 112.45 166.18 112 167.98 111.67 169.16 110.83 169.47 109.99 168.74 108.24 169.78 107.94 170.2 106.42 169.46 106.05 170.48 105.57 170.74 105.91 173.85 105.58 174.4 103.1 173.96 98.52 176.67 98.16 177.22 98.51 178.26 98 179.43 95.06 181.39 94.56 182.94 94.84 184.93 93.32 184.82 92.73 184.22 92.57 184.31 91.68 184.85 91.24 184.72 89.92 183.21 90.03 183.41 88.78 182.29 87.49 182.63 84.63 181.65 82.81 182.25 82.99 184.81 81.33 188.95 80.22 189.45 80.97 191.16 81.97 192.54 81.79 193.68 82.57 195.28 82.56 197.21 83.33 197.83 84.39 200.78 82.66 204.34 82.59 207.18 80.39 208.95 80.78 211.13 82.07 212.69 83.72 214.45 84.09 220.03 82.91 220.25 83.47 218.24 84.38 215.9 89.59 216.12 90.62 216.02 92.18 214.64 95.99 218.48 97.21 219.17 98.07 220.94 98.21 224.34 96.95 226.16 97.69 226.63 98.49 226.63 99.79 227.76 100.3 227.86 102 229.37 101.04 232.24 100.25 234.37 98.28 236.06 98.67 237.96 97.22 241.76 97.16 242.09 96.93 242.68 96.52 244.24 96.65 245.74 98.09 251.67 98.99 255.09 98.08 255.55 98.05 255.53 97.44 256.19 96.84 257.48 96.36 258.75 95.23 259.13 94.08 260.04 93.38 260.32 91.89 262.95 91.25 264.75 89.01 264.84 88.38 263.91 87.73 263.44 88.01 262.73 86.91 260.19 85.87 258.76 86.46 259.52 84.33 261.15 81.85 264.64 84.06 265.96 84.15 267.5 86.4 270.44 85.91 272.18 84.11 272.97 83.8 272.96 83 274.55 82.14 274.16 80.82 274.54 80.65 274.24 78.83 272.47 77.17 272.24 75.81 273.24 77.52 275.57 76.9 275.93 77.41 276.83 77.37 276.81 76.47 278.16 74.12 277.51 72.93 276.92 73.02 276 72.35 275.47 72.85 274.35 73.91 273.05 73.92 272.45 72.17 272.49 70.98 273.42 70.16 274.01 69.7 276 69.34 277.06 67.91 281.73 64.85 282.33 64.55 282.98 63.29 282.54 62.82 282.73 62.46 284.28 61.21 285.78 61.54 287.54 61.67 288.29 57.97 291.08 59.28 291.01 61.11 293.57 61.36 294.53 60.68 297.81 57.59 297.59 56.84 298.27 56.12 298.84 56.32 302.05 57.4 303.42 57.41 304.79 55.73 306.64 55.17 302.84 58.62 302.89 59.21 304.42 59.84 304.48 60.3 304.95 62.1 305.96 62.75 305.34 64.28 304.89 62.83 303.45 64.32 303.83 64.74 302.94 64.76 302.56 64.21 299.84 65.1 298.69 65.77 296.59 64.69 296.21 65.45 298.18 67.66 299.28 69.12 301.02 69.67 301.97 71.81 303.46 72.61 305.38 72.88 307.28 72.78 310.23 71.09 312.04 70.35 317.07 69.63 317.98 68.76 322.47 67.48 324.64 66.4 325.31 65.05 327.51 62.94 328.71 58.69 331.16 58.83 332.01 59.85 333.7 59.92 336.04 58.63 337.5 58.32 340.36 58.23 341.95 58.88 342.63 59.48 344.14 61.34 345.02 63.39 344.29 65.52 344.49 66.93 346.02 68.93 348.68 69.14 350.12 69.77 351.01 69.9 351.55 69.49 352.74 66.49 353.55 66.18 354.38 66.47 356.71 66.98 360.44 66.67 361.86 67.04 362.03 67.15 364.02 68.22 368.68 66.96 371.01 64.85 372.43 64.57 373.14 64.67 375.29 66.4 376.48 66.28 377.68 65.47 378.43 64.08 378.7 61.55 379.45 60.35 380.42 59.62 382.77 59.68 384.58 59.48 384.93 57.73 386.5 56.64 388.59 56.86 389.71 56.82 391.28 54.83 393.04 54.09 394.7 51.1 396.06 50.04 398.24 50.14 399.51 51.3 400 53.56 400.33 54 400.93 53.93 402.5 52.03 406.05 51.38 406.53 51.83 407.23 52.89 409.81 52.31 411.34 52.65 412.95 53.91 412.49 56.74 413.06 58.26 415.17 59.59 416.24 60.81 417.67 62.46 419.9 63.03 424.29 63.27 428.06 64.31 429.57 61.83 430.87 61.3 433.82 62.95 435.61 63.78 437.5 63.89 440.79 62.53 442.24 62.56 444.47 61.09 445.69 61.26 446.25 61.13 447.59 60.23 446.55 58.5 446.26 58.63 443.06 59.51 442.36 58.45 441.59 58.38 441.73 57.27 440.99 56.04 440.91 54.72 442.94 54.39 443.51 53.54 443.32 53.13 444.15 53.34 444.65 52.55 444.88 51.39 445.6 51.79 447.48 51.57 450 50.78 449.83 49.13 451.18 49.26 450.77 48.68 451.44 47.02 451.28 46.51 452.21 46.37 453.08 47.07 455.26 47.24 455.33 48.55 456.12 48.32 456.31 48.78 458.64 48.95 459.6 50.98 460.74 50.85 461.05 52.09 461.64 52.23 460.23 52.77 460.17 53.94 459.36 54.98 459.61 55.49 460.25 56.09 461.11 55.82 461.68 56.5 462.11 56.16 463.04 56.34 464 54.88 464.63 54.76 464.86 53.74 465.37 53.9 466.75 52.41 467.01 51.18 465.68 47.8 465.32 44.25 467.5 41.69 468.38 42.5 468.58 43.85 468.1 44.38 466.93 44.53 466.63 45.07 467.29 45.69 469.09 45.45 470.26 44.66 471.12 42.66 471.07 41.47 468.69 39.32 468.4 39.53 467.72 38.83 467.26 37.38 467.31 36.56 465.8 36.39 465.06 37.88 463.92 38.05 462.22 39.3 461.03 38.5 459.92 38.33 459.75 37.13 456.85 37.88 455.6 38.4 455.84 40.49 454.49 39.74 454.42 38.89 453.3 39.62 454.43 42.17 454.1 43.42 452.55 43.63 450.89 42.98 447.34 43.09 447.53 44.38 447.2 44.39 446.32 43.6 445.51 43.84 445.12 42.53 443.93 42.37 443.79 42.86 444.62 43.71 443.47 44.32 444.66 45.01 443.89 45.37 442.83 44.59 442.18 42.7 442.78 40.74 442.5 40.49 441.05 41.63 440.4 41.07 439.59 41.09 438.89 41.34 437.43 40.4 435.12 37.95 433.13 38.09 431.94 35.94 432.46 34.85 433.78 34.61 434.59 33.51 433.09 30.8 432.08 30.48 431.74 29.81 433.91 26.7 435.51 26.4 437.42 24.55 438.27 24.7 438.03 24.15 438.92 23.32 440.67 23.4 440.57 22.21 440.98 21.7 440.26 21.37 439.7 19.35 440.78 18.15 440.96 16.41 442.68 15.28 443.93 12.46 446.62 10.19 447.85 10.87 448.93 10.11 450.19 9.92 450.33 9.43 452.09 10.92 453.21 8.92 454.3 8.96 457.82 7.23 459.63 8.31 459.55 9 460.2 8.97 462.11 8.04 461.73 5.95 459.4 5.1 459.73 1.83 460.49 1 461.4 1.65 Z"
+      className="fill-blue-100 dark:fill-blue-900/20 stroke-blue-500 dark:stroke-blue-400" 
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const SectionHeading = ({ children, icon: Icon }: { children: React.ReactNode; icon?: React.ComponentType<any> }) => (
+  <div className="flex items-center gap-3 mb-8">
+    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
+      {Icon && <Icon size={24} />}
+    </div>
+    <h2 className="text-3xl font-bold text-slate-800 dark:text-slate-100">
+      {children}
+    </h2>
+  </div>
+);
+
+const Card = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <div className={`bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 transition-all hover:shadow-md ${className}`}>
+    {children}
+  </div>
+);
+
+const Badge = ({ children, variant = "primary" }: { children: React.ReactNode; variant?: "primary" | "secondary" | "outline" }) => {
+  const variants: Record<"primary" | "secondary" | "outline", string> = {
+    primary: "bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300",
+    secondary: "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300",
+    outline: "border border-slate-300 text-slate-600 dark:border-slate-600 dark:text-slate-400"
+  };
+  return (
+    <span className={`px-3 py-1 rounded-full text-xs font-medium ${variants[variant]}`}>
+      {children}
+    </span>
+  );
+};
+
+// --- Main Application ---
+
+export default function App() {
+  const [activeSection, setActiveSection] = useState('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setDarkMode(true);
+    }
+  }, []);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+
+  const navLinks = [
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'education', label: 'Education' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
   ];
 
-  const certificates = [
-    'Google Data Analytics Professional Certificate',
-    'Google IT Support Professional Certificate'
-  ];
-
-  const scrollToSection = (sectionId: string) => {
-    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    setActiveSection(sectionId);
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
+      setIsMenuOpen(false);
+    }
   };
 
-  type Project = typeof projects[number];
-  interface ProjectGalleryProps {
-    project: Project;
-    onClose: () => void;
-  }
-  
-  const ProjectGallery: React.FC<ProjectGalleryProps> = ({ project, onClose }) => (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
-      style={{ backgroundColor: isDarkMode ? 'rgba(11, 15, 31, 0.95)' : 'rgba(0, 0, 0, 0.75)' }}
-      onClick={onClose}
-    >
-      <div
-        className="max-w-4xl w-full max-h-[90vh] overflow-y-auto rounded-2xl"
-        style={{ backgroundColor: colors.bgCard, border: `2px solid ${colors.primary}` }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="p-8">
-          <div className="flex justify-between items-start mb-6">
-            <div>
-              <h3 className="text-3xl font-bold mb-3 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                {project.title}
-              </h3>
-              <div className="flex items-center gap-4 flex-wrap">
-                <span className="text-sm px-3 py-1 rounded-lg" style={{ 
-                  background: colors.gradient3,
-                  color: colors.text,
-                  fontFamily: "'JetBrains Mono', monospace"
-                }}>
-                  {project.period}
-                </span>
-                <span
-                  className="px-4 py-1 rounded-xl text-sm font-medium"
-                  style={{
-                    background: colors.gradient1,
-                    color: colors.text
-                  }}
-                >
-                  {project.status}
-                </span>
-                <span
-                  className="px-3 py-1 rounded-lg text-sm font-medium"
-                  style={{
-                    background: colors.gradient2,
-                    color: colors.text
-                  }}
-                >
-                  {project.category}
-                </span>
-              </div>
-            </div>
-            <button
-              onClick={onClose}
-              className="text-3xl hover:opacity-70 transition-all hover:scale-110 px-3"
-              style={{ color: colors.textMuted }}
-            >
-              ×
-            </button>
-          </div>
-
-          {/* Project Images */}
-          {project.images && project.images.length > 0 ? (
-            <div className="grid md:grid-cols-2 gap-4 mb-6">
-              {project.images.map((image, idx) => (
-                <div key={idx} className="aspect-video rounded-xl overflow-hidden border" style={{ borderColor: colors.bgLight }}>
-                  <img
-                    src={image}
-                    alt={`${project.title} screenshot ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div 
-              className="p-8 rounded-2xl border mb-6 text-center"
-              style={{
-                backgroundColor: colors.bg,
-                borderColor: colors.bgLight
-              }}
-            >
-              <div className="mb-4" style={{ color: colors.primary }}>
-                {project.icon}
-              </div>
-              <p className="text-sm" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
-                Infrastructure/Hardware Project - No visual interface
-              </p>
-            </div>
-          )}
-
-          {/* Description */}
-          <div className="mb-6">
-            <h4 className="text-xl font-semibold mb-3" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
-              About This Project
-            </h4>
-            <p className="leading-relaxed text-lg" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
-              {project.description}
-            </p>
-          </div>
-
-          {/* Features */}
-          <div className="mb-6">
-            <h4 className="text-xl font-semibold mb-4" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
-              Key Features
-            </h4>
-            <div className="grid md:grid-cols-2 gap-3">
-              {project.features.map((feature, idx) => (
-                <div key={idx} className="flex items-center">
-                  <div
-                    className="w-2 h-2 rounded-full mr-3"
-                    style={{ background: colors.gradient1 }}
-                  ></div>
-                  <span style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Tech Stack */}
-          <div className="mb-6">
-            <h4 className="text-xl font-semibold mb-4" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
-              Technology Stack
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {project.tech.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
-                  style={{
-                    backgroundColor: colors.bgHover,
-                    color: colors.primary,
-                    fontFamily: "'JetBrains Mono', monospace"
-                  }}
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Links */}
-          <div className="flex gap-4">
-            {project.github && (
-              <a
-                href={project.github}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all hover:scale-105 font-medium"
-                style={{ background: colors.gradient1, color: colors.text }}
-              >
-                <Github className="w-5 h-5" />
-                View Code
-              </a>
-            )}
-            {project.demo && (
-              <a
-                href={project.demo}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl hover:opacity-90 transition-all hover:scale-105 font-medium"
-                style={{ background: colors.gradient3, color: colors.text }}
-              >
-                <LinkIcon className="w-5 h-5" />
-                Live Demo
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="min-h-screen" style={{ backgroundColor: colors.bg, color: colors.text }}>
-      {/* Animated background gradient */}
-      <div className="fixed inset-0 pointer-events-none" style={{ opacity: isDarkMode ? 0.2 : 0.1 }}>
-        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '2s' }}></div>
-      </div>
-
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'dark bg-slate-900' : 'bg-slate-50'}`}>
+      
       {/* Navigation */}
-      <nav
-        className="fixed top-0 w-full z-40 transition-all duration-300"
-        style={{
-          backgroundColor: scrolled ? (isDarkMode ? 'rgba(11, 15, 31, 0.95)' : 'rgba(255, 255, 255, 0.95)') : 'transparent',
-          borderBottom: scrolled ? `1px solid ${colors.bgLight}` : 'none',
-          backdropFilter: scrolled ? 'blur(20px)' : 'none'
-        }}
-      >
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="text-xl font-bold gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              Pietro Quintavalle
-            </div>
-            <div className="hidden md:flex items-center space-x-8">
-              {['Home', 'About', 'Experience', 'Projects', 'Education', 'Contact'].map((item) => (
+      <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 md:px-6">
+          <div className="flex items-center justify-between h-16">
+            <span className="text-xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
+              <Terminal className="text-blue-600" size={24} />
+              <span className="hidden sm:inline">Quinta.System</span>
+            </span>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-8">
+              {navLinks.map(link => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  className="transition-all hover:scale-105 relative group"
-                  style={{
-                    color: activeSection === item.toLowerCase() ? colors.primary : colors.text,
-                    fontFamily: "'Inter', sans-serif",
-                    fontWeight: 500
-                  }}
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className={`text-sm font-medium transition-colors hover:text-blue-600 ${
+                    activeSection === link.id ? 'text-blue-600 dark:text-blue-400' : 'text-slate-600 dark:text-slate-400'
+                  }`}
                 >
-                  {item}
-                  <span 
-                    className="absolute -bottom-1 left-0 w-full h-0.5 transition-transform origin-left"
-                    style={{
-                      background: colors.gradient1,
-                      transform: activeSection === item.toLowerCase() ? 'scaleX(1)' : 'scaleX(0)'
-                    }}
-                  />
+                  {link.label}
                 </button>
               ))}
-              {/* Dark Mode Toggle */}
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 rounded-xl transition-all hover:scale-110"
-                style={{
-                  background: colors.gradient1,
-                  color: colors.text
-                }}
-                aria-label="Toggle dark mode"
+              <button 
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-label="Toggle Theme"
               >
-                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                {darkMode ? '☀️' : '🌙'}
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="flex items-center gap-4 md:hidden">
+               <button 
+                onClick={toggleTheme}
+                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
+              >
+                {darkMode ? '☀️' : '🌙'}
+              </button>
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-slate-600 dark:text-slate-300"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
           </div>
         </div>
+
+        {/* Mobile Nav Dropdown */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-4 space-y-4 shadow-lg">
+            {navLinks.map(link => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className="block w-full text-left text-base font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 py-2"
+              >
+                {link.label}
+              </button>
+            ))}
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="text-center max-w-4xl mx-auto px-6 relative z-10">
-          <div className="mb-8 animate-fadeInUp">
-            <h1 className="text-6xl md:text-8xl font-bold mb-6" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              <span style={{ color: colors.text }}>Pietro</span>
-              <br />
-              <span className="gradient-text">Quintavalle</span>
-            </h1>
-            <div className="text-xl md:text-3xl mb-8 font-medium" style={{ 
-              color: colors.secondary,
-              fontFamily: "'Inter', sans-serif",
-              letterSpacing: '-0.01em'
-            }}>
-              IT Systems Engineer • Economics Student • Infrastructure Specialist
+      <section id="home" className="pt-32 pb-20 px-4 md:px-6 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6 z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                Available for Junior SysAdmin & IT Projects
+              </div>
+              
+              <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white leading-tight">
+                {DATA.profile.name}
+              </h1>
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 font-light">
+                {DATA.profile.role}
+              </p>
+              <p className="text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed">
+                {DATA.profile.tagline}. Integrating robust IT infrastructure skills with economic analysis to deliver efficient, scalable solutions.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-6 pt-4">
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all shadow-lg shadow-blue-600/20 flex items-center gap-2"
+                >
+                  <Mail size={18} /> Contact Me
+                </button>
+                
+                {/* Visual Map Indicator */}
+                <div className="flex items-center gap-3 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm">
+                   <div className="relative w-12 h-8">
+                     <SwissMap className="w-full h-full drop-shadow-sm" />
+                   </div>
+                   <div className="text-xs text-slate-600 dark:text-slate-400 leading-tight">
+                     Based in<br/>
+                     <span className="font-semibold text-slate-800 dark:text-slate-200">Switzerland</span>
+                   </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4 pt-4 text-slate-500 dark:text-slate-400">
+                <a href={DATA.profile.links.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
+                  <Linkedin size={24} />
+                </a>
+                <a href={DATA.profile.links.github} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
+                  <Github size={24} />
+                </a>
+              </div>
             </div>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed" style={{ 
-              color: colors.textMuted,
-              fontFamily: "'Inter', sans-serif"
-            }}>
-              Certified IT Support professional with 5+ years of hands-on experience in system administration, 
-              virtualization, and network infrastructure. Seeking Junior SysAdmin roles to contribute reliable, 
-              scalable solutions in enterprise systems.
-            </p>
-          </div>
 
-          <div className="flex justify-center space-x-6 mb-16">
-            <a
-              href="https://github.com/Quinta0"
-              className="p-4 rounded-xl transition-all hover:scale-110 hover:shadow-2xl group"
-              style={{ 
-                background: colors.gradient1,
-              }}
-            >
-              <Github className="w-6 h-6" style={{ color: colors.text }} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
-              className="p-4 rounded-xl transition-all hover:scale-110 hover:shadow-2xl group"
-              style={{ 
-                background: colors.gradient3,
-              }}
-            >
-              <Linkedin className="w-6 h-6" style={{ color: colors.text }} />
-            </a>
-            <a
-              href="mailto:0pietroquintavalle0@gmail.com"
-              className="p-4 rounded-xl transition-all hover:scale-110 hover:shadow-2xl group"
-              style={{ 
-                background: colors.gradient2,
-              }}
-            >
-              <Mail className="w-6 h-6" style={{ color: colors.text }} />
-            </a>
+            {/* Terminal Decoration */}
+            <div className="relative hidden md:block">
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg blur opacity-20"></div>
+              <div className="relative bg-slate-900 rounded-lg shadow-2xl overflow-hidden border border-slate-700 font-mono text-sm">
+                <div className="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                  <div className="flex-1 text-center text-slate-400 text-xs">quinta@server:~</div>
+                </div>
+                <div className="p-6 text-slate-300 space-y-4">
+                  <div>
+                    <span className="text-green-400">➜</span> <span className="text-blue-400">~</span> neofetch
+                  </div>
+                  <div className="flex gap-4">
+                    <div className="text-blue-500 select-none">
+<pre>{`       _     _
+      | |   | |
+ _ __ | |__ | |
+| '_ \\| '_ \\| |
+| |_) | |_) |_|
+| .__/|_.__/(_)
+| |            
+|_|            `}</pre>
+                    </div>
+                    <div className="space-y-1">
+                      <p><span className="text-blue-400 font-bold">OS</span>: Linux / Windows Server</p>
+                      <p><span className="text-blue-400 font-bold">Host</span>: Proxmox VE Cluster</p>
+                      <p><span className="text-blue-400 font-bold">Uptime</span>: 5+ years experience</p>
+                      <p><span className="text-blue-400 font-bold">Shell</span>: Bash, PowerShell</p>
+                      <p><span className="text-blue-400 font-bold">Spoken</span>: IT, EN, DE, ES, NO</p>
+                      <p><span className="text-blue-400 font-bold">Code</span>: Python, JS, React, SQL</p>
+                      <p><span className="text-blue-400 font-bold">Status</span>: Open for Work</p>
+                    </div>
+                  </div>
+                  <div className="animate-pulse">
+                    <span className="text-green-400">➜</span> <span className="text-blue-400">~</span> <span className="inline-block w-2 h-4 bg-slate-400 align-middle"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown className="w-8 h-8" style={{ color: colors.secondary }} />
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 relative">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            About Me
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-lg md:text-xl leading-relaxed mb-6" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
-                I'm an IT Support–certified Economics student with 5+ years of hands-on experience in system 
-                administration, virtualization (Proxmox, Hyper-V), and network infrastructure.
-              </p>
-              <p className="text-lg md:text-xl leading-relaxed mb-6" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
-                Skilled in scripting, automation, and server deployment across Windows and Linux environments. 
-                I've built and maintained 6-10 production-grade servers with 90%+ uptime using automation tools 
-                and Infrastructure as Code (IaC) principles.
-              </p>
-              <p className="text-lg md:text-xl leading-relaxed mb-8" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
-                Currently pursuing Economics at USI while continuing to deliver scalable, secure, and 
-                high-availability infrastructure solutions to clients.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <span
-                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
-                  style={{ background: colors.gradient1, color: colors.text }}
-                >
-                  🇮🇹 Italian (Native)
-                </span>
-                <span
-                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
-                  style={{ background: colors.gradient3, color: colors.text }}
-                >
-                  🇺🇸 English (Fluent)
-                </span>
-                <span
-                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
-                  style={{ background: colors.gradient2, color: colors.text }}
-                >
-                  🇩🇪 German (Conversational)
-                </span>
-                <span
-                  className="px-4 py-2 rounded-xl text-sm font-medium transition-all hover:scale-105"
-                  style={{ backgroundColor: colors.success, color: colors.bg }}
-                >
-                  📍 Switzerland 🇨🇭
-                </span>
+      <section id="about" className="py-20 px-4 md:px-6 bg-white dark:bg-slate-800/50">
+        <div className="max-w-4xl mx-auto">
+          <SectionHeading icon={Terminal}>Professional Summary</SectionHeading>
+          <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+            {DATA.profile.summary}
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {DATA.languages.map((lang, idx) => (
+              <div key={idx} className="p-4 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-lg text-center">
+                <div className="font-bold text-slate-800 dark:text-slate-200">{lang.lang}</div>
+                <div className="text-xs text-slate-500 uppercase tracking-wider mt-1">{lang.level}</div>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            <div className="space-y-6">
-              {Object.entries(skills).map(([category, skillList]) => (
-                <div
-                  key={category}
-                  className="p-6 rounded-2xl border transition-all hover:scale-105 hover:shadow-2xl group"
-                  style={{
-                    backgroundColor: colors.bgCard,
-                    borderColor: colors.bgLight,
-                    borderWidth: '1px'
-                  }}
-                >
-                  <h3 className="text-xl font-semibold mb-4" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
-                    {category}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {skillList.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 rounded-lg text-sm transition-all hover:scale-105"
-                        style={{
-                          backgroundColor: colors.bgHover,
-                          color: colors.text,
-                          fontFamily: "'JetBrains Mono', monospace"
-                        }}
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+      {/* Skills Section */}
+      <section id="skills" className="py-20 px-4 md:px-6">
+        <div className="max-w-6xl mx-auto">
+          <SectionHeading icon={Cpu}>Technical Arsenal</SectionHeading>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {DATA.skills.map((skillGroup, idx) => (
+              <Card key={idx} className="h-full hover:border-blue-500 dark:hover:border-blue-500">
+                <div className="flex items-center gap-3 mb-4 text-blue-600 dark:text-blue-400">
+                  {skillGroup.icon}
+                  <h3 className="font-bold text-slate-800 dark:text-white">{skillGroup.category}</h3>
                 </div>
-              ))}
-            </div>
+                <ul className="space-y-2">
+                  {skillGroup.items.map((item, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Professional Experience
-          </h2>
-
-          <div className="max-w-4xl mx-auto">
-            {experience.map((exp, index) => (
-              <div
-                key={index}
-                className="p-8 rounded-2xl border mb-8 transition-all hover:scale-[1.02] hover:shadow-2xl group"
-                style={{
-                  backgroundColor: colors.bgCard,
-                  borderColor: colors.primary,
-                  borderWidth: '2px'
-                }}
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-center mb-4">
-                    <div
-                      className="p-4 rounded-xl mr-4 transition-all group-hover:scale-110"
-                      style={{ background: colors.gradient1 }}
-                    >
-                      <Briefcase className="w-7 h-7" style={{ color: colors.text }} />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl md:text-3xl font-bold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>
-                        {exp.title}
-                      </h3>
-                      <div className="flex items-center gap-4 mt-2">
-                        <span className="text-lg font-medium" style={{ color: colors.secondary }}>
-                          {exp.company}
-                        </span>
-                        <span className="text-sm" style={{ color: colors.textMuted }}>
-                          {exp.location}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center text-sm px-4 py-2 rounded-xl" style={{ 
-                    background: colors.gradient3,
-                    color: colors.text,
-                    fontFamily: "'JetBrains Mono', monospace"
-                  }}>
-                    <Calendar className="w-4 h-4 mr-2" />
+      <section id="experience" className="py-20 px-4 md:px-6 bg-slate-100 dark:bg-slate-900/50">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeading icon={Briefcase}>Experience</SectionHeading>
+          <div className="relative border-l-2 border-slate-200 dark:border-slate-700 ml-3 md:ml-6 space-y-12">
+            {DATA.experience.map((exp) => (
+              <div key={exp.id} className="relative pl-8 md:pl-12">
+                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white dark:border-slate-900"></div>
+                
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 className="text-xl font-bold text-slate-800 dark:text-white">{exp.role}</h3>
+                  <span className="text-sm font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full w-fit mt-2 md:mt-0">
                     {exp.period}
-                  </div>
+                  </span>
                 </div>
-
-                <p className="text-lg leading-relaxed mb-6" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
+                
+                <p className="text-slate-600 dark:text-slate-400 font-medium mb-4">
+                  {exp.company} • {exp.location}
+                </p>
+                
+                <p className="text-slate-600 dark:text-slate-400 mb-4 italic">
                   {exp.description}
                 </p>
 
-                <div>
-                  <h4 className="text-lg font-semibold mb-4" style={{ color: colors.primary, fontFamily: "'Space Grotesk', sans-serif" }}>
-                    Key Achievements:
-                  </h4>
-                  <div className="space-y-3">
-                    {exp.achievements.map((achievement, idx) => (
-                      <div key={idx} className="flex items-start group/item">
-                        <div
-                          className="w-2 h-2 rounded-full mt-2 mr-4 flex-shrink-0 transition-all group-hover/item:scale-150"
-                          style={{ background: colors.gradient2 }}
-                        ></div>
-                        <span style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>{achievement}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <ul className="space-y-2">
+                  {exp.achievements.map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-slate-700 dark:text-slate-300">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-400 flex-shrink-0"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section - Redesigned as Timeline */}
+      <section id="education" className="py-20 px-4 md:px-6">
+        <div className="max-w-5xl mx-auto">
+          <SectionHeading icon={GraduationCap}>Education Timeline</SectionHeading>
+          
+          <div className="relative mt-12">
+            {/* Vertical Line */}
+            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 -translate-x-1/2"></div>
+
+            <div className="space-y-12">
+              {DATA.education.map((edu, idx) => (
+                <div key={idx} className={`relative flex flex-col md:flex-row items-center justify-between ${idx % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                  
+                  {/* Date Badge / Center Node */}
+                  <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-blue-500 border-4 border-white dark:border-slate-900 z-10 flex items-center justify-center">
+                    <div className="w-2 h-2 bg-white rounded-full"></div>
+                  </div>
+
+                  {/* Empty space for alignment */}
+                  <div className="hidden md:block w-[45%]"></div>
+
+                  {/* Content Card */}
+                  <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${idx % 2 === 0 ? 'text-left' : 'text-left md:text-right'}`}>
+                    <div className={`bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow relative
+                      ${idx % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}
+                    `}>
+                      {/* Mobile Arrow */}
+                      <div className="md:hidden absolute top-6 -left-2 w-4 h-4 bg-white dark:bg-slate-800 border-l border-b border-slate-200 dark:border-slate-700 rotate-45"></div>
+
+                      <div className={`flex items-center gap-2 mb-2 ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                          <Calendar size={12} />
+                          {edu.period}
+                        </span>
+                        <span className={`text-xs font-semibold uppercase tracking-wider ${edu.status === 'Current' ? 'text-green-600' : 'text-slate-500'}`}>
+                          {edu.status}
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-1">{edu.degree}</h3>
+                      <p className="text-blue-600 dark:text-blue-400 font-medium mb-3">{edu.institution}</p>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{edu.details}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Featured Projects
-          </h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <div
-                key={index}
-                className="p-6 rounded-2xl border transition-all hover:scale-105 hover:shadow-2xl cursor-pointer group"
-                style={{
-                  backgroundColor: colors.bgCard,
-                  borderColor: colors.bgLight,
-                  borderWidth: '1px'
-                }}
-                onClick={() => setShowProjectGallery(project)}
-              >
-                <div className="flex items-center mb-4">
-                  <div
-                    className="p-3 rounded-xl mr-3 transition-all group-hover:scale-110"
-                    style={{ background: colors.gradient1 }}
-                  >
-                    {project.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>
-                      {project.title}
-                    </h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <p className="text-sm" style={{ color: colors.secondary, fontFamily: "'JetBrains Mono', monospace" }}>
-                        {project.period}
-                      </p>
-                      <span
-                        className="px-2 py-0.5 rounded-lg text-xs font-medium"
-                        style={{
-                          background: colors.gradient3,
-                          color: colors.bg
-                        }}
-                      >
-                        {project.category}
-                      </span>
-                    </div>
+      <section id="projects" className="py-20 px-4 md:px-6 bg-slate-100 dark:bg-slate-900/50">
+        <div className="max-w-6xl mx-auto">
+          <SectionHeading icon={Code}>Featured Projects</SectionHeading>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {DATA.projects.map((project, idx) => (
+              <Card key={idx} className="flex flex-col h-full hover:-translate-y-1 transition-transform duration-300">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="p-2 bg-slate-100 dark:bg-slate-700 rounded-lg text-slate-600 dark:text-slate-300">
+                    {idx % 2 === 0 ? <Server size={20} /> : <Globe size={20} />}
                   </div>
                 </div>
-
-                <p className="leading-relaxed mb-4 text-sm" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
+                
+                <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-2">
+                  {project.title}
+                </h3>
+                
+                <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-3 uppercase tracking-wide">
+                  {project.type}
+                </p>
+                
+                <p className="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 rounded-lg text-xs font-medium transition-all hover:scale-105"
-                      style={{
-                        backgroundColor: colors.bgHover,
-                        color: colors.secondary,
-                        fontFamily: "'JetBrains Mono', monospace"
-                      }}
-                    >
-                      {tech}
-                    </span>
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.map((tech, i) => (
+                    <Badge key={i} variant="secondary">{tech}</Badge>
                   ))}
-                  {project.tech.length > 3 && (
-                    <span
-                      className="px-3 py-1 rounded-lg text-xs"
-                      style={{
-                        backgroundColor: colors.bgLighter,
-                        color: colors.textMuted
-                      }}
-                    >
-                      +{project.tech.length - 3} more
-                    </span>
-                  )}
                 </div>
-
-                <div className="flex items-center justify-between">
-                  <span
-                    className="text-sm flex items-center gap-2 font-medium"
-                    style={{ color: colors.primary }}
-                  >
-                    <Image className="w-4 h-4" />
-                    View Details
-                  </span>
-                  <span
-                    className="px-3 py-1 rounded-lg text-xs font-medium"
-                    style={{
-                      background: project.status === 'Production' ? colors.gradient3 : 
-                                     project.status === 'Live' ? colors.gradient1 : colors.gradient2,
-                      color: colors.text
-                    }}
-                  >
-                    {project.status}
-                  </span>
-                </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Education & Certificates Section */}
-      <section id="education" className="py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-bold text-center mb-20 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Education & Certifications
-          </h2>
-
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Education Timeline */}
-            <div>
-              <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
-                <GraduationCap className="w-7 h-7 mr-3" />
-                Education Timeline
-              </h3>
-
-              <div className="relative">
-                {/* Timeline Line */}
-                <div 
-                  className="absolute left-4 top-0 bottom-0 w-0.5" 
-                  style={{ background: colors.gradient1 }}
-                ></div>
-                
-                <div className="space-y-8">
-                  {education.map((edu, index) => (
-                    <div key={index} className="relative flex items-start group">
-                      {/* Timeline Indicator */}
-                      <div className="relative z-10 flex-shrink-0">
-                        <div
-                          className="w-8 h-8 rounded-full border-4 flex items-center justify-center transition-all group-hover:scale-125"
-                          style={{
-                            backgroundColor: colors.bgCard,
-                            borderColor: index === 0 ? colors.primary : colors.secondary
-                          }}
-                        >
-                          <div
-                            className="w-3 h-3 rounded-full"
-                            style={{
-                              backgroundColor: index === 0 ? colors.primary : colors.secondary
-                            }}
-                          ></div>
-                        </div>
-                      </div>
-
-                      {/* Timeline Content */}
-                      <div 
-                        className="ml-6 p-6 rounded-2xl border flex-1 transition-all hover:scale-105 hover:shadow-2xl"
-                        style={{
-                          backgroundColor: colors.bgCard,
-                          borderColor: colors.bgLight,
-                          borderWidth: '1px'
-                        }}
-                      >
-                        <div className="flex justify-between items-start mb-3">
-                          <div>
-                            <h4 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>
-                              {edu.degree}
-                            </h4>
-                            <p className="font-medium" style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif" }}>
-                              {edu.institution}
-                            </p>
-                          </div>
-                          <span
-                            className="px-3 py-1 rounded-xl text-xs font-medium"
-                            style={{ 
-                              background: index === 0 ? colors.gradient1 : colors.gradient3,
-                              color: colors.text
-                            }}
-                          >
-                            {edu.status}
-                          </span>
-                        </div>
-                        
-                        {edu.description && (
-                          <p className="text-sm mb-3 leading-relaxed" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
-                            {edu.description}
-                          </p>
-                        )}
-                        
-                        <div className="flex items-center text-sm" style={{ color: colors.textMuted, fontFamily: "'JetBrains Mono', monospace" }}>
-                          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                          {edu.period}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Certificates */}
-            <div>
-              <h3 className="text-2xl font-semibold mb-8 flex items-center" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
-                <Award className="w-7 h-7 mr-3" />
-                Certifications
-              </h3>
-
-              <div className="space-y-4">
-                {certificates.map((cert, index) => (
-                  <div
-                    key={index}
-                    className="p-6 rounded-2xl border flex items-center transition-all hover:scale-105 hover:shadow-2xl group"
-                    style={{
-                      backgroundColor: colors.bgCard,
-                      borderColor: colors.bgLight,
-                      borderWidth: '1px'
-                    }}
-                  >
-                    <div
-                      className="w-3 h-3 rounded-full mr-4 transition-all group-hover:scale-150"
-                      style={{ background: colors.gradient2 }}
-                    ></div>
-                    <span style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>{cert}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div
-                className="mt-6 p-6 rounded-2xl border transition-all hover:scale-105 hover:shadow-2xl"
-                style={{
-                  backgroundColor: colors.bgCard,
-                  borderColor: colors.bgLight,
-                  borderWidth: '1px'
-                }}
-              >
-                <h4 className="text-lg font-semibold mb-4 flex items-center" style={{ color: colors.secondary, fontFamily: "'Space Grotesk', sans-serif" }}>
-                  <span className="mr-2">🎨</span>
-                  Self-Learning & Hobbies
-                </h4>
-                <div className="space-y-3">
-                  <div className="flex items-start">
-                    <div
-                      className="w-2 h-2 rounded-full mt-2 mr-4 flex-shrink-0"
-                      style={{ background: colors.gradient1 }}
-                    ></div>
-                    <div>
-                      <p className="font-medium" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>
-                        CAD Design & 3D Printing
-                      </p>
-                      <p className="text-sm mt-1" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
-                        Learning CAD via Fusion 360 for 3D design and printing projects as a creative hobby
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="mt-8 p-6 rounded-2xl border transition-all hover:shadow-2xl"
-                style={{
-                  backgroundColor: colors.bgCard,
-                  borderColor: colors.bgLight,
-                  borderWidth: '1px'
-                }}
-              >
-                <h4 className="text-lg font-semibold mb-4" style={{ color: colors.primary, fontFamily: "'Space Grotesk', sans-serif" }}>
-                  Interests & Specialties
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {['Computer Hardware', 'Economics & Finance', 'Web Development', 'CAD & 3D Design', '3D Printing', 'Literature', 'Photography', 'Virtualization', 'Network Security'].map((interest) => (
-                    <span
-                      key={interest}
-                      className="px-3 py-1 rounded-lg text-sm transition-all hover:scale-105"
-                      style={{
-                        backgroundColor: colors.bgHover,
-                        color: colors.text,
-                        fontFamily: "'Inter', sans-serif"
-                      }}
-                    >
-                      {interest}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
-      <section id="contact" className="py-20 relative">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 gradient-text" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-            Let's Connect
-          </h2>
-          <p className="text-xl mb-16 max-w-2xl mx-auto" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
-            I'm always interested in discussing new opportunities, collaborations, or Junior SysAdmin positions. 
-            Let's connect and explore how my infrastructure expertise can benefit your organization.
+      <section id="contact" className="py-20 px-4 md:px-6 bg-blue-600 text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-8">Ready to Collaborate?</h2>
+          <p className="text-blue-100 text-lg mb-12 max-w-2xl mx-auto">
+            Whether you need assistance with server infrastructure, network architecture, or are looking for a Junior SysAdmin, I'm here to help.
           </p>
+          
+          <div className="flex justify-center gap-12 mb-12 flex-wrap">
+            <div className="flex flex-col items-center gap-3">
+              <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm">
+                <Mail size={24} />
+              </div>
+              <p className="font-medium">{DATA.profile.email}</p>
+            </div>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <a
-              href="mailto:0pietroquintavalle0@gmail.com"
-              className="p-8 rounded-2xl transition-all hover:scale-110 hover:shadow-2xl group"
-              style={{ background: colors.gradient2 }}
-            >
-              <Mail className="w-10 h-10 mx-auto mb-4 transition-all group-hover:scale-110" style={{ color: colors.text }} />
-              <h3 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>Email</h3>
-              <p className="text-sm" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>Professional inquiries</p>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
-              className="p-8 rounded-2xl transition-all hover:scale-110 hover:shadow-2xl group"
-              style={{ background: colors.gradient3 }}
-            >
-              <Linkedin className="w-10 h-10 mx-auto mb-4 transition-all group-hover:scale-110" style={{ color: colors.text }} />
-              <h3 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>LinkedIn</h3>
-              <p className="text-sm" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>Professional network</p>
-            </a>
-
-            <a
-              href="https://github.com/Quinta0"
-              className="p-8 rounded-2xl transition-all hover:scale-110 hover:shadow-2xl group"
-              style={{ background: colors.gradient1 }}
-            >
-              <Github className="w-10 h-10 mx-auto mb-4 transition-all group-hover:scale-110" style={{ color: colors.text }} />
-              <h3 className="text-lg font-semibold mb-2" style={{ color: colors.text, fontFamily: "'Space Grotesk', sans-serif" }}>GitHub</h3>
-              <p className="text-sm" style={{ color: colors.text, fontFamily: "'Inter', sans-serif" }}>Code repositories</p>
-            </a>
+          <div className="bg-white text-slate-800 p-8 rounded-2xl max-w-lg mx-auto shadow-2xl">
+            <h3 className="text-xl font-bold mb-6 text-left">Send a Message</h3>
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-left">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Name</label>
+                  <input type="text" className="w-full px-4 py-2 bg-slate-100 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="John Doe" />
+                </div>
+                <div className="text-left">
+                  <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Email</label>
+                  <input type="email" className="w-full px-4 py-2 bg-slate-100 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="john@example.com" />
+                </div>
+              </div>
+              <div className="text-left">
+                <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Message</label>
+                <textarea rows={4} className="w-full px-4 py-2 bg-slate-100 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Hi, I'd like to discuss a project..."></textarea>
+              </div>
+              <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors">
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t" style={{ borderColor: colors.bgLight }}>
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="mb-6">
-            <div className="flex justify-center items-center gap-8 mb-6">
-              <a
-                href="https://github.com/Quinta0"
-                className="text-sm hover:opacity-80 transition-all hover:scale-105"
-                style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/"
-                className="text-sm hover:opacity-80 transition-all hover:scale-105"
-                style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
-              >
-                LinkedIn
-              </a>
-              <a
-                href="mailto:0pietroquintavalle0@gmail.com"
-                className="text-sm hover:opacity-80 transition-all hover:scale-105"
-                style={{ color: colors.secondary, fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
-              >
-                Email
-              </a>
-            </div>
-          </div>
-          <p className="mb-3" style={{ color: colors.textMuted, fontFamily: "'Inter', sans-serif" }}>
-            Built with ⚡ using React & Modern Design • Pietro Quintavalle © 2025
-          </p>
-          <p className="text-sm" style={{ color: colors.textMuted, fontFamily: "'JetBrains Mono', monospace" }}>
-            IT Support Professional | Systems Engineer | Economics Student
-          </p>
-        </div>
+      <footer className="py-8 bg-slate-900 text-slate-500 text-center text-sm">
+        <p>© {new Date().getFullYear()} Pietro Quintavalle. All rights reserved.</p>
+        <p className="mt-2">Built with React & Tailwind CSS</p>
       </footer>
-
-      {/* Project Gallery Modal */}
-      {showProjectGallery && (
-        <ProjectGallery
-          project={showProjectGallery}
-          onClose={() => setShowProjectGallery(null)}
-        />
-      )}
     </div>
   );
-};
-
-export default Portfolio;
+}

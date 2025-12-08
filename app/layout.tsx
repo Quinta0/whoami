@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   keywords: ['Pietro Quintavalle', 'Economics', 'Data Analytics', 'Web Development', 'Switzerland', 'USI'],
   authors: [{ name: 'Pietro Quintavalle' }],
   openGraph: {
-    title: 'Pietro Quintavalle - Economics Student & Developer',
+    title: 'Pietro Quintavalle',
     description: 'Economics student at USI with extensive data analytics and web development expertise.',
     url: 'https://your-domain.com',
     siteName: 'Pietro Quintavalle Portfolio',
