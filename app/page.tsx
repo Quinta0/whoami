@@ -59,7 +59,7 @@ const DATA = {
     // IMPROVEMENT: Updated with README "About Me" text for a more personal touch
     summary: "Hi! I'm Pietro, but friends call me Quinta. I'm an Economics student (USI, Lugano) with 5+ years' experience in system administration, virtualization, and network infrastructure. I engineer robust, secure, and scalable solutions—delivering production-grade servers (90%+ uptime) and infrastructure for clients and personal projects. Currently, I'm passionate about bridging the gap between economics and technology through data analytics, machine learning, and modern web development.",
     location: "Switzerland",
-    email: "opietroquintavalle0@gmail.com",
+    email: "0pietroquintavalle0@gmail.com",
     phone: "+41(0)79 906 82 53",
     links: {
       github: "https://github.com/Quinta0",
@@ -626,7 +626,6 @@ export default function App() {
           <p className="text-blue-100 dark:text-[#E5E9F0] text-lg mb-12 max-w-2xl mx-auto">
             Whether you need assistance with server infrastructure, network architecture, or are looking for a Junior SysAdmin, I'm here to help.
           </p>
-          
           <div className="flex justify-center gap-12 mb-12 flex-wrap">
             <div className="flex flex-col items-center gap-3">
               <div className="p-4 bg-white/10 rounded-full backdrop-blur-sm">
@@ -637,7 +636,6 @@ export default function App() {
           </div>
         </div>
       </section>
-
       <footer className="py-8 bg-slate-900 dark:bg-[#2E3440] text-slate-500 dark:text-[#4C566A] text-center text-sm border-t border-slate-800 dark:border-[#434C5E]">
         <p>Built with ❄️ using a Nord-inspired monochrome palette • {new Date().getFullYear()} Pietro Quintavalle.</p>
       </footer>
