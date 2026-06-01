@@ -229,8 +229,8 @@ export default function Home() {
               <tr><td>GPU</td><td>Zotac RTX 5080 Solid OC</td></tr>
               <tr><td>RAM</td><td>32GB DDR5 6000MHz</td></tr>
               <tr><td>Motherboard</td><td>Gigabyte X870E AORUS PRO X3D ICE</td></tr>
-              <tr><td>OS</td><td>Windows 11 / CachyOS (dual boot)</td></tr>
-              <tr><td>Role</td><td>Dev &middot; Gaming &middot; Local ML inference &middot; Rendering</td></tr>
+              <tr><td>OS</td><td>CachyOS</td></tr>
+              <tr><td>Role</td><td>Dev &middot; Gaming &middot; 3D Modelling and Printing &middot; Rendering</td></tr>
             </tbody>
           </table>
 
@@ -410,7 +410,6 @@ export default function Home() {
             <a href="mailto:0pietroquintavalle0@gmail.com" className="btn-li">&#9993; 0pietroquintavalle0@gmail.com</a>
             <a href="https://github.com/Quinta0" target="_blank" rel="noopener" className="btn-gh">GitHub &#8599;</a>
             <a href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" target="_blank" rel="noopener" className="btn-gh">LinkedIn &#8599;</a>
-            <a href="tel:+41799068253" className="btn-gh">+41 79 906 82 53</a>
           </div>
         </div>
         <div className="contact-gr"></div>
