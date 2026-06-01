@@ -2,34 +2,25 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Pietro Quintavalle - Economics Student & Developer',
-  description: 'Economics student at USI with extensive data analytics and web development expertise. Google-certified in Data Analytics and IT Support.',
-  keywords: ['Pietro Quintavalle', 'Economics', 'Data Analytics', 'Web Development', 'Switzerland', 'USI'],
+  title: 'Pietro Quintavalle',
+  description: 'Systems Engineer · Developer · Homelabber. Economics student at USI Lugano with 5+ years building production-grade infrastructure.',
+  keywords: ['Pietro Quintavalle', 'Systems Engineer', 'Homelab', 'SysAdmin', 'Economics', 'USI', 'Switzerland'],
   authors: [{ name: 'Pietro Quintavalle' }],
   openGraph: {
     title: 'Pietro Quintavalle',
-    description: 'Economics student at USI with extensive data analytics and web development expertise.',
-    url: 'https://your-domain.com',
-    siteName: 'Pietro Quintavalle Portfolio',
+    description: 'Systems Engineer · Developer · Homelabber',
+    siteName: 'Pietro Quintavalle',
     type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Pietro Quintavalle - Economics Student & Developer',
-    description: 'Economics student at USI with extensive data analytics and web development expertise.',
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
       </head>
       <body>{children}</body>
     </html>
