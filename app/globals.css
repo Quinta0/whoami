@@ -37,12 +37,12 @@ body{
 .col-rule-c1{
   position:fixed;top:0;bottom:0;width:1px;
   background:var(--line);z-index:200;pointer-events:none;
-  left:calc(var(--g1) + var(--g2)/3);
+  left:calc(var(--g1) + var(--g2)/3);display:none;
 }
 .col-rule-c2{
   position:fixed;top:0;bottom:0;width:1px;
   background:var(--line);z-index:200;pointer-events:none;
-  left:calc(var(--g1) + var(--g2)*2/3);
+  left:calc(var(--g1) + var(--g2)*2/3);display:none;
 }
 
 nav{

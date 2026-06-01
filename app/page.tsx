@@ -220,7 +220,7 @@ export default function Home() {
         <div className="sec-g"></div>
         <div className="sec-body">
           <div className="slbl">Personal Workstation</div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'32px',maxWidth:'680px',lineHeight:'1.65',fontWeight:'300'}}>Daily driver and dev machine. Built around AMD&rsquo;s 3D V-Cache architecture for a blend of high single-threaded performance and serious GPU compute &mdash; doubles as a local ML/render node.</p>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'32px',maxWidth:'680px',lineHeight:'1.65',fontWeight:'300'}}>Daily driver and dev machine. Built around AMD&rsquo;s 3D V-Cache architecture for a blend of high single-threaded performance and serious GPU compute &mdash; doubles as a gaming rig, 3D modelling workstation, and 3D printing controller.</p>
 
           <table className="hw-table" style={{marginBottom:'32px',border:'1px solid var(--line3)',borderRadius:'5px',overflow:'hidden'}}>
             <thead><tr><th>Component</th><th>Spec</th></tr></thead>
@@ -230,11 +230,12 @@ export default function Home() {
               <tr><td>RAM</td><td>32GB DDR5 6000MHz</td></tr>
               <tr><td>Motherboard</td><td>Gigabyte X870E AORUS PRO X3D ICE</td></tr>
               <tr><td>OS</td><td>CachyOS</td></tr>
-              <tr><td>Role</td><td>Dev &middot; Gaming &middot; 3D Modelling and Printing &middot; Rendering</td></tr>
+              <tr><td>Role</td><td>Dev &middot; Gaming &middot; 3D Modelling &middot; 3D Printing &middot; Daily Driver</td></tr>
+              <tr><td>Keyboard</td><td>Weikav Stars 75 &middot; Huano Sakura switches (hand-soldered)</td></tr>
             </tbody>
           </table>
 
-          <div className="hl3" style={{marginBottom:'0'}}>
+          <div className="hl3" style={{marginBottom:'0',gridTemplateColumns:'repeat(2,1fr)'}}>
             <div className="hl">
               <div className="hl-hd"><span className="hl-ico">&#9889;</span><span className="hl-t">AMD Ryzen 7 9800X3D</span></div>
               <div className="hl-d">Zen 5 architecture with 96MB 3D V-Cache. Exceptional single-thread and gaming performance, with low-latency cache access ideal for simulation and data-heavy workloads.</div>
@@ -242,13 +243,18 @@ export default function Home() {
             </div>
             <div className="hl">
               <div className="hl-hd"><span className="hl-ico">&#127918;</span><span className="hl-t">Zotac RTX 5080 Solid OC</span></div>
-              <div className="hl-d">Blackwell architecture. 16GB GDDR7, hardware ray tracing, DLSS 4 with Multi Frame Generation. Used for rendering, local LLM inference (llama.cpp / Ollama), and GPU-accelerated dev tasks.</div>
-              <div className="specs"><span className="spec">Blackwell</span><span className="spec">16GB GDDR7</span><span className="spec">DLSS 4</span><span className="spec">MFG</span><span className="spec">CUDA</span><span className="spec">Ollama</span></div>
+              <div className="hl-d">Blackwell architecture. 16GB GDDR7, hardware ray tracing, DLSS 4 with Multi Frame Generation. Used for gaming, 3D rendering, and GPU-accelerated dev and compute tasks.</div>
+              <div className="specs"><span className="spec">Blackwell</span><span className="spec">16GB GDDR7</span><span className="spec">DLSS 4</span><span className="spec">MFG</span><span className="spec">CUDA</span><span className="spec">Ray Tracing</span></div>
             </div>
             <div className="hl">
               <div className="hl-hd"><span className="hl-ico">&#128268;</span><span className="hl-t">X870E AORUS PRO X3D ICE</span></div>
               <div className="hl-d">Gigabyte X870E flagship board with PCIe 5.0, USB4, and optimised X3D power delivery. Supports DDR5 6000MHz XMP out-of-the-box. White aesthetic matches the build&rsquo;s ICE theme.</div>
               <div className="specs"><span className="spec">X870E</span><span className="spec">PCIe 5.0</span><span className="spec">USB4</span><span className="spec">DDR5 6000</span><span className="spec">WiFi 7</span></div>
+            </div>
+            <div className="hl">
+              <div className="hl-hd"><span className="hl-ico">&#9000;</span><span className="hl-t">Weikav Stars 75</span></div>
+              <div className="hl-d">Custom 75% keyboard hand-soldered with Huano Sakura tactile switches. Gasket mount, per-key RGB, 1000Hz polling &mdash; built and tuned entirely from scratch. Soldering is a regular hobby for keyboard and electronics work.</div>
+              <div className="specs"><span className="spec">75% layout</span><span className="spec">Huano Sakura</span><span className="spec">Tactile</span><span className="spec">Hand-soldered</span><span className="spec">Gasket mount</span><span className="spec">1000Hz</span></div>
             </div>
           </div>
         </div>
@@ -377,14 +383,38 @@ export default function Home() {
                 <div className="acc-l"><div className="acc-t">BSc in Informatics <span style={{fontSize:'11.5px',color:'var(--muted)',fontWeight:400,fontFamily:'\'DM Mono\',monospace'}}>&mdash; 2 yrs completed</span></div><div className="acc-s">USI Universit&agrave; della Svizzera italiana &middot; Lugano</div></div>
                 <div className="acc-r2"><span className="acc-per">Sep 2022 &mdash; Jun 2024</span><ChevronDown/></div>
               </button>
-              <div className="acc-body"><ul><li>Software Engineering, Agile, Data Structures &amp; Algorithms, OOP (Java, C++), Web Development.</li></ul></div>
+              <div className="acc-body">
+                <p>Two years of rigorous computer science foundations before transitioning to Economics.</p>
+                <ul>
+                  <li><strong style={{color:'var(--navy)'}}>Software Engineering</strong> &mdash; agile methodologies, requirements engineering, UML modelling, design patterns, and testing practices.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Data Structures &amp; Algorithms</strong> &mdash; complexity analysis (Big-O), arrays, linked lists, trees, graphs, and sorting and searching algorithms.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Object-Oriented Programming</strong> &mdash; Java and C++ with inheritance, polymorphism, encapsulation, and SOLID principles.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Web Development</strong> &mdash; HTML, CSS, and JavaScript fundamentals with introductory full-stack concepts.</li>
+                  <li>Discrete mathematics, logic, and formal reasoning for computer science.</li>
+                </ul>
+                <div className="econ-tags">
+                  <span className="econ-tag">Java</span><span className="econ-tag">C++</span><span className="econ-tag">Algorithms</span><span className="econ-tag">Data Structures</span><span className="econ-tag">OOP</span><span className="econ-tag">Agile</span><span className="econ-tag">Software Engineering</span><span className="econ-tag">Web Dev</span>
+                </div>
+              </div>
             </div>
             <div className={`acc-item${openAcc['edu-2'] ? ' open' : ''}`}>
               <button className="acc-btn" onClick={() => toggle('edu-2')}>
                 <div className="acc-l"><div className="acc-t">Maturit&agrave; Cantonale &amp; AFC Economics</div><div className="acc-s">Scuola cantonale di commercio &middot; Bellinzona</div></div>
                 <div className="acc-r2"><span className="acc-per">Sep 2018 &mdash; Jun 2022</span><ChevronDown/></div>
               </button>
-              <div className="acc-body"><ul><li>Maturit&agrave; Cantonale: 4.5/6. AFC Economics: 5/6. Above-average in both.</li></ul></div>
+              <div className="acc-body">
+                <p>Swiss dual-track qualification combining the academic Maturit&agrave; with a commercial AFC diploma. Graduated above average in both tracks.</p>
+                <ul>
+                  <li><strong style={{color:'var(--navy)'}}>Economics &amp; Business</strong> &mdash; microeconomic principles, business organisation, entrepreneurship, and market dynamics.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Accounting &amp; Finance</strong> &mdash; double-entry bookkeeping, financial statements, cost accounting, and Swiss business law.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Mathematics &amp; Statistics</strong> &mdash; algebra, calculus foundations, probability, and descriptive statistics.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Languages</strong> &mdash; Italian (native instruction), German, English, and French; professional writing and communication.</li>
+                  <li>Maturit&agrave; Cantonale: <strong>4.5 / 6</strong> &middot; AFC Economics: <strong>5 / 6</strong>. Above average in both tracks.</li>
+                </ul>
+                <div className="econ-tags">
+                  <span className="econ-tag">Maturit&agrave; 4.5/6</span><span className="econ-tag">AFC 5/6</span><span className="econ-tag">Accounting</span><span className="econ-tag">Business Law</span><span className="econ-tag">Mathematics</span><span className="econ-tag">Economics</span><span className="econ-tag">Multilingual</span>
+                </div>
+              </div>
             </div>
           </div>
 
