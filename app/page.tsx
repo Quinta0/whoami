@@ -67,7 +67,7 @@ export default function Home() {
           <div className="status-row"><span className="green-dot"></span>Lugano &middot; Switzerland &middot; USI Economics student</div>
           <div className="hero-name">Pietro<br/>Quintavalle</div>
           <div className="hero-role">Systems Engineer &middot; Developer &middot; Homelabber</div>
-          <p className="hero-lead">5+ years building production-grade infrastructure from the ground up. Self-hosting everything from DNS to music indexing pipelines, secured behind zero-trust networking and automated fail-safes.</p>
+          <p className="hero-lead">5+ years building production-grade infrastructure from the ground up. I design resilient systems and write the software that runs on top of them &mdash; then secure and monitor all of it myself.</p>
           <div className="btns">
             <a href="#contact" className="btn btn-d">Get in touch &#8594;</a>
             <a href="#homelab" className="btn btn-o">Explore homelab</a>
@@ -93,7 +93,7 @@ export default function Home() {
             <div className="t-body">
               <div><span className="t-p">&#10148;</span> <span className="t-c">~</span> neofetch</div>
               <div>&nbsp;</div>
-              <div><span className="t-k">OS        </span><span className="t-v">Proxmox VE 8 / UNRAID / TrueNAS</span></div>
+              <div><span className="t-k">OS        </span><span className="t-v">Proxmox VE 8 / UNRAID 7.3.1 / TrueNAS</span></div>
               <div><span className="t-k">Virt      </span><span className="t-v">LXC &middot; Docker &middot; KVM</span></div>
               <div><span className="t-k">DNS       </span><span className="t-v">Cloudflare &middot; AAAA &middot; AdGuard</span></div>
               <div><span className="t-k">Tunnels   </span><span className="t-v">Cloudflare Tunnel &middot; Newt</span></div>
@@ -115,6 +115,7 @@ export default function Home() {
           <p>Hi &mdash; friends call me <strong>Quinta</strong>. I&rsquo;m an Economics student at USI Lugano and a self-taught systems engineer who&rsquo;s been running homelab infrastructure since 2020.</p>
           <p>My setup spans everything from <strong>bare-metal Proxmox clusters</strong> to <strong>DNS and domain management via Cloudflare</strong>, <strong>Pangolin/Traefik reverse proxying</strong>, and a full media+music automation pipeline.</p>
           <p>On the academic side I&rsquo;m deepening my understanding of <strong>microeconomics, macroeconomics, game theory, and quantitative finance</strong> &mdash; and finding more overlap with systems thinking than you&rsquo;d expect.</p>
+          <p style={{fontSize:'12.5px',color:'var(--muted)',fontFamily:'\'DM Mono\',monospace',marginTop:'4px'}}>Daily driver &mdash; Ryzen 7 9800X3D &middot; RTX 5080 &middot; hand-built custom keyboard</p>
         </div>
         <div className="about-gr"></div>
       </div>
@@ -127,7 +128,7 @@ export default function Home() {
           <div className="sk4">
             <div className="sk"><div className="sk-ico">&#128423;</div><div className="sk-t">System &amp; Infra</div><div className="tags"><span className="tag">Proxmox VE</span><span className="tag">UNRAID</span><span className="tag">TrueNAS</span><span className="tag">Docker</span><span className="tag">LXC</span><span className="tag">KVM</span><span className="tag">Linux</span><span className="tag">Win Server</span><span className="tag">AD</span></div></div>
             <div className="sk"><div className="sk-ico">&#128274;</div><div className="sk-t">Network &amp; Security</div><div className="tags"><span className="tag">VLAN</span><span className="tag">Cloudflare</span><span className="tag">AAAA/DNS</span><span className="tag">CF Tunnels</span><span className="tag">Tailscale</span><span className="tag">Fail2Ban</span><span className="tag">Crowdsec</span><span className="tag">UFW</span><span className="tag">Authelia</span><span className="tag">Traefik</span></div></div>
-            <div className="sk"><div className="sk-ico">&#9000;</div><div className="sk-t">Development</div><div className="tags"><span className="tag">Python</span><span className="tag">TypeScript</span><span className="tag">React</span><span className="tag">Next.js</span><span className="tag">Django</span><span className="tag">SQL</span><span className="tag">Bash</span><span className="tag">Ansible</span><span className="tag">HTML/CSS</span></div></div>
+            <div className="sk"><div className="sk-ico">&#9000;</div><div className="sk-t">Development</div><div className="tags"><span className="tag">Python</span><span className="tag">TypeScript</span><span className="tag">React</span><span className="tag">Next.js</span><span className="tag">Django</span><span className="tag">SQL</span><span className="tag">Bash</span><span className="tag">Ansible</span><span className="tag">HTML/CSS</span><span className="tag">Soldering</span></div></div>
             <div className="sk"><div className="sk-ico">&#128202;</div><div className="sk-t">Data &amp; Monitoring</div><div className="tags"><span className="tag">Grafana</span><span className="tag">Prometheus</span><span className="tag">Uptime Kuma</span><span className="tag">ZFS</span><span className="tag">rsync</span><span className="tag">RAID</span><span className="tag">cAdvisor</span></div></div>
           </div>
           <div style={{marginTop:'32px'}}>
@@ -176,7 +177,7 @@ export default function Home() {
             <div className="hl">
               <div className="hl-hd"><span className="hl-ico">&#128190;</span><span className="hl-t">UNRAID NAS</span></div>
               <div className="hl-d">Parity-protected array hosting 9-user network shares, Docker Appdata, automated backups. Acts as the central file hub for all services via SMB/NFS.</div>
-              <div className="specs"><span className="spec">UNRAID 6.x</span><span className="spec">Parity array</span><span className="spec">ZFS cache</span><span className="spec">9 users</span><span className="spec">rsync</span><span className="spec">SMB/NFS</span></div>
+              <div className="specs"><span className="spec">UNRAID 7.3.1</span><span className="spec">Parity array</span><span className="spec">NVMe cache</span><span className="spec">9 users</span><span className="spec">rsync</span><span className="spec">SMB/NFS</span></div>
             </div>
             <div className="hl">
               <div className="hl-hd"><span className="hl-ico">&#127758;</span><span className="hl-t">DNS &amp; Cloudflare</span></div>
@@ -231,7 +232,7 @@ export default function Home() {
               <tr><td>Motherboard</td><td>Gigabyte X870E AORUS PRO X3D ICE</td></tr>
               <tr><td>OS</td><td>CachyOS</td></tr>
               <tr><td>Role</td><td>Dev &middot; Gaming &middot; 3D Modelling &middot; 3D Printing &middot; Daily Driver</td></tr>
-              <tr><td>Keyboard</td><td>Weikav Stars 75 &middot; Huano Sakura switches (hand-soldered)</td></tr>
+              <tr><td>Keyboard</td><td>Weikav Stars 75 &middot; Huano Sakura switches (hand-lubed, custom assembly)</td></tr>
             </tbody>
           </table>
 
@@ -253,8 +254,8 @@ export default function Home() {
             </div>
             <div className="hl">
               <div className="hl-hd"><span className="hl-ico">&#9000;</span><span className="hl-t">Weikav Stars 75</span></div>
-              <div className="hl-d">Custom 75% keyboard hand-soldered with Huano Sakura tactile switches. Gasket mount, per-key RGB, 1000Hz polling &mdash; built and tuned entirely from scratch. Soldering is a regular hobby for keyboard and electronics work.</div>
-              <div className="specs"><span className="spec">75% layout</span><span className="spec">Huano Sakura</span><span className="spec">Tactile</span><span className="spec">Hand-soldered</span><span className="spec">Gasket mount</span><span className="spec">1000Hz</span></div>
+              <div className="hl-d">Fully custom 75% aluminium keyboard &mdash; hand-lubed Huano Sakura tactile switches, gasket mount, per-key RGB, 1000Hz polling. Full assembly and switch tuning done from scratch.</div>
+              <div className="specs"><span className="spec">75% layout</span><span className="spec">Huano Sakura</span><span className="spec">Tactile</span><span className="spec">Hand-lubed</span><span className="spec">Gasket mount</span><span className="spec">Aluminium</span><span className="spec">1000Hz</span></div>
             </div>
           </div>
         </div>
@@ -302,13 +303,38 @@ export default function Home() {
               <div className="pr-d">Entire homelab reproduced from code &mdash; Ansible playbooks, Docker Compose, and Bash scripts. Idempotent provisioning; full rebuild in under 30 minutes from scratch.</div>
               <div className="pr-tags"><span className="pr-tag">Ansible</span><span className="pr-tag">Compose</span><span className="pr-tag">Bash</span><span className="pr-tag">IaC</span></div>
             </div>
-            <div className="pr" style={{justifyContent:'center',alignItems:'center',textAlign:'center',minHeight:'160px'}}>
-              <div style={{color:'var(--muted)',fontSize:'12.5px',lineHeight:'1.8',fontFamily:'\'DM Mono\',monospace'}}>
-                More on GitHub<br/>
-                <a href="https://github.com/Quinta0" target="_blank" rel="noopener" style={{color:'var(--mid)',textDecoration:'none',borderBottom:'1px solid var(--line3)'}}>github.com/Quinta0 &#8599;</a>
-              </div>
+            <div className="pr">
+              <span className="badge b-oss">&#8599; Open Source</span>
+              <div className="pr-type">Personal Project</div>
+              <div className="pr-t">re-soulcommand</div>
+              <div className="pr-d">Music recommendation downloader integrating ListenBrainz and Last.fm playlists with Navidrome via slskd (Soulseek daemon). Fork rebuilt around a REST API backend &mdash; stripped of bloat, Docker-native.</div>
+              <div className="pr-tags"><span className="pr-tag">Python</span><span className="pr-tag">Docker</span><span className="pr-tag">ListenBrainz</span><span className="pr-tag">Last.fm</span><span className="pr-tag">slskd</span><span className="pr-tag">Navidrome</span></div>
+            </div>
+            <div className="pr">
+              <span className="badge b-live">&#9679; Live</span>
+              <div className="pr-type">Personal Homelab</div>
+              <div className="pr-t">Ainulindale &mdash; Music Stack</div>
+              <div className="pr-d">Fully self-hosted music discovery and streaming platform. Auto-discovers music weekly from listening habits, downloads via Soulseek P2P through a VPN gateway, streams via Navidrome. No commercial services required.</div>
+              <div className="pr-tags"><span className="pr-tag">Docker</span><span className="pr-tag">Navidrome</span><span className="pr-tag">slskd</span><span className="pr-tag">Gluetun</span><span className="pr-tag">ListenBrainz</span><span className="pr-tag">ProtonVPN</span></div>
+            </div>
+            <div className="pr">
+              <span className="badge b-live">&#9679; Live</span>
+              <div className="pr-type">Personal Homelab</div>
+              <div className="pr-t">UNRAID Home Server</div>
+              <div className="pr-d">Intel Core Ultra 5 225 build running UNRAID 7.3.1 as primary NAS, Docker host, and media stack. Parity-protected array with NVMe cache, 9-user SMB/NFS shares, and all homelab services containerised.</div>
+              <div className="pr-tags"><span className="pr-tag">UNRAID 7.3.1</span><span className="pr-tag">Docker</span><span className="pr-tag">Parity Array</span><span className="pr-tag">48GB DDR5</span><span className="pr-tag">SMB/NFS</span></div>
+            </div>
+            <div className="pr">
+              <span className="badge b-live">&#9679; Live</span>
+              <div className="pr-type">Personal Homelab</div>
+              <div className="pr-t">Proxmox Virtualisation Node</div>
+              <div className="pr-d">Intel Core i7-8700 node running Proxmox VE 8 for LXC containers and KVM VMs. VLAN-segmented network, Tailscale + SSH access, acts as the compute backbone for all hosted services.</div>
+              <div className="pr-tags"><span className="pr-tag">Proxmox VE 8</span><span className="pr-tag">LXC</span><span className="pr-tag">KVM</span><span className="pr-tag">Tailscale</span><span className="pr-tag">VLAN</span><span className="pr-tag">32GB DDR4</span></div>
             </div>
           </div>
+          <p style={{marginTop:'16px',fontSize:'12px',color:'var(--muted)',fontFamily:'\'DM Mono\',monospace'}}>
+            More projects at <a href="https://github.com/Quinta0" target="_blank" rel="noopener" style={{color:'var(--mid)',textDecoration:'none',borderBottom:'1px solid var(--line3)'}}>github.com/Quinta0 &#8599;</a>
+          </p>
         </div>
         <div className="sec-gr"></div>
       </div>
@@ -321,11 +347,9 @@ export default function Home() {
           <div className="gh-list">
             <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/valgo</div><div className="gh-d">Algorithm visualizer &mdash; step-by-step sorting, graph and search walkthroughs. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">TypeScript</span><a href="https://github.com/Quinta0/valgo" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
             <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/finance-tracker</div><div className="gh-d">50/30/20 budgeting dashboard with Django and Chart.js. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Python</span><a href="https://github.com/Quinta0/finance-tracker" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/re-soulcommand</div><div className="gh-d">Music recommendation downloader &mdash; ListenBrainz &amp; Last.fm playlists into Navidrome via slskd. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Python</span><a href="https://github.com/Quinta0/re-soulcommand" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/Ainulindale</div><div className="gh-d">Self-hosted music discovery &amp; streaming stack &mdash; auto-discovery, Soulseek P2P download via VPN, Navidrome streaming. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Shell</span><a href="https://github.com/Quinta0/Ainulindale" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
             <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/homelab</div><div className="gh-d">IaC scripts, Ansible playbooks, Docker Compose stacks for full homelab provisioning.</div></div><div className="gh-r"><span className="gh-lang">Shell</span><a href="https://github.com/Quinta0" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
-            <div className="gh-item" style={{background:'var(--stone2)'}}>
-              <div style={{flex:1}}><div className="gh-n" style={{color:'var(--muted)'}}>upstream contributions &amp; issues</div><div className="gh-d">PRs and issues filed in external repos (Pangolin, Jellyfin, Lidarr, etc.)</div></div>
-              <div className="gh-r"><a href="https://github.com/Quinta0" target="_blank" rel="noopener" className="gh-lnk">github.com/Quinta0 &#8599;</a></div>
-            </div>
           </div>
         </div>
         <div className="sec-gr"></div>
@@ -345,11 +369,11 @@ export default function Home() {
               <div className="acc-body">
                 <p>End-to-end IT infrastructure for private and business clients in Ticino.</p>
                 <ul>
-                  <li>Built 6&ndash;10 production servers at 90%+ uptime using containerisation, IaC, and automated monitoring.</li>
-                  <li>Domain management via Cloudflare: AAAA records, Cloudflare Tunnels, DNSSEC, split-DNS with AdGuard Home.</li>
+                  <li>Delivered and maintained 6&ndash;10 production servers at 90%+ uptime using containerisation, IaC, and automated monitoring &mdash; all without managed hosting.</li>
+                  <li>Eliminated public exposure across all client servers by routing every external entry-point through Cloudflare Tunnels and Pangolin/Traefik &mdash; zero open ports, DNSSEC enforced, split-DNS via AdGuard Home.</li>
                   <li>Pangolin + Traefik reverse proxy with Authelia SSO, automatic TLS, and Newt tunnelling.</li>
                   <li>Fail2Ban + Crowdsec intrusion detection; UFW + iptables firewall rules across all nodes.</li>
-                  <li>Jellyfin media server with per-user OAuth, hardware transcoding, and full *arr automation stack.</li>
+                  <li>Reduced storage recovery time to under 30 minutes by implementing ZFS RAID-Z snapshots and automated rsync offsite backups on all storage nodes.</li>
                   <li>Music pipeline: Lidarr &#8594; Prowlarr &#8594; Beets &#8594; Navidrome + Listenbrainz scrobbling + Symfonium/Explo mobile.</li>
                   <li>Windows Server: Active Directory, DNS, DHCP, Group Policy, Disaster Recovery planning.</li>
                 </ul>
