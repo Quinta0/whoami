@@ -57,7 +57,7 @@ export default function Home() {
       {/* ANNOUNCE STRIP */}
       <div className="strip">
         <span className="strip-pill">Open to work</span>
-        <a href="#contact">Available for Junior SysAdmin &amp; IT consulting <span className="strip-arr">&#8594;</span></a>
+        <a href="#contact">Available for Junior SysAdmin &amp; IT consulting &amp; Junior Quant <span className="strip-arr">&#8594;</span></a>
       </div>
 
       {/* HERO */}
