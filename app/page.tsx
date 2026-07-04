@@ -210,7 +210,7 @@ export default function Home() {
         <div className="about-g"></div>
         <div className="about-left">
           <div className="terminal">
-            <div className="t-bar"><span className="td r"></span><span className="td y"></span><span className="td g"></span><span className="t-title">quinta@proxmox:~</span></div>
+            <div className="t-bar"><span className="td r"></span><span className="td y"></span><span className="td g"></span><span className="t-title">quinta@server:~</span></div>
             <div className="t-stage">
               <div className={`t-pane t-body${eggView !== 'main' ? ' t-hidden' : ''}`}>
                 <div><span className="t-p">&#10148;</span> <span className="t-c">~</span> neofetch</div>
@@ -242,6 +242,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="t-hint">try typing something...</div>
+                <div>&nbsp;</div>
               </div>
 
               <div className={`t-pane t-egg-pane${eggView === 'moria' ? ' t-egg-show' : ''}`}>
