@@ -227,7 +227,6 @@ export default function Home() {
                 <div><span className="t-k">Monitor   </span><span className="t-v">Grafana &middot; Prometheus &middot; Kuma</span></div>
                 <div><span className="t-k">Code      </span><span className="t-v">Python &middot; TypeScript &middot; SQL</span></div>
                 <div><span className="t-k">Status    </span><span className="t-v" style={{color:'#5FCE8A'}}>Open for work &#9679;</span></div>
-                <div>&nbsp;</div>
                 <div className="t-cmd-row">
                   <span className="t-p">&#10148;</span> <span className="t-c">~</span>
                   <input
