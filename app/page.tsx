@@ -214,7 +214,6 @@ export default function Home() {
             <div className="t-stage">
               <div className={`t-pane t-body${eggView !== 'main' ? ' t-hidden' : ''}`}>
                 <div><span className="t-p">&#10148;</span> <span className="t-c">~</span> neofetch</div>
-                <div>&nbsp;</div>
                 <div><span className="t-k">OS        </span><span className="t-v">Proxmox VE 8 / UNRAID 7.3.1 / TrueNAS</span></div>
                 <div><span className="t-k">Virt      </span><span className="t-v">LXC &middot; Docker &middot; KVM</span></div>
                 <div><span className="t-k">DNS       </span><span className="t-v">Cloudflare &middot; AAAA &middot; AdGuard</span></div>
