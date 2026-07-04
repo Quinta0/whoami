@@ -2,6 +2,98 @@
 
 import { useState } from 'react'
 
+const DURIN_ART = ` ______________     _             _,-----------._        ___
+|              |   (_,.-      _,-'_,-----------._\`-._    _)_)
+| THE _  _  _  |      |     ,'_,-'  ___________  \`-._\`.
+| |  / \\|_)| \\ |     \`'   ,','  _,-'___________\`-._  \`.\`.
+| |__\\_/| \\|_/ |        ,','  ,'_,-'     .     \`-._\`.  \`.\`.
+|              |       /,'  ,','        >|<        \`.\`.  \`.\\
+| OF THE  _ _  |      //  ,','      ><  ,^.  ><      \`.\`.  \\\\
+| |_)||\\|/_(_  |     //  /,'      ><   / | \\   ><      \`.\\  \\\\
+| | \\|| |\\_|_) |    //  //      ><    \\/\\^/\\/    ><      \\\\  \\\\
+|______________|   ;;  ;;              \`---'              ::  ::
+                   ||  ||              (____              ||  ||
+ DOORS OF DURIN   _||__||_            ,'----.            _||__||_
+                 (o.____.o)____        \`---'        ____(o.____.o)
+                   |    | /,--.)                   (,--.\\ |    |
+                   |    |((  -\`___               ___\`   ))|    |
+                   |    | \\\\,'',  \`.           .'  .\`\`.// |    |
+                   |    |  // (___,'.         .'.___) \\\\  |    |
+                  /|    | ;;))  ____) .     . (____  ((\\\\ |    |\\
+                  \\|.__ | ||/ .'.--.\\/       \`/,--.\`. \\;: | __,|;
+                   |\`-,\`;.| :/ /,'  \`)-'   \`-('  \`.\\ \\: |.;',-'|
+                   |   \`..  ' / \\__.'         \`.__/ \\ \`  ,.'   |
+                   |    |,\\  /,                     ,\\  /,|    |
+                   |    ||: : )          .          ( : :||    |
+                  /|    |:; |/  .      ./|\\,      ,  \\| :;|    |\\
+                  \\|.__ |/  :  ,/-    <--:-->    ,\\.  ;  \\| __,|;
+                   |\`-.\`\`:   \`'/-.     '\\|/\`     ,-\\\`;   ;'',-'|
+                   |   \`..   ,' \`'       '       \`  \`.   ,.'   |
+                   |    ||  :                         :  ||    |
+                   |    ||  |                         |  ||    |
+                   |    ||  |                         |  ||    |
+                   |    |'  |            _            |  \`|    |
+                   |    |   |          '|))           |   |    |
+                   ;____:   \`._        \`'           _,'   ;____:
+                  {______}     \\___________________/     {______}
+              SSt |______|_______________________________|______|`
+
+const BALROG_ART = `############################+##++++++########+++++-----.   ------------ .    - --.---              --.--.------...---------------..---
+###############################+++++++####+++++----- ---    -  ----   --     -. ..-  -               - -------------------------------
+##########################+++++++++++++#####+++---. .  --        -      -    -      -                .--.-----------------------------
+########################+++#+++++++++######++++-.                           ..--++++++------..-----        -  ------------.- ---------
+###########################+##+++++++++++##++-                           -++++++++--+--------.- .. ...-.. - ----------------.---------
+############################+++++++++++++#++-+            -         -++++++++++++------+++---++-------------.    -.----------.--------
+#############################++++++++++++#++++- ---             ++++++++++++++++--+++++++-------------------------   -------------.---
+#############################++++++++++++++++---             .+##+++++++++++++++++++++++++---------------------------.----------------
+############++#+###+#+++#####++++++++++++++-- ---    --     -+###+++++++++++++++++++++++++----+---------------------------------------
+###########++++++++++++#++++++++++++++--..----  .  .-- .. -+#####++++++++++++++++++++++++-+--++++-------------------------------------
+############+++++++++++++++++++++++++++++++++.+  ..--.- +#########+++++++++++++++++++++++++++----+------------------------.-----------
+############++++++++++++++++++++++-+++++++++++++.. + .++#####++#++++#++++++++++++++++++++++++++-------+--------------------- ---------
+########+#+++++++++++++++++++++---++++-+++++++++.. -+#########-+  .+++++++++++++++++++++++-++++-+++++----+-------------------+--------
++######+#+++++++++++++++++++++-+++++++-++++++++++##+-.+++++++#+    +++++++++++++++++++++++-----+++++++++++-----+--------+-------------
+++##+++++++++++++++++++++++++++++++++++++-+++.++++-+    .+++++-++++++++++++++++++++++----+---------------+++++++-----+----------------
+++++++++++++++++++++++++++##+++++++++++++++.  ++#  ++  +-.++++++++++++++++#++++---+------------------------+-+++---+++-+---+-----.----
++++++++++++++++++++++++###++++++++++++++++++-+++-  +++  ++++++++++++++#++++-++----+-+----------------------+---++++++++----+--++++----
++++++++++++++++++++++###++++++++++++++++++++++++  +#+#+#+#+++#######+++#----------------------------------+-++----++-+++--+++++++----.
++++++++++++++++++++++++#++++++++++++-++++++++++##++++#++#+++#+++#+#+++++++++--+----------+------------------+-++--++-+--++++++-++-.---
+++++++++++++++++++++++++++++++++++++++++++#+++++-++++##+#++##++####+++++++++++-+-----------+------------------+---++++++++++++++-++---
++++++++++++++++++++++++++++++++++++++++--++++++#++++###+#++#+#++++++++++++++++++++---+---------------------------+++++++++++++++++++--
++++++++++++++++++++++++++++++-------++--+++++#++++#+#######+#++++#+#-++-+++++++++++------------------------------+--++++++++++++++++--
++++++++++++++++++++++++++++-------+-----+#+++#+++#   #.# #+####+###++--+++++++++++++--------------.-------------+-++--++++++++++++++--
++++++++++++++++++++++++-----------------+++#+--#  . - - .+####+##++-----++++++++--+----+-+--------.--------------+-----+++++++++++++--
++++++++++++++++++++++-------++----------#++++# -         #. ####+-+-.+--+++++++---+++++++----------------------------.--++++++++++++--
++++++++++++++--+++++-+-------+----------+++##. . +         +#+-  -++---+ ++++----+++++++++---------------------------..+++++++++++++--
++++++++++++++-++++++---------------------#++ ---.         +#-    +++-. -++----++-+-+-+++++--------------------------..-+++++++++++++--
+++++++++++++++-----+--------------++++++++#+ +...--       +          .  - ----+-+++--++-+++-----------------------.---++++++++++++++--
+++++++++----++--+++----------+++++++++++-++#++. .                    .  ----+----++---+--++-------------------------+ +++++++++++++---
++++++++++---+--------------++++++++++++++++...-.                      . -----------+---++++------------------------++++++++++++++++---
++++++++---+-++-+++-+-----+++++++++++++++++------                      .. ---------+-----+++++-+-----------------++++++++++++++++++----
++++++++-+++-+----++------+++++++++++++++++++++---                     ....----+--+------++++-++------------.+.+++++++++++##+++++++----
+++++++++++++++++------+++++++++++++++++++++++++--.                  . ... ++---+--+----++++---++-------.+-.+++++++++++++#######+------
+++++---++++------+---++++++++++++++++++++++++++---.                 ...-.--+--+---++--+------+-+--.-.++.+#+++#+++++###++++++#---------
+-++++.--+++++---+----+++++++++++++++++++++++++++-+-...             ......---+++-++----++-----+--.---++####+++++###--++####++-----.----
+++++-----+----------++++++++++++++++++++++++++++++--....           ..------++++--------------.+- ############+++##+###+---------------
++++-+++------------++++++++++++++++++++++++++++++----.....        ..----+. -+---------- ---..+###+####+###-#####++-+--.---------------
++++++++++--.------+++++++++++++++++++++++++++++. -----.... .    . ..-++-+--+-----------  .#++++#++##+--++++---+-----------.-----------
+-----+-+++--------++++++++++++++++++++++++++++++---.--.... . ..  ---++-.+------------  .+-++##--#+--++--.-----------------------------
+-------+++--------++++#++++++++++++++++++++++-+-------..-.      .---+--+++---------. +#-#+#+--+------.---.---.----- ----------------..
+-------++++++-+------.+++++++++++++++++-++++++++-- ----..... ..----+--+.++--------  +--#++-------------------------....-.---------..--
+------++++++++++++---+--##++++++++++++++++++++---------......-.--+++-.-++---.---. -##++----------------------- ---.....---------......
+-++---++++++#+++++##++...+#++++++++ +++++++++---------...-.---.++++...--.-+-----..+#+-----------.---------------....  ......-.........
+-------+++-+++#+# ++#+....+##+#++++#+++++++++----++++---...----++++-..+.--++---.+#+-------------------------..... .   ....... . ...   
+++----+++++++-+---###+-+..-##+##+##+++++++++-.--------.--------+-+--------++---.#-----------..----------......    ..     .    ..      
+++++-+++++++++++++++##++-..##++++##+++++++++-+----..----+---+--++---------++-------------------------...-. .      .          ....     
+++++++++++++++++++++++##-..+++++++  ++++++ +-  - --------------+-.---------------- ----------.----------....                 . .      
+-+++++++-+++++++++++++#+--++.++-----------------------. .--- --------------------------------------...--..... ......         .        
+-++++--++++++++++++++++-++ -++.-------.------------ ------.---------.....--------------------- .--- ....... ......                    
+----------++++--------+++.----------..--------.------------  ...-.-.-.----------------------..---.--. .. ........                     
+-----.-...-------------------------------.------ -----..----...-.........-----------------.. .-.... ....... ...    .                  
+........ .---------------------------------------  --... ---......----.. . - ----------.--...-...  ......... ..                       
+  ...    ..---------------.--.-------------...-.---------.. ....-......   --- --- ---.-----......             .                       
+......    .-----.-.----------.---------------..--------.--......      . ..----------------.-..         ..                             
+    .    ...--------------------------...----.--------.-..---.-.      .---------------------.          .                              `
+
 const ChevronDown = () => (
   <svg className="acc-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <polyline points="6 9 12 15 18 9"/>
@@ -16,6 +108,33 @@ export default function Home() {
 
   const toggle = (id: string) => {
     setOpenAcc(prev => ({ ...prev, [id]: !prev[id] }))
+  }
+
+  const [cmd, setCmd] = useState('')
+  const [eggView, setEggView] = useState<'main' | 'moria' | 'balrog'>('main')
+  const [eggBusy, setEggBusy] = useState(false)
+
+  const triggerEgg = (view: 'moria' | 'balrog') => {
+    if (eggBusy) return
+    setEggBusy(true)
+    setEggView(view)
+    setTimeout(() => {
+      setEggView('main')
+      setCmd('')
+      setEggBusy(false)
+    }, 4200)
+  }
+
+  const handleTermKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key !== 'Enter' || eggBusy) return
+    const value = cmd.trim().toLowerCase()
+    if (value === 'mellon') {
+      triggerEgg('moria')
+    } else if (value === 'you shall not pass') {
+      triggerEgg('balrog')
+    } else {
+      setCmd('')
+    }
   }
 
   return (
@@ -67,7 +186,9 @@ export default function Home() {
           <div className="status-row"><span className="green-dot"></span>Lugano &middot; Switzerland &middot; USI Economics student</div>
           <div className="hero-name">Pietro<br/>Quintavalle</div>
           <div className="hero-role">Systems Engineer &middot; Developer &middot; Homelabber</div>
-          <p className="hero-lead">5+ years building production-grade infrastructure from the ground up. I design resilient systems and write the software that runs on top of them &mdash; then secure and monitor all of it myself.</p>
+          <p className="hero-thesis">Economics models incentives under constraints; infrastructure models constraints under load  I like sitting where those two disciplines overlap.</p>
+          <p className="hero-lead">5+ years building production-grade infrastructure from the ground up. I design resilient systems and write the software that runs on top of them  then secure and monitor all of it myself.</p>
+          
           <div className="btns">
             <a href="#contact" className="btn btn-d">Get in touch &#8594;</a>
             <a href="#homelab" className="btn btn-o">Explore homelab</a>
@@ -76,7 +197,7 @@ export default function Home() {
         </div>
         <div className="hero-stats">
           <div className="stat"><span className="stat-ico">&#9889;</span><div><div className="stat-val">90%+ uptime</div><div className="stat-lbl">Production servers</div></div></div>
-          <div className="stat"><span className="stat-ico">&#128187;</span><div><div className="stat-val">6&ndash;10 servers</div><div className="stat-lbl">Under management</div></div></div>
+          <div className="stat"><span className="stat-ico">&#128187;</span><div><div className="stat-val">4 servers</div><div className="stat-lbl">Under management</div></div></div>
           <div className="stat"><span className="stat-ico">&#128197;</span><div><div className="stat-val">5+ years</div><div className="stat-lbl">SysAdmin experience</div></div></div>
           <div className="stat"><span className="stat-ico">&#127891;</span><div><div className="stat-val">BSc Economics</div><div className="stat-lbl">USI &middot; Ongoing</div></div></div>
           <div className="stat"><span className="stat-ico">&#127760;</span><div><div className="stat-val">IT &middot; EN &middot; DE &middot; ES &middot; NO</div><div className="stat-lbl">5 languages</div></div></div>
@@ -90,32 +211,61 @@ export default function Home() {
         <div className="about-left">
           <div className="terminal">
             <div className="t-bar"><span className="td r"></span><span className="td y"></span><span className="td g"></span><span className="t-title">quinta@proxmox:~</span></div>
-            <div className="t-body">
-              <div><span className="t-p">&#10148;</span> <span className="t-c">~</span> neofetch</div>
-              <div>&nbsp;</div>
-              <div><span className="t-k">OS        </span><span className="t-v">Proxmox VE 8 / UNRAID 7.3.1 / TrueNAS</span></div>
-              <div><span className="t-k">Virt      </span><span className="t-v">LXC &middot; Docker &middot; KVM</span></div>
-              <div><span className="t-k">DNS       </span><span className="t-v">Cloudflare &middot; AAAA &middot; AdGuard</span></div>
-              <div><span className="t-k">Tunnels   </span><span className="t-v">Cloudflare Tunnel &middot; Newt</span></div>
-              <div><span className="t-k">Proxy     </span><span className="t-v">Pangolin + Traefik + Auto-TLS</span></div>
-              <div><span className="t-k">Security  </span><span className="t-v">Fail2Ban &middot; Crowdsec &middot; Authelia</span></div>
-              <div><span className="t-k">Storage   </span><span className="t-v">UNRAID parity &middot; ZFS RAID-Z</span></div>
-              <div><span className="t-k">Media     </span><span className="t-v">Jellyfin &middot; Navidrome &middot; *arr</span></div>
-              <div><span className="t-k">Music     </span><span className="t-v">Listenbrainz &middot; Symfonium</span></div>
-              <div><span className="t-k">Monitor   </span><span className="t-v">Grafana &middot; Prometheus &middot; Kuma</span></div>
-              <div><span className="t-k">Code      </span><span className="t-v">Python &middot; TypeScript &middot; SQL</span></div>
-              <div><span className="t-k">Status    </span><span className="t-v" style={{color:'#5FCE8A'}}>Open for work &#9679;</span></div>
-              <div>&nbsp;</div>
-              <div><span className="t-p">&#10148;</span> <span className="t-c">~</span> <span className="cur"></span></div>
+            <div className="t-stage">
+              <div className={`t-pane t-body${eggView !== 'main' ? ' t-hidden' : ''}`}>
+                <div><span className="t-p">&#10148;</span> <span className="t-c">~</span> neofetch</div>
+                <div>&nbsp;</div>
+                <div><span className="t-k">OS        </span><span className="t-v">Proxmox VE 8 / UNRAID 7.3.1 / TrueNAS</span></div>
+                <div><span className="t-k">Virt      </span><span className="t-v">LXC &middot; Docker &middot; KVM</span></div>
+                <div><span className="t-k">DNS       </span><span className="t-v">Cloudflare &middot; AAAA &middot; AdGuard</span></div>
+                <div><span className="t-k">Tunnels   </span><span className="t-v">Cloudflare Tunnel &middot; Newt</span></div>
+                <div><span className="t-k">Proxy     </span><span className="t-v">Pangolin + Traefik + Auto-TLS</span></div>
+                <div><span className="t-k">Security  </span><span className="t-v">Fail2Ban &middot; Crowdsec &middot; Authelia</span></div>
+                <div><span className="t-k">Storage   </span><span className="t-v">UNRAID parity &middot; TrueNAS ZFS RAID 10</span></div>
+                <div><span className="t-k">Media     </span><span className="t-v">Jellyfin &middot; Navidrome &middot; *arr</span></div>
+                <div><span className="t-k">Music     </span><span className="t-v">Listenbrainz &middot; Symfonium</span></div>
+                <div><span className="t-k">Monitor   </span><span className="t-v">Grafana &middot; Prometheus &middot; Kuma</span></div>
+                <div><span className="t-k">Code      </span><span className="t-v">Python &middot; TypeScript &middot; SQL</span></div>
+                <div><span className="t-k">Status    </span><span className="t-v" style={{color:'#5FCE8A'}}>Open for work &#9679;</span></div>
+                <div>&nbsp;</div>
+                <div className="t-cmd-row">
+                  <span className="t-p">&#10148;</span> <span className="t-c">~</span>
+                  <input
+                    className="t-input"
+                    type="text"
+                    value={cmd}
+                    onChange={e => setCmd(e.target.value)}
+                    onKeyDown={handleTermKey}
+                    autoComplete="off"
+                    spellCheck={false}
+                    aria-label="terminal command input"
+                  />
+                </div>
+                <div className="t-hint">try typing something...</div>
+              </div>
+
+              <div className={`t-pane t-egg-pane${eggView === 'moria' ? ' t-egg-show' : ''}`}>
+                <div className="t-ascii-scroll">
+                  <pre className="t-ascii t-ascii-moria">{DURIN_ART}</pre>
+                </div>
+                <div className="t-egg-cap t-egg-cap-moria">the doors of durin, lord of moria  speak, friend, and enter</div>
+              </div>
+
+              <div className={`t-pane t-egg-pane${eggView === 'balrog' ? ' t-egg-show' : ''}`}>
+                <div className="t-ascii-scroll">
+                  <pre className="t-ascii t-ascii-balrog">{BALROG_ART}</pre>
+                </div>
+                <div className="t-egg-cap t-egg-cap-balrog">a demon of the ancient world  YOU SHALL NOT PASS</div>
+              </div>
             </div>
           </div>
         </div>
         <div className="about-right">
           <div className="slbl">About me</div>
-          <p>Hi &mdash; friends call me <strong>Quinta</strong>. I&rsquo;m an Economics student at USI Lugano and a self-taught systems engineer who&rsquo;s been running homelab infrastructure since 2020.</p>
+          <p>Hi  friends call me <strong>Quinta</strong>. I&rsquo;m an Economics student at USI Lugano and a self-taught systems engineer who&rsquo;s been running homelab infrastructure since 2020.</p>
           <p>My setup spans everything from <strong>bare-metal Proxmox clusters</strong> to <strong>DNS and domain management via Cloudflare</strong>, <strong>Pangolin/Traefik reverse proxying</strong>, and a full media+music automation pipeline.</p>
-          <p>On the academic side I&rsquo;m deepening my understanding of <strong>microeconomics, macroeconomics, game theory, and quantitative finance</strong> &mdash; and finding more overlap with systems thinking than you&rsquo;d expect.</p>
-          <p style={{fontSize:'12.5px',color:'var(--muted)',fontFamily:'\'DM Mono\',monospace',marginTop:'4px'}}>Daily driver &mdash; Ryzen 7 9800X3D &middot; RTX 5080 &middot; hand-built custom keyboard</p>
+          <p>On the academic side I&rsquo;m deepening my understanding of <strong>microeconomics, macroeconomics, game theory, and quantitative finance</strong>  and finding more overlap with systems thinking than you&rsquo;d expect.</p>
+          <p style={{fontSize:'12.5px',color:'var(--muted)',fontFamily:'\'DM Mono\',monospace',marginTop:'4px'}}>Daily driver  Ryzen 7 9800X3D &middot; RTX 5080 &middot; hand-built custom keyboard</p>
         </div>
         <div className="about-gr"></div>
       </div>
@@ -145,6 +295,7 @@ export default function Home() {
             <div className="certs">
               <div className="cert">&#127891; Google Data Analytics Professional Certificate</div>
               <div className="cert">&#127891; Google IT Support Professional Certificate</div>
+              <div className="cert">&#127891; Microsoft Foundations of IT Systems, Networking &amp; Data Protection</div>
             </div>
           </div>
         </div>
@@ -221,7 +372,7 @@ export default function Home() {
         <div className="sec-g"></div>
         <div className="sec-body">
           <div className="slbl">Personal Workstation</div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'32px',maxWidth:'680px',lineHeight:'1.65',fontWeight:'300'}}>Daily driver and dev machine. Built around AMD&rsquo;s 3D V-Cache architecture for a blend of high single-threaded performance and serious GPU compute &mdash; doubles as a gaming rig, 3D modelling workstation, and 3D printing controller.</p>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'32px',maxWidth:'680px',lineHeight:'1.65',fontWeight:'300'}}>Daily driver and dev machine. Built around AMD&rsquo;s 3D V-Cache architecture for a blend of high single-threaded performance and serious GPU compute  doubles as a gaming rig, 3D modelling workstation, and 3D printing controller.</p>
 
           <table className="hw-table" style={{marginBottom:'32px',border:'1px solid var(--line3)',borderRadius:'5px',overflow:'hidden'}}>
             <thead><tr><th>Component</th><th>Spec</th></tr></thead>
@@ -254,7 +405,7 @@ export default function Home() {
             </div>
             <div className="hl">
               <div className="hl-hd"><span className="hl-ico">&#9000;</span><span className="hl-t">Weikav Stars 75</span></div>
-              <div className="hl-d">Fully custom 75% aluminium keyboard &mdash; hand-lubed Huano Sakura tactile switches, gasket mount, per-key RGB, 1000Hz polling. Full assembly and switch tuning done from scratch.</div>
+              <div className="hl-d">Fully custom 75% aluminium keyboard  hand-lubed Huano Sakura tactile switches, gasket mount, per-key RGB, 1000Hz polling. Full assembly and switch tuning done from scratch.</div>
               <div className="specs"><span className="spec">75% layout</span><span className="spec">Huano Sakura</span><span className="spec">Tactile</span><span className="spec">Hand-lubed</span><span className="spec">Gasket mount</span><span className="spec">Aluminium</span><span className="spec">1000Hz</span></div>
             </div>
           </div>
@@ -285,7 +436,7 @@ export default function Home() {
             <div className="pr">
               <span className="badge b-oss">&#8599; Open Source</span>
               <div className="pr-type">Personal Project</div>
-              <div className="pr-t">Valgo &mdash; Algorithm Visualizer</div>
+              <div className="pr-t">Valgo  Algorithm Visualizer</div>
               <div className="pr-d">Step-by-step algorithm visualisation built with React and Next.js. Sorting, graph, and search algorithms with live code annotations and speed controls.</div>
               <div className="pr-tags"><span className="pr-tag">React</span><span className="pr-tag">Next.js</span><span className="pr-tag">TypeScript</span><span className="pr-tag">Tailwind</span></div>
             </div>
@@ -300,20 +451,20 @@ export default function Home() {
               <span className="badge b-live">&#9679; Live</span>
               <div className="pr-type">Personal Homelab</div>
               <div className="pr-t">Self-Hosted Stack (IaC)</div>
-              <div className="pr-d">Entire homelab reproduced from code &mdash; Ansible playbooks, Docker Compose, and Bash scripts. Idempotent provisioning; full rebuild in under 30 minutes from scratch.</div>
+              <div className="pr-d">Entire homelab reproduced from code  Ansible playbooks, Docker Compose, and Bash scripts. Idempotent provisioning; full rebuild in under 30 minutes from scratch.</div>
               <div className="pr-tags"><span className="pr-tag">Ansible</span><span className="pr-tag">Compose</span><span className="pr-tag">Bash</span><span className="pr-tag">IaC</span></div>
             </div>
             <div className="pr">
               <span className="badge b-oss">&#8599; Open Source</span>
               <div className="pr-type">Personal Project</div>
               <div className="pr-t">re-soulcommand</div>
-              <div className="pr-d">Music recommendation downloader integrating ListenBrainz and Last.fm playlists with Navidrome via slskd (Soulseek daemon). Fork rebuilt around a REST API backend &mdash; stripped of bloat, Docker-native.</div>
+              <div className="pr-d">Music recommendation downloader integrating ListenBrainz and Last.fm playlists with Navidrome via slskd (Soulseek daemon). Fork rebuilt around a REST API backend  stripped of bloat, Docker-native.</div>
               <div className="pr-tags"><span className="pr-tag">Python</span><span className="pr-tag">Docker</span><span className="pr-tag">ListenBrainz</span><span className="pr-tag">Last.fm</span><span className="pr-tag">slskd</span><span className="pr-tag">Navidrome</span></div>
             </div>
             <div className="pr">
               <span className="badge b-live">&#9679; Live</span>
               <div className="pr-type">Personal Homelab</div>
-              <div className="pr-t">Ainulindale &mdash; Music Stack</div>
+              <div className="pr-t">Ainulindale  Music Stack</div>
               <div className="pr-d">Fully self-hosted music discovery and streaming platform. Auto-discovers music weekly from listening habits, downloads via Soulseek P2P through a VPN gateway, streams via Navidrome. No commercial services required.</div>
               <div className="pr-tags"><span className="pr-tag">Docker</span><span className="pr-tag">Navidrome</span><span className="pr-tag">slskd</span><span className="pr-tag">Gluetun</span><span className="pr-tag">ListenBrainz</span><span className="pr-tag">ProtonVPN</span></div>
             </div>
@@ -331,6 +482,20 @@ export default function Home() {
               <div className="pr-d">Intel Core i7-8700 node running Proxmox VE 8 for LXC containers and KVM VMs. VLAN-segmented network, Tailscale + SSH access, acts as the compute backbone for all hosted services.</div>
               <div className="pr-tags"><span className="pr-tag">Proxmox VE 8</span><span className="pr-tag">LXC</span><span className="pr-tag">KVM</span><span className="pr-tag">Tailscale</span><span className="pr-tag">VLAN</span><span className="pr-tag">32GB DDR4</span></div>
             </div>
+            <div className="pr">
+              <span className="badge b-oss">&#8599; Open Source &middot; &#9733; 26</span>
+              <div className="pr-type">Personal Project</div>
+              <div className="pr-t">ObsidianSetup</div>
+              <div className="pr-d">Cross-platform utility script that makes installing Obsidian and its plugins consistent across devices  PowerShell and Bash installers driven by a single plugins.json manifest.</div>
+              <div className="pr-tags"><span className="pr-tag">PowerShell</span><span className="pr-tag">Bash</span><span className="pr-tag">Obsidian</span><span className="pr-tag">Automation</span></div>
+            </div>
+            <div className="pr">
+              <span className="badge b-oss">&#8599; Open Source</span>
+              <div className="pr-type">Academic Project</div>
+              <div className="pr-t">Boston Housing Price Prediction</div>
+              <div className="pr-d">Probability &amp; Statistics coursework at USI  built and evaluated regression models on the classic Boston housing dataset to predict median home values from neighbourhood features.</div>
+              <div className="pr-tags"><span className="pr-tag">Python</span><span className="pr-tag">scikit-learn</span><span className="pr-tag">Regression</span><span className="pr-tag">Jupyter</span><span className="pr-tag">Statistics</span></div>
+            </div>
           </div>
           <p style={{marginTop:'16px',fontSize:'12px',color:'var(--muted)',fontFamily:'\'DM Mono\',monospace'}}>
             More projects at <a href="https://github.com/Quinta0" target="_blank" rel="noopener" style={{color:'var(--mid)',textDecoration:'none',borderBottom:'1px solid var(--line3)'}}>github.com/Quinta0 &#8599;</a>
@@ -343,13 +508,13 @@ export default function Home() {
       <div className="sec" id="github">
         <div className="sec-g"></div>
         <div className="sec-body">
-          <div className="slbl">GitHub &mdash; Contributions &amp; Issues</div>
+          <div className="slbl">GitHub  Contributions &amp; Issues</div>
           <div className="gh-list">
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/valgo</div><div className="gh-d">Algorithm visualizer &mdash; step-by-step sorting, graph and search walkthroughs. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">TypeScript</span><a href="https://github.com/Quinta0/valgo" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/finance-tracker</div><div className="gh-d">50/30/20 budgeting dashboard with Django and Chart.js. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Python</span><a href="https://github.com/Quinta0/finance-tracker" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/re-soulcommand</div><div className="gh-d">Music recommendation downloader &mdash; ListenBrainz &amp; Last.fm playlists into Navidrome via slskd. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Python</span><a href="https://github.com/Quinta0/re-soulcommand" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/Ainulindale</div><div className="gh-d">Self-hosted music discovery &amp; streaming stack &mdash; auto-discovery, Soulseek P2P download via VPN, Navidrome streaming. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Shell</span><a href="https://github.com/Quinta0/Ainulindale" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/re-soulcommand</div><div className="gh-d">Music recommendation downloader  ListenBrainz &amp; Last.fm playlists into Navidrome via slskd. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Python</span><a href="https://github.com/Quinta0/re-soulcommand" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/Ainulindale</div><div className="gh-d">Self-hosted music discovery &amp; streaming stack  auto-discovery, Soulseek P2P download via VPN, Navidrome streaming. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Shell</span><a href="https://github.com/Quinta0/Ainulindale" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
             <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/homelab</div><div className="gh-d">IaC scripts, Ansible playbooks, Docker Compose stacks for full homelab provisioning.</div></div><div className="gh-r"><span className="gh-lang">Shell</span><a href="https://github.com/Quinta0" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/ObsidianSetup</div><div className="gh-d">Cross-platform Obsidian + plugin installer, driven by a shared plugins.json manifest. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-stars">&#9733; 26</span><span className="gh-lang">PowerShell</span><a href="https://github.com/Quinta0/ObsidianSetup" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/BostonHousing</div><div className="gh-d">Probability &amp; Statistics coursework at USI  regression models predicting Boston-area housing prices.</div></div><div className="gh-r"><span className="gh-lang">Jupyter</span><a href="https://github.com/Quinta0/BostonHousing" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
           </div>
         </div>
         <div className="sec-gr"></div>
@@ -364,16 +529,16 @@ export default function Home() {
             <div className={`acc-item${openAcc['exp-0'] ? ' open' : ''}`}>
               <button className="acc-btn" onClick={() => toggle('exp-0')}>
                 <div className="acc-l"><div className="acc-t">Systems Engineering Consultant</div><div className="acc-s">Freelance &middot; Ticino, Switzerland</div></div>
-                <div className="acc-r2"><span className="acc-per">Jan 2020 &mdash; Present</span><ChevronDown/></div>
+                <div className="acc-r2"><span className="acc-per">Jan 2020  Present</span><ChevronDown/></div>
               </button>
               <div className="acc-body">
                 <p>End-to-end IT infrastructure for private and business clients in Ticino.</p>
                 <ul>
-                  <li>Delivered and maintained 6&ndash;10 production servers at 90%+ uptime using containerisation, IaC, and automated monitoring &mdash; all without managed hosting.</li>
-                  <li>Eliminated public exposure across all client servers by routing every external entry-point through Cloudflare Tunnels and Pangolin/Traefik &mdash; zero open ports, DNSSEC enforced, split-DNS via AdGuard Home.</li>
+                  <li>Delivered and maintained 4 production servers at 90%+ uptime using containerisation, IaC, and automated monitoring  all without managed hosting.</li>
+                  <li>Eliminated public exposure across all client servers by routing every external entry-point through Cloudflare Tunnels and Pangolin/Traefik  zero open ports, DNSSEC enforced, split-DNS via AdGuard Home.</li>
                   <li>Pangolin + Traefik reverse proxy with Authelia SSO, automatic TLS, and Newt tunnelling.</li>
                   <li>Fail2Ban + Crowdsec intrusion detection; UFW + iptables firewall rules across all nodes.</li>
-                  <li>Reduced storage recovery time to under 30 minutes by implementing ZFS RAID-Z snapshots and automated rsync offsite backups on all storage nodes.</li>
+                  <li>Reduced storage recovery time to under 30 minutes with ZFS snapshots on the TrueNAS RAID 10 array and automated rsync offsite backups across all storage nodes.</li>
                   <li>Music pipeline: Lidarr &#8594; Prowlarr &#8594; Beets &#8594; Navidrome + Listenbrainz scrobbling + Symfonium/Explo mobile.</li>
                   <li>Windows Server: Active Directory, DNS, DHCP, Group Policy, Disaster Recovery planning.</li>
                 </ul>
@@ -386,15 +551,15 @@ export default function Home() {
             <div className={`acc-item${openAcc['edu-0'] ? ' open' : ''}`}>
               <button className="acc-btn" onClick={() => toggle('edu-0')}>
                 <div className="acc-l"><div className="acc-t">BSc in Economics</div><div className="acc-s">USI Universit&agrave; della Svizzera italiana &middot; Lugano</div></div>
-                <div className="acc-r2"><span className="acc-per">Sep 2024 &mdash; Present</span><ChevronDown/></div>
+                <div className="acc-r2"><span className="acc-per">Sep 2024  Present</span><ChevronDown/></div>
               </button>
               <div className="acc-body">
                 <p>Ongoing bachelor&rsquo;s focusing on rigorous theory and quantitative methods.</p>
                 <ul>
-                  <li><strong style={{color:'var(--navy)'}}>Microeconomics</strong> &mdash; consumer and producer theory, market structures (perfect competition, oligopoly, monopoly), welfare economics, externalities.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Macroeconomics</strong> &mdash; GDP and growth models, IS-LM, monetary and fiscal policy, open economy models, inflation and unemployment dynamics.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Game Theory</strong> &mdash; Nash equilibrium, dominant strategies, extensive and normal form games, mechanism design, auction theory, repeated games.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Quantitative Finance &amp; Statistics</strong> &mdash; probability theory, statistical inference, regression analysis, time series, financial modelling, portfolio theory basics.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Microeconomics</strong>  consumer and producer theory, market structures (perfect competition, oligopoly, monopoly), welfare economics, externalities.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Macroeconomics</strong>  GDP and growth models, IS-LM, monetary and fiscal policy, open economy models, inflation and unemployment dynamics.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Game Theory</strong>  Nash equilibrium, dominant strategies, extensive and normal form games, mechanism design, auction theory, repeated games.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Quantitative Finance &amp; Statistics</strong>  probability theory, statistical inference, regression analysis, time series, financial modelling, portfolio theory basics.</li>
                   <li>Accounting, Statistics, and Quantitative Methods for economic analysis.</li>
                 </ul>
                 <div className="econ-tags">
@@ -404,16 +569,16 @@ export default function Home() {
             </div>
             <div className={`acc-item${openAcc['edu-1'] ? ' open' : ''}`}>
               <button className="acc-btn" onClick={() => toggle('edu-1')}>
-                <div className="acc-l"><div className="acc-t">BSc in Informatics <span style={{fontSize:'11.5px',color:'var(--muted)',fontWeight:400,fontFamily:'\'DM Mono\',monospace'}}>&mdash; 2 yrs completed</span></div><div className="acc-s">USI Universit&agrave; della Svizzera italiana &middot; Lugano</div></div>
-                <div className="acc-r2"><span className="acc-per">Sep 2022 &mdash; Jun 2024</span><ChevronDown/></div>
+                <div className="acc-l"><div className="acc-t">BSc in Informatics <span style={{fontSize:'11.5px',color:'var(--muted)',fontWeight:400,fontFamily:'\'DM Mono\',monospace'}}> 2 yrs completed</span></div><div className="acc-s">USI Universit&agrave; della Svizzera italiana &middot; Lugano</div></div>
+                <div className="acc-r2"><span className="acc-per">Sep 2022  Jun 2024</span><ChevronDown/></div>
               </button>
               <div className="acc-body">
                 <p>Two years of rigorous computer science foundations before transitioning to Economics.</p>
                 <ul>
-                  <li><strong style={{color:'var(--navy)'}}>Software Engineering</strong> &mdash; agile methodologies, requirements engineering, UML modelling, design patterns, and testing practices.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Data Structures &amp; Algorithms</strong> &mdash; complexity analysis (Big-O), arrays, linked lists, trees, graphs, and sorting and searching algorithms.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Object-Oriented Programming</strong> &mdash; Java and C++ with inheritance, polymorphism, encapsulation, and SOLID principles.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Web Development</strong> &mdash; HTML, CSS, and JavaScript fundamentals with introductory full-stack concepts.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Software Engineering</strong>  agile methodologies, requirements engineering, UML modelling, design patterns, and testing practices.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Data Structures &amp; Algorithms</strong>  complexity analysis (Big-O), arrays, linked lists, trees, graphs, and sorting and searching algorithms.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Object-Oriented Programming</strong>  Java and C++ with inheritance, polymorphism, encapsulation, and SOLID principles.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Web Development</strong>  HTML, CSS, and JavaScript fundamentals with introductory full-stack concepts.</li>
                   <li>Discrete mathematics, logic, and formal reasoning for computer science.</li>
                 </ul>
                 <div className="econ-tags">
@@ -424,15 +589,15 @@ export default function Home() {
             <div className={`acc-item${openAcc['edu-2'] ? ' open' : ''}`}>
               <button className="acc-btn" onClick={() => toggle('edu-2')}>
                 <div className="acc-l"><div className="acc-t">Maturit&agrave; Cantonale &amp; AFC Economics</div><div className="acc-s">Scuola cantonale di commercio &middot; Bellinzona</div></div>
-                <div className="acc-r2"><span className="acc-per">Sep 2018 &mdash; Jun 2022</span><ChevronDown/></div>
+                <div className="acc-r2"><span className="acc-per">Sep 2018  Jun 2022</span><ChevronDown/></div>
               </button>
               <div className="acc-body">
                 <p>Swiss dual-track qualification combining the academic Maturit&agrave; with a commercial AFC diploma. Graduated above average in both tracks.</p>
                 <ul>
-                  <li><strong style={{color:'var(--navy)'}}>Economics &amp; Business</strong> &mdash; microeconomic principles, business organisation, entrepreneurship, and market dynamics.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Accounting &amp; Finance</strong> &mdash; double-entry bookkeeping, financial statements, cost accounting, and Swiss business law.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Mathematics &amp; Statistics</strong> &mdash; algebra, calculus foundations, probability, and descriptive statistics.</li>
-                  <li><strong style={{color:'var(--navy)'}}>Languages</strong> &mdash; Italian (native instruction), German, English, and French; professional writing and communication.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Economics &amp; Business</strong>  microeconomic principles, business organisation, entrepreneurship, and market dynamics.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Accounting &amp; Finance</strong>  double-entry bookkeeping, financial statements, cost accounting, and Swiss business law.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Mathematics &amp; Statistics</strong>  algebra, calculus foundations, probability, and descriptive statistics.</li>
+                  <li><strong style={{color:'var(--navy)'}}>Languages</strong>  Italian (native instruction), German, English, and French; professional writing and communication.</li>
                   <li>Maturit&agrave; Cantonale: <strong>4.5 / 6</strong> &middot; AFC Economics: <strong>5 / 6</strong>. Above average in both tracks.</li>
                 </ul>
                 <div className="econ-tags">
@@ -444,11 +609,11 @@ export default function Home() {
 
           <div style={{marginTop:'36px'}}><div className="slbl">Languages</div></div>
           <div className="langs">
-            <div className="langc"><div className="lang-n">Italian</div><div className="lang-l">Native</div></div>
-            <div className="langc"><div className="lang-n">English</div><div className="lang-l">Fluent</div></div>
-            <div className="langc"><div className="lang-n">German</div><div className="lang-l">Conversational</div></div>
-            <div className="langc"><div className="lang-n">Spanish</div><div className="lang-l">Basic</div></div>
-            <div className="langc"><div className="lang-n">Norwegian</div><div className="lang-l">Basic</div></div>
+            <div className="langc"><div className="lang-n">Italian</div><div className="lang-l">Native &middot; C2</div></div>
+            <div className="langc"><div className="lang-n">English</div><div className="lang-l">Fluent &middot; C2</div></div>
+            <div className="langc"><div className="lang-n">German</div><div className="lang-l">Conversational &middot; B1&ndash;B2</div></div>
+            <div className="langc"><div className="lang-n">Spanish</div><div className="lang-l">Basic &middot; A1</div></div>
+            <div className="langc"><div className="lang-n">Norwegian</div><div className="lang-l">Basic &middot; A1</div></div>
           </div>
         </div>
         <div className="sec-gr"></div>
@@ -459,7 +624,7 @@ export default function Home() {
         <div className="contact-g"></div>
         <div className="contact-body">
           <h2>Ready to<br/>collaborate?</h2>
-          <p>Whether you need server infrastructure, network architecture, a self-hosted media stack, or a Junior SysAdmin &mdash; let&rsquo;s build something reliable together.</p>
+          <p>Whether you need server infrastructure, network architecture, a self-hosted media stack, or a Junior SysAdmin  let&rsquo;s build something reliable together.</p>
           <div className="contact-ctas">
             <a href="mailto:0pietroquintavalle0@gmail.com" className="btn-li">&#9993; 0pietroquintavalle0@gmail.com</a>
             <a href="https://github.com/Quinta0" target="_blank" rel="noopener" className="btn-gh">GitHub &#8599;</a>
@@ -472,7 +637,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer>
         <div className="foot">
-          <p>&#169; 2025 Pietro Quintavalle &middot; Lugano, Switzerland</p>
+          <p>&#169; 2026 Pietro Quintavalle &middot; Lugano, Switzerland</p>
           <a href="#">Back to top &#8593;</a>
         </div>
       </footer>
