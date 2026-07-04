@@ -239,7 +239,7 @@ export default function Home() {
                     aria-label="terminal command input"
                   />
                 </div>
-                <div className="t-hint">try typing something...</div>
+                <div className="t-hint">Speak friend and enter...</div>
                 <div>&nbsp;</div>
               </div>
 
