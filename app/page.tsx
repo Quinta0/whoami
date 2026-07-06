@@ -495,6 +495,13 @@ export default function Home() {
               <div className="pr-d">Probability &amp; Statistics coursework at USI  built and evaluated regression models on the classic Boston housing dataset to predict median home values from neighbourhood features.</div>
               <div className="pr-tags"><span className="pr-tag">Python</span><span className="pr-tag">scikit-learn</span><span className="pr-tag">Regression</span><span className="pr-tag">Jupyter</span><span className="pr-tag">Statistics</span></div>
             </div>
+            <div className="pr">
+              <span className="badge b-live">&#9680; In Dev</span>
+              <div className="pr-type">Personal Project</div>
+              <div className="pr-t">Dispatch</div>
+              <div className="pr-d">Modern self hostable RSS reader and aggregator that you can use however you want</div>
+              <div className="pr-tags"><span className="pr-tag">Vitejs</span><span className="pr-tag">Docker</span><span className="pr-tag">RSS</span></div>
+            </div>
           </div>
           <p style={{marginTop:'16px',fontSize:'12px',color:'var(--muted)',fontFamily:'\'DM Mono\',monospace'}}>
             More projects at <a href="https://github.com/Quinta0" target="_blank" rel="noopener" style={{color:'var(--mid)',textDecoration:'none',borderBottom:'1px solid var(--line3)'}}>github.com/Quinta0 &#8599;</a>
