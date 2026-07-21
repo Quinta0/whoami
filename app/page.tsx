@@ -159,6 +159,7 @@ export default function Home() {
           <a href="#homelab">Homelab</a>
           <a href="#desktop">Desktop</a>
           <a href="#projects">Projects</a>
+          <a href="#oss">Open Source</a>
           <a href="#github">GitHub</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
@@ -510,11 +511,25 @@ export default function Home() {
         <div className="sec-gr"></div>
       </div>
 
+      {/* OPEN SOURCE CONTRIBUTIONS */}
+      <div className="sec" id="oss">
+        <div className="sec-g"></div>
+        <div className="sec-body">
+          <div className="slbl">Open Source Contributions</div>
+          <div className="gh-list">
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">libratbag/libratbag</div><div className="gh-d">Reverse-engineered the full USB HID protocol (via Wireshark/USBPcap capture analysis) for an unsupported gaming mouse and wrote a complete libratbag driver from scratch  DPI, polling rate, debounce, and button remapping, with persistence verified on real hardware.</div></div><div className="gh-r"><span className="gh-lang">C</span><a href="https://github.com/libratbag/libratbag/pull/1873" target="_blank" rel="noopener" className="gh-lnk">&#8599; PR #1873</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">libratbag/piper</div><div className="gh-d">Companion contribution to the driver above  custom device artwork and Piper GUI integration so the new mouse is recognised and configurable in the Piper front-end.</div></div><div className="gh-r"><span className="gh-lang">SVG</span><a href="https://github.com/libratbag/piper/pull/1121" target="_blank" rel="noopener" className="gh-lnk">&#8599; PR #1121</a></div></div>
+            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">ValveSoftware/steam-for-linux</div><div className="gh-d">Diagnosed and fixed a Steam Linux Runtime install bug via config.vdf and appmanifest inspection after all standard recovery paths (integrity verification, manifest wipes, steamcmd re-install) failed; workaround adopted by other affected users.</div></div><div className="gh-r"><span className="gh-lang">Debugging</span><a href="https://github.com/ValveSoftware/steam-for-linux/issues/13248" target="_blank" rel="noopener" className="gh-lnk">&#8599; issue #13248</a></div></div>
+          </div>
+        </div>
+        <div className="sec-gr"></div>
+      </div>
+
       {/* GITHUB */}
       <div className="sec" id="github">
         <div className="sec-g"></div>
         <div className="sec-body">
-          <div className="slbl">GitHub  Contributions &amp; Issues</div>
+          <div className="slbl">My Projects on GitHub</div>
           <div className="gh-list">
             <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/re-soulcommand</div><div className="gh-d">Music recommendation downloader  ListenBrainz &amp; Last.fm playlists into Navidrome via slskd. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Python</span><a href="https://github.com/Quinta0/re-soulcommand" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
             <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/Ainulindale</div><div className="gh-d">Self-hosted music discovery &amp; streaming stack  auto-discovery, Soulseek P2P download via VPN, Navidrome streaming. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Shell</span><a href="https://github.com/Quinta0/Ainulindale" target="_blank" rel="noopener" className="gh-lnk">&#8599; repo</a></div></div>
