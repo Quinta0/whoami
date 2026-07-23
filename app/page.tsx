@@ -76,33 +76,30 @@ export default function Home() {
       <nav className={mobileOpen ? 'nav-open' : ''}>
         <div className="nav-bar">
           <a href="#" className="nav-logo-wrap">
-            <svg className="nav-logosvg" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="22" height="22" rx="4" fill="#111110"/>
-              <path d="M5 8L11 5.5L17 8V12.8C17 16.5 11 20 11 20C11 20 5 16.5 5 12.8V8Z" stroke="#C1121F" strokeWidth="1.3"/>
-              <path d="M9 11.8L10.8 13.5L14 9.5" stroke="#C1121F" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span className="nav-name">Pietro<sup>DEV</sup></span>
+            <span className="nav-mark">P<em>Q</em></span>
           </a>
-          <button className="nav-burger" aria-label="Toggle menu" aria-expanded={mobileOpen} onClick={() => setMobileOpen(o => !o)}>
-            <span></span><span></span><span></span>
-          </button>
-        </div>
-        <div className="nav-links">
-          <a href="#skills" onClick={closeMobile}>Skills</a>
-          <a href="#homelab" onClick={closeMobile}>Homelab</a>
-          <a href="#desktop" onClick={closeMobile}>Desktop</a>
-          <a href="#projects" onClick={closeMobile}>Projects</a>
-          <a href="#oss" onClick={closeMobile}>Open Source</a>
-          <a href="#github" onClick={closeMobile}>GitHub</a>
-          <a href="#experience" onClick={closeMobile}>Experience</a>
-          <a href="#contact" onClick={closeMobile}>Contact</a>
-          <div className="nav-socials">
-            <a href="https://github.com/Quinta0" target="_blank" rel="noopener" title="GitHub">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.69C6.72 19.9 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 7.8c.85.004 1.71.115 2.51.337 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" target="_blank" rel="noopener" title="LinkedIn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
-            </a>
+          <div className="nav-links">
+            <a href="#skills" onClick={closeMobile}>Skills</a>
+            <a href="#homelab" onClick={closeMobile}>Homelab</a>
+            <a href="#desktop" onClick={closeMobile}>Desktop</a>
+            <a href="#projects" onClick={closeMobile}>Projects</a>
+            <a href="#oss" onClick={closeMobile}>Open Source</a>
+            <a href="#github" onClick={closeMobile}>GitHub</a>
+            <a href="#experience" onClick={closeMobile}>Experience</a>
+            <a href="#contact" onClick={closeMobile}>Contact</a>
+          </div>
+          <div className="nav-right">
+            <div className="nav-socials">
+              <a href="https://github.com/Quinta0" target="_blank" rel="noopener" title="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.69C6.72 19.9 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 7.8c.85.004 1.71.115 2.51.337 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" target="_blank" rel="noopener" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+              </a>
+            </div>
+            <button className="nav-burger" aria-label="Toggle menu" aria-expanded={mobileOpen} onClick={() => setMobileOpen(o => !o)}>
+              <span></span><span></span><span></span>
+            </button>
           </div>
         </div>
       </nav>
