@@ -115,7 +115,6 @@ export default function Home() {
 
       {/* HERO */}
       <div className="hero-row">
-        <div className="hero-glow" aria-hidden="true"></div>
         <div className="hero-main">
           <div className="status-row"><span className="green-dot"></span>Lugano &middot; Switzerland &middot; USI Economics student</div>
           <div className="hero-name">Pietro<br/>Quintavalle</div>
@@ -124,7 +123,7 @@ export default function Home() {
           <p className="hero-lead">5+ years building production-grade infrastructure from the ground up. I design resilient systems and write the software that runs on top of them  then secure and monitor all of it myself.</p>
 
           <div className="btns">
-            <a href="#contact" className="btn btn-d">Get in touch &#8594;</a>
+            <a href="#contact" className="btn btn-d">Get in touch</a>
             <a href="#homelab" className="btn btn-o">Explore homelab</a>
             <a href="#projects" className="btn btn-o">View projects</a>
           </div>
@@ -371,7 +370,6 @@ export default function Home() {
               <tr><td>Motherboard</td><td>Gigabyte X870E AORUS PRO X3D ICE</td></tr>
               <tr><td>OS</td><td>CachyOS</td></tr>
               <tr><td>Role</td><td>Dev &middot; Gaming &middot; 3D Modelling &middot; 3D Printing &middot; Daily Driver</td></tr>
-              <tr><td>Keyboard</td><td>Weikav Stars 75 &middot; Huano Sakura switches (hand-lubed, custom assembly)</td></tr>
             </tbody>
           </table>
 
@@ -398,14 +396,6 @@ export default function Home() {
               <div>
                 <div className="desc">Gigabyte X870E flagship board with PCIe 5.0, USB4, and optimised X3D power delivery. Supports DDR5 6000MHz XMP out-of-the-box. White aesthetic matches the build&rsquo;s ICE theme.</div>
                 <div className="skill-list"><span className="skill">X870E</span><span className="skill">PCIe 5.0</span><span className="skill">USB4</span><span className="skill">DDR5 6000</span><span className="skill">WiFi 7</span></div>
-              </div>
-            </div>
-            <div className="detail-row">
-              <div className="cat-num">04</div>
-              <div className="cat-name">Weikav Stars 75</div>
-              <div>
-                <div className="desc">Fully custom 75% aluminium keyboard  hand-lubed Huano Sakura tactile switches, gasket mount, per-key RGB, 1000Hz polling. Full assembly and switch tuning done from scratch.</div>
-                <div className="skill-list"><span className="skill">75% layout</span><span className="skill">Huano Sakura</span><span className="skill">Tactile</span><span className="skill">Hand-lubed</span><span className="skill">Gasket mount</span><span className="skill">Aluminium</span><span className="skill">1000Hz</span></div>
               </div>
             </div>
           </div>
@@ -527,10 +517,29 @@ export default function Home() {
       <div className="sec" id="oss">
         <div className="sec-body">
           <div className="section-label"><div className="num"></div><h2>Open Source Contributions</h2><div className="rule"></div></div>
-          <div className="gh-list">
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">libratbag/libratbag</div><div className="gh-d">Reverse-engineered the full USB HID protocol (via Wireshark/USBPcap capture analysis) for an unsupported gaming mouse and wrote a complete libratbag driver from scratch  DPI, polling rate, debounce, and button remapping, with persistence verified on real hardware.</div></div><div className="gh-r"><span className="gh-lang">C</span><a href="https://github.com/libratbag/libratbag/pull/1873" target="_blank" rel="noopener" className="gh-lnk">PR #1873 &#8599;</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">libratbag/piper</div><div className="gh-d">Companion contribution to the driver above  custom device artwork and Piper GUI integration so the new mouse is recognised and configurable in the Piper front-end.</div></div><div className="gh-r"><span className="gh-lang">SVG</span><a href="https://github.com/libratbag/piper/pull/1121" target="_blank" rel="noopener" className="gh-lnk">PR #1121 &#8599;</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">ValveSoftware/steam-for-linux</div><div className="gh-d">Diagnosed and fixed a Steam Linux Runtime install bug via config.vdf and appmanifest inspection after all standard recovery paths (integrity verification, manifest wipes, steamcmd re-install) failed; workaround adopted by other affected users.</div></div><div className="gh-r"><span className="gh-lang">Debugging</span><a href="https://github.com/ValveSoftware/steam-for-linux/issues/13248" target="_blank" rel="noopener" className="gh-lnk">Issue #13248 &#8599;</a></div></div>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'640px',lineHeight:'1.6',fontWeight:'400'}}>External pull requests and issues resolved in other maintainers&rsquo; codebases  work landed in repos I don&rsquo;t own.</p>
+          <div className="row-index">
+            <div className="repo-row">
+              <div>
+                <h3>libratbag/libratbag</h3>
+                <p>Reverse-engineered the full USB HID protocol (via Wireshark/USBPcap capture analysis) for an unsupported gaming mouse and wrote a complete libratbag driver from scratch  DPI, polling rate, debounce, and button remapping, with persistence verified on real hardware.</p>
+              </div>
+              <div className="repo-meta"><span className="lang">C</span><a href="https://github.com/libratbag/libratbag/pull/1873" target="_blank" rel="noopener" className="action">PR #1873</a></div>
+            </div>
+            <div className="repo-row">
+              <div>
+                <h3>libratbag/piper</h3>
+                <p>Companion contribution to the driver above  custom device artwork and Piper GUI integration so the new mouse is recognised and configurable in the Piper front-end.</p>
+              </div>
+              <div className="repo-meta"><span className="lang">SVG</span><a href="https://github.com/libratbag/piper/pull/1121" target="_blank" rel="noopener" className="action">PR #1121</a></div>
+            </div>
+            <div className="repo-row">
+              <div>
+                <h3>ValveSoftware/steam-for-linux</h3>
+                <p>Diagnosed and fixed a Steam Linux Runtime install bug via config.vdf and appmanifest inspection after all standard recovery paths (integrity verification, manifest wipes, steamcmd re-install) failed; workaround adopted by other affected users.</p>
+              </div>
+              <div className="repo-meta"><span className="kind">debugging</span><a href="https://github.com/ValveSoftware/steam-for-linux/issues/13248" target="_blank" rel="noopener" className="action issue">Issue #13248</a></div>
+            </div>
           </div>
         </div>
       </div>
@@ -539,12 +548,43 @@ export default function Home() {
       <div className="sec" id="github">
         <div className="sec-body">
           <div className="section-label"><div className="num"></div><h2>My Projects on GitHub</h2><div className="rule"></div></div>
-          <div className="gh-list">
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/re-soulcommand</div><div className="gh-d">Music recommendation downloader  ListenBrainz &amp; Last.fm playlists into Navidrome via slskd. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Python</span><a href="https://github.com/Quinta0/re-soulcommand" target="_blank" rel="noopener" className="gh-lnk">Repo &#8599;</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/Ainulindale</div><div className="gh-d">Self-hosted music discovery &amp; streaming stack  auto-discovery, Soulseek P2P download via VPN, Navidrome streaming. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-lang">Shell</span><a href="https://github.com/Quinta0/Ainulindale" target="_blank" rel="noopener" className="gh-lnk">Repo &#8599;</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/Nargothrond</div><div className="gh-d">Documentation for full homelab provisioning.</div></div><div className="gh-r"><span className="gh-lang">Hardware</span><a href="https://github.com/Quinta0/Nargothrond" target="_blank" rel="noopener" className="gh-lnk">Repo &#8599;</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/ObsidianSetup</div><div className="gh-d">Cross-platform Obsidian + plugin installer, driven by a shared plugins.json manifest. Author &amp; maintainer.</div></div><div className="gh-r"><span className="gh-stars">&#9733; 26</span><span className="gh-lang">PowerShell</span><a href="https://github.com/Quinta0/ObsidianSetup" target="_blank" rel="noopener" className="gh-lnk">Repo &#8599;</a></div></div>
-            <div className="gh-item"><div style={{flex:1}}><div className="gh-n">Quinta0/BostonHousing</div><div className="gh-d">Probability &amp; Statistics coursework at USI  regression models predicting Boston-area housing prices.</div></div><div className="gh-r"><span className="gh-lang">Jupyter</span><a href="https://github.com/Quinta0/BostonHousing" target="_blank" rel="noopener" className="gh-lnk">Repo &#8599;</a></div></div>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'640px',lineHeight:'1.6',fontWeight:'400'}}>The complete repository list  including the projects featured above, plus the smaller tools and documentation that support them.</p>
+          <div className="row-index">
+            <div className="repo-row">
+              <div>
+                <h3>Quinta0/re-soulcommand</h3>
+                <p>Music recommendation downloader  ListenBrainz &amp; Last.fm playlists into Navidrome via slskd. Author &amp; maintainer.</p>
+              </div>
+              <div className="repo-meta"><span className="lang">Python</span><a href="https://github.com/Quinta0/re-soulcommand" target="_blank" rel="noopener" className="action">Repo</a></div>
+            </div>
+            <div className="repo-row">
+              <div>
+                <h3>Quinta0/Ainulindale</h3>
+                <p>Self-hosted music discovery &amp; streaming stack  auto-discovery, Soulseek P2P download via VPN, Navidrome streaming. Author &amp; maintainer.</p>
+              </div>
+              <div className="repo-meta"><span className="lang">Shell</span><a href="https://github.com/Quinta0/Ainulindale" target="_blank" rel="noopener" className="action">Repo</a></div>
+            </div>
+            <div className="repo-row">
+              <div>
+                <h3>Quinta0/Nargothrond</h3>
+                <p>Documentation for full homelab provisioning.</p>
+              </div>
+              <div className="repo-meta"><span className="kind">docs</span><a href="https://github.com/Quinta0/Nargothrond" target="_blank" rel="noopener" className="action">Repo</a></div>
+            </div>
+            <div className="repo-row">
+              <div>
+                <h3>Quinta0/ObsidianSetup</h3>
+                <p>Cross-platform Obsidian + plugin installer, driven by a shared plugins.json manifest. Author &amp; maintainer.</p>
+              </div>
+              <div className="repo-meta"><span className="star">26</span><span className="lang">PowerShell</span><a href="https://github.com/Quinta0/ObsidianSetup" target="_blank" rel="noopener" className="action">Repo</a></div>
+            </div>
+            <div className="repo-row">
+              <div>
+                <h3>Quinta0/BostonHousing</h3>
+                <p>Probability &amp; Statistics coursework at USI  regression models predicting Boston-area housing prices.</p>
+              </div>
+              <div className="repo-meta"><span className="lang">Jupyter</span><a href="https://github.com/Quinta0/BostonHousing" target="_blank" rel="noopener" className="action">Repo</a></div>
+            </div>
           </div>
         </div>
       </div>
