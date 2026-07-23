@@ -556,6 +556,13 @@ export default function Home() {
             </div>
             <div className="repo-row">
               <div>
+                <h3>Quinta0/riptune</h3>
+                <p>A terminal-native music client for Subsonic-compatible servers (Navidrome, Airsonic, Gonic), built for the niri scrollable-tiling compositor.</p>
+              </div>
+              <div className="repo-meta"><span className="lang">Rust</span><a href="https://github.com/Quinta0/riptune" target="_blank" rel="noopener" className="action">Repo</a></div>
+            </div>
+            <div className="repo-row">
+              <div>
                 <h3>Quinta0/Ainulindale</h3>
                 <p>Self-hosted music discovery &amp; streaming stack  auto-discovery, Soulseek P2P download via VPN, Navidrome streaming. Author &amp; maintainer.</p>
               </div>
