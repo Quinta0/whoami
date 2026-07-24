@@ -537,6 +537,13 @@ export default function Home() {
               </div>
               <div className="repo-meta"><span className="kind">debugging</span><a href="https://github.com/ValveSoftware/steam-for-linux/issues/13248" target="_blank" rel="noopener" className="action issue">Issue #13248</a></div>
             </div>
+            <div className="repo-row">
+            <div>
+              <h3>Recol/DLSS-Updater</h3>
+              <p>Diagnosed a UI state bug where a popup overlay fired a spurious mouse-exit event, desyncing the card footer from an open dropdown menu; decoupled footer state from raw hover signal to fix it. Verified across 3 cold-launch cycles with tab-switch latency logging at the maintainer&rsquo;s request before merge.</p>
+            </div>
+            <div className="repo-meta"><span className="lang">Python</span><a href="https://github.com/Recol/DLSS-Updater/pull/252" target="_blank" rel="noopener" className="action">PR #252</a></div>
+          </div>
           </div>
         </div>
       </div>
