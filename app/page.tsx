@@ -277,77 +277,198 @@ export default function Home() {
       <div className="sec" id="homelab">
         <div className="sec-body">
           <div className="section-label"><div className="num"></div><h2>Homelab Infrastructure</h2><div className="rule"></div></div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'40px',maxWidth:'680px',lineHeight:'1.65',fontWeight:'400'}}>Every service containerised, every entry-point proxied, every failure logged. Domain management via Cloudflare with AAAA records and tunnels. Built to enterprise patterns at personal scale.</p>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'24px',maxWidth:'900px',lineHeight:'1.65',fontWeight:'400'}}>
+            Started with a single Proxmox node &mdash; my first real server, and the one that taught me virtualisation and LXC.
+            When file storage and parity-protected array management outgrew that setup, I built Nargothrond:
+            a dedicated UNRAID box, named after the hidden fortress from <em>The Silmarillion</em>.
+            Every service containerised, every entry-point proxied, every failure logged.
+          </p>
 
           <div className="section-label" style={{marginBottom:'0'}}><div className="num">&mdash;</div><div className="slbl-t">Hardware</div><div className="rule"></div></div>
           <table className="hw-table">
-            <thead><tr><th>Component</th><th>UNRAID Server</th><th>Proxmox Node</th></tr></thead>
+            <thead><tr><th>Component</th><th>UNRAID Server (Nargothrond)</th><th>Proxmox Node</th></tr></thead>
             <tbody>
               <tr><td>CPU</td><td>Intel Core Ultra 5 225</td><td>Intel Core i7-8700</td></tr>
+              <tr><td>Motherboard</td><td>ASUS Prime Z890M-Plus</td><td>&mdash;</td></tr>
               <tr><td>RAM</td><td>48GB DDR5 5600MHz</td><td>32GB DDR4</td></tr>
-              <tr><td>Storage</td><td>4&times; HDD parity array + NVMe cache</td><td>SSD (OS) + SATA pool</td></tr>
-              <tr><td>Network</td><td>1Gbps LAN &middot; VLANs</td><td>1Gbps LAN &middot; VLANs</td></tr>
+              <tr><td>Case</td><td>Jonsbo N6</td><td>&mdash;</td></tr>
+              <tr><td>Storage</td><td>14TB + 2&times;12TB parity array + 2TB NVMe cache + 1TB NVMe boot</td><td>SSD (OS) + SATA pool</td></tr>
+              <tr><td>Network</td><td>10GbE (Realtek RTL8127) + 1Gbps LAN &middot; VLANs</td><td>1Gbps LAN &middot; VLANs</td></tr>
               <tr><td>OS</td><td>UNRAID 7.3.1</td><td>Proxmox VE 8</td></tr>
               <tr><td>Access</td><td>Pangolin + Traefik</td><td>Tailscale + SSH</td></tr>
-              <tr><td>Focus</td><td>Idle power efficiency &middot; perf/watt</td><td>Virtualisation &middot; LXC</td></tr>
             </tbody>
           </table>
 
-          <div className="section-label" style={{marginBottom:'0'}}><div className="num">&mdash;</div><div className="slbl-t">Services &amp; Stack</div><div className="rule"></div></div>
+          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">&mdash;</div><div className="slbl-t">Services &amp; Stack</div><div className="rule"></div></div>
           <div className="category-index">
             <div className="detail-row">
               <div className="cat-num">01</div>
-              <div className="cat-name">UNRAID NAS</div>
+              <div className="cat-name">Traefik + Pangolin</div>
               <div>
-                <div className="desc">Parity-protected array hosting 9-user network shares, Docker Appdata, automated backups. Acts as the central file hub for all services via SMB/NFS.</div>
-                <div className="skill-list"><span className="skill">UNRAID 7.3.1</span><span className="skill">Parity array</span><span className="skill">NVMe cache</span><span className="skill">9 users</span><span className="skill">rsync</span><span className="skill">SMB/NFS</span></div>
+                <div className="desc">Pangolin (WireGuard-based, identity-aware tunnel) publishes services externally with zero open inbound ports; Traefik routes by hostname and handles automatic TLS. Cloudflared runs a second outbound tunnel for select services.</div>
+                <div className="skill-list"><span className="skill">Pangolin</span><span className="skill">Traefik</span><span className="skill">WireGuard</span><span className="skill">Cloudflared</span><span className="skill">Auto-TLS</span></div>
               </div>
             </div>
             <div className="detail-row">
               <div className="cat-num">02</div>
-              <div className="cat-name">DNS &amp; Cloudflare</div>
+              <div className="cat-name">AdGuard Home + Unbound</div>
               <div>
-                <div className="desc">Domain managed through Cloudflare with AAAA records for IPv6, Cloudflare Tunnels for zero-open-port external access, and AdGuard Home for internal DNS resolution and ad-blocking.</div>
-                <div className="skill-list"><span className="skill">Cloudflare</span><span className="skill">AAAA records</span><span className="skill">CF Tunnels</span><span className="skill">AdGuard Home</span><span className="skill">Split DNS</span><span className="skill">DNSSEC</span></div>
+                <div className="desc">Network-wide DNS filtering on its own macvlan (br0) IP so it&rsquo;s visible to every LAN device. Unbound handles recursive resolution, keeping DNS queries private end-to-end.</div>
+                <div className="skill-list"><span className="skill">AdGuard Home</span><span className="skill">Unbound</span><span className="skill">macvlan</span><span className="skill">Split DNS</span></div>
               </div>
             </div>
             <div className="detail-row">
               <div className="cat-num">03</div>
-              <div className="cat-name">Pangolin + Traefik</div>
+              <div className="cat-name">CrowdSec + Gluetun</div>
               <div>
-                <div className="desc">Pangolin (Traefik-based) handles all inbound HTTPS with automatic TLS, subdomain routing, and middleware. Newt tunnel enables access without exposing raw ports. Authelia adds SSO/2FA.</div>
-                <div className="skill-list"><span className="skill">Pangolin</span><span className="skill">Traefik</span><span className="skill">Auto-TLS</span><span className="skill">Newt tunnel</span><span className="skill">Authelia</span><span className="skill">Middleware</span></div>
+                <div className="desc">CrowdSec watches logs and bans malicious IPs in real time using community threat intel. Gluetun routes the download client through an encrypted VPN tunnel with a kill switch, so it never touches the LAN directly.</div>
+                <div className="skill-list"><span className="skill">CrowdSec</span><span className="skill">Gluetun</span><span className="skill">Kill switch</span><span className="skill">Intrusion detection</span></div>
               </div>
             </div>
             <div className="detail-row">
               <div className="cat-num">04</div>
-              <div className="cat-name">Fail2Ban + Security</div>
+              <div className="cat-name">Jellyfin + *Arr Stack</div>
               <div>
-                <div className="desc">Fail2Ban monitors SSH and auth logs, auto-banning brute-force IPs. Crowdsec adds community threat intelligence with real-time blocklist sync. UFW provides host-level firewall rules on each node.</div>
-                <div className="skill-list"><span className="skill">Fail2Ban</span><span className="skill">Crowdsec</span><span className="skill">UFW</span><span className="skill">iptables</span><span className="skill">SSH hardening</span><span className="skill">Authelia</span></div>
+                <div className="desc">Jellyfin streams the library with iGPU transcoding. Seerr lets family request titles, which flow into Sonarr/Radarr; Jackett and Byparr proxy indexers; qBittorrent (VPN-locked via Gluetun) handles downloads.</div>
+                <div className="skill-list"><span className="skill">Jellyfin</span><span className="skill">Seerr</span><span className="skill">Sonarr</span><span className="skill">Radarr</span><span className="skill">Jackett</span><span className="skill">Byparr</span><span className="skill">qBittorrent</span></div>
               </div>
             </div>
             <div className="detail-row">
               <div className="cat-num">05</div>
-              <div className="cat-name">Jellyfin + Media</div>
+              <div className="cat-name">Navidrome + Music</div>
               <div>
-                <div className="desc">Jellyfin handles hardware-transcoded streaming with per-user OAuth authentication and Authelia SSO. Sonarr/Radarr auto-manage TV and film libraries; Bazarr handles subtitles; Prowlarr indexes trackers.</div>
-                <div className="skill-list"><span className="skill">Jellyfin</span><span className="skill">HW transcode</span><span className="skill">OAuth</span><span className="skill">Sonarr</span><span className="skill">Radarr</span><span className="skill">Bazarr</span><span className="skill">Prowlarr</span></div>
+                <div className="desc">Navidrome serves a lossless personal library Spotify-style. Lidarr tracks favorite artists and new releases; slskd taps the Soulseek network for rare or indie finds.</div>
+                <div className="skill-list"><span className="skill">Navidrome</span><span className="skill">Lidarr</span><span className="skill">slskd</span><span className="skill">Subsonic API</span></div>
               </div>
             </div>
             <div className="detail-row">
               <div className="cat-num">06</div>
-              <div className="cat-name">Music Pipeline</div>
+              <div className="cat-name">Immich + Vaultwarden</div>
               <div>
-                <div className="desc">Lidarr monitors for releases &#8594; Prowlarr indexes &#8594; Beets normalises tags &#8594; Navidrome streams via Subsonic API. Scrobbling to Listenbrainz. Mobile playback via Symfonium and Explo apps.</div>
-                <div className="skill-list"><span className="skill">Navidrome</span><span className="skill">Lidarr</span><span className="skill">Prowlarr</span><span className="skill">Beets</span><span className="skill">Listenbrainz</span><span className="skill">Symfonium</span><span className="skill">Explo</span></div>
+                <div className="desc">Immich (with dedicated PostgreSQL + Redis) is a self-hosted Google Photos replacement for phone backups. Vaultwarden syncs passwords across every device. Both live on an isolated network alongside the reverse proxy and IDS.</div>
+                <div className="skill-list"><span className="skill">Immich</span><span className="skill">PostgreSQL</span><span className="skill">Redis</span><span className="skill">Vaultwarden</span></div>
+              </div>
+            </div>
+            <div className="detail-row">
+              <div className="cat-num">07</div>
+              <div className="cat-name">Network Segmentation</div>
+              <div>
+                <div className="desc">Six Docker networks isolate containers by sensitivity &mdash; bridge, tunnel, explo_default, a dedicated pangolin network for the security-critical core, macvlan for AdGuard, and a Tailscale overlay for Jellyfin/Immich remote access.</div>
+                <div className="skill-list"><span className="skill">Docker networking</span><span className="skill">Tailscale</span><span className="skill">VLANs</span><span className="skill">Zero-trust</span></div>
               </div>
             </div>
           </div>
 
           <div className="note" style={{marginTop:'40px'}}>
             <div className="note-t">Zero open ports via Tailscale + Cloudflare Tunnels</div>
-            <div className="note-d">All services reachable remotely through a combination of Tailscale mesh VPN (for trusted devices) and Cloudflare Tunnels (for public-facing services). No port-forwarding. MagicDNS handles internal name resolution. Pangolin&rsquo;s Newt agent tunnels external traffic into the private LAN.</div>
+            <div className="note-d">All services reachable remotely through a combination of Tailscale mesh VPN (for trusted devices) and Cloudflare Tunnels (for public-facing services). No port-forwarding. Pangolin&rsquo;s Newt agent tunnels external traffic into the private LAN.</div>
+          </div>
+
+          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">&mdash;</div><div className="slbl-t">Traffic Flow</div><div className="rule"></div></div>
+          <div className="flow-diagram-wrap">
+            <svg viewBox="0 0 920 540" width="100%" role="img" aria-label="Diagram showing external requests routed through Cloudflare and Pangolin to Traefik, internal LAN requests routed through AdGuard Home to Traefik, and an isolated IoT device with no route to the core.">
+              <defs>
+                <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M1 1L8 5L1 9" fill="none" stroke="var(--navy2)" strokeWidth="1.3"/>
+                </marker>
+                <marker id="arrow-grey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M1 1L8 5L1 9" fill="none" stroke="var(--line3)" strokeWidth="1.3"/>
+                </marker>
+                <marker id="arrow-navy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M1 1L8 5L1 9" fill="none" stroke="var(--navy)" strokeWidth="1.3"/>
+                </marker>
+              </defs>
+
+              <path id="ext-motion" d="M190,85 L490,85 L490,195 L530,195 L680,200 L880,200" fill="none" stroke="none"/>
+              <path id="int-motion" d="M190,365 L505,365 L505,205 L530,205 L680,200 L880,200" fill="none" stroke="none"/>
+
+              <circle r="3" fill="var(--navy2)" className="flow-dot">
+                <animateMotion dur="3s" repeatCount="indefinite">
+                  <mpath href="#ext-motion"/>
+                </animateMotion>
+              </circle>
+              <circle r="3" fill="var(--stone2)" stroke="var(--navy2)" strokeWidth="1.2" className="flow-dot flow-dot-return">
+                <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#ext-motion"/>
+                </animateMotion>
+              </circle>
+
+              <circle r="3" fill="var(--line3)" className="flow-dot">
+                <animateMotion dur="3.4s" begin="0.4s" repeatCount="indefinite">
+                  <mpath href="#int-motion"/>
+                </animateMotion>
+              </circle>
+              <circle r="3" fill="var(--stone2)" stroke="var(--line3)" strokeWidth="1.2" className="flow-dot flow-dot-return">
+                <animateMotion dur="3.4s" begin="2.1s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
+                  <mpath href="#int-motion"/>
+                </animateMotion>
+              </circle>
+
+              <line x1="230" y1="10" x2="230" y2="490" stroke="var(--line)" strokeWidth="1" strokeDasharray="4 4"/>
+              <text x="40" y="24" className="flow-zone">Outside</text>
+              <text x="260" y="24" className="flow-zone">Internal network</text>
+
+              <rect x="40" y="60" width="150" height="50" fill="var(--stone2)" stroke="var(--line)"/>
+              <text x="115" y="80" textAnchor="middle" className="flow-t">Phone</text>
+              <text x="115" y="97" textAnchor="middle" className="flow-s">outside the house</text>
+              <line x1="190" y1="85" x2="260" y2="85" stroke="var(--navy2)" strokeWidth="1.2" markerEnd="url(#arrow-red)"/>
+
+              <rect x="260" y="60" width="190" height="50" fill="var(--stone2)" stroke="var(--line)"/>
+              <text x="355" y="80" textAnchor="middle" className="flow-t">Cloudflare / Pangolin</text>
+              <text x="355" y="97" textAnchor="middle" className="flow-s">tunnel &middot; no open ports</text>
+              <path d="M450 85 H490 V195 H530" fill="none" stroke="var(--navy2)" strokeWidth="1.2" markerEnd="url(#arrow-red)"/>
+              <text x="490" y="145" textAnchor="middle" className="flow-s">passes through tunnel</text>
+
+              <rect x="40" y="340" width="150" height="50" fill="var(--stone2)" stroke="var(--line)"/>
+              <text x="115" y="360" textAnchor="middle" className="flow-t">LAN device</text>
+              <text x="115" y="377" textAnchor="middle" className="flow-s">phone &middot; laptop &middot; TV</text>
+              <line x1="190" y1="365" x2="260" y2="365" stroke="var(--line3)" strokeWidth="1.2" markerEnd="url(#arrow-grey)"/>
+
+              <rect x="260" y="340" width="190" height="50" fill="var(--stone2)" stroke="var(--line)"/>
+              <text x="355" y="360" textAnchor="middle" className="flow-t">AdGuard Home</text>
+              <text x="355" y="377" textAnchor="middle" className="flow-s">DNS filtering</text>
+              <path d="M450 365 H505 V205 H530" fill="none" stroke="var(--line3)" strokeWidth="1.2" markerEnd="url(#arrow-grey)"/>
+
+              <rect x="530" y="175" width="150" height="50" fill="var(--stone2)" stroke="var(--navy)"/>
+              <text x="605" y="195" textAnchor="middle" className="flow-t">Traefik</text>
+              <text x="605" y="212" textAnchor="middle" className="flow-s">routes by hostname</text>
+              <line x1="680" y1="200" x2="730" y2="200" stroke="var(--navy)" strokeWidth="1.2" markerEnd="url(#arrow-navy)"/>
+
+              <rect x="730" y="175" width="150" height="50" fill="var(--stone2)" stroke="var(--line)"/>
+              <text x="805" y="195" textAnchor="middle" className="flow-t">Target app</text>
+              <text x="805" y="212" textAnchor="middle" className="flow-s">Jellyfin &middot; Immich &middot; &hellip;</text>
+
+              <rect x="260" y="420" width="190" height="50" fill="var(--stone2)" stroke="var(--line)"/>
+              <text x="355" y="440" textAnchor="middle" className="flow-t">IoT device</text>
+              <text x="355" y="457" textAnchor="middle" className="flow-s">smart bulb, etc.</text>
+              <path d="M355 420 V398" fill="none" stroke="var(--navy2)" strokeWidth="1.2" strokeDasharray="3 3"/>
+              <line x1="349" y1="392" x2="361" y2="404" stroke="var(--navy2)" strokeWidth="1.4"/>
+              <line x1="349" y1="404" x2="361" y2="392" stroke="var(--navy2)" strokeWidth="1.4"/>
+              <text x="370" y="401" className="flow-s">no route to core</text>
+
+              <line x1="40" y1="510" x2="64" y2="510" stroke="var(--navy2)" strokeWidth="1.5"/>
+              <text x="72" y="514" className="flow-s">Public path (tunnel)</text>
+              <line x1="260" y1="510" x2="284" y2="510" stroke="var(--line3)" strokeWidth="1.5"/>
+              <text x="292" y="514" className="flow-s">LAN-only path</text>
+              <line x1="470" y1="505" x2="480" y2="515" stroke="var(--navy2)" strokeWidth="1.4"/>
+              <line x1="470" y1="515" x2="480" y2="505" stroke="var(--navy2)" strokeWidth="1.4"/>
+              <text x="490" y="514" className="flow-s">Blocked (VLAN isolated)</text>
+
+              <circle cx="705" cy="510" r="3" fill="var(--navy2)"/>
+              <text x="716" y="514" className="flow-s">Request</text>
+              <circle cx="775" cy="510" r="3" fill="var(--stone2)" stroke="var(--navy2)" strokeWidth="1.2"/>
+              <text x="786" y="514" className="flow-s">Response</text>
+            </svg>
+          </div>
+
+          <div className="note" style={{marginTop:'16px'}}>
+            <div className="note-t">Request out, response back the same way</div>
+            <div className="note-d">A phone outside the house requests a photo backup &rarr; it passes through the Cloudflare/Pangolin tunnel (no open inbound ports) &rarr; Traefik routes it by hostname to the target app (e.g. Immich), which loads the photos and responds back along the same path.</div>
+          </div>
+
+          <div className="note" style={{marginTop:'16px'}}>
+            <div className="note-t">Spun up on demand, not left running</div>
+            <div className="note-d">A Satisfactory game server, FileFlows for media re-encoding, and an sftp-server for bulk transfers stay fully configured but stopped until a specific project or game night needs them &mdash; keeping idle power draw down.</div>
           </div>
         </div>
       </div>
@@ -356,7 +477,7 @@ export default function Home() {
       <div className="sec" id="desktop">
         <div className="sec-body">
           <div className="section-label"><div className="num"></div><h2>Personal Workstation</h2><div className="rule"></div></div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'40px',maxWidth:'680px',lineHeight:'1.65',fontWeight:'400'}}>Daily driver and dev machine. Built around AMD&rsquo;s 3D V-Cache architecture for a blend of high single-threaded performance and serious GPU compute  doubles as a gaming rig, 3D modelling workstation, and 3D printing controller.</p>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'40px',maxWidth:'900px',lineHeight:'1.65',fontWeight:'400'}}>Daily driver and dev machine. Built around AMD&rsquo;s 3D V-Cache architecture for a blend of high single-threaded performance and serious GPU compute  doubles as a gaming rig, 3D modelling workstation, and 3D printing controller.</p>
 
           <table className="hw-table">
             <thead><tr><th>Component</th><th>Spec</th></tr></thead>
@@ -514,7 +635,7 @@ export default function Home() {
       <div className="sec" id="oss">
         <div className="sec-body">
           <div className="section-label"><div className="num"></div><h2>Open Source Contributions</h2><div className="rule"></div></div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'640px',lineHeight:'1.6',fontWeight:'400'}}>External pull requests and issues resolved in other maintainers&rsquo; codebases  work landed in repos I don&rsquo;t own.</p>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'820px',lineHeight:'1.6',fontWeight:'400'}}>External pull requests and issues resolved in other maintainers&rsquo; codebases  work landed in repos I don&rsquo;t own.</p>
           <div className="row-index">
             <div className="repo-row">
               <div>
@@ -552,7 +673,7 @@ export default function Home() {
       <div className="sec" id="github">
         <div className="sec-body">
           <div className="section-label"><div className="num"></div><h2>My Projects on GitHub</h2><div className="rule"></div></div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'640px',lineHeight:'1.6',fontWeight:'400'}}>The complete repository list  including the projects featured above, plus the smaller tools and documentation that support them.</p>
+          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'820px',lineHeight:'1.6',fontWeight:'400'}}>The complete repository list  including the projects featured above, plus the smaller tools and documentation that support them.</p>
           <div className="row-index">
             <div className="repo-row">
               <div>
