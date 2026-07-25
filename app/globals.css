@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--navy2);outline-offset:2px}
 :root{
   --stone:#F7F6F1;
   --stone2:#FFFFFF;
@@ -409,9 +410,10 @@ nav.nav-open .nav-burger span:nth-child(3){transform:translateY(-5.5px) rotate(-
 .econ-tags{margin-top:22px}
 
 .langs{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--navy);margin-top:28px}
-.langc{padding:16px 26px;border-bottom:1px solid var(--line)}
-.langc:first-child{padding-left:0}
-.langc:not(:last-child){border-right:1px solid var(--line)}
+.langc{padding:16px 26px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.langc:nth-child(5n+1){padding-left:0}
+.langc:nth-child(5n){border-right:none}
+.langs .langc:last-child{border-right:none;border-bottom:none}
 .lang-n{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:3px;font-family:var(--f-head)}
 .lang-l{font-size:10px;color:var(--mid);text-transform:uppercase;letter-spacing:.05em;font-family:var(--f-mono)}
 
@@ -582,6 +584,9 @@ footer a:hover{color:var(--navy2)}
   .cert-row{grid-template-columns:36px 1fr}
   .cert-status{display:none}
   .langs{grid-template-columns:repeat(3,1fr)}
+  .langc:nth-child(5n+1){padding-left:26px}
+  .langc:nth-child(5n){border-right:1px solid var(--line)}
+  .langc:nth-child(3n+1){padding-left:0}
   .langc:nth-child(3n){border-right:none}
 }
 @media(max-width:700px){
@@ -590,6 +595,8 @@ footer a:hover{color:var(--navy2)}
   .sec-body,.about-split,.contact{padding:40px var(--pad)}
   .contact-body{padding:40px 24px}
   .langs{grid-template-columns:repeat(2,1fr)}
+  .langc:nth-child(3n+1){padding-left:26px}
   .langc:nth-child(3n){border-right:1px solid var(--line)}
+  .langc:nth-child(2n+1){padding-left:0}
   .langc:nth-child(2n){border-right:none}
 }

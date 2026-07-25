@@ -25,7 +25,7 @@ const BOOT_LINES = [
 
 const GREETING_LINES = [
   'Welcome back, root.',
-  "Hi, I'm Pietro — systems engineer, developer, homelabber.",
+  "Hi, I'm Pietro, systems engineer, developer, homelabber.",
 ]
 
 const DURIN_ART = ` ______________     _             _,-----------._        ___
@@ -139,10 +139,10 @@ const EGG_ART: Record<Exclude<EggView, 'none'>, string> = {
 }
 
 const EGG_CAPTIONS: Record<Exclude<EggView, 'none'>, string> = {
-  moria: 'the doors of durin, lord of moria — speak, friend, and enter',
-  balrog: 'a demon of the ancient world — YOU SHALL NOT PASS',
-  iddqd: 'IDDQD — GOD MODE ON — degreelessness achieved',
-  idkfa: 'IDKFA — armed to the teeth — all keys, all ammo',
+  moria: 'the doors of durin, lord of moria: speak, friend, and enter',
+  balrog: 'a demon of the ancient world: YOU SHALL NOT PASS',
+  iddqd: 'IDDQD - GOD MODE ON - degreelessness achieved',
+  idkfa: 'IDKFA - armed to the teeth - all keys, all ammo',
 }
 
 const EGG_DURATION = 4200
@@ -333,7 +333,7 @@ export default function BootSequence({ onComplete, onReboot }: { onComplete: () 
                     disabled={eggBusy}
                   />
                 </div>
-                <div className="boot-hint">type <strong>start</strong> to enter &mdash; speak, friend, and enter&hellip;</div>
+                <div className="boot-hint">type <strong>start</strong> to enter, speak, friend, and enter&hellip;</div>
               </div>
             ) : (
               <div className="boot-egg">

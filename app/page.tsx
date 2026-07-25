@@ -177,8 +177,8 @@ export default function Home() {
           </div>
 
           <div className="legend">
-            <span className="l-applied"><span className="mark">&#9642;</span>Applied &mdash; used in production or a shipped project</span>
-            <span className="l-exposure"><span className="mark">&#9643;</span>Exposure &mdash; coursework or limited use</span>
+            <span className="l-applied"><span className="mark">&#9642;</span>Applied: used in production or a shipped project</span>
+            <span className="l-exposure"><span className="mark">&#9643;</span>Exposure: coursework or limited use</span>
           </div>
 
           <div className="category-index">
@@ -278,20 +278,20 @@ export default function Home() {
         <div className="sec-body">
           <div className="section-label"><div className="num"></div><h2>Homelab Infrastructure</h2><div className="rule"></div></div>
           <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'24px',maxWidth:'900px',lineHeight:'1.65',fontWeight:'400'}}>
-            Started with a single Proxmox node &mdash; my first real server, and the one that taught me virtualisation and LXC.
+            Started with a single Proxmox node: my first real server, and the one that taught me virtualisation and LXC.
             When file storage and parity-protected array management outgrew that setup, I built Nargothrond:
             a dedicated UNRAID box, named after the hidden fortress from <em>The Silmarillion</em>.
             Every service containerised, every entry-point proxied, every failure logged.
           </p>
 
-          <div className="section-label" style={{marginBottom:'0'}}><div className="num">&mdash;</div><div className="slbl-t">Hardware</div><div className="rule"></div></div>
+          <div className="section-label" style={{marginBottom:'0'}}><div className="num">-</div><div className="slbl-t">Hardware</div><div className="rule"></div></div>
           <table className="hw-table">
             <thead><tr><th>Component</th><th>UNRAID Server (Nargothrond)</th><th>Proxmox Node</th></tr></thead>
             <tbody>
               <tr><td>CPU</td><td>Intel Core Ultra 5 225</td><td>Intel Core i7-8700</td></tr>
-              <tr><td>Motherboard</td><td>ASUS Prime Z890M-Plus</td><td>&mdash;</td></tr>
+              <tr><td>Motherboard</td><td>ASUS Prime Z890M-Plus</td><td>-</td></tr>
               <tr><td>RAM</td><td>48GB DDR5 5600MHz</td><td>32GB DDR4</td></tr>
-              <tr><td>Case</td><td>Jonsbo N6</td><td>&mdash;</td></tr>
+              <tr><td>Case</td><td>Jonsbo N6</td><td>-</td></tr>
               <tr><td>Storage</td><td>14TB + 2&times;12TB parity array + 2TB NVMe cache + 1TB NVMe boot</td><td>SSD (OS) + SATA pool</td></tr>
               <tr><td>Network</td><td>10GbE (Realtek RTL8127) + 1Gbps LAN &middot; VLANs</td><td>1Gbps LAN &middot; VLANs</td></tr>
               <tr><td>OS</td><td>UNRAID 7.3.1</td><td>Proxmox VE 8</td></tr>
@@ -299,7 +299,7 @@ export default function Home() {
             </tbody>
           </table>
 
-          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">&mdash;</div><div className="slbl-t">Services &amp; Stack</div><div className="rule"></div></div>
+          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">-</div><div className="slbl-t">Services &amp; Stack</div><div className="rule"></div></div>
           <div className="category-index">
             <div className="detail-row">
               <div className="cat-num">01</div>
@@ -353,7 +353,7 @@ export default function Home() {
               <div className="cat-num">07</div>
               <div className="cat-name">Network Segmentation</div>
               <div>
-                <div className="desc">Six Docker networks isolate containers by sensitivity &mdash; bridge, tunnel, explo_default, a dedicated pangolin network for the security-critical core, macvlan for AdGuard, and a Tailscale overlay for Jellyfin/Immich remote access.</div>
+                <div className="desc">Six Docker networks isolate containers by sensitivity: bridge, tunnel, explo_default, a dedicated pangolin network for the security-critical core, macvlan for AdGuard, and a Tailscale overlay for Jellyfin/Immich remote access.</div>
                 <div className="skill-list"><span className="skill">Docker networking</span><span className="skill">Tailscale</span><span className="skill">VLANs</span><span className="skill">Zero-trust</span></div>
               </div>
             </div>
@@ -364,7 +364,7 @@ export default function Home() {
             <div className="note-d">All services reachable remotely through a combination of Tailscale mesh VPN (for trusted devices) and Cloudflare Tunnels (for public-facing services). No port-forwarding. Pangolin&rsquo;s Newt agent tunnels external traffic into the private LAN.</div>
           </div>
 
-          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">&mdash;</div><div className="slbl-t">Traffic Flow</div><div className="rule"></div></div>
+          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">-</div><div className="slbl-t">Traffic Flow</div><div className="rule"></div></div>
           <div className="flow-diagram-wrap">
             <svg viewBox="0 0 920 540" width="100%" role="img" aria-label="Diagram showing external requests routed through Cloudflare and Pangolin to Traefik, internal LAN requests routed through AdGuard Home to Traefik, and an isolated IoT device with no route to the core.">
               <defs>
@@ -468,7 +468,7 @@ export default function Home() {
 
           <div className="note" style={{marginTop:'16px'}}>
             <div className="note-t">Spun up on demand, not left running</div>
-            <div className="note-d">A Satisfactory game server, FileFlows for media re-encoding, and an sftp-server for bulk transfers stay fully configured but stopped until a specific project or game night needs them &mdash; keeping idle power draw down.</div>
+            <div className="note-d">A Satisfactory game server, FileFlows for media re-encoding, and an sftp-server for bulk transfers stay fully configured but stopped until a specific project or game night needs them, keeping idle power draw down.</div>
           </div>
         </div>
       </div>
@@ -748,7 +748,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="section-label" style={{marginTop:'56px'}}><div className="num">&mdash;</div><div className="slbl-t">Education</div><div className="rule"></div></div>
+          <div className="section-label" style={{marginTop:'56px'}}><div className="num">-</div><div className="slbl-t">Education</div><div className="rule"></div></div>
           <div className="acc">
             <div className={`acc-item${openAcc['edu-0'] ? ' open' : ''}`}>
               <button className="acc-btn" onClick={() => toggle('edu-0')}>
@@ -815,7 +815,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="section-label" style={{marginTop:'48px'}}><div className="num">&mdash;</div><div className="slbl-t">Languages</div><div className="rule"></div></div>
+          <div className="section-label" style={{marginTop:'48px'}}><div className="num">-</div><div className="slbl-t">Languages</div><div className="rule"></div></div>
           <div className="langs">
             <div className="langc"><div className="lang-n">Italian</div><div className="lang-l">Native &middot; C2</div></div>
             <div className="langc"><div className="lang-n">English</div><div className="lang-l">Fluent &middot; C2</div></div>
