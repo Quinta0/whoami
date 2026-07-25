@@ -11,7 +11,7 @@ const ChevronDown = () => (
   </svg>
 )
 
-// Trusted, hand-authored copy only (never user input) — dangerouslySetInnerHTML is safe here.
+// Trusted, hand-authored copy only (never user input); dangerouslySetInnerHTML is safe here.
 function Html({ html, tag = 'span', className, style }: { html: string; tag?: 'span' | 'p' | 'div' | 'li' | 'h2'; className?: string; style?: React.CSSProperties }) {
   const Tag = tag as any
   return <Tag className={className} style={style} dangerouslySetInnerHTML={{ __html: html }} />
@@ -557,7 +557,7 @@ function Page() {
             {t.experience.education.map((edu, i) => (
               <div className={`acc-item${openAcc[`edu-${i}`] ? ' open' : ''}`} key={i}>
                 <button className="acc-btn" onClick={() => toggle(`edu-${i}`)}>
-                  <div className="acc-l"><div className="acc-t">{edu.title}{(edu as any).titleNote && <span style={{fontSize:'11px',color:'var(--muted)',fontWeight:400,fontFamily:'var(--f-mono)'}}> — {(edu as any).titleNote}</span>}</div><div className="acc-s">{edu.sub}</div></div>
+                  <div className="acc-l"><div className="acc-t">{edu.title}{(edu as any).titleNote && <span style={{fontSize:'11px',color:'var(--muted)',fontWeight:400,fontFamily:'var(--f-mono)'}}> · {(edu as any).titleNote}</span>}</div><div className="acc-s">{edu.sub}</div></div>
                   <div className="acc-r2"><span className="acc-per">{edu.period}</span><ChevronDown/></div>
                 </button>
                 <div className="acc-body-wrap">
