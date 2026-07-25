@@ -102,6 +102,31 @@ nav.nav-scrolled{
 }
 .nav-socials a:hover{color:var(--navy2);border-color:var(--navy);background:var(--stone3)}
 .nav-socials svg{width:18px;height:18px;fill:currentColor}
+
+.lang-switch{position:relative}
+.lang-switch-btn{
+  display:flex;align-items:center;justify-content:center;
+  min-width:38px;height:38px;padding:0 10px;
+  border:1px solid var(--line);background:transparent;
+  color:var(--navy);cursor:pointer;
+  font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.03em;
+  transition:color .15s,background .15s,border-color .15s;
+}
+.lang-switch-btn:hover{color:var(--navy2);border-color:var(--navy);background:var(--stone3)}
+.lang-switch-menu{
+  position:absolute;top:calc(100% + 6px);right:0;z-index:400;
+  display:flex;flex-direction:column;
+  min-width:64px;
+  background:var(--stone2);border:1px solid var(--line);
+  box-shadow:0 8px 24px rgba(17,17,16,.1);
+}
+.lang-switch-opt{
+  display:block;width:100%;padding:8px 12px;text-align:left;
+  border:none;background:transparent;cursor:pointer;
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.03em;color:var(--mid);
+}
+.lang-switch-opt:hover{color:var(--navy2);background:var(--stone3)}
+.lang-switch-opt.active{color:var(--navy);font-weight:600}
 .nav-burger{
   display:none;flex-direction:column;justify-content:center;gap:4px;
   width:38px;height:38px;background:transparent;border:1px solid var(--line3);
