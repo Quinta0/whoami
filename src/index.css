@@ -434,7 +434,7 @@ nav.nav-open .nav-burger span:nth-child(3){transform:translateY(-5.5px) rotate(-
 .langc{padding:16px 26px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
 .langc:nth-child(5n+1){padding-left:0}
 .langc:nth-child(5n){border-right:none}
-.langs .langc:last-child{border-right:none;border-bottom:none}
+.langs .langc:last-child{border-right:none}
 .lang-n{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:3px;font-family:var(--f-head)}
 .lang-l{font-size:10px;color:var(--mid);text-transform:uppercase;letter-spacing:.05em;font-family:var(--f-mono)}
 
