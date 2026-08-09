@@ -142,6 +142,7 @@ const en = {
       { name: 'ValveSoftware/steam-for-linux', desc: 'Diagnosed and fixed a Steam Linux Runtime install bug via config.vdf and appmanifest inspection after all standard recovery paths (integrity verification, manifest wipes, steamcmd re-install) failed; workaround adopted by other affected users.', tag: 'debugging', isKind: true, action: 'Issue #13248', href: 'https://github.com/ValveSoftware/steam-for-linux/issues/13248', isIssue: true },
       { name: 'Recol/DLSS-Updater', desc: 'Diagnosed a UI state bug where a popup overlay fired a spurious mouse-exit event, desyncing the card footer from an open dropdown menu; decoupled footer state from raw hover signal to fix it. Verified across 3 cold-launch cycles with tab-switch latency logging at the maintainer’s request before merge.', tag: 'Python', action: 'PR #252', href: 'https://github.com/Recol/DLSS-Updater/pull/252' },
       { name: 'Recol/DLSS-Updater', desc: 'Fixed game card image/text alignment and added a light-theme background fade for readability; implemented click-to-open DLL details on the card itself, resolving an accessibility issue by reusing the existing dialog handler instead of adding a new entry point. Verified across light/dark themes with tab-switch latency held under 200ms.', tag: 'Python', action: 'PR #256', href: 'https://github.com/Recol/DLSS-Updater/pull/256' },
+      { name: 'Sultech/simple-taskbar', desc: 'Added complete Italian and German translations (gettext .po) for this configurable GNOME Shell taskbar extension, registering both locales in po/LINGUAS so the build picks them up — roughly 1,200 translated strings per language.', tag: 'JavaScript', action: 'PR #41', href: 'https://github.com/Sultech/simple-taskbar/pull/41' },
     ],
   },
   github: {
@@ -154,6 +155,7 @@ const en = {
       { name: 'Quinta0/Nargothrond', desc: 'Documentation for full homelab provisioning.', tag: 'docs', isKind: true, href: 'https://github.com/Quinta0/Nargothrond' },
       { name: 'Quinta0/ObsidianSetup', desc: 'Cross-platform Obsidian + plugin installer, driven by a shared plugins.json manifest. Author & maintainer.', tag: 'PowerShell', star: '26', href: 'https://github.com/Quinta0/ObsidianSetup' },
       { name: 'Quinta0/BostonHousing', desc: 'Probability & Statistics coursework at USI: regression models predicting Boston-area housing prices.', tag: 'Jupyter', href: 'https://github.com/Quinta0/BostonHousing' },
+      { name: 'Quinta0/benthicbloom', desc: 'GNOME Shell 50 extension for wallpaper rotation, with looping video/GIF live wallpapers decoded via GStreamer and rendered on Shell’s own Clutter stage, plus OLED burn-in protection (pixel shifting, idle dimming, forced rotation). Author & maintainer.', tag: 'JavaScript', href: 'https://github.com/Quinta0/benthicbloom' },
     ],
     repoAction: 'Repo',
   },
@@ -390,6 +392,7 @@ const it: Translations = {
       { name: 'ValveSoftware/steam-for-linux', desc: 'Diagnosticato e risolto un bug nell’installazione dello Steam Linux Runtime tramite ispezione di config.vdf e appmanifest, dopo che tutti i percorsi di ripristino standard (verifica integrità, wipe dei manifest, reinstallazione via steamcmd) erano falliti; soluzione adottata anche da altri utenti colpiti.', tag: 'debug', isKind: true, action: 'Issue #13248', href: 'https://github.com/ValveSoftware/steam-for-linux/issues/13248', isIssue: true },
       { name: 'Recol/DLSS-Updater', desc: 'Diagnosticato un bug di stato UI in cui un overlay popup generava un evento spurio di mouse-exit, desincronizzando il footer della card da un menu a tendina aperto; risolto scollegando lo stato del footer dal segnale hover grezzo. Verificato su 3 cicli di avvio a freddo con logging della latenza di cambio tab su richiesta del maintainer prima del merge.', tag: 'Python', action: 'PR #252', href: 'https://github.com/Recol/DLSS-Updater/pull/252' },
       { name: 'Recol/DLSS-Updater', desc: 'Corretto l’allineamento di immagine e testo nella card di gioco e aggiunta una sfumatura di sfondo per la leggibilità nel tema chiaro; implementato il click sulla card per aprire i dettagli DLL, risolvendo un problema di accessibilità riutilizzando il gestore di dialogo già esistente invece di aggiungerne uno nuovo. Verificato nei temi chiaro/scuro con latenza di cambio tab sotto i 200ms.', tag: 'Python', action: 'PR #256', href: 'https://github.com/Recol/DLSS-Updater/pull/256' },
+      { name: 'Sultech/simple-taskbar', desc: 'Aggiunte le traduzioni complete in italiano e tedesco (gettext .po) per questa estensione GNOME Shell configurabile per la taskbar, registrando entrambe le lingue in po/LINGUAS per la build — circa 1.200 stringhe tradotte per lingua.', tag: 'JavaScript', action: 'PR #41', href: 'https://github.com/Sultech/simple-taskbar/pull/41' },
     ],
   },
   github: {
@@ -402,6 +405,7 @@ const it: Translations = {
       { name: 'Quinta0/Nargothrond', desc: 'Documentazione per il provisioning completo dell’homelab.', tag: 'documentazione', isKind: true, href: 'https://github.com/Quinta0/Nargothrond' },
       { name: 'Quinta0/ObsidianSetup', desc: 'Installer multipiattaforma per Obsidian + plugin, guidato da un manifest plugins.json condiviso. Autore e maintainer.', tag: 'PowerShell', star: '26', href: 'https://github.com/Quinta0/ObsidianSetup' },
       { name: 'Quinta0/BostonHousing', desc: 'Coursework di Probabilità & Statistica all’USI: modelli di regressione per predire i prezzi delle case nell’area di Boston.', tag: 'Jupyter', href: 'https://github.com/Quinta0/BostonHousing' },
+      { name: 'Quinta0/benthicbloom', desc: 'Estensione GNOME Shell 50 per la rotazione dello sfondo, con live wallpaper video/GIF in loop decodificati via GStreamer e renderizzati direttamente sullo stage Clutter di Shell, più protezione OLED dal burn-in (pixel shifting, dimming da inattività, rotazione forzata). Autore e maintainer.', tag: 'JavaScript', href: 'https://github.com/Quinta0/benthicbloom' },
     ],
     repoAction: 'Repo',
   },
@@ -628,6 +632,7 @@ const de: Translations = {
       { name: 'ValveSoftware/steam-for-linux', desc: 'Einen Installationsfehler des Steam Linux Runtime per Analyse von config.vdf und appmanifest diagnostiziert und behoben, nachdem alle Standard-Recovery-Wege (Integritätsprüfung, Manifest-Löschung, steamcmd-Neuinstallation) fehlgeschlagen waren; Workaround von weiteren betroffenen Nutzern übernommen.', tag: 'Debugging', isKind: true, action: 'Issue #13248', href: 'https://github.com/ValveSoftware/steam-for-linux/issues/13248', isIssue: true },
       { name: 'Recol/DLSS-Updater', desc: 'Einen UI-State-Bug diagnostiziert, bei dem ein Popup-Overlay ein falsches Mouse-Exit-Ereignis auslöste und dadurch die Kartenfußzeile aus einem offenen Dropdown-Menü desynchronisierte; behoben, indem der Footer-State vom rohen Hover-Signal entkoppelt wurde. Über 3 Kaltstart-Zyklen mit Tab-Wechsel-Latenz-Logging auf Wunsch des Maintainers vor dem Merge verifiziert.', tag: 'Python', action: 'PR #252', href: 'https://github.com/Recol/DLSS-Updater/pull/252' },
       { name: 'Recol/DLSS-Updater', desc: 'Ausrichtung von Bild und Text auf der Spielkarte korrigiert und einen Hintergrund-Verlauf für die Lesbarkeit im hellen Theme hinzugefügt; Klick auf die Karte zum Öffnen der DLL-Details implementiert, wodurch ein Zugänglichkeitsproblem gelöst wurde, indem der bestehende Dialog-Handler wiederverwendet statt ein neuer Einstiegspunkt hinzugefügt wurde. Verifiziert in hellem/dunklem Theme mit einer Tab-Wechsel-Latenz unter 200ms.', tag: 'Python', action: 'PR #256', href: 'https://github.com/Recol/DLSS-Updater/pull/256' },
+      { name: 'Sultech/simple-taskbar', desc: 'Vollständige italienische und deutsche Übersetzungen (gettext .po) für diese konfigurierbare GNOME-Shell-Taskbar-Erweiterung hinzugefügt und beide Sprachen in po/LINGUAS für den Build registriert — rund 1.200 übersetzte Strings pro Sprache.', tag: 'JavaScript', action: 'PR #41', href: 'https://github.com/Sultech/simple-taskbar/pull/41' },
     ],
   },
   github: {
@@ -640,6 +645,7 @@ const de: Translations = {
       { name: 'Quinta0/Nargothrond', desc: 'Dokumentation für die vollständige Homelab-Bereitstellung.', tag: 'Dokumentation', isKind: true, href: 'https://github.com/Quinta0/Nargothrond' },
       { name: 'Quinta0/ObsidianSetup', desc: 'Plattformübergreifender Obsidian-+-Plugin-Installer, gesteuert von einem gemeinsamen plugins.json-Manifest. Autor & Maintainer.', tag: 'PowerShell', star: '26', href: 'https://github.com/Quinta0/ObsidianSetup' },
       { name: 'Quinta0/BostonHousing', desc: 'Wahrscheinlichkeits- & Statistik-Coursework an der USI: Regressionsmodelle zur Vorhersage von Hauspreisen im Raum Boston.', tag: 'Jupyter', href: 'https://github.com/Quinta0/BostonHousing' },
+      { name: 'Quinta0/benthicbloom', desc: 'GNOME-Shell-50-Erweiterung zur Hintergrundbild-Rotation, mit in Schleife laufenden Video-/GIF-Live-Hintergründen, die via GStreamer dekodiert und direkt auf Shells eigenem Clutter-Stage gerendert werden, plus OLED-Burn-in-Schutz (Pixel-Shifting, Idle-Dimming, erzwungene Rotation). Autor & Maintainer.', tag: 'JavaScript', href: 'https://github.com/Quinta0/benthicbloom' },
     ],
     repoAction: 'Repo',
   },
@@ -866,6 +872,7 @@ const fr: Translations = {
       { name: 'ValveSoftware/steam-for-linux', desc: 'Diagnostic et correction d’un bug d’installation du Steam Linux Runtime via l’inspection de config.vdf et d’appmanifest, après l’échec de tous les chemins de récupération standards (vérification d’intégrité, suppression des manifestes, réinstallation via steamcmd) ; solution adoptée par d’autres utilisateurs concernés.', tag: 'débogage', isKind: true, action: 'Issue #13248', href: 'https://github.com/ValveSoftware/steam-for-linux/issues/13248', isIssue: true },
       { name: 'Recol/DLSS-Updater', desc: 'Diagnostic d’un bug d’état d’interface où une superposition popup déclenchait un événement de sortie de souris parasite, désynchronisant le pied de carte d’un menu déroulant ouvert ; corrigé en découplant l’état du pied de page du signal de survol brut. Vérifié sur 3 cycles de démarrage à froid avec journalisation de la latence de changement d’onglet à la demande du mainteneur avant la fusion.', tag: 'Python', action: 'PR #252', href: 'https://github.com/Recol/DLSS-Updater/pull/252' },
       { name: 'Recol/DLSS-Updater', desc: 'Corrigé l’alignement de l’image et du texte sur la carte du jeu et ajouté un dégradé d’arrière-plan pour la lisibilité en thème clair ; implémenté le clic sur la carte pour ouvrir les détails DLL, résolvant un problème d’accessibilité en réutilisant le gestionnaire de dialogue existant plutôt qu’en ajoutant un nouveau point d’entrée. Vérifié sur les thèmes clair/sombre avec une latence de changement d’onglet maintenue sous 200 ms.', tag: 'Python', action: 'PR #256', href: 'https://github.com/Recol/DLSS-Updater/pull/256' },
+      { name: 'Sultech/simple-taskbar', desc: 'Ajout des traductions complètes en italien et en allemand (gettext .po) pour cette extension de barre des tâches GNOME Shell configurable, avec enregistrement des deux langues dans po/LINGUAS pour la build — environ 1 200 chaînes traduites par langue.', tag: 'JavaScript', action: 'PR #41', href: 'https://github.com/Sultech/simple-taskbar/pull/41' },
     ],
   },
   github: {
@@ -878,6 +885,7 @@ const fr: Translations = {
       { name: 'Quinta0/Nargothrond', desc: 'Documentation pour le provisioning complet du homelab.', tag: 'documentation', isKind: true, href: 'https://github.com/Quinta0/Nargothrond' },
       { name: 'Quinta0/ObsidianSetup', desc: 'Installateur multiplateforme Obsidian + extensions, piloté par un manifeste plugins.json partagé. Auteur & mainteneur.', tag: 'PowerShell', star: '26', href: 'https://github.com/Quinta0/ObsidianSetup' },
       { name: 'Quinta0/BostonHousing', desc: 'Cours de Probabilités & Statistiques à l’USI : modèles de régression prédisant les prix des logements dans la région de Boston.', tag: 'Jupyter', href: 'https://github.com/Quinta0/BostonHousing' },
+      { name: 'Quinta0/benthicbloom', desc: 'Extension GNOME Shell 50 pour la rotation du fond d’écran, avec fonds d’écran animés (vidéo/GIF en boucle) décodés via GStreamer et rendus directement sur le stage Clutter de Shell, plus une protection OLED contre le burn-in (décalage de pixels, assombrissement en inactivité, rotation forcée). Auteur & mainteneur.', tag: 'JavaScript', href: 'https://github.com/Quinta0/benthicbloom' },
     ],
     repoAction: 'Dépôt',
   },

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useRef, useEffect } from 'react'
 import { useLang } from '../i18n/lang-context'
 import { LANGS } from '../i18n/translations'

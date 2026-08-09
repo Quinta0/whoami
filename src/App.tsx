@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from 'react'
 import BootSequence from './components/boot-sequence'
 import LangSwitcher from './components/lang-switcher'
@@ -17,7 +15,7 @@ function Html({ html, tag = 'span', className, style }: { html: string; tag?: 's
   return <Tag className={className} style={style} dangerouslySetInnerHTML={{ __html: html }} />
 }
 
-export default function Home() {
+export default function App() {
   return (
     <LangProvider>
       <Page />

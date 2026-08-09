@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" style="color-scheme: light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#FAF9F5" />
+  <title>Page not found · Pietro Quintavalle</title>
+  <link rel="icon" href="/whoami/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--stone:#F7F6F1;--navy:#111110;--navy2:#C1121F;--mid:#726F66;--line:#DAD7CC}
+    body{
+      min-height:100dvh;display:flex;flex-direction:column;justify-content:center;
+      max-width:640px;margin:0 auto;padding:0 24px;
+      background:var(--stone);color:var(--navy);
+      font-family:'Inter',sans-serif;
+    }
+    .status-row{
+      display:inline-flex;align-items:center;gap:8px;width:fit-content;
+      font-size:12px;color:var(--navy2);font-weight:500;letter-spacing:.08em;margin-bottom:24px;
+      font-family:'IBM Plex Mono',monospace;text-transform:uppercase;
+      border:1px solid var(--line);padding:6px 12px;
+    }
+    .dot{width:6px;height:6px;background:var(--navy2);border-radius:50%}
+    h1{font-family:'Archivo',sans-serif;font-size:clamp(40px,5.4vw,58px);font-weight:700;line-height:1.02;letter-spacing:-.02em}
+    p{font-size:15px;color:var(--mid);line-height:1.7;max-width:480px;margin:24px 0 32px}
+    a{
+      display:inline-block;padding:14px 20px;font-size:12px;font-weight:600;
+      font-family:'IBM Plex Mono',monospace;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;
+      background:var(--navy);color:var(--stone);border:1px solid var(--navy);
+    }
+    a:hover{background:var(--navy2);border-color:var(--navy2)}
+  </style>
+</head>
+<body>
+  <div class="status-row"><span class="dot"></span>404</div>
+  <h1>Page not<br/>found.</h1>
+  <p>The page you&rsquo;re looking for doesn&rsquo;t exist or has moved.</p>
+  <a href="/whoami/">Back to home</a>
+</body>
+</html>
