@@ -1,608 +1,490 @@
-import { useEffect, useState } from 'react'
-import BootSequence from './components/boot-sequence'
-import LangSwitcher from './components/lang-switcher'
-import { LangProvider, useLang } from './i18n/lang-context'
+import type { ReactNode } from 'react'
 
-const ChevronDown = () => (
-  <svg className="acc-chev" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="6 9 12 15 18 9"/>
-  </svg>
-)
+const EMAIL = '0pietroquintavalle0@gmail.com'
+const GITHUB = 'https://github.com/Quinta0'
+const LINKEDIN = 'https://www.linkedin.com/in/pietro-quintavalle-996b96267/'
+const CV = 'QuintavallePietro_CV.pdf'
 
-// Trusted, hand-authored copy only (never user input); dangerouslySetInnerHTML is safe here.
-function Html({ html, tag = 'span', className, style }: { html: string; tag?: 'span' | 'p' | 'div' | 'li' | 'h2'; className?: string; style?: React.CSSProperties }) {
-  const Tag = tag as any
-  return <Tag className={className} style={style} dangerouslySetInnerHTML={{ __html: html }} />
+type CaseStudy = {
+  label: string
+  title: string
+  desc: string
+  tags: string[]
+  tint: string
+  headerL: string
+  headerR: string
+  footerL: string
+  footerR: string
+  diagram: ReactNode
 }
+
+const cases: CaseStudy[] = [
+  {
+    label: '01 / Turnkey Rack Assembly',
+    title: 'Turnkey Server Cabinet & ZFS Storage Pool',
+    desc: 'Procured and physically assembled a turnkey 19" server cabinet, structured patch panels, and storage chassis for a private client. Dressed and labeled all cable runs, deployed TrueNAS with ZFS RAID 10, automated granular user ACLs, and configured offsite snapshot synchronization for a <30 min recovery target.',
+    tags: ['19" EIA-310 Cabinet', 'ZFS RAID 10', 'Structured Cabling'],
+    tint: '#EFECE6',
+    headerL: 'RACK_CHASSIS // EIA-310',
+    headerR: 'ZFS RAID 10 POOL',
+    footerL: 'STRUCTURED HARNESS',
+    footerR: 'SUB-30M RTO SYNC',
+    diagram: (
+      <svg viewBox="0 0 460 210" className="case-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="20" width="380" height="170" rx="3" stroke="var(--ink)" strokeWidth="1.5" />
+        <line x1="56" y1="20" x2="56" y2="190" stroke="var(--border)" strokeWidth="1" strokeDasharray="2 2" />
+        <line x1="404" y1="20" x2="404" y2="190" stroke="var(--border)" strokeWidth="1" strokeDasharray="2 2" />
+
+        <rect x="66" y="30" width="328" height="24" rx="2" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="85" cy="42" r="3" fill="var(--ink)" />
+        <circle cx="98" cy="42" r="3" fill="var(--ink)" />
+        <circle cx="111" cy="42" r="3" fill="var(--ink)" />
+        <circle cx="124" cy="42" r="3" fill="var(--ink)" />
+        <circle cx="340" cy="42" r="2.5" fill="var(--accent)" className="led-pulse" />
+        <text x="355" y="45" fill="var(--secondary)" fontFamily="Space Mono" fontSize="8">PATCH</text>
+
+        <rect x="66" y="62" width="328" height="68" rx="2" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1.2" />
+        <rect x="76" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="92" cy="112" r="1.5" fill="var(--accent)" />
+        <rect x="114" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="130" cy="112" r="1.5" fill="var(--ink)" />
+        <rect x="152" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="168" cy="112" r="1.5" fill="var(--ink)" />
+        <rect x="190" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="206" cy="112" r="1.5" fill="var(--ink)" />
+
+        <rect x="238" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="254" cy="112" r="1.5" fill="var(--ink)" />
+        <rect x="276" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="292" cy="112" r="1.5" fill="var(--ink)" />
+        <rect x="314" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="330" cy="112" r="1.5" fill="var(--ink)" />
+        <rect x="352" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
+        <circle cx="368" cy="112" r="1.5" fill="var(--accent)" />
+
+        <rect x="66" y="138" width="328" height="18" rx="2" fill="var(--canvas)" stroke="var(--border)" strokeWidth="1" />
+        <path d="M 85 147 Q 160 165 240 147 T 370 147" stroke="var(--accent)" strokeWidth="1.2" fill="none" className="bus-flow" />
+
+        <rect x="66" y="162" width="328" height="22" rx="2" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1" />
+        <line x1="80" y1="173" x2="130" y2="173" stroke="var(--ink)" strokeWidth="1.5" />
+        <circle cx="370" cy="173" r="2" fill="var(--ink)" />
+      </svg>
+    ),
+  },
+  {
+    label: '02 / Startup Infrastructure • DEC Energy',
+    title: 'Dual-Node Bare-Metal Kubernetes Cluster',
+    desc: 'Serving as freelance hardware partner for USI startup DEC Energy. Sourced parts, built, and deployed an on-premise 2-node cluster to host critical LLM inference, accounting, and Gitea source control. Tuned fan curves and conducted thermal bench stress testing to ensure quiet open-office operation under full tensor load.',
+    tags: ['Bare-Metal K8s', 'LLM Inference', 'Thermal Profiling'],
+    tint: '#EAE8E1',
+    headerL: 'DUAL_NODE // TOPOLOGY',
+    headerR: 'BARE-METAL FABRIC',
+    footerL: 'ON-PREMISES INGESTION',
+    footerR: 'USI STARTUP',
+    diagram: (
+      <svg viewBox="0 0 460 210" className="case-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="25" y="25" width="190" height="160" rx="3" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
+        <rect x="75" y="65" width="46" height="46" rx="2" stroke="var(--ink)" strokeWidth="1.5" fill="#FFFFFF" />
+        <text x="98" y="92" fill="var(--ink)" fontFamily="Space Mono" fontSize="9" textAnchor="middle" fontWeight="bold">NODE 01</text>
+        <line x1="130" y1="60" x2="130" y2="116" stroke="var(--ink)" strokeWidth="1" />
+        <line x1="136" y1="60" x2="136" y2="116" stroke="var(--ink)" strokeWidth="1" />
+        <line x1="142" y1="60" x2="142" y2="116" stroke="var(--accent)" strokeWidth="1" />
+        <line x1="148" y1="60" x2="148" y2="116" stroke="var(--ink)" strokeWidth="1" />
+        <rect x="40" y="135" width="120" height="14" rx="1" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
+        <text x="100" y="145" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">PCIe // TENSOR LOAD</text>
+
+        <path d="M 215 105 L 245 105" stroke="var(--accent)" strokeWidth="2" strokeDasharray="3 3" className="bus-flow" />
+
+        <rect x="245" y="25" width="190" height="160" rx="3" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
+        <rect x="295" y="65" width="46" height="46" rx="2" stroke="var(--ink)" strokeWidth="1.5" fill="#FFFFFF" />
+        <text x="318" y="92" fill="var(--ink)" fontFamily="Space Mono" fontSize="9" textAnchor="middle" fontWeight="bold">NODE 02</text>
+        <line x1="350" y1="60" x2="350" y2="116" stroke="var(--ink)" strokeWidth="1" />
+        <line x1="356" y1="60" x2="356" y2="116" stroke="var(--ink)" strokeWidth="1" />
+        <line x1="362" y1="60" x2="362" y2="116" stroke="var(--accent)" strokeWidth="1" />
+        <line x1="368" y1="60" x2="368" y2="116" stroke="var(--ink)" strokeWidth="1" />
+        <rect x="260" y="135" width="120" height="14" rx="1" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
+        <text x="320" y="145" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">STORAGE &amp; GITEA</text>
+      </svg>
+    ),
+  },
+  {
+    label: '03 / Protocol Reverse Engineering',
+    title: 'libratbag USB HID Kernel Driver',
+    desc: "Sniffed and reverse-engineered an undocumented vendor's raw USB HID packets using Wireshark. Decoded byte streams for DPI profiles, polling rates, and on-board memory layouts, writing a complete C device driver merged directly into upstream libratbag.",
+    tags: ['Upstream PR #1873', 'Wireshark Sniffing', 'C Device Driver'],
+    tint: '#F2EFEB',
+    headerL: 'USB HID DECODER',
+    headerR: 'KERNEL C INTERFACE',
+    footerL: 'RAW BYTE INSPECTION',
+    footerR: 'PR #1873 MERGED',
+    diagram: (
+      <svg viewBox="0 0 460 210" className="case-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="40" x2="430" y2="40" stroke="var(--ink)" strokeWidth="1" />
+        <path d="M 60 40 L 90 85" stroke="var(--accent)" strokeWidth="1.2" strokeDasharray="2 2" />
+        <path d="M 180 40 L 150 85" stroke="var(--ink)" strokeWidth="1" strokeDasharray="2 2" />
+
+        <rect x="50" y="85" width="360" height="50" rx="3" stroke="var(--ink)" strokeWidth="1.5" fill="var(--canvas)" />
+        <rect x="50" y="85" width="55" height="50" fill="var(--border)" stroke="var(--ink)" strokeWidth="1" />
+        <text x="77" y="110" fill="var(--ink)" fontFamily="Space Mono" fontSize="9" textAnchor="middle" fontWeight="bold">0x08</text>
+        <text x="77" y="125" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">REPORT</text>
+        <rect x="105" y="85" width="55" height="50" fill="#FFFFFF" stroke="var(--ink)" strokeWidth="1" />
+        <text x="132" y="110" fill="var(--ink)" fontFamily="Space Mono" fontSize="9" textAnchor="middle" fontWeight="bold">0x14</text>
+        <text x="132" y="125" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">CMD</text>
+        <rect x="160" y="85" width="65" height="50" fill="#FFFFFF" stroke="var(--ink)" strokeWidth="1" />
+        <text x="192" y="110" fill="var(--ink)" fontFamily="Space Mono" fontSize="9" textAnchor="middle">0x01 02</text>
+        <text x="192" y="125" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">PROF_2</text>
+        <rect x="225" y="85" width="85" height="50" fill="#FFFFFF" stroke="var(--accent)" strokeWidth="1.5" />
+        <text x="267" y="110" fill="var(--accent)" fontFamily="Space Mono" fontSize="10" textAnchor="middle" fontWeight="bold">0x0640</text>
+        <text x="267" y="125" fill="var(--accent)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">1600 DPI</text>
+        <rect x="310" y="85" width="100" height="50" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1" />
+        <text x="360" y="113" fill="var(--secondary)" fontFamily="Space Mono" fontSize="8" textAnchor="middle">00 00 ...</text>
+
+        <line x1="267" y1="135" x2="267" y2="165" stroke="var(--accent)" strokeWidth="1" />
+        <rect x="207" y="165" width="120" height="22" rx="2" fill="var(--ink)" />
+        <text x="267" y="179" fill="var(--canvas)" fontFamily="Space Mono" fontSize="8" textAnchor="middle">UPSTREAM KERNEL C</text>
+      </svg>
+    ),
+  },
+  {
+    label: '04 / Self-Directed Production',
+    title: 'Homelab as Code: 4-Node Multi-User Fabric',
+    desc: 'Operating 4 bare-metal production hosts (UNRAID, Proxmox VE 8, TrueNAS, Docker, LXC) actively serving 12+ daily active users without managed third-party hosting. Zero exposed WAN ports enforced via Cloudflare Tunnels, WireGuard, SSO/2FA, and Fail2Ban. Provisioned idempotently via Ansible with <30m bare-metal disaster recovery.',
+    tags: ['Zero-Trust WAN', 'Ansible IaC', 'Proxmox / UNRAID'],
+    tint: '#EDEAE3',
+    headerL: 'TOPOLOGY MAP',
+    headerR: 'ZERO EXPOSED WAN',
+    footerL: 'ANSIBLE PROVISIONED',
+    footerR: 'DAILY PRODUCTION',
+    diagram: (
+      <svg viewBox="0 0 460 210" className="case-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="105" r="24" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
+        <text x="50" y="103" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" textAnchor="middle" fontWeight="bold">12+ USERS</text>
+        <text x="50" y="115" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">SSO / 2FA</text>
+
+        <path d="M 74 105 L 146 105" stroke="var(--accent)" strokeWidth="1.5" strokeDasharray="3 3" className="bus-flow" />
+
+        <rect x="146" y="70" width="80" height="70" rx="3" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
+        <text x="186" y="98" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" textAnchor="middle" fontWeight="bold">CLOUDFLARE</text>
+        <text x="186" y="112" fill="var(--accent)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">TUNNELS</text>
+        <text x="186" y="124" fill="var(--secondary)" fontFamily="Space Mono" fontSize="6" textAnchor="middle">WIREGUARD MESH</text>
+
+        <path d="M 226 105 L 280 105" stroke="var(--ink)" strokeWidth="1.2" />
+        <line x1="280" y1="50" x2="280" y2="160" stroke="var(--ink)" strokeWidth="1.2" />
+
+        <line x1="280" y1="50" x2="310" y2="50" stroke="var(--ink)" strokeWidth="1.2" />
+        <rect x="310" y="32" width="125" height="36" rx="2" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
+        <text x="322" y="47" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" fontWeight="bold">UNRAID HOST</text>
+        <text x="322" y="58" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7">Docker Containers</text>
+
+        <line x1="280" y1="105" x2="310" y2="105" stroke="var(--ink)" strokeWidth="1.2" />
+        <rect x="310" y="87" width="125" height="36" rx="2" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
+        <text x="322" y="102" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" fontWeight="bold">PROXMOX VE 8</text>
+        <text x="322" y="113" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7">KVM / LXC Workloads</text>
+
+        <line x1="280" y1="160" x2="310" y2="160" stroke="var(--ink)" strokeWidth="1.2" />
+        <rect x="310" y="142" width="125" height="36" rx="2" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
+        <text x="322" y="157" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" fontWeight="bold">TRUENAS APPLIANCE</text>
+        <text x="322" y="168" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7">ZFS RAID 10</text>
+      </svg>
+    ),
+  },
+]
+
+const ossCards = [
+  {
+    kicker: 'RUNTIME PIPELINES',
+    title: 'Vysp3r/ProtonPlus • steam-for-linux',
+    meta: 'Issue #1232',
+    desc: 'Diagnosed a deployment pipeline fault in the Steam Linux Runtime installation sequence where unwritten manifest files caused execution crashes. Formulated a console depot recovery workaround and contributed code upstream to automate runtime integrity validation.',
+    tags: ['#SteamRuntime', '#Proton', '#LinuxGaming'],
+  },
+  {
+    kicker: 'COMPATIBILITY TOOLING',
+    title: 'Recol/DLSS-Updater',
+    meta: 'PR #283, #252, #256',
+    desc: 'Engineered dynamic multi-vendor library detection (NVIDIA DLSS, AMD FSR, Intel XeSS). Replaced brittle static mapping tables with bounded manifest parsing to maintain driver compatibility across DLL upgrades; resolved UI state desynchronization bugs.',
+    tags: ['#Python', '#Qt', '#DriverInterfacing'],
+  },
+  {
+    kicker: 'AUTOMATION UTILITY',
+    title: 'Quinta0/ObsidianSetup',
+    meta: '26 Stars on GitHub',
+    desc: 'Authored an idempotent cross-platform provisioning utility for automated workspace configuration, plugin synchronization, and environment deployment.',
+    tags: ['#PowerShell', '#EnvironmentProvisioning'],
+  },
+  {
+    kicker: 'TEAM SYSTEMS ARCHITECTURE',
+    title: 'City Simulator • USI Systems Project',
+    meta: 'Agile / Scrum',
+    desc: 'Coordinated a 12-person development team using Agile/Scrum to build a full-stack city simulation. Owned backend architecture in Spring Boot while integrating JavaScript/HTML/CSS frontend components.',
+    tags: ['#Java', '#SpringBoot', '#ScrumTeam'],
+  },
+]
+
+const experience = [
+  {
+    title: 'Infrastructure & Hardware Consultant (Freelance)',
+    period: '2025 – Present',
+    org: 'DEC Energy (USI Startup) • Ticino, Switzerland',
+    desc: 'Trusted technical partner advising on workstation hardware (custom PCs, multi-monitor ergonomics, laptop fleet selection). Designed, procured, and deployed an on-premise 2-node bare-metal Kubernetes cluster for local LLM inference, accounting, and Git source control.',
+  },
+  {
+    title: 'IT Support & Hardware Technician (Freelance)',
+    period: 'Jan 2020 – Present',
+    org: 'Private Clients • Ticino, Switzerland',
+    desc: 'Assembled, configured, and repaired 25+ custom workstations and laptops: component sourcing, OS imaging (Windows/Linux), driver debugging, and remote/onsite diagnostics. Maintained comprehensive hardware logs to eliminate recurring component failures.',
+  },
+  {
+    title: 'Bare-Metal Infrastructure Operator',
+    period: 'Jan 2020 – Present',
+    org: 'Self-Directed Production Homelab',
+    desc: 'Engineered and maintained 4 bare-metal production nodes serving 12+ daily active users without managed external hosting. Deployed turnkey server rack cabinets, configured ZFS RAID 10 arrays, and implemented zero exposed WAN ports via Cloudflare Tunnels and WireGuard meshes.',
+  },
+]
+
+const skillColumns = [
+  {
+    heading: 'HARDWARE & LAB',
+    items: ['Desktop / Server Assembly', 'Component Fault Triage', 'Thermal Bench Stressing', 'Firmware / BIOS Flashing', 'Soldering & Harness Wiring', 'Rack Mounting & Cabling'],
+  },
+  {
+    heading: 'SYSTEMS & STORAGE',
+    items: ['Linux Daily (5+ yrs)', 'Debian, Arch, Ubuntu, NixOS', 'Proxmox VE 8, KVM, LXC', 'TrueNAS • ZFS RAID 10', 'UNRAID • Docker / K8s', 'Windows Server (AD, GPO, DNS)'],
+  },
+  {
+    heading: 'NETWORK & TELEMETRY',
+    items: ['VLANs • Ubiquiti UniFi', 'Zero-Trust Tunnels', 'WireGuard / Tailscale', 'UFW, iptables, Fail2Ban', 'Ansible IaC • Bash', 'Grafana, Prometheus, Kuma'],
+  },
+]
+
+const education = [
+  {
+    date: '2022 – 2024 • USI Lugano',
+    title: 'Foundational Higher Education in Computer Science',
+    desc: 'Completed 2 full years of core CS curricula: Algorithms & data structures, OOP (Java, C++), discrete logic, and software architecture. Concluded formal coursework to transition full-time into hands-on bare-metal systems and datacenter infrastructure.',
+  },
+  {
+    date: '2018 – 2022 • SCC Bellinzona',
+    title: 'Maturità Cantonale & Federal VET Diploma (AFC)',
+    desc: 'Completed Swiss dual-track qualification (Maturità: 4.5/6, AFC: 5/6).',
+  },
+]
+
+const certifications = ['Google IT Support Professional', 'Google Data Analytics Professional', 'Microsoft Foundations of IT Systems']
+
+const languages = [
+  { name: 'Italian', level: 'Native (C2)' },
+  { name: 'English', level: 'Full Professional (C2)' },
+  { name: 'German', level: 'Working Proficiency (B1–B2)' },
+  { name: 'Spanish / Norwegian', level: 'Basic (A1)' },
+]
 
 export default function App() {
   return (
-    <LangProvider>
-      <Page />
-    </LangProvider>
-  )
-}
-
-function Page() {
-  const { t } = useLang()
-
-  const [openAcc, setOpenAcc] = useState<Record<string, boolean>>({
-    'exp-0': true,
-    'edu-0': true,
-  })
-
-  const toggle = (id: string) => {
-    setOpenAcc(prev => ({ ...prev, [id]: !prev[id] }))
-  }
-
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const closeMobile = () => setMobileOpen(false)
-
-  const [booting, setBooting] = useState(false)
-  const [bootKey, setBootKey] = useState(0)
-
-  useEffect(() => {
-    setBooting(true)
-  }, [])
-
-  useEffect(() => {
-    if (booting) return
-
-    const nav = document.querySelector('nav')
-    const onScroll = () => {
-      if (!nav) return
-      nav.classList.toggle('nav-scrolled', window.scrollY > 8)
-    }
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-
-    const revealEls = document.querySelectorAll(
-      '.sec-body, .hero-main, .hero-stats, .about-text, .about-card, .contact-body'
-    )
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view')
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    )
-    revealEls.forEach(el => observer.observe(el))
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      observer.disconnect()
-    }
-  }, [booting])
-
-  const reboot = () => {
-    setBootKey(k => k + 1)
-    setBooting(true)
-  }
-
-  return (
     <>
-      {booting && <BootSequence key={bootKey} onComplete={() => setBooting(false)} onReboot={reboot} />}
-      <div className={`site-shell${booting ? ' site-hidden' : ''}`} aria-hidden={booting}>
-
-      {/* NAV */}
-      <nav className={mobileOpen ? 'nav-open' : ''}>
-        <div className="nav-bar">
-          <a href="#" className="nav-logo-wrap">
-            <span className="nav-mark">P<em>Q</em></span>
+      <header className="site-header">
+        <div className="header-bar">
+          <a href="#" className="logo">
+            <span className="logo-dot"></span>
+            <span>Pietro Quintavalle</span>
           </a>
-          <div className="nav-links">
-            <a href="#skills" onClick={closeMobile}>{t.nav.skills}</a>
-            <a href="#homelab" onClick={closeMobile}>{t.nav.homelab}</a>
-            <a href="#desktop" onClick={closeMobile}>{t.nav.desktop}</a>
-            <a href="#projects" onClick={closeMobile}>{t.nav.projects}</a>
-            <a href="#oss" onClick={closeMobile}>{t.nav.oss}</a>
-            <a href="#github" onClick={closeMobile}>{t.nav.github}</a>
-            <a href="#experience" onClick={closeMobile}>{t.nav.experience}</a>
-            <a href="#contact" onClick={closeMobile}>{t.nav.contact}</a>
+          <nav className="main-nav">
+            <a href="#works">WORKS</a>
+            <a href="#oss">DIAGNOSTICS &amp; OSS</a>
+            <a href="#background">EXPERIENCE</a>
+            <a href={`mailto:${EMAIL}`} className="nav-contact">CONTACT</a>
+          </nav>
+        </div>
+      </header>
+
+      <main className="site-main">
+        {/* HERO */}
+        <section className="hero">
+          <div className="hero-badges">
+            <span className="badge-secondary">Monte Carasso, CH &bull; Permit C</span>
+            <span className="badge-sep">/</span>
+            <span className="badge-accent">Bare-Metal &amp; Linux Systems</span>
           </div>
-          <div className="nav-right">
-            <div className="nav-socials">
-              <a href="https://github.com/Quinta0" target="_blank" rel="noopener" title="GitHub">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.69C6.72 19.9 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0 1 12 7.8c.85.004 1.71.115 2.51.337 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.38.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.85-2.34 4.7-4.57 4.95.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10.01 10.01 0 0 0 22 12c0-5.52-4.48-10-10-10Z"/></svg>
-              </a>
-              <a href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" target="_blank" rel="noopener" title="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
-              </a>
+
+          <h1 className="hero-title">Bridging bare-metal hardware craft with low-level Linux systems.</h1>
+
+          <p className="hero-lead">
+            Systems technician with 6+ years assembling, repairing, and bench-testing desktop, laptop, and server hardware, backed by 5+ years administering Linux environments. Taking physical infrastructure from component-level triage to production reliability.
+          </p>
+
+          <div className="hero-ctas">
+            <a href={CV} download className="btn btn-dark">
+              <span>DOWNLOAD DOSSIER (PDF)</span>
+              <span>&darr;</span>
+            </a>
+            <a href={`mailto:${EMAIL}`} className="btn btn-outline">{EMAIL}</a>
+          </div>
+
+          <div className="hero-metrics">
+            <div>
+              <span className="metric-val">25+</span>
+              <span className="metric-lbl">Workstations Assembled</span>
             </div>
-            <LangSwitcher />
-            <button className="nav-burger" aria-label="Toggle menu" aria-expanded={mobileOpen} onClick={() => setMobileOpen(o => !o)}>
-              <span></span><span></span><span></span>
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* ANNOUNCE STRIP */}
-      <div className="strip">
-        <span className="strip-pill">{t.strip.pill}</span>
-        <a href="#contact">{t.strip.cta} <span className="strip-arr">&#8594;</span></a>
-      </div>
-
-      {/* HERO */}
-      <div className="hero-row">
-        <div className="hero-main">
-          <div className="status-row"><span className="green-dot"></span>{t.hero.status}</div>
-          <div className="hero-name">Pietro<br/>Quintavalle</div>
-          <div className="hero-role">{t.hero.role}</div>
-          <p className="hero-thesis">{t.hero.thesis}</p>
-          <p className="hero-lead">{t.hero.lead}</p>
-
-          <div className="btns">
-            <a href="#contact" className="btn btn-d">{t.hero.btnContact}</a>
-            <a href="#homelab" className="btn btn-o">{t.hero.btnHomelab}</a>
-            <a href="#projects" className="btn btn-o">{t.hero.btnProjects}</a>
-          </div>
-        </div>
-        <div className="hero-stats">
-          {t.hero.stats.map((s, i) => (
-            <div className="stat" key={i}><span className="stat-val">{s.val}</span><span className="stat-lbl">{s.lbl}</span></div>
-          ))}
-        </div>
-      </div>
-
-      {/* ABOUT */}
-      <div className="about-split">
-        <div className="about-text">
-          <div className="section-label"><div className="num"></div><h2>{t.about.heading}</h2><div className="rule"></div></div>
-          <Html tag="p" html={t.about.p1} />
-          <Html tag="p" html={t.about.p2} />
-          <Html tag="p" html={t.about.p3} />
-        </div>
-        <div className="about-card">
-          {t.about.card.map((c, i) => (
-            <div className="about-card-row" key={i}>
-              <div className="about-card-t">{c.t}</div>
-              <div className="about-card-d">{c.d}</div>
+            <div>
+              <span className="metric-val">4 Nodes</span>
+              <span className="metric-lbl">12+ Active Tenants</span>
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* SKILLS */}
-      <div className="sec" id="skills">
-        <div className="sec-body">
-          <div className="section-label"><div className="num"></div><h2>{t.skills.heading}</h2><div className="rule"></div></div>
-
-          <div className="core-band">
-            <div className="label">{t.skills.coreLabel}<span><Html html={t.skills.coreDesc} /></span></div>
-            <div className="stack">
-              <span className="item">Proxmox</span><span className="item">Docker / LXC</span><span className="item">Ansible</span>
-              <span className="item">Linux</span><span className="item">ZFS</span><span className="item">Cloudflare / Traefik</span>
-              <span className="item">Tailscale</span><span className="item">Fail2Ban / CrowdSec</span><span className="item">Grafana / Prometheus</span>
+            <div>
+              <span className="metric-val">&lt;30m</span>
+              <span className="metric-lbl">Ansible Disaster RTO</span>
             </div>
           </div>
+        </section>
 
-          <div className="legend">
-            <span className="l-applied"><span className="mark">&#9642;</span>{t.skills.legendApplied}</span>
-            <span className="l-exposure"><span className="mark">&#9643;</span>{t.skills.legendExposure}</span>
+        {/* WORKS */}
+        <section id="works" className="works">
+          <div className="section-head">
+            <span className="section-kicker">Physical Deployments &amp; Infrastructure</span>
+            <span className="section-kicker">[ 01 &mdash; 04 ]</span>
           </div>
 
-          <div className="category-index">
-            <div className="category-row">
-              <div className="cat-num">01</div>
-              <div className="cat-name">{t.skills.categories[0].name}<span>{t.skills.categories[0].sub}</span></div>
-              <div className="skill-list">
-                <span className="skill applied">Proxmox VE</span><span className="skill applied">UNRAID</span><span className="skill applied">TrueNAS</span>
-                <span className="skill applied">Docker</span><span className="skill applied">LXC</span><span className="skill applied">KVM</span>
-                <span className="skill applied">Linux</span><span className="skill exposure">Win Server</span><span className="skill exposure">AD</span>
-              </div>
-            </div>
-            <div className="category-row">
-              <div className="cat-num">02</div>
-              <div className="cat-name">{t.skills.categories[1].name}<span>{t.skills.categories[1].sub}</span></div>
-              <div className="skill-list">
-                <span className="skill applied">VLAN</span><span className="skill applied">Cloudflare</span><span className="skill applied">AAAA/DNS</span>
-                <span className="skill applied">CF Tunnels</span><span className="skill applied">Tailscale</span><span className="skill applied">Fail2Ban</span>
-                <span className="skill applied">Crowdsec</span><span className="skill applied">UFW</span><span className="skill applied">Authelia</span><span className="skill applied">Traefik</span>
-              </div>
-            </div>
-            <div className="category-row">
-              <div className="cat-num">03</div>
-              <div className="cat-name">{t.skills.categories[2].name}<span>{t.skills.categories[2].sub}</span></div>
-              <div className="skill-list">
-                <span className="skill applied">Python</span><span className="skill applied">TypeScript</span><span className="skill applied">React</span>
-                <span className="skill applied">Next.js</span><span className="skill applied">Django</span><span className="skill applied">SQL</span>
-                <span className="skill applied">Bash</span><span className="skill applied">Ansible</span><span className="skill exposure">HTML/CSS</span><span className="skill exposure">Soldering</span>
-              </div>
-            </div>
-            <div className="category-row">
-              <div className="cat-num">04</div>
-              <div className="cat-name">{t.skills.categories[3].name}<span>{t.skills.categories[3].sub}</span></div>
-              <div className="skill-list">
-                <span className="skill applied">Grafana</span><span className="skill applied">Prometheus</span><span className="skill applied">Uptime Kuma</span>
-                <span className="skill applied">ZFS</span><span className="skill applied">rsync</span><span className="skill applied">RAID</span><span className="skill applied">cAdvisor</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="section-label" style={{marginTop:'56px'}}><div className="num">05&ndash;08</div><div className="slbl-t">{t.skills.quantHeading}</div><div className="rule"></div></div>
-
-          <div className="quant-grid">
-            {t.skills.quant.map((q, qi) => (
-              <div className="quant-cell" key={qi}>
-                <div className="cat-head"><span className="cat-num">{String(qi + 5).padStart(2, '0')}</span><h3>{q.name}</h3></div>
-                <div className="skill-list">
-                  {q.items.map((item, ii) => (
-                    <span key={ii} className={`skill ${qi === 3 && ii >= 2 ? 'applied' : 'exposure'}`}>{item}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="section-label"><div className="num">09</div><div className="slbl-t">{t.skills.certsHeading}</div><div className="rule"></div></div>
-          <div className="certs">
-            {t.skills.certs.map((c, i) => (
-              <div className="cert-row" key={i}>
-                <div className="cert-mark">{c.issuer === 'Google' ? 'GA' : 'MS'}</div>
-                <div><div className="cert-name">{c.name}</div><div className="cert-issuer">{c.issuer}</div></div>
-                <div className="cert-status">{t.skills.verified}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* HOMELAB */}
-      <div className="sec" id="homelab">
-        <div className="sec-body">
-          <div className="section-label"><div className="num"></div><h2>{t.homelab.heading}</h2><div className="rule"></div></div>
-          <Html tag="p" style={{fontSize:'14px',color:'var(--mid)',marginBottom:'24px',maxWidth:'900px',lineHeight:'1.65',fontWeight:'400'}} html={t.homelab.intro} />
-
-          <div className="section-label" style={{marginBottom:'0'}}><div className="num">-</div><div className="slbl-t">{t.homelab.hardwareHeading}</div><div className="rule"></div></div>
-          <table className="hw-table">
-            <thead><tr><th>{t.homelab.hw.component}</th><th>{t.homelab.hw.unraidCol}</th><th>{t.homelab.hw.proxmoxCol}</th></tr></thead>
-            <tbody>
-              <tr><td>{t.homelab.hw.cpu}</td><td>Intel Core Ultra 5 225</td><td>Intel Core i7-8700</td></tr>
-              <tr><td>{t.homelab.hw.motherboard}</td><td>ASUS Prime Z890M-Plus</td><td>-</td></tr>
-              <tr><td>{t.homelab.hw.ram}</td><td>48GB DDR5 5600MHz</td><td>32GB DDR4</td></tr>
-              <tr><td>{t.homelab.hw.case}</td><td>Jonsbo N6</td><td>-</td></tr>
-              <tr><td>{t.homelab.hw.storage}</td><td>14TB + 2&times;12TB parity array + 2TB NVMe cache + 1TB NVMe boot</td><td>SSD (OS) + SATA pool</td></tr>
-              <tr><td>{t.homelab.hw.network}</td><td>10GbE (Realtek RTL8127) + 1Gbps LAN &middot; VLANs</td><td>1Gbps LAN &middot; VLANs</td></tr>
-              <tr><td>{t.homelab.hw.os}</td><td>UNRAID 7.3.1</td><td>Proxmox VE 8</td></tr>
-              <tr><td>{t.homelab.hw.access}</td><td>Pangolin + Traefik</td><td>Tailscale + SSH</td></tr>
-            </tbody>
-          </table>
-
-          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">-</div><div className="slbl-t">{t.homelab.servicesHeading}</div><div className="rule"></div></div>
-          <div className="category-index">
-            {[
-              ['Pangolin','Traefik','WireGuard','Cloudflared','Auto-TLS'],
-              ['AdGuard Home','Unbound','macvlan','Split DNS'],
-              ['CrowdSec','Gluetun','Kill switch','Intrusion detection'],
-              ['Jellyfin','Seerr','Sonarr','Radarr','Jackett','Byparr','qBittorrent'],
-              ['Navidrome','Lidarr','slskd','Subsonic API'],
-              ['Immich','PostgreSQL','Redis','Vaultwarden'],
-              ['Docker networking','Tailscale','VLANs','Zero-trust'],
-            ].map((tags, i) => (
-              <div className="detail-row" key={i}>
-                <div className="cat-num">{String(i + 1).padStart(2, '0')}</div>
-                <div className="cat-name">{t.homelab.services[i].name}</div>
-                <div>
-                  <div className="desc">{t.homelab.services[i].desc}</div>
-                  <div className="skill-list">{tags.map((s, si) => <span className="skill" key={si}>{s}</span>)}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="note" style={{marginTop:'40px'}}>
-            <div className="note-t">{t.homelab.note1.t}</div>
-            <div className="note-d">{t.homelab.note1.d}</div>
-          </div>
-
-          <div className="section-label" style={{marginBottom:'0',marginTop:'56px'}}><div className="num">-</div><div className="slbl-t">{t.homelab.flowHeading}</div><div className="rule"></div></div>
-          <div className="flow-diagram-wrap">
-            <svg viewBox="0 0 920 540" width="100%" role="img" aria-label={t.homelab.flowSvgLabel}>
-              <defs>
-                <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M1 1L8 5L1 9" fill="none" stroke="var(--navy2)" strokeWidth="1.3"/>
-                </marker>
-                <marker id="arrow-grey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M1 1L8 5L1 9" fill="none" stroke="var(--line3)" strokeWidth="1.3"/>
-                </marker>
-                <marker id="arrow-navy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M1 1L8 5L1 9" fill="none" stroke="var(--navy)" strokeWidth="1.3"/>
-                </marker>
-              </defs>
-
-              <path id="ext-motion" d="M190,85 L490,85 L490,195 L530,195 L680,200 L880,200" fill="none" stroke="none"/>
-              <path id="int-motion" d="M190,365 L505,365 L505,205 L530,205 L680,200 L880,200" fill="none" stroke="none"/>
-
-              <circle r="3" fill="var(--navy2)" className="flow-dot">
-                <animateMotion dur="3s" repeatCount="indefinite">
-                  <mpath href="#ext-motion"/>
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="var(--stone2)" stroke="var(--navy2)" strokeWidth="1.2" className="flow-dot flow-dot-return">
-                <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-                  <mpath href="#ext-motion"/>
-                </animateMotion>
-              </circle>
-
-              <circle r="3" fill="var(--line3)" className="flow-dot">
-                <animateMotion dur="3.4s" begin="0.4s" repeatCount="indefinite">
-                  <mpath href="#int-motion"/>
-                </animateMotion>
-              </circle>
-              <circle r="3" fill="var(--stone2)" stroke="var(--line3)" strokeWidth="1.2" className="flow-dot flow-dot-return">
-                <animateMotion dur="3.4s" begin="2.1s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear">
-                  <mpath href="#int-motion"/>
-                </animateMotion>
-              </circle>
-
-              <line x1="230" y1="10" x2="230" y2="490" stroke="var(--line)" strokeWidth="1" strokeDasharray="4 4"/>
-              <text x="40" y="24" className="flow-zone">{t.homelab.flow.outside}</text>
-              <text x="260" y="24" className="flow-zone">{t.homelab.flow.internal}</text>
-
-              <rect x="40" y="60" width="150" height="50" fill="var(--stone2)" stroke="var(--line)"/>
-              <text x="115" y="80" textAnchor="middle" className="flow-t">{t.homelab.flow.phone}</text>
-              <text x="115" y="97" textAnchor="middle" className="flow-s">{t.homelab.flow.phoneSub}</text>
-              <line x1="190" y1="85" x2="260" y2="85" stroke="var(--navy2)" strokeWidth="1.2" markerEnd="url(#arrow-red)"/>
-
-              <rect x="260" y="60" width="190" height="50" fill="var(--stone2)" stroke="var(--line)"/>
-              <text x="355" y="80" textAnchor="middle" className="flow-t">{t.homelab.flow.cfPangolin}</text>
-              <text x="355" y="97" textAnchor="middle" className="flow-s">{t.homelab.flow.cfPangolinSub}</text>
-              <path d="M450 85 H490 V195 H530" fill="none" stroke="var(--navy2)" strokeWidth="1.2" markerEnd="url(#arrow-red)"/>
-              <text x="490" y="145" textAnchor="middle" className="flow-s">{t.homelab.flow.passesThrough}</text>
-
-              <rect x="40" y="340" width="150" height="50" fill="var(--stone2)" stroke="var(--line)"/>
-              <text x="115" y="360" textAnchor="middle" className="flow-t">{t.homelab.flow.lanDevice}</text>
-              <text x="115" y="377" textAnchor="middle" className="flow-s">{t.homelab.flow.lanDeviceSub}</text>
-              <line x1="190" y1="365" x2="260" y2="365" stroke="var(--line3)" strokeWidth="1.2" markerEnd="url(#arrow-grey)"/>
-
-              <rect x="260" y="340" width="190" height="50" fill="var(--stone2)" stroke="var(--line)"/>
-              <text x="355" y="360" textAnchor="middle" className="flow-t">{t.homelab.flow.adguard}</text>
-              <text x="355" y="377" textAnchor="middle" className="flow-s">{t.homelab.flow.adguardSub}</text>
-              <path d="M450 365 H505 V205 H530" fill="none" stroke="var(--line3)" strokeWidth="1.2" markerEnd="url(#arrow-grey)"/>
-
-              <rect x="530" y="175" width="150" height="50" fill="var(--stone2)" stroke="var(--navy)"/>
-              <text x="605" y="195" textAnchor="middle" className="flow-t">{t.homelab.flow.traefik}</text>
-              <text x="605" y="212" textAnchor="middle" className="flow-s">{t.homelab.flow.traefikSub}</text>
-              <line x1="680" y1="200" x2="730" y2="200" stroke="var(--navy)" strokeWidth="1.2" markerEnd="url(#arrow-navy)"/>
-
-              <rect x="730" y="175" width="150" height="50" fill="var(--stone2)" stroke="var(--line)"/>
-              <text x="805" y="195" textAnchor="middle" className="flow-t">{t.homelab.flow.targetApp}</text>
-              <text x="805" y="212" textAnchor="middle" className="flow-s">{t.homelab.flow.targetAppSub}</text>
-
-              <rect x="260" y="420" width="190" height="50" fill="var(--stone2)" stroke="var(--line)"/>
-              <text x="355" y="440" textAnchor="middle" className="flow-t">{t.homelab.flow.iot}</text>
-              <text x="355" y="457" textAnchor="middle" className="flow-s">{t.homelab.flow.iotSub}</text>
-              <path d="M355 420 V398" fill="none" stroke="var(--navy2)" strokeWidth="1.2" strokeDasharray="3 3"/>
-              <line x1="349" y1="392" x2="361" y2="404" stroke="var(--navy2)" strokeWidth="1.4"/>
-              <line x1="349" y1="404" x2="361" y2="392" stroke="var(--navy2)" strokeWidth="1.4"/>
-              <text x="370" y="401" className="flow-s">{t.homelab.flow.iotNote}</text>
-
-              <line x1="40" y1="510" x2="64" y2="510" stroke="var(--navy2)" strokeWidth="1.5"/>
-              <text x="72" y="514" className="flow-s">{t.homelab.flow.legendPublic}</text>
-              <line x1="260" y1="510" x2="284" y2="510" stroke="var(--line3)" strokeWidth="1.5"/>
-              <text x="292" y="514" className="flow-s">{t.homelab.flow.legendLan}</text>
-              <line x1="470" y1="505" x2="480" y2="515" stroke="var(--navy2)" strokeWidth="1.4"/>
-              <line x1="470" y1="515" x2="480" y2="505" stroke="var(--navy2)" strokeWidth="1.4"/>
-              <text x="490" y="514" className="flow-s">{t.homelab.flow.legendBlocked}</text>
-
-              <circle cx="705" cy="510" r="3" fill="var(--navy2)"/>
-              <text x="716" y="514" className="flow-s">{t.homelab.flow.legendRequest}</text>
-              <circle cx="775" cy="510" r="3" fill="var(--stone2)" stroke="var(--navy2)" strokeWidth="1.2"/>
-              <text x="786" y="514" className="flow-s">{t.homelab.flow.legendResponse}</text>
-            </svg>
-          </div>
-
-          <div className="note" style={{marginTop:'16px'}}>
-            <div className="note-t">{t.homelab.note2.t}</div>
-            <div className="note-d">{t.homelab.note2.d}</div>
-          </div>
-
-          <div className="note" style={{marginTop:'16px'}}>
-            <div className="note-t">{t.homelab.note3.t}</div>
-            <div className="note-d">{t.homelab.note3.d}</div>
-          </div>
-        </div>
-      </div>
-
-      {/* DESKTOP */}
-      <div className="sec" id="desktop">
-        <div className="sec-body">
-          <div className="section-label"><div className="num"></div><h2>{t.desktop.heading}</h2><div className="rule"></div></div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'40px',maxWidth:'900px',lineHeight:'1.65',fontWeight:'400'}}>{t.desktop.intro}</p>
-
-          <table className="hw-table">
-            <thead><tr><th>{t.desktop.hw.component}</th><th>{t.desktop.hw.spec}</th></tr></thead>
-            <tbody>
-              <tr><td>{t.desktop.hw.cpu}</td><td>AMD Ryzen 7 9800X3D (8c/16t &middot; 3D V-Cache)</td></tr>
-              <tr><td>{t.desktop.hw.gpu}</td><td>Zotac RTX 5080 Solid OC</td></tr>
-              <tr><td>{t.desktop.hw.ram}</td><td>32GB DDR5 6000MHz</td></tr>
-              <tr><td>{t.desktop.hw.motherboard}</td><td>Gigabyte X870E AORUS PRO X3D ICE</td></tr>
-              <tr><td>{t.desktop.hw.os}</td><td>CachyOS</td></tr>
-              <tr><td>{t.desktop.hw.role}</td><td>{t.desktop.hw.roleVal}</td></tr>
-            </tbody>
-          </table>
-
-          <div className="category-index">
-            {[
-              ['Zen 5','8c / 16t','96MB L3 3D V-Cache','5.0GHz boost'],
-              ['Blackwell','16GB GDDR7','DLSS 4','MFG','CUDA','Ray Tracing'],
-              ['X870E','PCIe 5.0','USB4','DDR5 6000','WiFi 7'],
-            ].map((tags, i) => (
-              <div className="detail-row" key={i}>
-                <div className="cat-num">{String(i + 1).padStart(2, '0')}</div>
-                <div className="cat-name">{t.desktop.parts[i].name}</div>
-                <div>
-                  <div className="desc">{t.desktop.parts[i].desc}</div>
-                  <div className="skill-list">{tags.map((s, si) => <span className="skill" key={si}>{s}</span>)}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* PROJECTS */}
-      <div className="sec" id="projects">
-        <div className="sec-body">
-          <div className="section-label"><div className="num"></div><h2>{t.projects.heading}</h2><div className="rule"></div></div>
-          <div className="category-index">
-            {[
-              ['Proxmox','Docker','LXC','Traefik','Tailscale'],
-              ['TrueNAS','RAID 10','ZFS','rsync','ACLs'],
-              ['React','Next.js','TypeScript','Tailwind'],
-              ['Rust','ratatui','Subsonic','MPRIS2','tokio','SQLite'],
-              ['Ansible','Compose','Bash','IaC'],
-              ['Python','Docker','ListenBrainz','Last.fm','slskd','Navidrome'],
-              ['Docker','Navidrome','slskd','Gluetun','ListenBrainz','ProtonVPN'],
-              ['UNRAID 7.3.1','Docker','Parity Array','48GB DDR5','SMB/NFS'],
-              ['Proxmox VE 8','LXC','KVM','Tailscale','VLAN','32GB DDR4'],
-              ['PowerShell','Bash','Obsidian','Automation'],
-              ['Python','scikit-learn','Regression','Jupyter','Statistics'],
-            ].map((tags, i) => {
-              const p = t.projects.items[i]
-              return (
-                <div className="detail-row" key={i}>
-                  <div className="cat-num">{String(i + 1).padStart(2, '0')}</div>
-                  <div className="row-meta"><div className="pr-type">{p.type}</div><div className={`status-tag ${p.status}`}>{t.projects.statusLabels[p.status as 'live' | 'oss']}{(p as any).statusExtra || ''}</div></div>
-                  <div>
-                    <div className="pr-t">{p.title}</div>
-                    <div className="desc">{p.desc}</div>
-                    <div className="skill-list">{tags.map((s, si) => <span className="skill" key={si}>{s}</span>)}</div>
+          <div className="case-list">
+            {cases.map(c => (
+              <article className="case" key={c.title}>
+                <div className="case-copy">
+                  <span className="case-label">{c.label}</span>
+                  <h2 className="case-title">{c.title}</h2>
+                  <p className="case-desc">{c.desc}</p>
+                  <div className="tag-row">
+                    {c.tags.map(tag => <span className="tag-pill" key={tag}>{tag}</span>)}
                   </div>
                 </div>
-              )
-            })}
-          </div>
-          <p style={{marginTop:'24px',fontSize:'12px',color:'var(--muted)',fontFamily:'var(--f-mono)'}}>
-            {t.projects.moreAt} <a href="https://github.com/Quinta0" target="_blank" rel="noopener" style={{color:'var(--navy2)',textDecoration:'none'}}>github.com/Quinta0 &#8599;</a>
-          </p>
-        </div>
-      </div>
 
-      {/* OPEN SOURCE CONTRIBUTIONS */}
-      <div className="sec" id="oss">
-        <div className="sec-body">
-          <div className="section-label"><div className="num"></div><h2>{t.oss.heading}</h2><div className="rule"></div></div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'820px',lineHeight:'1.6',fontWeight:'400'}}>{t.oss.intro}</p>
-          <div className="row-index">
-            {t.oss.repos.map((r, i) => (
-              <div className="repo-row" key={i}>
-                <div>
-                  <h3>{r.name}</h3>
-                  <p>{r.desc}</p>
+                <div className="case-diagram" style={{ background: c.tint }}>
+                  <div className="diagram-card">
+                    <div className="diagram-row diagram-header">
+                      <span>{c.headerL}</span>
+                      <span>{c.headerR}</span>
+                    </div>
+                    <div className="diagram-svg-wrap">{c.diagram}</div>
+                    <div className="diagram-row diagram-footer">
+                      <span>{c.footerL}</span>
+                      <span>{c.footerR}</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="repo-meta">
-                  <span className={(r as any).isKind ? 'kind' : 'lang'}>{r.tag}</span>
-                  <a href={r.href} target="_blank" rel="noopener" className={`action${(r as any).isIssue ? ' issue' : ''}`}>{r.action}</a>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* OSS */}
+        <section id="oss" className="oss">
+          <div className="section-head">
+            <span className="section-kicker">Systems Diagnostics &amp; Open-Source</span>
+            <a href={GITHUB} target="_blank" rel="noopener" className="section-link">github.com/Quinta0 &nearr;</a>
+          </div>
+
+          <div className="oss-grid">
+            {ossCards.map(card => (
+              <div className="oss-card" key={card.title}>
+                <div className="oss-card-top">
+                  <div>
+                    <span className="oss-kicker">{card.kicker}</span>
+                    <h3>{card.title}</h3>
+                  </div>
+                  <span className="oss-meta">{card.meta}</span>
+                </div>
+                <p>{card.desc}</p>
+                <div className="tag-row tag-row-mini">
+                  {card.tags.map(tag => <span key={tag}>{tag}</span>)}
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* GITHUB */}
-      <div className="sec" id="github">
-        <div className="sec-body">
-          <div className="section-label"><div className="num"></div><h2>{t.github.heading}</h2><div className="rule"></div></div>
-          <p style={{fontSize:'14px',color:'var(--mid)',marginBottom:'28px',maxWidth:'820px',lineHeight:'1.6',fontWeight:'400'}}>{t.github.intro}</p>
-          <div className="row-index">
-            {t.github.repos.map((r, i) => (
-              <div className="repo-row" key={i}>
-                <div>
-                  <h3>{r.name}</h3>
-                  <p>{r.desc}</p>
-                </div>
-                <div className="repo-meta">
-                  {(r as any).star && <span className="star">{(r as any).star}</span>}
-                  <span className={(r as any).isKind ? 'kind' : 'lang'}>{r.tag}</span>
-                  <a href={r.href} target="_blank" rel="noopener" className="action">{t.github.repoAction}</a>
-                </div>
-              </div>
-            ))}
+        {/* BACKGROUND */}
+        <section id="background" className="background">
+          <div className="bg-row">
+            <div className="bg-label">Technician Approach</div>
+            <div className="bg-content">
+              <p className="quote">
+                &ldquo;When I sustained a broken humerus, I kept assembling workstations one-handed. Physical engineering is second nature; Linux is what I administer daily.&rdquo;
+              </p>
+              <p className="bg-text">
+                Holding a Swiss Permit C and based in Monte Carasso, I bring 6+ years of component-level hardware diagnostics alongside 5+ years of practical Linux systems administration. Focused on zero-downtime staging, structured documentation, and reliable uptime.
+              </p>
+            </div>
           </div>
-        </div>
-      </div>
 
-      {/* EXPERIENCE + EDUCATION */}
-      <div className="sec" id="experience">
-        <div className="sec-body">
-          <div className="section-label"><div className="num"></div><h2>{t.experience.heading}</h2><div className="rule"></div></div>
-          <div className="acc">
-            <div className={`acc-item${openAcc['exp-0'] ? ' open' : ''}`}>
-              <button className="acc-btn" onClick={() => toggle('exp-0')}>
-                <div className="acc-l"><div className="acc-t">{t.experience.job.title}</div><div className="acc-s">{t.experience.job.sub}</div></div>
-                <div className="acc-r2"><span className="acc-per">{t.experience.job.period}</span><ChevronDown/></div>
-              </button>
-              <div className="acc-body-wrap">
-                <div className="acc-body">
-                  <p>{t.experience.job.intro}</p>
+          <div className="bg-row bg-row-bordered">
+            <div className="bg-label">Professional Experience</div>
+            <div className="bg-content exp-list">
+              {experience.map(job => (
+                <div className="exp-item" key={job.title}>
+                  <div className="exp-head">
+                    <h3>{job.title}</h3>
+                    <span className="exp-period">{job.period}</span>
+                  </div>
+                  <div className="exp-org">{job.org}</div>
+                  <p>{job.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-row bg-row-bordered">
+            <div className="bg-label">Technical Capabilities</div>
+            <div className="bg-content skills-grid">
+              {skillColumns.map(col => (
+                <div className="skills-col" key={col.heading}>
+                  <span className="skills-heading">{col.heading}</span>
                   <ul>
-                    {t.experience.job.bullets.map((b, i) => <li key={i}>{b}</li>)}
+                    {col.items.map(item => <li key={item}>{item}</li>)}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-row bg-row-bordered">
+            <div className="bg-label">Education &amp; Credentials</div>
+            <div className="bg-content edu-grid">
+              <div className="edu-list">
+                {education.map(edu => (
+                  <div key={edu.title}>
+                    <span className="edu-date">{edu.date}</span>
+                    <h4>{edu.title}</h4>
+                    <p>{edu.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="creds-list">
+                <div>
+                  <span className="creds-heading">CERTIFICATIONS</span>
+                  <ul>
+                    {certifications.map(cert => <li key={cert}>&bull; {cert}</li>)}
+                  </ul>
+                </div>
+                <div>
+                  <span className="creds-heading">LANGUAGES</span>
+                  <ul>
+                    {languages.map(l => <li key={l.name}>&bull; <strong>{l.name}</strong>: {l.level}</li>)}
                   </ul>
                 </div>
               </div>
             </div>
           </div>
+        </section>
+      </main>
 
-          <div className="section-label" style={{marginTop:'56px'}}><div className="num">-</div><div className="slbl-t">{t.experience.educationHeading}</div><div className="rule"></div></div>
-          <div className="acc">
-            {t.experience.education.map((edu, i) => (
-              <div className={`acc-item${openAcc[`edu-${i}`] ? ' open' : ''}`} key={i}>
-                <button className="acc-btn" onClick={() => toggle(`edu-${i}`)}>
-                  <div className="acc-l"><div className="acc-t">{edu.title}{(edu as any).titleNote && <span style={{fontSize:'11px',color:'var(--muted)',fontWeight:400,fontFamily:'var(--f-mono)'}}> · {(edu as any).titleNote}</span>}</div><div className="acc-s">{edu.sub}</div></div>
-                  <div className="acc-r2"><span className="acc-per">{edu.period}</span><ChevronDown/></div>
-                </button>
-                <div className="acc-body-wrap">
-                  <div className="acc-body">
-                    <p>{edu.intro}</p>
-                    <ul>
-                      {edu.bullets.map((b, bi) => <Html key={bi} tag="li" html={b} />)}
-                    </ul>
-                    <div className="econ-tags skill-list">
-                      {edu.tags.map((tag, ti) => <span className="skill" key={ti}>{tag}</span>)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="section-label" style={{marginTop:'48px'}}><div className="num">-</div><div className="slbl-t">{t.experience.languagesHeading}</div><div className="rule"></div></div>
-          <div className="langs">
-            {t.experience.languages.map((l, i) => (
-              <div className="langc" key={i}><div className="lang-n">{l.name}</div><div className="lang-l">{l.level}</div></div>
-            ))}
-          </div>
+      <footer className="site-footer">
+        <div>
+          <span className="footer-name">Pietro Quintavalle</span> &bull; Open for Datacenter &amp; Systems roles across Switzerland
         </div>
-      </div>
-
-      {/* CONTACT */}
-      <div className="contact" id="contact">
-        <div className="contact-body">
-          <Html tag="h2" html={t.contact.heading} />
-          <p>{t.contact.p}</p>
-          <div className="contact-ctas">
-            <a href="mailto:0pietroquintavalle0@gmail.com" className="btn-li">0pietroquintavalle0@gmail.com</a>
-            <a href="https://github.com/Quinta0" target="_blank" rel="noopener" className="btn-gh">GitHub &#8599;</a>
-            <a href="https://www.linkedin.com/in/pietro-quintavalle-996b96267/" target="_blank" rel="noopener" className="btn-gh">LinkedIn &#8599;</a>
-          </div>
-        </div>
-      </div>
-
-      {/* FOOTER */}
-      <footer>
-        <div className="foot">
-          <p>{t.footer.copyright}</p>
-          <a href="#">{t.footer.backToTop} &#8593;</a>
+        <div className="footer-links">
+          <a href={GITHUB} target="_blank" rel="noopener">GitHub &nearr;</a>
+          <a href={LINKEDIN} target="_blank" rel="noopener">LinkedIn &nearr;</a>
+          <a href={CV} download>CV Dossier (PDF) &darr;</a>
         </div>
       </footer>
-      </div>
     </>
   )
 }
