@@ -3,7 +3,6 @@ import type { ReactNode } from 'react'
 const EMAIL = '0pietroquintavalle0@gmail.com'
 const GITHUB = 'https://github.com/Quinta0'
 const LINKEDIN = 'https://www.linkedin.com/in/pietro-quintavalle-996b96267/'
-const CV = 'QuintavallePietro_CV.pdf'
 
 type CaseStudy = {
   label: string
@@ -309,10 +308,6 @@ export default function App() {
           </p>
 
           <div className="hero-ctas">
-            <a href={CV} download className="btn btn-dark">
-              <span>DOWNLOAD DOSSIER (PDF)</span>
-              <span>&darr;</span>
-            </a>
             <a href={`mailto:${EMAIL}`} className="btn btn-outline">{EMAIL}</a>
           </div>
 
@@ -373,7 +368,7 @@ export default function App() {
         <section id="oss" className="oss">
           <div className="section-head">
             <span className="section-kicker">Systems Diagnostics &amp; Open-Source</span>
-            <a href={GITHUB} target="_blank" rel="noopener" className="section-link">github.com/Quinta0 &nearr;</a>
+            <a href={GITHUB} target="_blank" rel="noopener" className="section-link">github.com/Quinta0 ↗</a>
           </div>
 
           <div className="oss-grid">
@@ -465,8 +460,8 @@ export default function App() {
           <span className="footer-name">Pietro Quintavalle</span> &bull; Open for Datacenter &amp; Systems roles across Switzerland
         </div>
         <div className="footer-links">
-          <a href={GITHUB} target="_blank" rel="noopener">GitHub &nearr;</a>
-          <a href={LINKEDIN} target="_blank" rel="noopener">LinkedIn &nearr;</a>
+          <a href={GITHUB} target="_blank" rel="noopener">GitHub ↗</a>
+          <a href={LINKEDIN} target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </footer>
     </>
