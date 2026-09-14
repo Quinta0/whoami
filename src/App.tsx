@@ -284,10 +284,6 @@ export default function App() {
     <>
       <header className="site-header">
         <div className="header-bar">
-          <a href="#" className="logo">
-            <span className="logo-dot"></span>
-            <span>Pietro Quintavalle</span>
-          </a>
           <nav className="main-nav">
             <a href="#works">WORKS</a>
             <a href="#oss">DIAGNOSTICS &amp; OSS</a>
