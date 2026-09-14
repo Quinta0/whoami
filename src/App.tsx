@@ -224,7 +224,7 @@ const ossCards = [
 const experience = [
   {
     title: 'Infrastructure & Hardware Consultant (Freelance)',
-    period: '2025 – Present',
+    period: '2026',
     org: 'DEC Energy (USI Startup) • Ticino, Switzerland',
     desc: 'Trusted technical partner advising on workstation hardware (custom PCs, multi-monitor ergonomics, laptop fleet selection). Designed, procured, and deployed an on-premise 2-node bare-metal Kubernetes cluster for local LLM inference, accounting, and Git source control.',
   },
