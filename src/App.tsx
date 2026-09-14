@@ -467,7 +467,6 @@ export default function App() {
         <div className="footer-links">
           <a href={GITHUB} target="_blank" rel="noopener">GitHub &nearr;</a>
           <a href={LINKEDIN} target="_blank" rel="noopener">LinkedIn &nearr;</a>
-          <a href={CV} download>CV Dossier (PDF) &darr;</a>
         </div>
       </footer>
     </>
