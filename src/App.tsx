@@ -401,18 +401,7 @@ export default function App() {
 
         {/* BACKGROUND */}
         <section id="background" className="background">
-          <div className="bg-row">
-            <div className="bg-label">Technician Approach</div>
-            <div className="bg-content">
-              <p className="quote">
-                &ldquo;When I sustained a broken humerus, I kept assembling workstations one-handed. Physical engineering is second nature; Linux is what I administer daily.&rdquo;
-              </p>
-              <p className="bg-text">
-                Holding a Swiss Permit C and based in Monte Carasso, I bring 6+ years of component-level hardware diagnostics alongside 5+ years of practical Linux systems administration. Focused on zero-downtime staging, structured documentation, and reliable uptime.
-              </p>
-            </div>
-          </div>
-
+          
           <div className="bg-row bg-row-bordered">
             <div className="bg-label">Professional Experience</div>
             <div className="bg-content exp-list">
