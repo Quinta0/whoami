@@ -62,13 +62,8 @@ export default function ParticleScene({ keyframes, onLabel, onProgress }: Props)
     const resize = () => {
       renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
       renderer.setSize(innerWidth, innerHeight, false)
-      const aspect = innerWidth / innerHeight
-      camera.aspect = aspect; camera.updateProjectionMatrix()
-      // fixed vertical FOV means horizontal FOV shrinks on portrait screens; back the
-      // camera off enough that the widest shape (the "PQ" text sweep, ~8 units half-width)
-      // still fits the frustum instead of getting cropped on narrow viewports
-      const halfV = Math.tan(camera.fov * Math.PI / 360)
-      camera.position.z = 8.2 / (halfV * Math.min(aspect, 1))
+      camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix()
+      camera.position.z = innerWidth < 760 ? 26 : 18
     }
 
     // scroll: real fraction for the bar, section-keyed progress for the morph

@@ -72,7 +72,9 @@ function sampleCanvas(n: number, w: number, h: number, draw: (ctx: CanvasRenderi
 }
 /* Shape 3 — the initials */
 export function shapeText(n: number): Float32Array {
-  return sampleCanvas(n,720,360,ctx=>{ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='800 300px Syne, "Helvetica Neue", Arial, sans-serif'; ctx.fillText('PQ',360,194); },0.0215,0.9);
+  // scale kept small enough that the full width still fits the camera frustum on
+  // narrow/portrait viewports, where it's forced face-on to stay readable
+  return sampleCanvas(n,720,360,ctx=>{ ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.font='800 300px Syne, "Helvetica Neue", Arial, sans-serif'; ctx.fillText('PQ',360,194); },0.012,0.9);
 }
 /* Primitive builder for the project dioramas: boxes as edges or solid fill, plus lines */
 type Prim = { t: 'edges' | 'fill'; c: number[]; s: number[]; w: number } | { t: 'line'; a: number[]; b: number[]; w: number }
