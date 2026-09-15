@@ -109,6 +109,20 @@ body{
 .diagram-footer{padding-top:12px;border-top:1px solid rgba(230,228,221,.4);font-size:10px}
 .diagram-svg-wrap{width:100%;overflow-x:auto;padding:8px 0}
 .case-svg{width:100%;min-width:320px;height:auto}
+.diagram-interactive{color:var(--accent);font-weight:600}
+
+.case-canvas{
+  position:relative;width:100%;height:288px;border-radius:6px;overflow:hidden;
+  cursor:grab;touch-action:pan-y;
+}
+.case-canvas:active{cursor:grabbing}
+.case-canvas canvas{display:block;touch-action:pan-y}
+.nas-hud{
+  position:absolute;z-index:5;pointer-events:none;
+  background:var(--ink);color:var(--canvas);
+  font-family:var(--f-mono);font-size:10px;
+  padding:4px 8px;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.2);
+}
 
 .led-pulse{animation:ledBlink 2.4s ease-in-out infinite}
 @keyframes ledBlink{0%,100%{opacity:.3}50%{opacity:1}}
@@ -197,5 +211,6 @@ body{
   .case-desc{font-size:12px}
   .case-diagram{padding:16px;border-radius:12px}
   .diagram-card{padding:16px}
+  .case-canvas{height:256px}
   .site-footer{padding:48px var(--pad);flex-direction:column;align-items:flex-start}
 }

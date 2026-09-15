@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react'
+import ThreeViewport from './ThreeViewport'
+import { buildRackScene, buildClusterScene, buildNasScene } from './scenes'
 
 const EMAIL = '0pietroquintavalle0@gmail.com'
 const GITHUB = 'https://github.com/Quinta0'
@@ -15,6 +17,7 @@ type CaseStudy = {
   footerL: string
   footerR: string
   diagram: ReactNode
+  interactive?: boolean
 }
 
 const cases: CaseStudy[] = [
@@ -25,50 +28,11 @@ const cases: CaseStudy[] = [
     tags: ['19" EIA-310 Cabinet', 'ZFS RAID 10', 'Structured Cabling'],
     tint: '#EFECE6',
     headerL: 'RACK_CHASSIS // EIA-310',
-    headerR: 'ZFS RAID 10 POOL',
+    headerR: '• DRAG TO ROTATE',
     footerL: 'STRUCTURED HARNESS',
     footerR: 'SUB-30M RTO SYNC',
-    diagram: (
-      <svg viewBox="0 0 460 210" className="case-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="40" y="20" width="380" height="170" rx="3" stroke="var(--ink)" strokeWidth="1.5" />
-        <line x1="56" y1="20" x2="56" y2="190" stroke="var(--border)" strokeWidth="1" strokeDasharray="2 2" />
-        <line x1="404" y1="20" x2="404" y2="190" stroke="var(--border)" strokeWidth="1" strokeDasharray="2 2" />
-
-        <rect x="66" y="30" width="328" height="24" rx="2" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="85" cy="42" r="3" fill="var(--ink)" />
-        <circle cx="98" cy="42" r="3" fill="var(--ink)" />
-        <circle cx="111" cy="42" r="3" fill="var(--ink)" />
-        <circle cx="124" cy="42" r="3" fill="var(--ink)" />
-        <circle cx="340" cy="42" r="2.5" fill="var(--accent)" className="led-pulse" />
-        <text x="355" y="45" fill="var(--secondary)" fontFamily="Space Mono" fontSize="8">PATCH</text>
-
-        <rect x="66" y="62" width="328" height="68" rx="2" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1.2" />
-        <rect x="76" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="92" cy="112" r="1.5" fill="var(--accent)" />
-        <rect x="114" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="130" cy="112" r="1.5" fill="var(--ink)" />
-        <rect x="152" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="168" cy="112" r="1.5" fill="var(--ink)" />
-        <rect x="190" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="206" cy="112" r="1.5" fill="var(--ink)" />
-
-        <rect x="238" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="254" cy="112" r="1.5" fill="var(--ink)" />
-        <rect x="276" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="292" cy="112" r="1.5" fill="var(--ink)" />
-        <rect x="314" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="330" cy="112" r="1.5" fill="var(--ink)" />
-        <rect x="352" y="72" width="32" height="48" rx="1.5" stroke="var(--ink)" strokeWidth="1" />
-        <circle cx="368" cy="112" r="1.5" fill="var(--accent)" />
-
-        <rect x="66" y="138" width="328" height="18" rx="2" fill="var(--canvas)" stroke="var(--border)" strokeWidth="1" />
-        <path d="M 85 147 Q 160 165 240 147 T 370 147" stroke="var(--accent)" strokeWidth="1.2" fill="none" className="bus-flow" />
-
-        <rect x="66" y="162" width="328" height="22" rx="2" fill="var(--canvas)" stroke="var(--ink)" strokeWidth="1" />
-        <line x1="80" y1="173" x2="130" y2="173" stroke="var(--ink)" strokeWidth="1.5" />
-        <circle cx="370" cy="173" r="2" fill="var(--ink)" />
-      </svg>
-    ),
+    diagram: <ThreeViewport build={buildRackScene} className="case-canvas" />,
+    interactive: true,
   },
   {
     label: '02 / Startup Infrastructure • DEC Energy',
@@ -77,34 +41,11 @@ const cases: CaseStudy[] = [
     tags: ['Bare-Metal K8s', 'LLM Inference', 'Thermal Profiling'],
     tint: '#EAE8E1',
     headerL: 'DUAL_NODE // TOPOLOGY',
-    headerR: 'BARE-METAL FABRIC',
+    headerR: '• DRAG TO ROTATE',
     footerL: 'ON-PREMISES INGESTION',
     footerR: 'USI STARTUP',
-    diagram: (
-      <svg viewBox="0 0 460 210" className="case-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="25" y="25" width="190" height="160" rx="3" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
-        <rect x="75" y="65" width="46" height="46" rx="2" stroke="var(--ink)" strokeWidth="1.5" fill="#FFFFFF" />
-        <text x="98" y="92" fill="var(--ink)" fontFamily="Space Mono" fontSize="9" textAnchor="middle" fontWeight="bold">NODE 01</text>
-        <line x1="130" y1="60" x2="130" y2="116" stroke="var(--ink)" strokeWidth="1" />
-        <line x1="136" y1="60" x2="136" y2="116" stroke="var(--ink)" strokeWidth="1" />
-        <line x1="142" y1="60" x2="142" y2="116" stroke="var(--accent)" strokeWidth="1" />
-        <line x1="148" y1="60" x2="148" y2="116" stroke="var(--ink)" strokeWidth="1" />
-        <rect x="40" y="135" width="120" height="14" rx="1" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
-        <text x="100" y="145" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">PCIe // TENSOR LOAD</text>
-
-        <path d="M 215 105 L 245 105" stroke="var(--accent)" strokeWidth="2" strokeDasharray="3 3" className="bus-flow" />
-
-        <rect x="245" y="25" width="190" height="160" rx="3" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
-        <rect x="295" y="65" width="46" height="46" rx="2" stroke="var(--ink)" strokeWidth="1.5" fill="#FFFFFF" />
-        <text x="318" y="92" fill="var(--ink)" fontFamily="Space Mono" fontSize="9" textAnchor="middle" fontWeight="bold">NODE 02</text>
-        <line x1="350" y1="60" x2="350" y2="116" stroke="var(--ink)" strokeWidth="1" />
-        <line x1="356" y1="60" x2="356" y2="116" stroke="var(--ink)" strokeWidth="1" />
-        <line x1="362" y1="60" x2="362" y2="116" stroke="var(--accent)" strokeWidth="1" />
-        <line x1="368" y1="60" x2="368" y2="116" stroke="var(--ink)" strokeWidth="1" />
-        <rect x="260" y="135" width="120" height="14" rx="1" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
-        <text x="320" y="145" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">STORAGE &amp; GITEA</text>
-      </svg>
-    ),
+    diagram: <ThreeViewport build={buildClusterScene} className="case-canvas" />,
+    interactive: true,
   },
   {
     label: '03 / Protocol Reverse Engineering',
@@ -151,41 +92,11 @@ const cases: CaseStudy[] = [
     tags: ['Zero-Trust WAN', 'Ansible IaC', 'Proxmox / UNRAID'],
     tint: '#EDEAE3',
     headerL: 'TOPOLOGY MAP',
-    headerR: 'ZERO EXPOSED WAN',
+    headerR: '• HOVER BAYS',
     footerL: 'ANSIBLE PROVISIONED',
     footerR: 'DAILY PRODUCTION',
-    diagram: (
-      <svg viewBox="0 0 460 210" className="case-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="105" r="24" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
-        <text x="50" y="103" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" textAnchor="middle" fontWeight="bold">12+ USERS</text>
-        <text x="50" y="115" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">SSO / 2FA</text>
-
-        <path d="M 74 105 L 146 105" stroke="var(--accent)" strokeWidth="1.5" strokeDasharray="3 3" className="bus-flow" />
-
-        <rect x="146" y="70" width="80" height="70" rx="3" stroke="var(--ink)" strokeWidth="1.2" fill="var(--canvas)" />
-        <text x="186" y="98" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" textAnchor="middle" fontWeight="bold">CLOUDFLARE</text>
-        <text x="186" y="112" fill="var(--accent)" fontFamily="Space Mono" fontSize="7" textAnchor="middle">TUNNELS</text>
-        <text x="186" y="124" fill="var(--secondary)" fontFamily="Space Mono" fontSize="6" textAnchor="middle">WIREGUARD MESH</text>
-
-        <path d="M 226 105 L 280 105" stroke="var(--ink)" strokeWidth="1.2" />
-        <line x1="280" y1="50" x2="280" y2="160" stroke="var(--ink)" strokeWidth="1.2" />
-
-        <line x1="280" y1="50" x2="310" y2="50" stroke="var(--ink)" strokeWidth="1.2" />
-        <rect x="310" y="32" width="125" height="36" rx="2" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
-        <text x="322" y="47" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" fontWeight="bold">UNRAID HOST</text>
-        <text x="322" y="58" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7">Docker Containers</text>
-
-        <line x1="280" y1="105" x2="310" y2="105" stroke="var(--ink)" strokeWidth="1.2" />
-        <rect x="310" y="87" width="125" height="36" rx="2" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
-        <text x="322" y="102" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" fontWeight="bold">PROXMOX VE 8</text>
-        <text x="322" y="113" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7">KVM / LXC Workloads</text>
-
-        <line x1="280" y1="160" x2="310" y2="160" stroke="var(--ink)" strokeWidth="1.2" />
-        <rect x="310" y="142" width="125" height="36" rx="2" stroke="var(--ink)" strokeWidth="1" fill="#FFFFFF" />
-        <text x="322" y="157" fill="var(--ink)" fontFamily="Space Mono" fontSize="8" fontWeight="bold">TRUENAS APPLIANCE</text>
-        <text x="322" y="168" fill="var(--secondary)" fontFamily="Space Mono" fontSize="7">ZFS RAID 10</text>
-      </svg>
-    ),
+    diagram: <ThreeViewport build={buildNasScene} className="case-canvas" />,
+    interactive: true,
   },
 ]
 
@@ -350,7 +261,7 @@ export default function App() {
                   <div className="diagram-card">
                     <div className="diagram-row diagram-header">
                       <span>{c.headerL}</span>
-                      <span>{c.headerR}</span>
+                      <span className={c.interactive ? 'diagram-interactive' : undefined}>{c.headerR}</span>
                     </div>
                     <div className="diagram-svg-wrap">{c.diagram}</div>
                     <div className="diagram-row diagram-footer">
