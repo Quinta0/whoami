@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import ThreeViewport from './ThreeViewport'
+import ContourBackground from './ContourBackground'
 import { buildRackScene, buildClusterScene, buildNasScene } from './scenes'
 
 const EMAIL = '0pietroquintavalle0@gmail.com'
@@ -206,34 +207,38 @@ export default function App() {
       <main className="site-main">
         {/* HERO */}
         <section className="hero">
-          <div className="hero-badges">
-            <span className="badge-secondary">Monte Carasso, CH &bull; Permit C</span>
-            <span className="badge-sep">/</span>
-            <span className="badge-accent">Bare-Metal &amp; Linux Systems</span>
-          </div>
+          <ContourBackground className="hero-canvas" />
 
-          <h1 className="hero-title">Bridging bare-metal hardware craft with low-level Linux systems.</h1>
-
-          <p className="hero-lead">
-            Systems technician with 6+ years assembling, repairing, and bench-testing desktop, laptop, and server hardware, backed by 5+ years administering Linux environments. Taking physical infrastructure from component-level triage to production reliability.
-          </p>
-
-          <div className="hero-ctas">
-            <a href={`mailto:${EMAIL}`} className="btn btn-outline">{EMAIL}</a>
-          </div>
-
-          <div className="hero-metrics">
-            <div>
-              <span className="metric-val">25+</span>
-              <span className="metric-lbl">Workstations Assembled</span>
+          <div className="hero-content">
+            <div className="hero-badges">
+              <span className="badge-secondary">Monte Carasso, CH &bull; Permit C</span>
+              <span className="badge-sep">/</span>
+              <span className="badge-accent">Bare-Metal &amp; Linux Systems</span>
             </div>
-            <div>
-              <span className="metric-val">4 Nodes</span>
-              <span className="metric-lbl">12+ Active Tenants</span>
+
+            <h1 className="hero-title">Bridging bare-metal hardware craft with low-level Linux systems.</h1>
+
+            <p className="hero-lead">
+              Systems technician with 6+ years assembling, repairing, and bench-testing desktop, laptop, and server hardware, backed by 5+ years administering Linux environments. Taking physical infrastructure from component-level triage to production reliability.
+            </p>
+
+            <div className="hero-ctas">
+              <a href={`mailto:${EMAIL}`} className="btn btn-outline">{EMAIL}</a>
             </div>
-            <div>
-              <span className="metric-val">&lt;30m</span>
-              <span className="metric-lbl">Ansible Disaster RTO</span>
+
+            <div className="hero-metrics">
+              <div>
+                <span className="metric-val">25+</span>
+                <span className="metric-lbl">Workstations Assembled</span>
+              </div>
+              <div>
+                <span className="metric-val">4 Nodes</span>
+                <span className="metric-lbl">12+ Active Tenants</span>
+              </div>
+              <div>
+                <span className="metric-val">&lt;30m</span>
+                <span className="metric-lbl">Ansible Disaster RTO</span>
+              </div>
             </div>
           </div>
         </section>
