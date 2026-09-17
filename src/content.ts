@@ -83,6 +83,9 @@ export const projects: (Shaped & { title: string; star?: string; text: string; s
   { title: 'City simulator, USI group project', shape: 'city', label: 'City simulator: twelve people, one Spring Boot backend',
     text: 'Coordinated a twelve-person Scrum team building a full-stack city simulation. Owned the Spring Boot backend and its integration with the web frontend.',
     stack: 'Java, Spring Boot, JavaScript, HTML, CSS' },
+  { title: 'Nargothrond Watch',
+    text: 'Scheduled health checks for a home server: container status via the Docker API, ZFS pool health, CrowdSec security events and Traefik routes, with an optional self-contained HTML dashboard and email/Discord alerts. No daemon, no database required, just a script on a schedule.',
+    stack: 'Python, SQLite, Docker API, Traefik' },
 ]
 
 export const toolsRowA = ['Proxmox VE', 'TrueNAS', 'ZFS', 'UNRAID', 'Kubernetes', 'Docker', 'LXC', 'KVM', 'Ansible', 'GitHub Actions', 'Bash', 'PowerShell', 'Debian', 'Arch', 'NixOS', 'Windows Server', 'Active Directory']
