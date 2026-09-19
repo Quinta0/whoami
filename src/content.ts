@@ -1,9 +1,10 @@
 // All page copy lives here so the layout stays clean
 export const EMAIL = '0pietroquintavalle0@gmail.com'
-export const PHONE = '+41 79 906 82 53'
 export const GITHUB = 'https://github.com/Quinta0'
 export const LINKEDIN = 'https://linkedin.com/in/pietro-quintavalle'
 export const WHOAMI = 'https://quinta0.github.io/whoami'
+export const GITLAB = 'https://gitlab.com/Quinta0'
+export const CODEBERG = 'https://codeberg.org/Quinta'
 
 export const facts = [
   { n: 6, label: 'years assembling and repairing hardware' },

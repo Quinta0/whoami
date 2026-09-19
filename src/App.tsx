@@ -161,6 +161,8 @@ export default function App() {
               <a data-mag href={C.GITHUB} target="_blank" rel="noopener">GitHub</a>
               <a data-mag href={C.LINKEDIN} target="_blank" rel="noopener">LinkedIn</a>
               <a data-mag href={C.WHOAMI} target="_blank" rel="noopener">whoami</a>
+	      <a data-mag href={C.GITLAB} target="_blank" rel="noopener">GitLab</a>
+              <a data-mag href={C.CODEBERG} target="_blank" rel="noopener">Codeberg</a>
             </div>
           </div>
         </section>
