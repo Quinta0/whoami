@@ -2,7 +2,7 @@
 export const EMAIL = '0pietroquintavalle0@gmail.com'
 export const GITHUB = 'https://github.com/Quinta0'
 export const LINKEDIN = 'https://linkedin.com/in/pietro-quintavalle'
-export const WHOAMI = '__NEW_URL__'
+export const WHOAMI = 'https://me.quintahomelab.org'
 export const GITLAB = 'https://gitlab.com/Quinta0'
 export const CODEBERG = 'https://codeberg.org/Quinta'
 
