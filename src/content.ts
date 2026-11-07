@@ -24,6 +24,15 @@ export type Shaped = { shape?: string; label?: string }
 
 export const jobs: (Shaped & { time: string; title: string; org: string; bullets: string[] })[] = [
   {
+    time: 'July to August 2026', title: 'Infrastructure and systems consultant', org: 'DEC Energy, startup, Switzerland',
+    shape: 'cluster', label: 'DEC Energy: two nodes, one GPU, one HBA',
+    bullets: [
+      'Designed and built the internal server infrastructure from scratch: a two-node Kubernetes cluster on the company\'s own hardware, hosting local LLM inference, accounting software and Gitea source control.',
+      'Selected, purchased and assembled every component of both servers and of the engineering team\'s workstations, with thermal stress tests and fan tuning for stable operation under load.',
+      'Tier-2 and Tier-3 support for servers and workstations.',
+    ],
+  },
+  {
     time: 'January 2020 to now', title: 'IT support technician', org: 'Private clients across Ticino, freelance',
     bullets: [
       'Built, configured and repaired more than 25 desktop and laptop systems: sourcing, assembly, Windows and Linux deployment, driver debugging, ongoing maintenance.',
