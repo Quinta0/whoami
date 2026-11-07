@@ -35,8 +35,9 @@ export const jobs: (Shaped & { time: string; title: string; org: string; bullets
   {
     time: 'January 2020 to now', title: 'IT support technician', org: 'Private clients across Ticino, freelance',
     bullets: [
-      'Built, configured and repaired more than 25 desktop and laptop systems: sourcing, assembly, Windows and Linux deployment, driver debugging, ongoing maintenance.',
-      'Remote and on-site support for hardware failures, software conflicts and local networking faults, with repair logs kept to stop issues recurring.',
+      'Built, configured and repaired more than 25 desktop and laptop systems, including board-level repairs: sourcing, assembly, Windows and Linux deployment, driver debugging, ongoing maintenance.',
+      'Cabled client networks and configured switches, routers, DNS, DHCP and VLAN segmentation, with VPN remote access for staff.',
+      'Remote and on-site support for hardware failures, software conflicts and local networking faults, with technical documentation kept for every client.',
     ],
   },
   {
