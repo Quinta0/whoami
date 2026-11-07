@@ -81,7 +81,7 @@ export const projects: (Shaped & { title: string; star?: string; text: string; s
 ]
 
 export const toolsRowA = ['Proxmox VE', 'TrueNAS', 'ZFS', 'UNRAID', 'Kubernetes', 'Docker', 'LXC', 'KVM', 'Ansible', 'GitHub Actions', 'Bash', 'PowerShell', 'Debian', 'Arch', 'NixOS', 'Windows Server', 'Active Directory']
-export const toolsRowB = ['WireGuard', 'Tailscale', 'Cloudflare Tunnels', 'UniFi', 'VLANs', 'iptables', 'Fail2Ban', 'AdGuard Home', 'Grafana', 'Prometheus', 'Uptime Kuma', 'Spring Boot', 'TypeScript', 'llama.cpp', 'Rust', 'C']
+export const toolsRowB = ['WireGuard', 'Tailscale', 'Cloudflare Tunnels', 'UniFi', 'VLANs', 'iptables', 'Fail2Ban', 'AdGuard Home', 'Grafana', 'Prometheus', 'Uptime Kuma', 'Gitea', 'Cloudflare R2', 'Spring Boot', 'TypeScript', 'llama.cpp', 'Rust', 'C']
 
 export const education = [
   { title: 'BSc Economics, English stream', text: 'Università della Svizzera italiana, Lugano, since September 2024. Microeconomics, game theory, quantitative finance, statistics, financial modelling.' },
