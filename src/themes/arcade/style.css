@@ -112,3 +112,5 @@ a:focus-visible, button:focus-visible, .row:focus-visible { outline: 2px solid v
   .row { grid-template-columns: minmax(0, 1fr); gap: var(--space-xs); }
   .star { text-align: left; }
 }
+
+.oss-intro { margin: calc(-1 * var(--space-md)) 0 var(--space-xl); max-width: 60ch; color: var(--color-ink-2); }
