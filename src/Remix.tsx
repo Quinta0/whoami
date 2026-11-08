@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import css from './remix.css?inline'
 
-// every style is its own chunk; three.js only loads when Particles is dealt
+// every style is its own chunk; three.js only loads when Particles is shown
 const STYLES = [
   { id: 'particles', name: 'Particles', C: lazy(() => import('./App')) },
   { id: 'terminal', name: 'Terminal', C: lazy(() => import('./themes/terminal')) },
@@ -16,12 +16,12 @@ const KEY = 'pq-style'
 const byId = (id: string | null) => STYLES.findIndex(s => s.id === id)
 const store = { get: () => { try { return localStorage.getItem(KEY) } catch { return null } }, set: (v: string) => { try { localStorage.setItem(KEY, v) } catch { /* private mode */ } } }
 
-// ?style= wins, then the last one seen, then a random deal
+// ?style= wins, then the last one seen, then the first
 function initial() {
   const q = byId(new URLSearchParams(location.search).get('style'))
   if (q >= 0) return q
   const s = byId(store.get())
-  return s >= 0 ? s : Math.floor(Math.random() * STYLES.length)
+  return Math.max(s, 0)
 }
 
 export default function Remix() {
@@ -34,10 +34,8 @@ export default function Remix() {
     document.documentElement.dataset.style = cur.id
   }, [cur.id])
 
-  const shuffle = () => {
-    const n = (i + 1 + Math.floor(Math.random() * (STYLES.length - 1))) % STYLES.length
-    setI(n); scrollTo({ top: 0 })
-  }
+  const next = STYLES[(i + 1) % STYLES.length]
+  const go = () => { setI((i + 1) % STYLES.length); scrollTo({ top: 0 }) }
 
   return (
     <>
@@ -47,7 +45,9 @@ export default function Remix() {
       </Suspense>
       <div className="remix" role="group" aria-label="Page style">
         <span className="remix-name" aria-live="polite">{cur.name}, {i + 1} of {STYLES.length}</span>
-        <button className="remix-btn" onClick={shuffle}>Shuffle style</button>
+        <button className="remix-btn" onClick={go} aria-label={`Next style: ${next.name}`} title={`Next: ${next.name}`}>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" /></svg>
+        </button>
       </div>
     </>
   )
