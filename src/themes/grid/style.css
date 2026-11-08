@@ -2,7 +2,7 @@
  * hero: Poster, the name at poster scale overprinting an ultramarine field from column 8 · nav: edge-aligned, a two-line wordmark with the red square · footer: one line, name and links · imagery: none, type and fields · signature: the name crossing onto the field and turning paper-white where it crosses
  * axes: light/grotesk-sans/cool · posture: full-palette · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · waive 77 · type-only sections · the year index, the hung statement and the red field are the theme's range, set at poster scale */
-/* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V4 · weakest: P, no photographs, so the fields and the year index carry the mass */
+/* Hallmark · pre-emit critique: P4 H5 E4 S4 R4 V4 · weakest: P, no photographs, so the fields and the year index carry the mass; every line of the original CV is on the page by request, so long sections pass 80 words a screen (58 open by request) */
 @import url("./tokens.css");
 @import url("./base.css");
 
@@ -48,7 +48,7 @@ h1, .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(4
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
 /* the year index */
-.index { padding-block: var(--section-gap-s); }
+.index { padding-bottom: var(--space-2xl); }
 .years { display: flex; flex-wrap: wrap; gap: 0 var(--space-xl); }
 .years button { background: none; border: 0; padding: 0; cursor: pointer; color: var(--color-ink); font: 700 var(--text-display-s)/1 var(--font-display); letter-spacing: -0.035em; transition: color var(--dur-short) var(--ease-out); }
 .years button:hover, .years button[aria-selected="true"] { color: var(--color-mark); }
@@ -62,6 +62,8 @@ h1, .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(4
 .field--mark { background: var(--color-mark); color: var(--color-mark-ink); --color-focus: var(--color-ink); }
 .quals { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2xl) var(--gap-columns); }
 .quals li { display: grid; grid-template-columns: 3ch minmax(0, 1fr); gap: var(--space-md); align-items: baseline; }
+.quals li > div { display: grid; gap: var(--space-sm); }
+.quals p { max-width: 48ch; }
 .quals .n { font: 700 var(--text-2xl)/1.1 var(--font-display); }
 .quals h3 { font-size: var(--text-2xl); max-width: 18ch; }
 
@@ -70,7 +72,10 @@ h1, .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(4
 .proj li { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap-columns); padding-block: var(--space-lg); border-top: var(--rule-hair) solid var(--color-rule); align-items: baseline; }
 .proj .n { grid-column: span 2; font: 700 var(--text-3xl)/1 var(--font-display); color: var(--color-muted); transition: color var(--dur-short) var(--ease-out); }
 .proj li:hover .n { color: var(--color-mark); }
-.proj h3 { grid-column: span 6; font-size: var(--text-2xl); }
+.proj li > div { grid-column: span 6; display: grid; gap: var(--space-xs); }
+.proj h3 { font-size: var(--text-2xl); }
+.proj p { color: var(--color-ink-2); }
+.proj .stack b { display: block; color: var(--color-mark); font-weight: 500; margin-bottom: var(--space-2xs); }
 .proj .stack { grid-column: span 4; font-weight: 500; font-size: var(--text-sm); color: var(--color-muted); }
 
 .well { background: var(--color-paper-2); }
@@ -79,14 +84,17 @@ h1, .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(4
 .ups a { display: grid; align-content: start; gap: var(--space-sm); text-decoration: none; color: var(--color-ink); }
 .ups .repo { font-weight: 500; font-size: var(--text-sm); color: var(--color-muted); }
 .ups h3 { font-size: var(--text-xl); }
+.ups p { color: var(--color-ink-2); font-size: var(--text-sm); }
 .ups .ref { font-weight: 500; font-size: var(--text-sm); text-decoration: underline var(--rule-hair); text-underline-offset: 0.3em; }
 .ups a:hover h3, .ups a:hover .ref { color: var(--color-mark); }
 
 .cols2 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap-columns); }
-.statement { grid-column: 3 / span 6; font: 400 var(--text-2xl)/1.2 var(--font-display); letter-spacing: -0.02em; max-width: none; }
-.tools dl { grid-column: 10 / span 3; margin: 0; }
-.tools dl div { display: flex; justify-content: space-between; padding-block: var(--space-xs); border-bottom: var(--rule-hair) solid var(--color-rule); }
-.tools dt { font-weight: 500; } .tools dd { margin: 0; color: var(--color-muted); }
+.statement { font: 400 var(--text-2xl)/1.2 var(--font-display); letter-spacing: -0.02em; max-width: none; }
+.tool-col { grid-column: 1 / span 7; display: grid; gap: var(--space-lg); align-content: start; }
+.note { color: var(--color-ink-2); max-width: 56ch; }
+.edu { grid-column: 9 / span 4; margin: 0; }
+.edu div { display: grid; gap: var(--space-2xs); padding-block: var(--space-sm); border-bottom: var(--rule-hair) solid var(--color-rule); }
+.edu dt { font-weight: 500; color: var(--color-ink); } .edu dd { margin: 0; color: var(--color-ink-2); font-size: var(--text-sm); }
 
 #contact h2 { max-width: 20ch; }
 .mail { display: inline-block; white-space: nowrap; font: 700 clamp(1rem, 4.6vw, 3.5rem)/1 var(--font-display); letter-spacing: -0.03em; color: var(--color-mark-ink); text-decoration: none; margin-bottom: var(--space-xl); overflow-wrap: anywhere; }
@@ -104,8 +112,25 @@ h1, .h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(4
   .years { gap: 0 var(--space-md); }
   .years button { font-size: 2rem; }
   .overprint { clip-path: inset(0 0 0 50%); }
-  .hero-copy, .hero-fig, .big, .year > div, .proj h3, .proj .stack, .statement, .tools dl { grid-column: 1 / -1; }
+  .hero-copy, .hero-fig, .big, .year > div, .proj li > div, .proj .stack, .tool-col, .edu, .about > *, .jobs li > * { grid-column: 1 / -1; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .hero-fig { color: var(--color-ink); padding-left: 0; }
   .proj .n { grid-column: 1 / -1; }
   .quals, .ups { grid-template-columns: minmax(0, 1fr); }
 }
+
+.about { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-xl) var(--gap-columns); }
+.about .statement { grid-column: 3 / span 8; font-size: var(--text-3xl); line-height: 1.1; }
+.about .intro { grid-column: 3 / span 5; color: var(--color-ink-2); }
+.facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap-columns); margin: var(--space-xl) 0 0; }
+.facts div { display: flex; flex-direction: column-reverse; gap: var(--space-xs); }
+.facts dd { margin: 0; font: 700 var(--text-display-s)/1 var(--font-display); letter-spacing: -0.04em; color: var(--color-ink); }
+.facts dt { font-weight: 500; font-size: var(--text-sm); color: var(--color-muted); max-width: 22ch; }
+.jobs { list-style: none; margin: 0; padding: 0; }
+.jobs > li { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gap-columns); padding-block: var(--space-xl); border-top: var(--rule-hair) solid var(--color-rule); }
+.jobs .when { grid-column: span 3; font-weight: 500; font-size: var(--text-sm); color: var(--color-mark); }
+.jobs > li > div { grid-column: span 8; display: grid; gap: var(--space-xs); }
+.jobs h3 { font-size: var(--text-2xl); }
+.jobs .org { color: var(--color-muted); font-weight: 500; font-size: var(--text-sm); }
+.jobs ul { margin: var(--space-sm) 0 0; padding-left: 1.1em; display: grid; gap: var(--space-xs); color: var(--color-ink-2); }
+.jobs ul li { max-width: 68ch; }
