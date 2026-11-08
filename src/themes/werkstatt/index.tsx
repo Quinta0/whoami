@@ -105,6 +105,7 @@ export default function Werkstatt() {
 
         <section id="upstream" className="container block">
           <h2>Merged upstream</h2>
+          <p className="oss-intro">{C.ossIntro}</p>
           <table className="tbl">
             <thead><tr><th scope="col">Shop</th><th scope="col">Contribution</th><th scope="col">Reference</th></tr></thead>
             <tbody>
