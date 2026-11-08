@@ -101,3 +101,5 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-focus); o
   .stories article + article, .records > div + div { border-left: 0; padding-left: 0; border-top: var(--rule-hair) solid var(--color-rule); padding-top: var(--space-lg); }
   .agate { text-align: left; }
 }
+
+.oss-intro { margin: calc(-1 * var(--space-md)) 0 var(--space-xl); max-width: 60ch; color: var(--color-ink-2); }

@@ -63,6 +63,7 @@ export default function Newsprint() {
         <section id="upstream" className="well">
           <div className="container block-in">
             <h2>Upstream report</h2>
+            <p className="oss-intro">{C.ossIntro}</p>
             <div className="stories">
               {C.oss.map(o => (
                 <article key={o.href}>
