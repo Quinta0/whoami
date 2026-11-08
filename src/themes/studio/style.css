@@ -2,7 +2,7 @@
  * hero: Split, head on columns 1 to 5, the project deck on 7 to 12, on the proof grid · nav: wordmark, a live Ticino clock and four links · footer: a proof strip with links, the clock and back to top · imagery: none, the work as printed cards · signature: five projects as a crop-marked deck you drag through, each card leading with its outcome
  * axes: light/serif/cadmium · posture: restrained · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · waive 77 · the tool ticker · a belt of tool names at display size is the object, after the reference portfolio's stack ticker */
-/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: P, no photographs, so the deck, the year sheet and the ticker are the objects */
+/* Hallmark · pre-emit critique: P4 H4 E4 S5 R4 V4 · weakest: P, no photographs, so the deck, the year sheet and the ticker are the objects; every line of the CV is on the page by request, so long sections pass 80 words a screen (58 open by request) */
 @import url("./tokens.css");
 @import url("./base.css");
 
@@ -60,6 +60,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .card:focus-visibl
 .card h3 { font-size: var(--text-3xl); line-height: 1.02; max-width: 14ch; }
 .card .file { font-weight: 500; font-size: var(--text-sm); color: var(--color-muted); font-variant-numeric: tabular-nums; }
 .card .name { font-weight: 500; color: var(--color-ink); }
+.card .ptext { font-size: var(--text-sm); line-height: 1.5; }
 .card .stack { font-size: var(--text-sm); color: var(--color-muted); }
 .deck-ctl { display: flex; align-items: center; gap: var(--space-sm); flex-wrap: wrap; justify-content: center; }
 .hint { font-size: var(--text-sm); color: var(--color-muted); margin-right: var(--space-sm); }
@@ -67,9 +68,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .card:focus-visibl
 
 .block { padding-top: var(--section-gap-s); }
 .quals ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-xl); }
-.quals li { display: grid; align-content: space-between; min-height: 200px; gap: var(--space-md); padding: var(--space-lg); background: var(--color-paper-hi); border-radius: var(--radius-card); box-shadow: var(--shadow-sheet); }
+.quals li { display: grid; align-content: space-between; gap: var(--space-lg); min-height: 200px; gap: var(--space-md); padding: var(--space-lg); background: var(--color-paper-hi); border-radius: var(--radius-card); box-shadow: var(--shadow-sheet); }
 .quals .fig { font-weight: 500; font-size: var(--text-sm); color: var(--color-muted); }
 .quals h3 { font-size: var(--text-xl); }
+.quals li > div { display: grid; gap: var(--space-sm); }
+.quals li p { font-size: var(--text-sm); }
 
 .set { border-top: var(--rule-hair) solid var(--color-ink); }
 .set details { border-bottom: var(--rule-hair) solid var(--color-rule); }
@@ -120,3 +123,41 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .card:focus-visibl
   .set summary { grid-template-columns: minmax(0, 1fr); gap: var(--space-2xs); }
   .set .meta { text-align: left; }
 }
+
+.about { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-xl) var(--gap-columns); }
+.tagline { grid-column: 1 / span 9; font: 400 var(--text-3xl)/1.15 var(--font-display); letter-spacing: -0.015em; color: var(--color-ink); max-width: none; }
+.intro { grid-column: 1 / span 6; }
+.facts { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-xl); margin: var(--space-lg) 0 0; }
+.facts div { display: grid; gap: var(--space-xs); padding: var(--space-lg); background: var(--color-paper-hi); border-radius: var(--radius-card); box-shadow: var(--shadow-sheet); }
+.facts dd { margin: 0; font: 400 var(--text-display-s)/1 var(--font-display); color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.facts dt { font-weight: 500; font-size: var(--text-sm); color: var(--color-muted); }
+.job, .up { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--gap-columns); padding-block: var(--space-xl); border-bottom: var(--rule-hair) solid var(--color-rule); }
+.up { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); }
+.job > div, .up > div { display: grid; gap: var(--space-sm); }
+.job h3, .up h3 { font-size: var(--text-2xl); }
+.job .org { font-weight: 500; font-size: var(--text-sm); color: var(--color-muted); }
+.job ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--space-xs); }
+.job li, .up p { max-width: 66ch; }
+.up a { font-weight: 500; color: var(--color-ink); text-decoration-color: var(--color-accent); }
+.up .meta { text-align: right; }
+.plist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2xl) var(--gap-columns); border-top: var(--rule-hair) solid var(--color-ink); padding-top: var(--space-xl); }
+.plist article:first-child { grid-column: 1 / -1; }
+.plist article:first-child > p { max-width: 70ch; }
+.sub { font-size: var(--text-3xl); margin: var(--section-gap-s) 0 var(--space-xl); }
+.plist article { display: grid; align-content: start; gap: var(--space-sm); }
+.plist .star { font-weight: 500; font-size: var(--text-sm); color: var(--color-ink); }
+.edu { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-xl) var(--gap-columns); margin: var(--space-2xl) 0 0; border-top: var(--rule-hair) solid var(--color-ink); padding-top: var(--space-xl); }
+.edu div { display: grid; gap: var(--space-xs); align-content: start; }
+.edu dt { font-family: var(--font-display); font-size: var(--text-lg); color: var(--color-ink); line-height: 1.15; }
+.edu dd { margin: 0; font-size: var(--text-sm); }
+.bench-note { margin-top: var(--space-xl); max-width: 62ch; }
+.ink-links { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-xl); margin-top: var(--space-xl); }
+.ink-links a { color: var(--color-paper); font-weight: 500; text-decoration: underline var(--color-accent) 2px; text-underline-offset: 0.3em; }
+.ink-links a:hover { text-decoration-thickness: 4px; }
+@media (max-width: 60rem) {
+  .tagline, .intro { grid-column: 1 / -1; }
+  .facts, .edu { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .job, .up, .plist { grid-template-columns: minmax(0, 1fr); }
+  .up .meta { text-align: left; }
+}
+@media (max-width: 40rem) { .facts, .edu { grid-template-columns: minmax(0, 1fr); } }
