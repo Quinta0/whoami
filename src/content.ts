@@ -98,3 +98,4 @@ export const skillsNote = 'Also on the bench: Rust, C, C++, Python and SQL for d
 export const status = 'Italian national, Swiss Permit C, born 2001.'
 export const contactHead = 'Need someone who can rack it, image it, and keep it up?'
 export const links: [string, string][] = [['GitHub', GITHUB], ['LinkedIn', LINKEDIN], ['whoami', WHOAMI], ['GitLab', GITLAB], ['Codeberg', CODEBERG]]
+export const ossIntro = 'Upstream contributions to projects that sit between hardware and the kernel.'

@@ -152,6 +152,7 @@ export default function Studio() {
             ))}
           </div>
           <h3 className="sub" id="upstream">Merged upstream</h3>
+          <p className="oss-intro">{C.ossIntro}</p>
           <div className="set">
             {C.oss.map(o => (
               <article key={o.href} className="up">

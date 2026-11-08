@@ -161,3 +161,5 @@ a:focus-visible, button:focus-visible, summary:focus-visible, .card:focus-visibl
   .up .meta { text-align: left; }
 }
 @media (max-width: 40rem) { .facts, .edu { grid-template-columns: minmax(0, 1fr); } }
+
+.oss-intro { margin: calc(-1 * var(--space-md)) 0 var(--space-xl); max-width: 60ch; color: var(--color-ink-2); }
