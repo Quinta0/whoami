@@ -41,8 +41,9 @@ export default function ParticleScene({ keyframes, onLabel, onProgress }: Props)
 
     const g = new THREE.BufferGeometry()
     const rand = new Float32Array(COUNT); for (let i = 0; i < COUNT; i++) rand[i] = Math.random()
-    g.setAttribute('position', new THREE.BufferAttribute(shapeRack(COUNT), 3))
-    g.setAttribute('aP0', new THREE.BufferAttribute(shapeRack(COUNT), 3))
+    const rack = shapeRack(COUNT) // position is only read by three, the shader morphs from aP0
+    g.setAttribute('position', new THREE.BufferAttribute(rack, 3))
+    g.setAttribute('aP0', new THREE.BufferAttribute(rack, 3))
     g.setAttribute('aP1', new THREE.BufferAttribute(shapeKnot(COUNT), 3))
     g.setAttribute('aP2', new THREE.BufferAttribute(shapeGlobe(COUNT), 3))
     g.setAttribute('aP3', new THREE.BufferAttribute(shapeText(COUNT), 3))
@@ -57,6 +58,7 @@ export default function ParticleScene({ keyframes, onLabel, onProgress }: Props)
     }
     const material = new THREE.ShaderMaterial({ uniforms, vertexShader: vert, fragmentShader: frag, transparent: true, depthWrite: false, blending: THREE.NormalBlending })
     const points = new THREE.Points(g, material)
+    points.frustumCulled = false // the vertex shader moves every particle, so the CPU bounding sphere is wrong anyway
     group.add(points)
 
     const resize = () => {
