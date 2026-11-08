@@ -37,7 +37,7 @@ export default function Blueprint() {
 
       <header className="nav container">
         <a href="#top" className="mark">Pietro Quintavalle</a>
-        <nav aria-label="Sections"><a href="#register">Projects</a><a href="#upstream">Upstream</a><a href="#stages">Stages</a><a href="#contact">Contact</a></nav>
+        <nav aria-label="Sections"><a href="#stages">Work</a><a href="#register">Projects</a><a href="#upstream">Upstream</a><a href="#contact">Contact</a></nav>
       </header>
 
       <main id="top">
@@ -63,10 +63,47 @@ export default function Blueprint() {
           </figure>
         </section>
 
-        <section className="figs container" aria-label="Figures">
-          {C.facts.map(f => (
-            <div key={f.label}><b>{f.prefix ?? ''}{f.n}{f.prefix ? '' : '+'}</b><span>{f.label}</span></div>
-          ))}
+        <section className="container notes-sec" aria-label="General notes and figures">
+          <div className="notes">
+            <p className="num">Note 1</p><p className="tag">{C.tagline}</p>
+            <p className="num">Note 2</p><p>{C.intro}</p>
+          </div>
+          <div className="figs">
+            {C.facts.map(f => (
+              <div key={f.label}><b>{f.prefix ?? ''}{f.n}{f.prefix ? '' : '+'}</b><span>{f.label}</span></div>
+            ))}
+          </div>
+        </section>
+
+        <section className="block container spec">
+          <h2>Specification</h2>
+          <ul className="cells">
+            {C.qualities.map(q => <li key={q.title}><h3>{q.title}</h3><p>{q.text}</p></li>)}
+          </ul>
+        </section>
+
+        <section id="stages" className="block container">
+          <h2>Stages and schedule of works</h2>
+          <div className="run">
+            <div className="dim" aria-hidden="true" />
+            <ol>
+              {STAGES.map(s => <li key={s.y}><span className="num">{s.y}</span><p className="st">{s.t}</p></li>)}
+            </ol>
+          </div>
+          <table className="reg sched">
+            <thead><tr><th scope="col">Period</th><th scope="col">Work</th></tr></thead>
+            <tbody>
+              {C.jobs.map(j => (
+                <tr key={j.title}>
+                  <td className="num">{j.time}</td>
+                  <td><b className="row-h">{j.title}</b><span className="note">{j.org}</span><ul>{j.bullets.map(b => <li key={b}>{b}</li>)}</ul></td>
+                </tr>
+              ))}
+              {C.education.map(e => (
+                <tr key={e.title}><td className="num">Education</td><td><b className="row-h">{e.title}</b><span className="note">{e.text}</span></td></tr>
+              ))}
+            </tbody>
+          </table>
         </section>
 
         <section id="register" className="block container">
@@ -77,7 +114,7 @@ export default function Blueprint() {
               {C.projects.map((p, i) => (
                 <tr key={p.title}>
                   <td className="num">P-{String(i + 1).padStart(2, '0')}</td>
-                  <th scope="row">{p.title}{p.star && <span className="note">{p.star}</span>}</th>
+                  <th scope="row">{p.title}{p.star && <span className="note">{p.star}</span>}<span className="desc">{p.text}</span></th>
                   <td>{p.stack}</td>
                 </tr>
               ))}
@@ -93,6 +130,7 @@ export default function Blueprint() {
                 <a key={o.href} href={o.href} target="_blank" rel="noopener">
                   <span className="num">{o.ref}</span>
                   <h3>{o.title}</h3>
+                  <p className="otext">{o.text}</p>
                   <span className="repo">{o.repo}</span>
                 </a>
               ))}
@@ -100,25 +138,26 @@ export default function Blueprint() {
           </div>
         </section>
 
-        <section id="stages" className="block container">
-          <h2>Stages</h2>
-          <div className="run">
-            <div className="dim" aria-hidden="true" />
-            <ol>
-              {STAGES.map(s => <li key={s.y}><span className="num">{s.y}</span><p className="st">{s.t}</p></li>)}
-            </ol>
+        <section id="materials" className="block container">
+          <h2>Materials and credentials</h2>
+          <div className="mat">
+            <div className="fig mat-list">
+              <p className="num">Platform, storage, automation</p>
+              <p>{C.toolsRowA.join(', ')}</p>
+              <p className="num">Network, security, monitoring, code</p>
+              <p>{C.toolsRowB.join(', ')}</p>
+              <p className="mat-note">{C.skillsNote}</p>
+            </div>
+            <dl className="creds">
+              <div><dt>Certifications</dt><dd>{C.certifications}</dd></div>
+              <div><dt>Languages</dt><dd>{C.languages.map(([l, lv]) => `${l} ${lv}`).join(', ')}</dd></div>
+              <div><dt>Status</dt><dd>{C.status}</dd></div>
+            </dl>
           </div>
         </section>
 
-        <section className="block container spec">
-          <h2>Specification</h2>
-          <ul className="cells">
-            {C.qualities.map(q => <li key={q.title}><h3>{q.title}</h3></li>)}
-          </ul>
-        </section>
-
         <section id="contact" className="block container contact">
-          <h2>Need someone who can rack it, image it and keep it up?</h2>
+          <div className="contact-l"><h2>{C.contactHead}</h2><a className="mailto" href={`mailto:${C.EMAIL}`}>{C.EMAIL}</a></div>
           <TitleBlock />
         </section>
       </main>
@@ -127,8 +166,8 @@ export default function Blueprint() {
         <dl>
           <div><dt>Drawn by</dt><dd>Pietro Quintavalle</dd></div>
           <div><dt>Location</dt><dd>Monte Carasso, Ticino</dd></div>
-          <div><dt>Languages</dt><dd>{C.languages.slice(0, 3).map(([l]) => l).join(', ')}</dd></div>
-          <div><dt>Elsewhere</dt><dd className="links"><a href={C.GITHUB}>GitHub</a><a href={C.GITLAB}>GitLab</a><a href={C.CODEBERG}>Codeberg</a><a href={C.LINKEDIN}>LinkedIn</a></dd></div>
+          <div><dt>Status</dt><dd>Swiss Permit C</dd></div>
+          <div><dt>Elsewhere</dt><dd className="links">{C.links.map(([n, h]) => <a key={n} href={h} target="_blank" rel="noopener">{n}</a>)}</dd></div>
         </dl>
       </footer>
     </div>
