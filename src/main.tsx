@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import Theme from './themes/studio'
+import Remix from './Remix'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Theme />
+    <Remix />
   </StrictMode>,
 )

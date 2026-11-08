@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import css from './index.css?inline'
 import ParticleScene, { SHAPE_NAMES } from './scene/ParticleScene'
 import { usePageMotion } from './usePageMotion'
 import * as C from './content'
@@ -41,6 +42,7 @@ export default function App() {
 
   return (
     <>
+      <style>{css}</style>
       <ParticleScene keyframes={KEYFRAMES} onLabel={onLabel} onProgress={onProgress} />
       <div className="grain" aria-hidden="true" />
       <div className="vignette" aria-hidden="true" />

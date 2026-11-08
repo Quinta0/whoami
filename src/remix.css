@@ -1,0 +1,18 @@
+/* Hallmark · component: the style switcher, borrowing whichever theme is dealt (--color-* in the four Hallmark styles, --fg and --bg in Particles) · v2.0.0 */
+/* Hallmark · pre-emit critique: one control, one label, the theme's own ink and paper · weakest: it sits over every page, so it stays small and in the corner */
+:root {
+  --remix-ink: var(--color-ink, var(--fg));
+  --remix-paper: var(--color-paper, var(--bg));
+  --remix-font: var(--font-body, var(--body));
+  --remix-focus: var(--color-focus, var(--amber));
+}
+.remix { position: fixed; right: 16px; bottom: 16px; z-index: 900; display: flex; align-items: center; gap: 12px; padding: 6px 6px 6px 14px; background: var(--remix-paper); color: var(--remix-ink); border: 1px solid var(--remix-ink); font-family: var(--remix-font); font-size: 0.875rem; cursor: auto; }
+.remix-name { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.remix-btn { min-height: 44px; padding: 0 16px; border: 0; background: var(--remix-ink); color: var(--remix-paper); font: 500 0.875rem/1 var(--remix-font); cursor: pointer; transition: opacity 120ms ease-out, transform 120ms ease-out; }
+.remix-btn:hover { opacity: 0.85; }
+.remix-btn:active { transform: translateY(1px); }
+.remix-btn:focus-visible { outline: 2px solid var(--remix-focus); outline-offset: 2px; }
+.remix-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.remix-wait { min-height: 100svh; background: var(--remix-paper); }
+@media (max-width: 40rem) { .remix-name { display: none; } }
+@media (prefers-reduced-motion: reduce) { .remix-btn { transition: none; } }
