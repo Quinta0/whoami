@@ -24,10 +24,20 @@ export type Shaped = { shape?: string; label?: string }
 
 export const jobs: (Shaped & { time: string; title: string; org: string; bullets: string[] })[] = [
   {
+    time: 'July to August 2026', title: 'Infrastructure and systems consultant', org: 'DEC Energy, startup, Switzerland',
+    shape: 'cluster', label: 'DEC Energy: two nodes, one GPU, one HBA',
+    bullets: [
+      'Designed and built the internal server infrastructure from scratch: a two-node Kubernetes cluster on the company\'s own hardware, hosting local LLM inference, accounting software and Gitea source control.',
+      'Selected, purchased and assembled every component of both servers and of the engineering team\'s workstations, with thermal stress tests and fan tuning for stable operation under load.',
+      'Tier-2 and Tier-3 support for servers and workstations.',
+    ],
+  },
+  {
     time: 'January 2020 to now', title: 'IT support technician', org: 'Private clients across Ticino, freelance',
     bullets: [
-      'Built, configured and repaired more than 25 desktop and laptop systems: sourcing, assembly, Windows and Linux deployment, driver debugging, ongoing maintenance.',
-      'Remote and on-site support for hardware failures, software conflicts and local networking faults, with repair logs kept to stop issues recurring.',
+      'Built, configured and repaired more than 25 desktop and laptop systems, including board-level repairs: sourcing, assembly, Windows and Linux deployment, driver debugging, ongoing maintenance.',
+      'Cabled client networks and configured switches, routers, DNS, DHCP and VLAN segmentation, with VPN remote access for staff.',
+      'Remote and on-site support for hardware failures, software conflicts and local networking faults, with technical documentation kept for every client.',
     ],
   },
   {
@@ -66,6 +76,9 @@ export const projects: (Shaped & { title: string; star?: string; text: string; s
   { title: 'Homelab as code', shape: 'homelab', label: 'Homelab as code: nine bays, twelve users, no open ports',
     text: 'Four production hosts rebuilt from bare metal by Ansible in under thirty minutes. Twelve-plus daily users, no exposed WAN ports: Cloudflare Tunnels, WireGuard, SSO with 2FA and Fail2Ban on every node.',
     stack: 'Ansible, Docker Compose, UNRAID, Grafana, Prometheus' },
+  { title: 'Community revival of a mobile game', shape: 'revival', label: 'Game revival: before and after, 14,000 players live',
+    text: 'Profiled the C++ game server under 14,000+ active players: peak capacity from 210 to 266 req/s, CPU per request down 33%, p95 at ~200 req/s from 747 ms to 66 ms, verified by diffing 400 responses and the final database between versions. Players felt it: login from 23 s to 9.7 s, the achievements screen from 7.2 s to 2.3 s, average server CPU from over 300% to about 230%. Cut CI from ~30 minutes to ~1 with ccache, vcpkg and cargo caching, and traced ~70% of the Cloudflare bill to a Worker; moving downloads to R2 more than halved Worker costs.',
+    stack: 'C++, Drogon, SQLite, GitHub Actions, Docker, Cloudflare Workers and R2' },
   { title: 'Turnkey TrueNAS rack', shape: 'nas', label: 'Client rack: the cabinet that opens this page',
     text: 'A 19-inch cabinet for a private client: patch panels, storage chassis and nine drive bays, every cable run dressed and labelled. TrueNAS on top with ZFS RAID 10, per-user ACLs and offsite snapshots for a sub-30-minute recovery target.',
     stack: 'TrueNAS, ZFS, rack infrastructure, structured cabling' },
@@ -81,7 +94,7 @@ export const projects: (Shaped & { title: string; star?: string; text: string; s
 ]
 
 export const toolsRowA = ['Proxmox VE', 'TrueNAS', 'ZFS', 'UNRAID', 'Kubernetes', 'Docker', 'LXC', 'KVM', 'Ansible', 'GitHub Actions', 'Bash', 'PowerShell', 'Debian', 'Arch', 'NixOS', 'Windows Server', 'Active Directory']
-export const toolsRowB = ['WireGuard', 'Tailscale', 'Cloudflare Tunnels', 'UniFi', 'VLANs', 'iptables', 'Fail2Ban', 'AdGuard Home', 'Grafana', 'Prometheus', 'Uptime Kuma', 'Spring Boot', 'TypeScript', 'llama.cpp', 'Rust', 'C']
+export const toolsRowB = ['WireGuard', 'Tailscale', 'Cloudflare Tunnels', 'UniFi', 'VLANs', 'iptables', 'Fail2Ban', 'AdGuard Home', 'Grafana', 'Prometheus', 'Uptime Kuma', 'Gitea', 'Cloudflare R2', 'Spring Boot', 'TypeScript', 'llama.cpp', 'Rust', 'C']
 
 export const education = [
   { title: 'BSc Economics, English stream', text: 'Università della Svizzera italiana, Lugano, since September 2024. Microeconomics, game theory, quantitative finance, statistics, financial modelling.' },
