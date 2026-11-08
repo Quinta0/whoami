@@ -51,7 +51,7 @@ function Deck() {
             <article key={p.title} className={`card crop${isTop ? ' top' : ''}`} style={style} aria-hidden={!isTop}
               onPointerDown={isTop ? down : undefined} onPointerMove={isTop ? move : undefined} onPointerUp={isTop ? up : undefined} onPointerCancel={isTop ? up : undefined}>
               <p className="file">{slug(p.title)}.md, {String(idx + 1).padStart(2, '0')} of {String(C.projects.length).padStart(2, '0')}</p>
-              {isTop && <><h3>{OUTCOME[p.title]}</h3><p className="name">{p.title}</p><p className="stack">{p.stack}</p></>}
+              {isTop && <><h3>{OUTCOME[p.title]}</h3><p className="name">{p.title}</p><p className="ptext">{p.text}</p><p className="stack">{p.stack}</p></>}
             </article>
           )
         })}
@@ -63,16 +63,6 @@ function Deck() {
       </div>
       <p className="visually-hidden" aria-live="polite">{top.title}</p>
     </div>
-  )
-}
-
-function Row({ o }: { o: (typeof C.oss)[number] }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <details onToggle={e => setOpen(e.currentTarget.open)}>
-      <summary><h3>{o.title}</h3><span className="meta">{o.repo}</span></summary>
-      {open && <div className="case"><p>{o.text}</p><a href={o.href} target="_blank" rel="noopener">Read {o.ref} on GitHub</a></div>}
-    </details>
   )
 }
 
@@ -100,7 +90,7 @@ export default function Studio() {
         <header className="nav container">
           <a href="#top" className="mark">Pietro Quintavalle</a>
           <Clock />
-          <nav aria-label="Sections"><a href="#work">Work</a><a href="#upstream">Upstream</a><a href="#years">Years</a><a href="#contact">Contact</a></nav>
+          <nav aria-label="Sections"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#upstream">Upstream</a><a href="#years">Years</a><a href="#contact">Contact</a></nav>
         </header>
 
         <section className="hero container" id="top">
@@ -117,25 +107,63 @@ export default function Studio() {
       </div>
 
       <main>
+        <section className="container block about">
+          <p className="tagline">{C.tagline}</p>
+          <p className="intro">{C.intro}</p>
+          <dl className="facts">
+            {C.facts.map(f => <div key={f.label} className="crop"><dd>{f.prefix ?? ''}{f.n}{f.prefix ? '' : '+'}</dd><dt>{f.label}</dt></div>)}
+          </dl>
+        </section>
+
         <section className="container block quals">
           <h2>What you get when you hire me</h2>
           <ol>
             {C.qualities.map((q, i) => (
               <li key={q.title} className="crop">
-                <h3>{q.title}</h3>
+                <div><h3>{q.title}</h3><p>{q.text}</p></div>
                 <span className="fig">Fig. {i + 1}</span>
               </li>
             ))}
           </ol>
         </section>
 
-        <section id="upstream" className="container block">
-          <h2>Merged upstream</h2>
-          <div className="set">{C.oss.map(o => <Row key={o.href} o={o} />)}</div>
+        <section id="experience" className="container block">
+          <h2>Experience</h2>
+          <div className="set">
+            {C.jobs.map(j => (
+              <article key={j.title} className="job">
+                <p className="meta">{j.time}</p>
+                <div><h3>{j.title}</h3><p className="org">{j.org}</p><ul>{j.bullets.map(b => <li key={b}>{b}</li>)}</ul></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="projects" className="container block">
+          <h2>Every card in the deck</h2>
+          <div className="plist">
+            {C.projects.map(p => (
+              <article key={p.title}>
+                <h3>{p.title}</h3>
+                {p.star && <p className="star">{p.star}</p>}
+                <p>{p.text}</p>
+                <p className="meta">{p.stack}</p>
+              </article>
+            ))}
+          </div>
+          <h3 className="sub" id="upstream">Merged upstream</h3>
+          <div className="set">
+            {C.oss.map(o => (
+              <article key={o.href} className="up">
+                <div><h3>{o.title}</h3><p>{o.text}</p><a href={o.href} target="_blank" rel="noopener">Read {o.ref} on GitHub</a></div>
+                <p className="meta">{o.repo}</p>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section id="years" className="container block">
-          <h2>Nine years on one sheet</h2>
+          <h2>Nine years on one sheet, and the schooling behind them</h2>
           <div className="cal" role="table" aria-label="What ran in which year">
             <div className="cal-row head" role="row">
               <span role="columnheader" className="cal-label" />
@@ -148,17 +176,25 @@ export default function Studio() {
               </div>
             ))}
           </div>
+          <dl className="edu">
+            {C.education.map(e => <div key={e.title}><dt>{e.title}</dt><dd>{e.text}</dd></div>)}
+            <div><dt>Certifications</dt><dd>{C.certifications}</dd></div>
+            <div><dt>Languages</dt><dd>{C.languages.map(([l, lv]) => `${l} ${lv}`).join(', ')}</dd></div>
+            <div><dt>Status</dt><dd>{C.status}</dd></div>
+          </dl>
         </section>
 
         <section className="block">
           <div className="container"><h2>On the bench</h2></div>
           <Ticker />
+          <div className="container"><p className="bench-note">{C.skillsNote}</p></div>
         </section>
 
         <section id="contact" className="ink">
           <div className="container">
-            <h2>Need someone who can rack it, image it and keep it up?</h2>
+            <h2>{C.contactHead}</h2>
             <a className="mail" href={`mailto:${C.EMAIL}`}>{C.EMAIL}</a>
+            <p className="ink-links">{C.links.map(([n, h]) => <a key={n} href={h} target="_blank" rel="noopener">{n}</a>)}</p>
           </div>
         </section>
       </main>
@@ -166,7 +202,7 @@ export default function Studio() {
       <footer className="foot proof">
         <div className="container foot-in">
           <span className="mark">Pietro Quintavalle</span>
-          <span className="links"><a href={C.GITHUB}>GitHub</a><a href={C.LINKEDIN}>LinkedIn</a><a href={C.GITLAB}>GitLab</a><a href={C.CODEBERG}>Codeberg</a></span>
+          <span className="links">{C.links.map(([n, h]) => <a key={n} href={h}>{n}</a>)}</span>
           <Clock />
           <a href="#top">Back to top</a>
         </div>
