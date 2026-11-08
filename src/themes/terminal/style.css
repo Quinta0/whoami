@@ -123,3 +123,5 @@ a:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visi
   .files .body { margin-left: 0; }
   .files .row .dim { text-align: left; }
 }
+
+.oss-intro { margin: calc(-1 * var(--space-md)) 0 var(--space-xl); max-width: 60ch; color: var(--color-ink-2); }
