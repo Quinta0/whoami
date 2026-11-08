@@ -13,8 +13,7 @@ function Index() {
   const [i, setI] = useState(1)
   const cur = YEARS[i]
   return (
-    <section className="index container" aria-labelledby="idx-h">
-      <h2 id="idx-h" className="visually-hidden">Timeline</h2>
+    <div className="index">
       <div className="years" role="tablist" aria-label="Years">
         {YEARS.map((y, n) => (
           <button key={y.y} role="tab" aria-selected={n === i} aria-controls="year-panel" onClick={() => setI(n)}>{y.y}</button>
@@ -24,7 +23,7 @@ function Index() {
         <b className="big" aria-hidden="true">{cur.y}</b>
         <div><h3>{cur.head}</h3><p>{cur.text}</p></div>
       </div>
-    </section>
+    </div>
   )
 }
 
@@ -36,7 +35,7 @@ export default function Grid() {
 
       <header className="nav container">
         <a href="#top" className="wordmark" aria-label="Pietro Quintavalle, top"><b>Pietro</b><span>Quintavalle</span></a>
-        <nav aria-label="Sections"><a href="#qualities">Approach</a><a href="#projects">Projects</a><a href="#upstream">Upstream</a><a href="#contact">Contact</a></nav>
+        <nav aria-label="Sections"><a href="#qualities">Approach</a><a href="#work">Experience</a><a href="#projects">Projects</a><a href="#upstream">Upstream</a><a href="#contact">Contact</a></nav>
       </header>
 
       <main id="top">
@@ -63,15 +62,34 @@ export default function Grid() {
           </div>
         </section>
 
-        <Index />
+        <section className="about container block">
+          <p className="statement">{C.tagline}</p>
+          <p className="intro">{C.intro}</p>
+          <dl className="facts">
+            {C.facts.map(f => <div key={f.label}><dt>{f.label}</dt><dd>{f.prefix ?? ''}{f.n}{f.prefix ? '' : '+'}</dd></div>)}
+          </dl>
+        </section>
 
         <section id="qualities" className="band field">
           <div className="container">
             <h2>What you get</h2>
             <ol className="quals">
-              {C.qualities.map((q, n) => <li key={q.title}><span className="n" aria-hidden="true">{n + 1}</span><h3>{q.title}</h3></li>)}
+              {C.qualities.map((q, n) => <li key={q.title}><span className="n" aria-hidden="true">{n + 1}</span><div><h3>{q.title}</h3><p>{q.text}</p></div></li>)}
             </ol>
           </div>
+        </section>
+
+        <section id="work" className="container block">
+          <h2>Experience</h2>
+          <Index />
+          <ol className="jobs">
+            {C.jobs.map(j => (
+              <li key={j.title}>
+                <p className="when">{j.time}</p>
+                <div><h3>{j.title}</h3><p className="org">{j.org}</p><ul>{j.bullets.map(b => <li key={b}>{b}</li>)}</ul></div>
+              </li>
+            ))}
+          </ol>
         </section>
 
         <section id="projects" className="container block">
@@ -80,8 +98,8 @@ export default function Grid() {
             {C.projects.map((p, n) => (
               <li key={p.title}>
                 <span className="n">{String(n + 1).padStart(2, '0')}</span>
-                <h3>{p.title}</h3>
-                <span className="stack">{p.star ?? p.stack}</span>
+                <div><h3>{p.title}</h3><p>{p.text}</p></div>
+                <span className="stack">{p.star && <b>{p.star}</b>}{p.stack}</span>
               </li>
             ))}
           </ol>
@@ -95,6 +113,7 @@ export default function Grid() {
                 <a key={o.href} href={o.href} target="_blank" rel="noopener">
                   <span className="repo">{o.repo}</span>
                   <h3>{o.title}</h3>
+                  <p>{o.text}</p>
                   <span className="ref">{o.ref}</span>
                 </a>
               ))}
@@ -103,20 +122,29 @@ export default function Grid() {
         </section>
 
         <section className="container block tools">
-          <h2>Tools and languages</h2>
+          <h2>Tools, education and languages</h2>
           <div className="cols2">
-            <p className="statement">{[...C.toolsRowA.slice(0, 9), ...C.toolsRowB.slice(0, 7)].join(', ')}.</p>
-            <dl>{C.languages.map(([l, lv]) => <div key={l}><dt>{l}</dt><dd>{lv}</dd></div>)}</dl>
+            <div className="tool-col">
+              <p className="statement">{C.toolsRowA.join(', ')}.</p>
+              <p className="statement">{C.toolsRowB.join(', ')}.</p>
+              <p className="note">{C.skillsNote}</p>
+            </div>
+            <dl className="edu">
+              {C.education.map(e => <div key={e.title}><dt>{e.title}</dt><dd>{e.text}</dd></div>)}
+              <div><dt>Certifications</dt><dd>{C.certifications}</dd></div>
+              <div><dt>Languages</dt><dd>{C.languages.map(([l, lv]) => `${l} ${lv}`).join(', ')}</dd></div>
+              <div><dt>Status</dt><dd>{C.status}</dd></div>
+            </dl>
           </div>
         </section>
 
         <section id="contact" className="band field--mark">
           <div className="container">
-            <h2>Need someone who can rack it, image it and keep it up?</h2>
+            <h2>{C.contactHead}</h2>
             <a className="mail" href={`mailto:${C.EMAIL}`}>{C.EMAIL}</a>
             <div className="actions">
               <a className="btn btn--primary" href={`mailto:${C.EMAIL}`}>Write to me</a>
-              <a className="btn btn--secondary" href={C.LINKEDIN} target="_blank" rel="noopener">LinkedIn</a>
+              {C.links.map(([n, h]) => <a key={n} className="btn btn--secondary" href={h} target="_blank" rel="noopener">{n}</a>)}
             </div>
           </div>
         </section>
@@ -124,7 +152,7 @@ export default function Grid() {
 
       <footer className="foot container">
         <span>Pietro Quintavalle, Monte Carasso, Ticino</span>
-        <span className="links"><a href={C.GITHUB}>GitHub</a><a href={C.GITLAB}>GitLab</a><a href={C.CODEBERG}>Codeberg</a><a href={C.WHOAMI}>whoami</a></span>
+        <span className="links">{C.links.map(([n, h]) => <a key={n} href={h}>{n}</a>)}</span>
       </footer>
     </div>
   )
