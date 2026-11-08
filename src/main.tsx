@@ -10,6 +10,6 @@ import Theme from './themes/terminal'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Theme />
+    <Remix />
   </StrictMode>,
 )
