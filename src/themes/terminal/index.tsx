@@ -13,6 +13,7 @@ const HELP: Line[] = [
   ['cat <file>', 'read one, tab completes'],
   ['upstream', 'merged work in other repos'],
   ['skills', 'the tools on the bench'],
+  ['education', 'schools and degrees'],
   ['contact', 'how to reach me'],
   ['clear', 'empty the screen'],
 ].map(([c, d]) => ({ k: 'out' as const, t: `  ${c.padEnd(12)} ${d}` }))
@@ -36,7 +37,8 @@ function run(raw: string): Line[] | 'clear' {
     }
     case 'upstream': return C.oss.flatMap(o => [{ k: 'out' as const, t: `${o.repo}  ${o.ref}` }, { k: 'dim' as const, t: `  ${o.title}` }])
     case 'skills': return [{ k: 'out', t: C.toolsRowA.join(', ') }, { k: 'out', t: C.toolsRowB.join(', ') }]
-    case 'contact': return [{ k: 'out', t: C.EMAIL }, { k: 'dim', t: C.GITHUB }, { k: 'dim', t: C.LINKEDIN }]
+    case 'contact': return [{ k: 'out', t: C.EMAIL }, ...C.links.map(([n, h]) => ({ k: 'dim' as const, t: `${n.toLowerCase().padEnd(10)}${h}` }))]
+    case 'education': return C.education.flatMap(e => [{ k: 'out' as const, t: e.title }, { k: 'dim' as const, t: `  ${e.text}` }])
     case 'sudo': return [{ k: 'err', t: 'you are not in the sudoers file, but my inbox is open: contact' }]
     case 'clear': return 'clear'
     default: return [{ k: 'err', t: `${cmd}: command not found, try help` }]
@@ -96,27 +98,6 @@ function Shell() {
   )
 }
 
-// body only mounts when open, so closed rows stay short
-function File({ name, p }: { name: string; p: (typeof C.projects)[number] }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <details onToggle={e => setOpen(e.currentTarget.open)}>
-      <summary><span className="arg">{name}</span><span>{p.title}</span><span className="dim">{p.star ?? p.stack.split(',')[0]}</span></summary>
-      {open && <><p>{p.text}</p><p className="dim">stack: {p.stack}</p></>}
-    </details>
-  )
-}
-
-function More({ items }: { items: string[] }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <details onToggle={e => setOpen(e.currentTarget.open)}>
-      <summary>git show, {items.length} lines</summary>
-      {open && <ul>{items.map(b => <li key={b}>{b}</li>)}</ul>}
-    </details>
-  )
-}
-
 function Mail() {
   const [subject, setSubject] = useState('')
   const [body, setBody] = useState('')
@@ -160,17 +141,30 @@ export default function Terminal() {
           ))}
         </section>
 
+        <section id="man" className="container block">
+          <h2>man pietro</h2>
+          <div className="prose">
+            <p>{C.intro}</p>
+            <p className="ink">{C.tagline}</p>
+          </div>
+          <dl className="man">
+            {C.qualities.map((q, i) => (
+              <div key={q.title}><dt><span className="arg">-{'dsrp'[i]}</span> {q.title}</dt><dd>{q.text}</dd></div>
+            ))}
+          </dl>
+        </section>
+
         <section id="work" className="container block">
           <h2>git log --author=pietro</h2>
           <ol className="log">
             {C.jobs.map(j => (
               <li key={j.title}>
                 <time>{j.time}</time>
-                <div><h3>{j.title}</h3><p className="dim">{j.org}</p><More items={j.bullets} /></div>
+                <div><h3>{j.title}</h3><p className="dim">{j.org}</p><ul>{j.bullets.map(b => <li key={b}>{b}</li>)}</ul></div>
               </li>
             ))}
             {C.education.map(e => (
-              <li key={e.title}><time>education</time><div><h3>{e.title}</h3><p className="dim">{e.text.split('. ')[0]}.</p></div></li>
+              <li key={e.title}><time>education</time><div><h3>{e.title}</h3><p className="dim">{e.text}</p></div></li>
             ))}
           </ol>
         </section>
@@ -180,7 +174,7 @@ export default function Terminal() {
           <div className="refs">
             {C.oss.map(o => (
               <a key={o.href} href={o.href} target="_blank" rel="noopener">
-                <span className="arg">{o.repo}</span><span className="t">{o.title}</span><span className="dim">{o.ref}</span>
+                <span className="arg">{o.repo}</span><span className="t">{o.title}<small>{o.text}</small></span><span className="dim">{o.ref}</span>
               </a>
             ))}
           </div>
@@ -190,18 +184,31 @@ export default function Terminal() {
           <h2>ls -l ~/projects</h2>
           <div className="files">
             {files.map(({ name, p }) => (
-              <File key={name} name={name} p={p} />
+              <article key={name}>
+                <p className="row"><span className="arg">{name}</span><span className="t">{p.title}</span><span className="dim">{p.star ?? ''}</span></p>
+                <p className="body">{p.text}</p>
+                <p className="body dim">stack: {p.stack}</p>
+              </article>
             ))}
           </div>
         </section>
 
         <section className="container block tools">
           <h2>ls /usr/local/bin</h2>
-          <ul className="cols">{[...C.toolsRowA, ...C.toolsRowB].map(t => <li key={t}>{t}</li>)}</ul>
+          <p className="dim grp"># platform, storage and automation</p>
+          <ul className="cols">{C.toolsRowA.map(t => <li key={t}>{t}</li>)}</ul>
+          <p className="dim grp"># network, security, monitoring and code</p>
+          <ul className="cols">{C.toolsRowB.map(t => <li key={t}>{t}</li>)}</ul>
+          <p className="note"><span className="dim"># </span>{C.skillsNote}</p>
+          <dl className="env">
+            <div><dt>CERTIFICATIONS</dt><dd>{C.certifications}</dd></div>
+            <div><dt>LANG</dt><dd>{C.languages.map(([l, lv]) => `${l} ${lv}`).join(', ')}</dd></div>
+            <div><dt>STATUS</dt><dd>{C.status}</dd></div>
+          </dl>
         </section>
 
         <section id="contact" className="container block contact">
-          <h2>Need someone who can rack it, image it and keep it up?</h2>
+          <div className="contact-l"><h2>{C.contactHead}</h2><a className="mailto" href={`mailto:${C.EMAIL}`}>{C.EMAIL}</a></div>
           <Mail />
         </section>
       </main>
@@ -209,7 +216,7 @@ export default function Terminal() {
       <footer className="foot container">
         <span>Pietro Quintavalle, Ticino, Switzerland</span>
         <span className="links">
-          <a href={C.GITHUB}>github</a><a href={C.GITLAB}>gitlab</a><a href={C.CODEBERG}>codeberg</a><a href={C.LINKEDIN}>linkedin</a>
+          {C.links.map(([n, h]) => <a key={n} href={h} target="_blank" rel="noopener">{n.toLowerCase()}</a>)}
         </span>
       </footer>
     </div>
