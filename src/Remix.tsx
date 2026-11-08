@@ -34,8 +34,9 @@ export default function Remix() {
     document.documentElement.dataset.style = cur.id
   }, [cur.id])
 
-  const next = STYLES[(i + 1) % STYLES.length]
-  const go = () => { setI((i + 1) % STYLES.length); scrollTo({ top: 0 }) }
+  const n = STYLES.length
+  const prev = STYLES[(i - 1 + n) % n], next = STYLES[(i + 1) % n]
+  const go = (d: number) => { setI((i + d + n) % n); scrollTo({ top: 0 }) }
 
   return (
     <>
@@ -45,7 +46,10 @@ export default function Remix() {
       </Suspense>
       <div className="remix" role="group" aria-label="Page style">
         <span className="remix-name" aria-live="polite">{cur.name}, {i + 1} of {STYLES.length}</span>
-        <button className="remix-btn" onClick={go} aria-label={`Next style: ${next.name}`} title={`Next: ${next.name}`}>
+        <button className="remix-btn" onClick={() => go(-1)} aria-label={`Previous style: ${prev.name}`} title={`Previous: ${prev.name}`}>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" /></svg>
+        </button>
+        <button className="remix-btn" onClick={() => go(1)} aria-label={`Next style: ${next.name}`} title={`Next: ${next.name}`}>
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" /></svg>
         </button>
       </div>
