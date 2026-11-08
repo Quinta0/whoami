@@ -133,10 +133,23 @@ export const hoverShapes: Record<string, (n: number) => Float32Array> = {
       ctx.fillStyle='#fff'; ctx.font='500 26px Syne, Arial, sans-serif'; ctx.textAlign='left';
       ctx.fillText('REPORT',60,275); ctx.fillText('CMD',180,275); ctx.fillText('PROFILE 2',300,275); ctx.fillText('1600 DPI',440,275);
     },0.0142,0.5);
+  },
+  revival(n: number){ // the game revival: before (outline) vs after (solid) for p95, CI and Worker cost
+    return sampleCanvas(n,1000,420,ctx=>{
+      const base=330, H=250, groups: [number,number,string,string,string][]=[[60,66/747,'747 ms','66 ms','P95 LATENCY'],[390,1/30,'30 min','1 min','CI RUN'],[720,0.45,'100%','<50%','WORKER COST']];
+      ctx.lineWidth=5; ctx.beginPath(); ctx.moveTo(30,base); ctx.lineTo(970,base); ctx.stroke();
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      for(const [x,r,before,after,name] of groups){
+        ctx.lineWidth=5; ctx.strokeRect(x,base-H,100,H);
+        const h=Math.max(8,H*r); ctx.fillRect(x+120,base-h,100,h);
+        ctx.font='700 30px Syne, Arial, sans-serif'; ctx.fillText(before,x+50,base-H-28); ctx.fillText(after,x+170,base-h-28);
+        ctx.font='500 26px Syne, Arial, sans-serif'; ctx.fillText(name,x+110,base+40);
+      }
+    },0.0142,0.5);
   }
 };
 hoverShapes.nas=shapeRack; // the client rack is the same one that opens the page
-export const hoverFlat: Record<string, boolean> = { hid: true };
+export const hoverFlat: Record<string, boolean> = { hid: true, revival: true };
 const shapeCache: Record<string, Float32Array> = {};
 export function getHoverShape(k: string, count: number): Float32Array { return shapeCache[k] || (shapeCache[k] = hoverShapes[k](count)); }
 
