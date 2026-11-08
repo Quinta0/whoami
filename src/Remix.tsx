@@ -8,6 +8,9 @@ const STYLES = [
   { id: 'swiss', name: 'Swiss', C: lazy(() => import('./themes/grid')) },
   { id: 'blueprint', name: 'Blueprint', C: lazy(() => import('./themes/blueprint')) },
   { id: 'studio', name: 'Studio', C: lazy(() => import('./themes/studio')) },
+  { id: 'newsprint', name: 'Newsprint', C: lazy(() => import('./themes/newsprint')) },
+  { id: 'werkstatt', name: 'Werkstatt', C: lazy(() => import('./themes/werkstatt')) },
+  { id: 'arcade', name: 'Arcade', C: lazy(() => import('./themes/arcade')) },
 ]
 const KEY = 'pq-style'
 const byId = (id: string | null) => STYLES.findIndex(s => s.id === id)
