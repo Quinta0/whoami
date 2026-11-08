@@ -171,6 +171,7 @@ export default function Terminal() {
 
         <section id="upstream" className="container block">
           <h2>Merged upstream</h2>
+          <p className="oss-intro">{C.ossIntro}</p>
           <div className="refs">
             {C.oss.map(o => (
               <a key={o.href} href={o.href} target="_blank" rel="noopener">
