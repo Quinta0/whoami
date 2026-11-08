@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import Theme from './themes/newsprint'
 import Theme from './themes/studio'
 import Theme from './themes/blueprint'
 import Theme from './themes/grid'
