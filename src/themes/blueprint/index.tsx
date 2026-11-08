@@ -125,6 +125,7 @@ export default function Blueprint() {
         <section id="upstream" className="band">
           <div className="container block-in">
             <h2>Merged upstream</h2>
+            <p className="oss-intro">{C.ossIntro}</p>
             <div className="elev">
               {C.oss.map(o => (
                 <a key={o.href} href={o.href} target="_blank" rel="noopener">
