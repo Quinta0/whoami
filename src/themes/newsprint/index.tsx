@@ -47,7 +47,7 @@ export default function Newsprint() {
 
         <section id="career" className="container block">
           <hr className="rule--double" />
-          <h2>Career: two jobs, one bench, since January 2020</h2>
+          <h2>Career: from the bench to the rack</h2>
           <div className="career">
             {C.jobs.map(j => (
               <article key={j.title}>
@@ -78,7 +78,7 @@ export default function Newsprint() {
         </section>
 
         <section id="listings" className="container block">
-          <h2>Listings: five projects in production</h2>
+          <h2>Listings: selected projects</h2>
           <ol className="listing">
             {C.projects.map(p => (
               <li key={p.title}>

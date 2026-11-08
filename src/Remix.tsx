@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import css from './remix.css?inline'
 
 // every style is its own chunk; three.js only loads when Particles is shown
@@ -24,6 +24,13 @@ function initial() {
   return Math.max(s, 0)
 }
 
+// one broken style shows a note instead of blanking the page, so the chevrons stay usable
+class Guard extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+  static getDerivedStateFromError() { return { failed: true } }
+  render() { return this.state.failed ? <p className="remix-fail">This style failed to load. Use the chevrons to pick another.</p> : this.props.children }
+}
+
 export default function Remix() {
   const [i, setI] = useState(initial)
   const cur = STYLES[i]
@@ -41,9 +48,11 @@ export default function Remix() {
   return (
     <>
       <style>{css}</style>
-      <Suspense fallback={<div className="remix-wait" />}>
-        <cur.C key={cur.id} />
-      </Suspense>
+      <Guard key={cur.id}>
+        <Suspense fallback={<div className="remix-wait" />}>
+          <cur.C />
+        </Suspense>
+      </Guard>
       <div className="remix" role="group" aria-label="Page style">
         <span className="remix-name" aria-live="polite">{cur.name}, {i + 1} of {STYLES.length}</span>
         <button className="remix-btn" onClick={() => go(-1)} aria-label={`Previous style: ${prev.name}`} title={`Previous: ${prev.name}`}>

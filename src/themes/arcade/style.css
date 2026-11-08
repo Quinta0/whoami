@@ -65,7 +65,7 @@ a:focus-visible, button:focus-visible, .row:focus-visible { outline: 2px solid v
 .quals .n { font-family: var(--font-outlier); font-weight: 700; font-size: 2.5rem; line-height: 1; color: var(--color-accent-2); }
 .quals p { color: var(--color-ink-2); }
 
-.players { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--gap-columns); }
+.players { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--gap-columns); }
 .player { display: grid; align-content: start; gap: var(--space-sm); padding: var(--space-xl); border-top-width: 8px; }
 .p1 { border-top-color: var(--color-accent); } .p2 { border-top-color: var(--color-accent-2); }
 .p1 .who { color: var(--color-accent); } .p2 .who { color: var(--color-accent-2); }

@@ -7,6 +7,7 @@ const YEARS = [
   { y: '2020', head: 'The bench and the rack', text: 'Freelance IT support across Ticino starts, and so does the homelab: four bare-metal servers that now serve twelve-plus users.' },
   { y: '2022', head: 'Computer science at USI', text: 'Two years of algorithms, Java, C++ and software architecture. Owned the Spring Boot backend of a twelve-person city simulator.' },
   { y: '2024', head: 'Economics at USI', text: 'BSc Economics in the English stream: game theory, quantitative finance, statistics and financial modelling.' },
+  { y: '2026', head: 'Consultant at DEC Energy', text: 'July to August: built the internal server infrastructure from scratch, a two-node Kubernetes cluster on the company\'s own hardware.' },
 ]
 
 function Index() {
@@ -93,7 +94,7 @@ export default function Grid() {
         </section>
 
         <section id="projects" className="container block">
-          <h2>Five things I built and still run</h2>
+          <h2>What I have built</h2>
           <ol className="proj">
             {C.projects.map((p, n) => (
               <li key={p.title}>

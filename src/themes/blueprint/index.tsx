@@ -9,6 +9,7 @@ const STAGES = [
   { y: '2020', t: 'Freelance IT support and the homelab' },
   { y: '2022', t: 'Computer science, USI' },
   { y: '2024', t: 'BSc Economics, USI' },
+  { y: '2026', t: 'Consultant, DEC Energy' },
 ]
 
 function TitleBlock() {
