@@ -78,6 +78,7 @@ export default function Arcade() {
         <section id="upstream" className="band">
           <div className="container block-in">
             <h2>Merged upstream</h2>
+            <p className="oss-intro">{C.ossIntro}</p>
             <div className="ups">
               {C.oss.map(o => (
                 <article key={o.href} className="well">
