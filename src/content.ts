@@ -103,3 +103,12 @@ export const education = [
 ]
 export const certifications = 'Google IT Support Professional Certificate. Google Data Analytics Professional Certificate. Microsoft Foundations of IT Systems, Networking and Data Protection.'
 export const languages = [['Italian', 'native'], ['English', 'C2'], ['German', 'B1–B2'], ['Spanish', 'A1'], ['Norwegian', 'A1']]
+
+// shared copy the styles need, lifted from the original App.tsx
+export const intro = 'Monte Carasso, Ticino. Six years at the bench, five years on Linux, four servers in production. Looking for datacenter operations, hardware integration or Linux systems support, on-site or hybrid.'
+export const tagline = 'I build infrastructure from the solder joint up. Component-level diagnostics, ZFS storage, zero-trust networks, and the occasional driver written from a packet dump.'
+export const skillsNote = 'Also on the bench: Rust, C, C++, Python and SQL for diagnostics, and a self-directed track on local LLM deployment and quantisation on bare-metal hardware with llama.cpp and Claude Code.'
+export const status = 'Italian national, Swiss Permit C, born 2001.'
+export const contactHead = 'Need someone who can rack it, image it, and keep it up?'
+export const links: [string, string][] = [['GitHub', GITHUB], ['LinkedIn', LINKEDIN], ['whoami', WHOAMI], ['GitLab', GITLAB], ['Codeberg', CODEBERG]]
+export const ossIntro = 'Upstream contributions to projects that sit between hardware and the kernel.'
