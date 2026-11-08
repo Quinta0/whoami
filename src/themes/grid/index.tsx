@@ -108,6 +108,7 @@ export default function Grid() {
         <section id="upstream" className="well">
           <div className="container block-in">
             <h2>Merged upstream</h2>
+            <p className="oss-intro">{C.ossIntro}</p>
             <div className="ups">
               {C.oss.map(o => (
                 <a key={o.href} href={o.href} target="_blank" rel="noopener">
