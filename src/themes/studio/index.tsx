@@ -9,6 +9,7 @@ const OUTCOME: Record<string, string> = {
   'ObsidianSetup': 'Adopted by other users, 26 stars on GitHub',
   'City simulator, USI group project': 'Twelve people, one Spring Boot backend',
   'Nargothrond Watch': 'No daemon, no database, a script on a schedule',
+  'Community revival of a mobile game': 'p95 from 747 ms to 66 ms, 14,000+ players live',
 }
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
@@ -19,6 +20,7 @@ const ROWS: { label: string; from: number; to: number }[] = [
   { label: 'Homelab in production', from: 2020, to: 2026 },
   { label: 'Computer science, USI', from: 2022, to: 2024 },
   { label: 'Economics, USI', from: 2024, to: 2026 },
+  { label: 'Consultant, DEC Energy', from: 2026, to: 2026 },
 ]
 
 function Clock() {
@@ -51,7 +53,7 @@ function Deck() {
             <article key={p.title} className={`card crop${isTop ? ' top' : ''}`} style={style} aria-hidden={!isTop}
               onPointerDown={isTop ? down : undefined} onPointerMove={isTop ? move : undefined} onPointerUp={isTop ? up : undefined} onPointerCancel={isTop ? up : undefined}>
               <p className="file">{slug(p.title)}.md, {String(idx + 1).padStart(2, '0')} of {String(C.projects.length).padStart(2, '0')}</p>
-              {isTop && <><h3>{OUTCOME[p.title]}</h3><p className="name">{p.title}</p><p className="ptext">{p.text}</p><p className="stack">{p.stack}</p></>}
+              {isTop && <><h3>{OUTCOME[p.title] ?? p.title}</h3><p className="name">{p.title}</p><p className="ptext">{p.text}</p><p className="stack">{p.stack}</p></>}
             </article>
           )
         })}

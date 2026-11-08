@@ -117,3 +117,4 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--color-focus); o
 @media (max-width: 40rem) { .grid4, .figs { grid-template-columns: minmax(0, 1fr); } .figs > div + div { border-left: 0; border-top: var(--rule-box) solid var(--color-ink); } }
 
 .oss-intro { margin: calc(-1 * var(--space-md)) 0 var(--space-xl); max-width: 60ch; color: var(--color-ink-2); }
+.grid3 > li.wide ~ li:last-child:nth-child(even) { grid-column: 1 / -1; }

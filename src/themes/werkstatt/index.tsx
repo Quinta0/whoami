@@ -8,11 +8,15 @@ const SHOPS: { id: Shop; name: string; covers: string }[] = [
   { id: 'rack', name: 'The rack', covers: 'Proxmox, TrueNAS and ZFS, UNRAID, Docker and LXC, Ansible rebuilds, WireGuard, Tailscale and Cloudflare Tunnels.' },
   { id: 'code', name: 'The code', covers: 'C, Rust, Java and Spring Boot, TypeScript, Python, PowerShell and Bash, upstream pull requests.' },
 ]
-const QUAL: Shop[] = ['bench', 'rack', 'rack', 'bench']
-const JOB: Shop[] = ['bench', 'rack']
-const PROJ: Record<string, Shop> = { 'Homelab as code': 'rack', 'Turnkey TrueNAS rack': 'bench', 'ObsidianSetup': 'code', 'City simulator, USI group project': 'code', 'Nargothrond Watch': 'rack' }
-const OSS: Shop[] = ['bench', 'code', 'code']
-const shopName = (s: Shop) => SHOPS.find(x => x.id === s)!.name
+// keyed by title so new entries in content.ts never crash the page; anything unlisted files under the rack
+const SHOP_OF: Record<string, Shop> = {
+  'Diagnoses at the component, not the ticket': 'bench', 'Reads the protocol when there is no documentation': 'bench',
+  'IT support technician': 'bench', 'Turnkey TrueNAS rack': 'bench', 'A complete USB HID device driver, written from a packet capture': 'bench',
+  'ObsidianSetup': 'code', 'City simulator, USI group project': 'code', 'Community revival of a mobile game': 'code',
+  'Runtime installation pipeline fault, diagnosed and fixed upstream': 'code', 'Multi-vendor upscaler library detection': 'code',
+}
+const shopOf = (title: string): Shop => SHOP_OF[title] ?? 'rack'
+const shopName = (s: Shop) => SHOPS.find(x => x.id === s)?.name ?? ''
 
 const Tag = ({ s }: { s: Shop }) => <span className={`tag shop-${s}`}>{shopName(s)}</span>
 
@@ -60,8 +64,8 @@ export default function Werkstatt() {
         <section className="container block">
           <h2>What you get when you hire me</h2>
           <ul className="grid4">
-            {C.qualities.map((q, i) => (
-              <li key={q.title}><Tag s={QUAL[i]} /><h3>{q.title}</h3><p>{q.text}</p></li>
+            {C.qualities.map(q => (
+              <li key={q.title}><Tag s={shopOf(q.title)} /><h3>{q.title}</h3><p>{q.text}</p></li>
             ))}
           </ul>
         </section>
@@ -70,11 +74,11 @@ export default function Werkstatt() {
           <div className="container block-in">
             <h2>Work and school, by year</h2>
             <ol className="sched">
-              {C.jobs.map((j, i) => (
+              {C.jobs.map(j => (
                 <li key={j.title}>
                   <p className="when">{j.time}</p>
                   <div>
-                    <Tag s={JOB[i]} />
+                    <Tag s={shopOf(j.title)} />
                     <h3>{j.title}</h3>
                     <p className="org">{j.org}</p>
                     <ul>{j.bullets.map(b => <li key={b}>{b}</li>)}</ul>
@@ -89,11 +93,11 @@ export default function Werkstatt() {
         </section>
 
         <section id="projects" className="container block">
-          <h2>Five builds, coded by shop</h2>
+          <h2>Builds, coded by shop</h2>
           <ul className="grid3">
             {C.projects.map(p => (
               <li key={p.title} className={p.title === 'Homelab as code' ? 'wide' : undefined}>
-                <Tag s={PROJ[p.title]} />
+                <Tag s={shopOf(p.title)} />
                 <h3>{p.title}</h3>
                 {p.star && <p className="star">{p.star}</p>}
                 <p>{p.text}</p>
@@ -109,9 +113,9 @@ export default function Werkstatt() {
           <table className="tbl">
             <thead><tr><th scope="col">Shop</th><th scope="col">Contribution</th><th scope="col">Reference</th></tr></thead>
             <tbody>
-              {C.oss.map((o, i) => (
+              {C.oss.map(o => (
                 <tr key={o.href}>
-                  <td><Tag s={OSS[i]} /></td>
+                  <td><Tag s={shopOf(o.title)} /></td>
                   <td><b className="row-h">{o.title}</b><small>{o.repo}</small><p>{o.text}</p></td>
                   <td><a href={o.href} target="_blank" rel="noopener">{o.ref}</a></td>
                 </tr>

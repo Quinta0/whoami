@@ -49,10 +49,10 @@ export default function Arcade() {
         </section>
 
         <section id="players" className="container block">
-          <h2>Two jobs, played at once since January 2020</h2>
+          <h2>Every job, player by player</h2>
           <div className="players">
             {C.jobs.map((j, i) => (
-              <article key={j.title} className={`well player ${i ? 'p2' : 'p1'}`}>
+              <article key={j.title} className={`well player ${i % 2 ? 'p2' : 'p1'}`}>
                 <p className="who">Player {i + 1}</p>
                 <h3>{j.title}</h3>
                 <p className="org">{j.org}, {j.time.toLowerCase()}</p>
