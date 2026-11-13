@@ -1,6 +1,6 @@
 :root {
-  --bg: #06070a; --fg: #ece8df; --muted: #9aa0aa; --dim: #5d636e; --hot: #ff7a1a; --line: rgba(236, 232, 223, .16);
-  --serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --bg: #efece5; --fg: #1a1b1f; --muted: #5b5d65; --dim: #8d8c86; --hot: #f0440e; --line: rgba(26, 27, 31, .16);
+  --display: 'Bricolage Grotesque', 'Helvetica Neue', Arial, sans-serif;
   --sans: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --gutter: clamp(1.25rem, 6vw, 6.5rem);
@@ -9,117 +9,93 @@
 html { scroll-behavior: smooth; background: var(--bg) }
 body { color: var(--fg); font: 400 1.0625rem/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden }
 a { color: inherit }
-::selection { background: var(--hot); color: #000 }
+::selection { background: var(--hot); color: #fff }
 :focus-visible { outline: 2px solid var(--hot); outline-offset: 4px }
 
 #world { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0 }
-/* without WebGL the page keeps a quiet glow where the scene would be */
-.no-gl #world { display: none }
-.no-gl body { background: radial-gradient(60rem 40rem at 75% 30%, #2a1407, var(--bg) 70%) fixed }
-/* a scrim down the text side, so copy never fights the scene */
-body::before { content: ''; position: fixed; inset: 0 auto 0 0; width: 62vw; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(6, 7, 10, .88) 0%, rgba(6, 7, 10, .62) 55%, transparent) }
+.no-gl #world, .no-gl #callouts, .no-gl .key { display: none }
+/* a wash of paper down the text side, so copy never fights the scene */
+body::before { content: ''; position: fixed; inset: 0 auto 0 0; width: 60vw; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(239, 236, 229, .94) 0%, rgba(239, 236, 229, .8) 60%, transparent) }
 
 main { position: relative; z-index: 2 }
 section { min-height: 100vh; display: grid; align-items: center; padding: 16vh var(--gutter); margin-bottom: 75vh }
 section:last-child { margin-bottom: 0; min-height: 100svh }
-.panel { max-width: 34rem }
+.panel { max-width: 33rem }
 .panel > * { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1) }
 .panel > .in { opacity: 1; transform: none }
-.panel > * + * { margin-top: 1.15rem }
+.panel > * + * { margin-top: 1.1rem }
 
-.eyebrow { font: 500 .75rem/1.4 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--hot) }
-h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: -.015em; text-wrap: balance }
-h1 { font-size: clamp(3.6rem, 9.5vw, 8.5rem); line-height: .86; margin-left: -.04em }
-h2 { font-size: clamp(2.3rem, 4.6vw, 3.9rem); line-height: 1 }
-h1 em, h2 em { color: var(--hot) }
-.lead { font: 400 clamp(1.5rem, 2.4vw, 2rem)/1.2 var(--serif) }
-.lead strong { font-weight: 400; font-style: italic; color: var(--hot) }
-p { color: #cfcbc3; text-wrap: pretty }
+.eyebrow { font: 500 .75rem/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--hot) }
+h1, h2 { font-family: var(--display); font-weight: 800; letter-spacing: -.035em; text-wrap: balance }
+h1 { font-size: clamp(3.4rem, 8.4vw, 7.6rem); line-height: .88; margin-left: -.04em }
+h2 { font-size: clamp(2.1rem, 4.1vw, 3.5rem); line-height: 1 }
+h2 em, .lead em { font-style: normal; color: var(--hot) }
+.lead { font: 700 clamp(1.4rem, 2.2vw, 1.85rem)/1.2 var(--display); letter-spacing: -.02em }
+p { color: #3a3b42; text-wrap: pretty }
 p strong { color: var(--fg); font-weight: 600 }
-.cue { font: 500 .75rem var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-top: 2.5rem !important }
+.cue { font: 500 .75rem var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--muted); margin-top: 2.2rem !important }
 .cue span { display: inline-block; color: var(--hot); animation: nudge 1.6s ease-in-out infinite }
 @keyframes nudge { 50% { transform: translateY(5px) } }
 
 .items, .facts, .jobs { list-style: none }
-.items li, .jobs li { padding: .85rem 0; border-top: 1px solid var(--line) }
-.items li > a, .items li > b { display: block; font-weight: 500; text-decoration: none }
+.items li, .jobs li { padding: .8rem 0; border-top: 1px solid var(--line) }
+.items li > a { display: block; font-weight: 500; text-decoration: none }
 .items li > a::after { content: ' ↗'; color: var(--hot) }
 .items li > a:hover { color: var(--hot) }
 .items b { font-weight: 600 }
 .items span, .jobs p { display: block; color: var(--muted); font-size: .95rem; margin-top: .2rem }
 .jobs h3 { font: 600 1.05rem/1.3 var(--sans) }
 .jobs h3 span { display: block; font: 400 .75rem var(--mono); letter-spacing: .04em; color: var(--hot); margin-top: .25rem }
-.facts li { padding: .3rem 0; color: var(--muted); font-size: .95rem }
-.facts b { font: 400 1.5rem/1 var(--serif); color: var(--fg); margin-right: .4rem }
-.note { font-size: .875rem; color: var(--muted) }
-.sub { font: 500 .75rem var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--dim); margin-top: 2rem !important }
-.tools { font-size: .92rem; color: var(--muted) }
+.facts li { display: grid; grid-template-columns: 7.2rem 1fr; gap: .8rem; align-items: baseline; padding: .55rem 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .95rem }
+.facts b { font: 800 1.35rem/1 var(--display); letter-spacing: -.03em; color: var(--fg); white-space: nowrap }
+.note { font-size: .85rem; color: var(--dim) }
+.tools { font-size: .9rem; color: var(--muted) }
 
-/* before/after: a faint full-width bar for before, a hot one that shrinks to the after value */
-.ba dt { font: 400 .75rem var(--mono); letter-spacing: .04em; color: var(--muted); margin-bottom: .45rem }
-.ba dd { position: relative; height: 2.6rem; display: flex; align-items: center; justify-content: space-between; padding: 0 .7rem; background: rgba(236, 232, 223, .07); font: 400 1.5rem var(--serif) }
-.ba dd::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 100%; background: var(--hot); transition: width 1.6s cubic-bezier(.6, 0, .1, 1) .25s }
-.ba.in dd::before { width: var(--b) }
-.ba span { position: relative }
-.ba span:first-child { color: var(--muted); order: 2; text-decoration: line-through; text-decoration-thickness: 1px }
-.ba span:last-child { color: var(--hot); padding-left: calc(var(--b) + .2rem) }
-
-.end { max-width: 46rem; margin: 0 auto; text-align: center }
-.end p { margin-inline: auto; max-width: 36rem }
-.mail { display: inline-block; font: 400 clamp(1.25rem, 3.4vw, 2.3rem)/1.2 var(--serif); color: var(--hot); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: .15em; margin-top: 1.8rem !important; overflow-wrap: anywhere }
+.mail { display: inline-block; font: 700 clamp(1.1rem, 2.3vw, 1.7rem)/1.2 var(--display); letter-spacing: -.02em; color: var(--hot); text-decoration: none; border-bottom: 2px solid currentColor; padding-bottom: .1em; margin-top: 1.6rem !important; overflow-wrap: anywhere }
 .mail:hover { color: var(--fg) }
-.links { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; font: 500 .8rem var(--mono); letter-spacing: .06em; text-transform: uppercase }
+.links { display: flex; gap: 1.5rem; flex-wrap: wrap; font: 500 .8rem var(--mono); letter-spacing: .06em; text-transform: uppercase }
 .links a { text-decoration: none; color: var(--muted) }
 .links a:hover { color: var(--hot) }
-.colophon { font: 400 .75rem/1.6 var(--mono); color: var(--dim); margin-top: 3.5rem !important }
-#contact { background: radial-gradient(closest-side, rgba(6, 7, 10, .82), rgba(6, 7, 10, .5) 70%, transparent) }
+.colophon { font: 400 .75rem/1.6 var(--mono); color: var(--dim); margin-top: 2.5rem !important }
 
-.top { background: linear-gradient(rgba(6, 7, 10, .85), transparent); position: fixed; z-index: 5; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem var(--gutter) 2.4rem; font: 500 .8rem var(--mono); letter-spacing: .08em; text-transform: uppercase; pointer-events: none }
+.top { position: fixed; z-index: 5; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 1.3rem var(--gutter) 2.2rem; font: 500 .8rem var(--mono); letter-spacing: .06em; text-transform: uppercase; pointer-events: none; background: linear-gradient(rgba(239, 236, 229, .92), transparent) }
 .top a { text-decoration: none; pointer-events: auto }
 .mark { display: flex; align-items: center; gap: .6rem }
-.mark i { width: .6rem; height: .6rem; border-radius: 50%; background: var(--hot); box-shadow: 0 0 14px var(--hot) }
-.hire { border: 1px solid var(--line); padding: .5rem .9rem; border-radius: 99px; backdrop-filter: blur(8px); transition: border-color .2s, color .2s }
-.hire:hover { border-color: var(--hot); color: var(--hot) }
-.hire span { color: var(--hot) }
+.mark i { width: .6rem; height: .6rem; background: var(--hot) }
+.hire { background: var(--fg); color: var(--bg); padding: .5rem .9rem; transition: background .2s }
+.hire:hover { background: var(--hot) }
 
-/* the ruler: chapter nav down the right edge, with a needle that tracks the zoom */
-.ruler { position: fixed; z-index: 5; right: clamp(.8rem, 2.2vw, 2rem); top: 50%; transform: translateY(-50%); height: min(60vh, 26rem); display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--line); padding-right: .7rem }
-.ruler a { position: relative; display: flex; flex-direction: column; align-items: flex-end; text-decoration: none; font: 500 .68rem/1.25 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); transform: translateY(-50%); transition: color .25s }
+/* chapter nav down the right edge, with a needle that tracks the scroll */
+.ruler { position: fixed; z-index: 5; right: clamp(.8rem, 2.2vw, 2rem); top: 50%; transform: translateY(-50%); height: min(56vh, 24rem); display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--line); padding-right: .7rem }
+.ruler a { position: relative; text-align: right; text-decoration: none; font: 500 .68rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); transform: translateY(-50%); transition: color .25s }
 .ruler a:last-of-type { transform: translateY(50%) }
 .ruler a::after { content: ''; position: absolute; right: -.7rem; top: 50%; width: .4rem; height: 1px; background: currentColor }
-.ruler a:first-child { transform: translateY(-50%) }
-.ruler a b { font-weight: 500 }
-.ruler a i { font-style: normal; font-size: .6rem; opacity: .7 }
 .ruler a:hover, .ruler a.on { color: var(--fg) }
-.ruler a.on i { color: var(--hot); opacity: 1 }
-#needle { position: absolute; right: -4px; width: 7px; height: 7px; border-radius: 50%; background: var(--hot); box-shadow: 0 0 12px var(--hot); transform: translateY(-50%) }
+#needle { position: absolute; right: -4px; width: 7px; height: 7px; background: var(--hot); transform: translateY(-50%) }
 
-.hud { position: fixed; z-index: 5; right: var(--gutter); bottom: 1.5rem; flex-direction: row-reverse; font: 400 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: flex-end; gap: 1.5rem; pointer-events: none }
-.scale { display: flex; flex-direction: column; align-items: flex-end; gap: .35rem }
-.scale i { display: block; height: 6px; border: 1px solid var(--fg); border-top: 0; min-width: 2px; max-width: 46vw }
-.scale b { font-weight: 500; color: var(--fg); text-transform: none }
-.no-gl .scale, .no-gl #callouts { display: none }
+.hud { position: fixed; z-index: 5; right: var(--gutter); bottom: 1.5rem; font: 400 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; flex-direction: row-reverse; align-items: center; gap: 1.5rem; pointer-events: none }
+.key { display: flex; align-items: center; gap: .55rem; background: var(--fg); color: var(--bg); padding: .45rem .7rem }
+.key i { width: .55rem; height: .55rem; background: var(--hot) }
+.key b { font-weight: 500 }
 
-.co { position: fixed; z-index: 3; left: 0; top: 0; pointer-events: none; opacity: 0; transition: opacity .5s; will-change: transform }
+.co { position: fixed; z-index: 3; left: 0; top: 0; pointer-events: none; opacity: 0; transition: opacity .4s; will-change: transform }
 .co.on { opacity: 1 }
-.co::before { content: ''; position: absolute; left: -4px; top: -4px; width: 7px; height: 7px; border: 1px solid var(--hot); border-radius: 50% }
-.co::after { content: ''; position: absolute; left: 0; bottom: 4px; width: 1px; height: 34px; background: linear-gradient(var(--hot), transparent) }
-.co span { position: absolute; left: 0; bottom: 38px; white-space: nowrap; font: 400 .68rem var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--fg); border-left: 1px solid var(--hot); padding: .15rem .5rem; background: rgba(6, 7, 10, .55); backdrop-filter: blur(4px) }
-
-.co.flip span { left: auto; right: 0; border-left: 0; border-right: 1px solid var(--hot) }
+.co::before { content: ''; position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; background: var(--fg) }
+.co::after { content: ''; position: absolute; left: 0; bottom: 3px; width: 1px; height: 30px; background: var(--fg) }
+.co span { position: absolute; left: 0; bottom: 33px; white-space: nowrap; font: 500 .68rem var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--bg); background: var(--fg); padding: .2rem .5rem }
+.co.flip span { left: auto; right: 0 }
 
 @media (max-width: 760px) {
   /* on a phone the copy sits on its own card; the scene shows above it and in the gaps between chapters */
   body::before { display: none }
   section { align-items: end; padding: 52vh .75rem 6vh; margin-bottom: 60vh }
-  .panel { background: rgba(6, 7, 10, .78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.15rem }
-  #contact { align-items: center; padding-top: 14vh; background: none }
+  .panel { background: rgba(239, 236, 229, .9); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--line); padding: 1.4rem 1.15rem }
   .ruler, .co, #chap { display: none }
-  .hud { bottom: auto; top: 4.6rem; right: auto; left: 1.25rem }
-  .scale { align-items: flex-start }
+  .hud { bottom: auto; top: 4.4rem; right: auto; left: 1.25rem }
+  .facts li { grid-template-columns: 5.8rem 1fr }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto }
-  .panel > *, .ba dd::before { transition: none }
+  .panel > * { transition: none }
   .cue span { animation: none }
 }

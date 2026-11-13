@@ -3,149 +3,147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pietro Quintavalle — Infrastructure, from the solder joint up</title>
-  <meta name="description" content="Pietro Quintavalle builds infrastructure from the solder joint up: bare-metal servers, ZFS storage, zero-trust networks, Kubernetes and performance work. Ticino, Switzerland." />
+  <title>Pietro Quintavalle — Infrastructure and systems engineer</title>
+  <meta name="description" content="Pietro Quintavalle makes systems faster, cheaper and harder to break, and measures it: Linux infrastructure, Kubernetes, performance work and zero-trust networks. Ticino, Switzerland." />
   <meta name="author" content="Pietro Quintavalle" />
-  <meta name="theme-color" content="#06070a" />
-  <meta property="og:title" content="Pietro Quintavalle — Infrastructure, from the solder joint up" />
-  <meta property="og:description" content="One continuous zoom from a single solder joint to a year of work: hardware, racks, networks and performance engineering." />
+  <meta name="theme-color" content="#efece5" />
+  <meta property="og:title" content="Pietro Quintavalle — Infrastructure and systems engineer" />
+  <meta property="og:description" content="65,536 cubes, and every one of them is a number from real work: requests, watts, ports, months, commits." />
   <meta property="og:site_name" content="Pietro Quintavalle" />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2306070a'/%3E%3Ccircle cx='32' cy='32' r='11' fill='%23ff7a1a'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23efece5'/%3E%3Crect x='16' y='16' width='32' height='32' fill='%23ff4a12'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
   <canvas id="world" aria-hidden="true"></canvas>
   <div id="callouts" aria-hidden="true"></div>
 
   <header class="top">
-    <a class="mark" href="#joint" aria-label="Pietro Quintavalle, back to start"><i></i>PQ</a>
+    <a class="mark" href="#start" aria-label="Pietro Quintavalle, back to start"><i></i>Pietro Quintavalle</a>
     <a class="hire" href="#contact">Open to work <span>→</span></a>
   </header>
 
   <nav class="ruler" aria-label="Chapters">
-    <a href="#joint"><b>Joint</b><i>mm</i></a>
-    <a href="#chip"><b>Chip</b><i>cm</i></a>
-    <a href="#board"><b>Board</b><i>dm</i></a>
-    <a href="#rack"><b>Rack</b><i>m</i></a>
-    <a href="#network"><b>Network</b><i>km</i></a>
-    <a href="#year"><b>Year</b><i>53 wk</i></a>
-    <a href="#contact"><b>Contact</b><i>you</i></a>
+    <a href="#start">Start</a>
+    <a href="#before">Before</a>
+    <a href="#after">After</a>
+    <a href="#power">Power</a>
+    <a href="#ports">Ports</a>
+    <a href="#path">Path</a>
+    <a href="#year">Year</a>
+    <a href="#contact">Contact</a>
     <span id="needle"></span>
   </nav>
 
   <div class="hud" aria-hidden="true">
-    <div class="scale"><i id="bar"></i><b id="barl">1 mm</b></div>
-    <div id="chap">00 / joint</div>
+    <div class="key"><i></i><b id="key">65,536 cubes</b></div>
+    <div id="chap">00 / start</div>
   </div>
 
   <main>
-    <section id="joint" data-ch="joint">
+    <section id="start" data-ch="start">
       <div class="panel hero">
-        <p class="eyebrow">Infrastructure and systems · Ticino, Switzerland</p>
-        <h1>Pietro<br /><em>Quintavalle</em></h1>
-        <p class="lead">I build infrastructure from the <strong>solder joint</strong> up.</p>
-        <p>This is one solder joint, still warm. Scroll and the camera pulls back through everything I work on: the chip, the board, the rack, the network. By the end, all of it is one square in a year of commits.</p>
-        <p class="cue">Scroll to pull back <span>↓</span></p>
+        <p class="eyebrow">Infrastructure and systems engineer · Ticino, Switzerland</p>
+        <h1>Pietro Quintavalle</h1>
+        <p class="lead">I make systems faster, cheaper and harder to break. <em>Then I measure it.</em></p>
+        <p>There are 65,536 cubes on this page. Scroll, and each one becomes a number from my work: a request, a watt, a port, a month, a commit.</p>
+        <p class="cue">Scroll <span>↓</span></p>
       </div>
     </section>
 
-    <section id="chip" data-ch="chip">
+    <section id="before" data-ch="before">
       <div class="panel">
-        <p class="eyebrow">01 · Chip scale · open source</p>
-        <h2>No documentation? <em>Read the wire.</em></h2>
-        <p>A vendor shipped a USB device with an undocumented protocol. I captured its raw HID reports in Wireshark, decoded the byte layout for DPI profiles, polling rates and on-board memory, and wrote a complete Linux driver in C. It was merged upstream.</p>
-        <ul class="items">
-          <li><a href="https://github.com/libratbag/libratbag/pull/1873" target="_blank" rel="noopener"><b>libratbag</b> PR #1873, merged</a><span>A USB HID device driver written from a packet capture.</span></li>
-          <li><a href="https://github.com/Vysp3r/ProtonPlus/pull/1260" target="_blank" rel="noopener"><b>ProtonPlus</b> PR #1260, merged for v0.6.9</a><span>Diagnostics that detect broken Steam compatibility tools and guide recovery, after tracing Steam Linux Runtime crash loops in <a href="https://github.com/ValveSoftware/steam-for-linux/issues/13248" target="_blank" rel="noopener">Valve's tracker (#13248)</a>.</span></li>
-          <li><a href="https://github.com/Recol/DLSS-Updater/pull/283" target="_blank" rel="noopener"><b>DLSS-Updater</b> PRs #283, #252, #256</a><span>Bounded manifest parsing so DLSS, FSR and XeSS libraries survive DLL upgrades.</span></li>
-        </ul>
+        <p class="eyebrow">01 · Performance · before</p>
+        <h2>A game server, mid-launch, <em>running hot.</em></h2>
+        <p>In autumn 2026 I volunteered on the community revival of a mobile game while its player base grew from 2,500 to over 14,000.</p>
+        <p>Here are 14,000 requests, one cube each, stacked by how long they took. The orange cubes are the slowest 5%. On the test server that tail started at <strong>747 ms</strong>.</p>
+        <p>I profiled the live, multi-threaded C++ server to find where the time was actually going, before changing anything.</p>
+        <p class="note">Axis is logarithmic. The shape is illustrative; the p95 values are measured.</p>
       </div>
     </section>
 
-    <section id="board" data-ch="board">
+    <section id="after" data-ch="after">
       <div class="panel">
-        <p class="eyebrow">02 · Board scale · the bench</p>
-        <h2>Diagnose the component, <em>not the ticket.</em></h2>
-        <p>Six years of building, upgrading and repairing machines for private clients across Ticino: more than 25 systems, board-level repairs, BIOS and firmware work, thermal stress tests, and documentation left behind for every client.</p>
-        <dl class="ba" style="--b:20%">
-          <dt>Idle draw of a production server</dt>
-          <dd><span>85 W</span><span>17 W</span></dd>
-        </dl>
-        <p>That 80% came from BIOS voltage offsets, PL1/PL2 power limits and C-state tuning, then ASPM, powertop and drive spin-down. Every change was benchmarked and stability-tested before it stayed. Core Ultra 5, 48 GB DDR5, parity array, 10 GbE, CPU and drives under 40 °C. About CHF 160 a year, from one machine.</p>
-      </div>
-    </section>
-
-    <section id="rack" data-ch="rack">
-      <div class="panel">
-        <p class="eyebrow">03 · Rack scale · experience</p>
-        <h2>Rack it, cable it, <em>hand over the keys.</em></h2>
-        <ol class="jobs">
-          <li>
-            <h3>Infrastructure and systems consultant <span>DEC Energy · July to August 2026</span></h3>
-            <p>Designed and built a startup's internal infrastructure from scratch: a two-node Kubernetes cluster on the company's own hardware, hosting local LLM inference, accounting software and Gitea. Chose, bought and assembled every component of both servers and the engineering workstations, then provided Tier-2 and Tier-3 support.</p>
-          </li>
-          <li>
-            <h3>IT support and systems technician <span>Private clients, Ticino · 2020 to now</span></h3>
-            <p>Networks cabled and segmented into VLANs, DNS and DHCP, VPN access for staff. A turnkey 19-inch rack for one client: TrueNAS on ZFS RAID 10, nine bays, per-user permissions, automatic offsite copies, every cable run dressed and labelled.</p>
-          </li>
-          <li>
-            <h3>Self-hosted production homelab <span>Four bare-metal servers · ongoing</span></h3>
-            <p>Proxmox VE 8, TrueNAS and Unraid serving 12+ daily users with no managed hosting, offsite backups, and Grafana, Prometheus and Uptime Kuma watching all of it.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section id="network" data-ch="network">
-      <div class="panel">
-        <p class="eyebrow">04 · Network scale · operations</p>
-        <h2>Zero open ports. <em>Fourteen thousand players.</em></h2>
-        <p>My own network exposes nothing to the internet. Traffic arrives through Cloudflare Zero-Trust and Tailscale with SSO, 2FA and mutual TLS; VLANs and host firewalls sit behind that. If it all burns down, Ansible rebuilds the cluster from bare metal in <strong>under 30 minutes</strong>.</p>
-        <p>In autumn 2026 I volunteered on the community revival of a mobile game, in the middle of its launch. I profiled the live C++ server and shipped 40 commits in 5 pull requests, all reviewed and merged by the founder, while the player base grew from 2,500 to over 14,000.</p>
-        <dl class="ba" style="--b:8.8%">
-          <dt>p95 response time on the test server</dt>
-          <dd><span>747 ms</span><span>66 ms</span></dd>
-        </dl>
-        <dl class="ba" style="--b:3.3%">
-          <dt>CI run, with ccache, vcpkg and cargo caching</dt>
-          <dd><span>30 min</span><span>1 min</span></dd>
-        </dl>
+        <p class="eyebrow">02 · Performance · after</p>
+        <h2>The same requests, <em>eleven times faster.</em></h2>
+        <p>p95 fell from 747 ms to <strong>66 ms</strong>. Forty commits in five pull requests, each reviewed and merged by the project's founder.</p>
         <ul class="facts">
           <li><b>+27%</b> throughput, 210 to 266 requests per second</li>
           <li><b>−25%</b> CPU per request in the project benchmark</li>
+          <li><b>30 → 1 min</b> CI runs, with ccache, vcpkg and cargo caching</li>
           <li><b>~70%</b> of the Cloudflare bill traced to one Worker; moving downloads to R2 more than halved Worker costs</li>
         </ul>
-        <p class="note">Correctness checked by diffing 400 responses and the final database between versions. Founder's reference available on request.</p>
+        <p class="note">Checked by diffing 400 responses and the final database between versions. Founder's reference available on request.</p>
+      </div>
+    </section>
+
+    <section id="power" data-ch="power">
+      <div class="panel">
+        <p class="eyebrow">03 · Efficiency</p>
+        <h2>85 watts of idle, <em>cut to 17.</em></h2>
+        <p>One of my production servers, before and after. Each layer of cubes is one watt it draws while doing nothing.</p>
+        <p>The 80% came from BIOS voltage offsets, PL1/PL2 power limits and C-state tuning, then ASPM, powertop and drive spin-down. Every change was benchmarked and stability-tested before it stayed. About CHF 160 a year, from one machine.</p>
+        <p>The same habit goes into the hardware itself: more than 25 systems built, upgraded and repaired for private clients since 2020, down to board-level repairs.</p>
+      </div>
+    </section>
+
+    <section id="ports" data-ch="ports">
+      <div class="panel">
+        <p class="eyebrow">04 · Security</p>
+        <h2>65,536 ports. <em>None of them open.</em></h2>
+        <p>This wall is every port number there is. My network answers on none of them from the internet.</p>
+        <p>Four bare-metal servers run Proxmox VE, TrueNAS and Unraid for 12+ daily users. Traffic reaches them only through Cloudflare Zero-Trust and Tailscale, behind SSO, 2FA and mutual TLS, with VLANs and host firewalls inside.</p>
+        <ul class="facts">
+          <li><b>&lt; 30 min</b> to rebuild the cluster from bare metal with Ansible</li>
+          <li><b>24/7</b> watched by Grafana, Prometheus, Uptime Kuma and my own Python health checker</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="path" data-ch="path">
+      <div class="panel">
+        <p class="eyebrow">05 · Experience</p>
+        <h2>The whole path, <em>month by month.</em></h2>
+        <ol class="jobs">
+          <li>
+            <h3>Infrastructure and systems consultant <span>DEC Energy · July to August 2026</span></h3>
+            <p>Designed and built a startup's internal infrastructure from scratch: a two-node Kubernetes cluster on its own hardware, hosting local LLM inference, accounting software and Gitea. Chose, bought and assembled both servers and the engineering workstations, then provided Tier-2 and Tier-3 support.</p>
+          </li>
+          <li>
+            <h3>IT support and systems technician <span>Private clients, Ticino · 2020 to now</span></h3>
+            <p>Networks cabled and split into VLANs, DNS, DHCP and VPN access. A turnkey TrueNAS rack on ZFS RAID 10 with per-user permissions and automatic offsite copies. Documentation left with every client.</p>
+          </li>
+          <li>
+            <h3>Education <span>USI Lugano · Bellinzona</span></h3>
+            <p>BSc Economics at Università della Svizzera italiana, 2024 to now, after 66 ECTS of computer science there. AFC and commercial Maturità. Google IT Support and Data Analytics certificates, Microsoft Foundations of IT Systems and Networking.</p>
+          </li>
+        </ol>
+        <p class="tools">Italian, native · English, C2 · German, B1–B2</p>
       </div>
     </section>
 
     <section id="year" data-ch="year">
       <div class="panel">
-        <p class="eyebrow">05 · One year · everything else</p>
-        <h2>All of that fits in <em>one square.</em></h2>
-        <p>Every column is a day of the last year on GitHub: <strong><span id="contribs">379</span> contributions</strong>. The rack, the network and the fourteen thousand players are still there, inside the outlined cell at the far end.</p>
+        <p class="eyebrow">06 · Open source</p>
+        <h2><span class="contribs">379</span> contributions, <em>and a driver written from a packet dump.</em></h2>
+        <p>The last year on GitHub. Every orange cube is one contribution, stacked on the day it happened.</p>
         <ul class="items">
-          <li><a href="https://github.com/Quinta0/ObsidianSetup" target="_blank" rel="noopener"><b>ObsidianSetup</b> · 27 stars</a><span>Cross-platform provisioning for Obsidian and its plugins. PowerShell.</span></li>
-          <li><b>Nargothrond Watch</b><span>Scheduled health checks for containers, ZFS pools, CrowdSec and Traefik, with an HTML history and email or Discord alerts. Python, SQLite. No daemon.</span></li>
-          <li><a href="https://github.com/Quinta0/riptune" target="_blank" rel="noopener"><b>riptune</b></a><span>A terminal-native music client for Subsonic-compatible servers. Rust.</span></li>
-          <li><b>City simulator</b><span>Coordinated a twelve-person Scrum team at USI and owned the Spring Boot backend.</span></li>
+          <li><a href="https://github.com/libratbag/libratbag/pull/1873" target="_blank" rel="noopener"><b>libratbag</b> PR #1873, merged</a><span>A Linux driver in C for a USB device with an undocumented protocol, reconstructed from Wireshark captures.</span></li>
+          <li><a href="https://github.com/Vysp3r/ProtonPlus/pull/1260" target="_blank" rel="noopener"><b>ProtonPlus</b> PR #1260, merged for v0.6.9</a><span>Diagnostics for broken Steam compatibility tools, after tracing runtime crash loops in <a href="https://github.com/ValveSoftware/steam-for-linux/issues/13248" target="_blank" rel="noopener">Valve's tracker</a>.</span></li>
+          <li><a href="https://github.com/Recol/DLSS-Updater/pull/283" target="_blank" rel="noopener"><b>DLSS-Updater</b> PRs #283, #252, #256</a><span>Bounded manifest parsing so DLSS, FSR and XeSS libraries survive DLL upgrades.</span></li>
+          <li><a href="https://github.com/Quinta0/ObsidianSetup" target="_blank" rel="noopener"><b>ObsidianSetup</b> · 27 stars</a><span>Cross-platform provisioning for Obsidian and its plugins.</span></li>
         </ul>
-        <h3 class="sub">Toolbox</h3>
-        <p class="tools">Linux · Proxmox VE · TrueNAS · ZFS · Unraid · Kubernetes · Docker · podman · Ansible · GitHub Actions · Bash · Python · PowerShell · C · C++ · Rust · WireGuard · Tailscale · Cloudflare Zero-Trust, Workers and R2 · VLANs · UniFi · Prometheus · Grafana · Gitea · llama.cpp</p>
-        <h3 class="sub">Education</h3>
-        <p class="tools">BSc Economics, Università della Svizzera italiana, 2024 to now · 66 ECTS of computer science at USI, 2022 to 2024 · AFC and commercial Maturità, Bellinzona · Google IT Support and Data Analytics certificates · Microsoft Foundations of IT Systems and Networking</p>
-        <p class="tools">Italian, native · English, C2 · German, B1–B2</p>
+        <p class="tools">Linux · Proxmox VE · TrueNAS · ZFS · Unraid · Kubernetes · Docker · podman · Ansible · GitHub Actions · Bash · Python · PowerShell · C · C++ · Rust · WireGuard · Tailscale · Cloudflare Zero-Trust, Workers and R2 · Prometheus · Grafana · Gitea · llama.cpp</p>
       </div>
     </section>
 
     <section id="contact" data-ch="contact">
-      <div class="panel end">
-        <p class="eyebrow">06 · Your scale</p>
-        <h2>Need someone who can rack it, image it, <em>and keep it up?</em></h2>
-        <p>Looking for infrastructure, DevOps or datacenter roles, on-site or hybrid. Based in Ticino and open to relocating to Zurich, Zug, Lucerne, Basel, Geneva or Lausanne. Italian national, Swiss Permit C.</p>
+      <div class="panel">
+        <p class="eyebrow">07 · Contact</p>
+        <h2>Got something that should be <em>faster, cheaper or safer?</em></h2>
+        <p>I'm looking for infrastructure, DevOps or datacenter roles, on-site or hybrid. Based in Ticino and open to relocating to Zurich, Zug, Lucerne, Basel, Geneva or Lausanne. Italian national, Swiss Permit C.</p>
         <a class="mail" href="mailto:0pietroquintavalle0@gmail.com">0pietroquintavalle0@gmail.com</a>
         <p class="links">
           <a href="https://github.com/Quinta0" target="_blank" rel="noopener">GitHub</a>
@@ -153,7 +151,7 @@
           <a href="https://gitlab.com/Quinta0" target="_blank" rel="noopener">GitLab</a>
           <a href="https://codeberg.org/Quinta" target="_blank" rel="noopener">Codeberg</a>
         </p>
-        <p class="colophon">Everything on this page is drawn live in your browser. No models, no images, no video: 64 solder joints, 900 passives, 42 rack units, 14,000 players and 53 weeks, generated from code.</p>
+        <p class="colophon">Drawn live in your browser: one mesh, 65,536 instances, no images.</p>
       </div>
     </section>
   </main>
