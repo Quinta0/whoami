@@ -28,3 +28,6 @@ yarn-error.log*
 *.tsbuildinfo
 
 /resume
+
+# CVs and reference letter carry a phone number and third-party details
+/cv
