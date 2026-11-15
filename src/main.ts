@@ -91,9 +91,17 @@ const minis: Record<string, number[][]> = {
   rack: shapes[0],
   bloom: shape(i => { const a = rnd(i) * Math.PI * 2, r = Math.sqrt(rnd(i, 2)), m = .5 + .5 * Math.abs(Math.cos(2.5 * a)); return [r * m * Math.cos(a), .7 * r * r - .35, r * m * Math.sin(a)] }),
   mouse: shape(i => {
-    if (i % 12 === 0) { const a = rnd(i) * Math.PI * 2; return [(rnd(i, 2) - .5) * .08, .36 + Math.sin(a) * .07, .5 + Math.cos(a) * .12] } // the wheel
-    const a = rnd(i) * Math.PI * 2, r = i % 5 === 0 ? 1 : Math.sqrt(rnd(i, 2)), z = r * Math.sin(a) * .95, x = r * Math.cos(a) * (.52 - .08 * z)
-    return Math.abs(x) < .025 && z > .2 ? [x, 0, z * 1.02] : [x, .42 * Math.sqrt(1 - r * r) * (1 - .3 * z), z] // a hump toward the palm, a split between the buttons
+    const a = rnd(i) * Math.PI * 2, t = rnd(i, 2), m = i % 12
+    const hw = (z: number) => { const c = z / .95; return .47 * (c < -.5 ? Math.sqrt(1 - (2 * c + 1) ** 2) : c > .7 ? (1 - ((c - .7) / .3) ** 4) ** .25 : 1) } // half the width at z: a round palm, straight flanks, a square nose
+    const on = (s: number, z: number) => { const c = z / .95; return [s * hw(z), .42 * Math.sqrt((1 - s * s) * (1 - Math.abs(c) ** (c > 0 ? 4 : 2))) * (1 - .3 * c), z] } // a point on the shell, s from flank to flank
+    if (m === 0) return [(t - .5) * .08, .33 + Math.sin(a) * .07, .58 + Math.cos(a) * .13] // the wheel
+    if (m === 1) return [-.49, .05 + rnd(i, 3) * .1, (i % 24 < 12 ? .11 : -.19) + t * .27] // two side buttons under the thumb
+    if (i % 4 === 2) { // the seams: the wheel channel, the split between the buttons, the arc where they end, the line down each flank
+      const u = rnd(i, 3), e = i % 8 < 4 ? 1 : -1, z = .43 + t * .5
+      return u < .3 ? on(e * .07 / hw(z), z) : u < .45 ? on(0, .13 + t * .3) : u < .8 ? on(e * t * .92, .19 - .06 * (1 - t * t)) : on(e * .92, .19 + t * .62)
+    }
+    const r = i % 5 === 0 ? 1 : Math.sqrt(t), c = r * Math.sin(a)
+    return on(r * Math.cos(a) / Math.sqrt(1 - c * c + 1e-9), c * .95)
   }),
 }
 const spin = () => $$<HTMLCanvasElement>('.mini').forEach(el => {
