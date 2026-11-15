@@ -1,0 +1,38 @@
+:root {
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --text-section: clamp(2.25rem, 4.6vw, 4.5rem);
+  /* the poster sizes follow the screen, and stop growing at 1440 */
+  --text-poster: clamp(1.5rem, 7.6vw, 7.25rem);
+  --text-mega: clamp(4.5rem, min(26vw, 42svh), 23rem);
+  --text-mega-s: clamp(3.5rem, min(13vw, 17svh), 12rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1440px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --nav-height: 72px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+
+  /* full palette, earth pigments: washi paper and sumi ink, and four pigment fields */
+  --color-paper: oklch(94% 0.018 85); --color-paper-2: oklch(89.5% 0.024 82); --color-paper-3: oklch(84% 0.03 80);
+  --color-ink: oklch(21% 0.012 60); --color-ink-2: oklch(33% 0.015 60); --color-muted: oklch(47% 0.018 65);
+  --color-rule: oklch(21% 0.012 60 / 0.24);
+  --color-accent: oklch(35% 0.075 256); --color-accent-ink: oklch(94% 0.018 85); --color-focus: oklch(38% 0.18 256); /* indigo, the dye */
+  --color-ochre: oklch(78% 0.115 82);  /* ochre */
+  --color-kaki: oklch(63% 0.13 42);    /* persimmon */
+  --color-moss: oklch(44% 0.055 128);  /* moss */
+  --color-cal-0: color-mix(in oklab, var(--color-ochre) 9%, var(--color-ink)); --color-cal-1: color-mix(in oklab, var(--color-ochre) 34%, var(--color-ink)); --color-cal-2: color-mix(in oklab, var(--color-ochre) 56%, var(--color-ink)); --color-cal-3: color-mix(in oklab, var(--color-ochre) 78%, var(--color-ink)); --color-cal-4: var(--color-ochre);
+
+  --font-display: "Archivo", "Arial Narrow", ui-sans-serif, system-ui, sans-serif; --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif; --font-outlier: ui-monospace, "DejaVu Sans Mono", Menlo, Consolas, monospace; /* one role: characters as material, the drawing and the packet */
+  --radius-card: 0px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: none;
+  --tracking-display: -0.03em;
+}
+
+/* the fields: each section sets its ground, its ink and a focus ring that shows on it */
+.f-paper { --bg: var(--color-paper); --fg: var(--color-ink); --color-focus: var(--color-accent); }
+.f-indigo { --bg: var(--color-accent); --fg: var(--color-accent-ink); --color-focus: var(--color-ochre); }
+.f-ochre { --bg: var(--color-ochre); --fg: var(--color-ink); --color-focus: var(--color-ink); }
+.f-kaki { --bg: var(--color-kaki); --fg: var(--color-ink); --color-focus: var(--color-ink); }
+.f-moss { --bg: var(--color-moss); --fg: var(--color-paper); --color-focus: var(--color-ochre); }
+.f-ink { --bg: var(--color-ink); --fg: var(--color-paper); --color-focus: var(--color-ochre); }
