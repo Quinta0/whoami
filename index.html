@@ -3,155 +3,356 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pietro Quintavalle — Infrastructure and systems engineer</title>
-  <meta name="description" content="Pietro Quintavalle makes systems faster, cheaper and harder to break, and measures it: Linux infrastructure, Kubernetes, performance work and zero-trust networks. Ticino, Switzerland." />
+  <title>Pietro Quintavalle, infrastructure and systems engineer</title>
+  <meta name="description" content="Pietro Quintavalle is an infrastructure and systems engineer in Ticino, Switzerland, and a creative developer: Linux servers, zero-trust networks, performance work on a live game server, and interactive motion built in code." />
   <meta name="author" content="Pietro Quintavalle" />
-  <meta name="theme-color" content="#efece5" />
-  <meta property="og:title" content="Pietro Quintavalle — Infrastructure and systems engineer" />
-  <meta property="og:description" content="65,536 cubes, and every one of them is a number from real work: requests, watts, ports, months, commits." />
+  <meta name="theme-color" content="#f1ebdf" />
+  <meta property="og:title" content="Pietro Quintavalle, infrastructure and systems engineer" />
+  <meta property="og:description" content="Systems that hold, screens that move: 747 milliseconds to 66 on a live game server, 85 watts to 17, and motion built in code." />
   <meta property="og:site_name" content="Pietro Quintavalle" />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23efece5'/%3E%3Crect x='16' y='16' width='32' height='32' fill='%23ff4a12'/%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23d9a441'/%3E%3Crect x='12' y='12' width='14' height='40' fill='%231f1b17'/%3E%3Crect x='38' y='44' width='14' height='8' fill='%231f1b17'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,800&family=Hanken+Grotesk:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- motion only runs for people who have not asked for less of it; without this script the page is the finished, still layout -->
+  <script>document.documentElement.classList.add('js'); if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion')</script>
 </head>
 <body>
-  <canvas id="world" aria-hidden="true"></canvas>
-  <div id="callouts" aria-hidden="true"></div>
-
-  <header class="top">
-    <a class="mark" href="#start" aria-label="Pietro Quintavalle, back to start"><i></i>Pietro Quintavalle</a>
-    <a class="hire" href="#contact">Open to work <span>→</span></a>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="nav f-paper">
+    <div class="container nav__in">
+      <a class="wordmark" href="#top" aria-label="Pietro Quintavalle, back to the top">Pietro Quintavalle</a>
+      <a class="nav__link" href="#contact">Open to work</a>
+    </div>
+    <div class="progress" aria-hidden="true"></div>
   </header>
 
-  <nav class="ruler" aria-label="Chapters">
-    <a href="#start">Start</a>
-    <a href="#before">Before</a>
-    <a href="#after">After</a>
-    <a href="#power">Power</a>
-    <a href="#ports">Ports</a>
-    <a href="#path">Path</a>
-    <a href="#year">Year</a>
-    <a href="#contact">Contact</a>
-    <span id="needle"></span>
-  </nav>
-
-  <div class="hud" aria-hidden="true">
-    <div class="key"><i></i><b id="key">65,536 cubes</b></div>
-    <div id="chap">00 / start</div>
-  </div>
-
-  <main>
-    <section id="start" data-ch="start">
-      <div class="panel hero">
-        <p class="eyebrow">Infrastructure and systems engineer · Ticino, Switzerland</p>
-        <h1>Pietro Quintavalle</h1>
-        <p class="lead">I make systems faster, cheaper and harder to break. <em>Then I measure it.</em></p>
-        <p>There are 65,536 cubes on this page. Scroll, and each one becomes a number from my work: a request, a watt, a port, a month, a commit.</p>
-        <p class="cue">Scroll <span>↓</span></p>
+  <main id="main">
+    <section class="hero f-paper" id="top">
+      <div class="container hero__in">
+        <h1><span class="line">Systems that hold.</span> <span class="line">Screens that move.</span></h1>
+        <div class="hero__copy">
+          <p class="lead">Pietro Quintavalle, infrastructure and systems engineer in Ticino, and a creative developer. I build the servers, speed up the code and make the interface move.</p>
+          <div class="actions">
+            <a class="btn" href="mailto:0pietroquintavalle0@gmail.com">Email Pietro</a>
+            <a class="btn btn--quiet" href="#skills">See the work</a>
+          </div>
+        </div>
+        <table class="ledger">
+          <thead><tr><th scope="col">Work</th><th scope="col">What happened</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><a href="#latency">Brave Frontier Revival</a></th><td>A live game server: p95 latency from 747 ms to 66</td></tr>
+            <tr><th scope="row"><a href="#ports">Homelab</a></th><td>Four servers, twelve daily users, no open ports</td></tr>
+            <tr><th scope="row"><a href="#watts">Idle power</a></th><td>One server, from 85 watts to 17</td></tr>
+            <tr><th scope="row"><a href="#whoami">Motion in code</a></th><td>A particle portfolio, narrated sorting, live wallpapers</td></tr>
+            <tr><th scope="row"><a href="#hitscan">Hitscan Hyperlight</a></th><td>A USB capture, decoded into a Linux driver</td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <section id="before" data-ch="before">
-      <div class="panel">
-        <p class="eyebrow">01 · Performance · before</p>
-        <h2>A game server, mid-launch, <em>running hot.</em></h2>
-        <p>In autumn 2026 I volunteered on the community revival of a mobile game while its player base grew from 2,500 to over 14,000.</p>
-        <p>Here are 14,000 requests, one cube each, stacked by how long they took. The orange cubes are the slowest 5%. On the test server that tail started at <strong>747 ms</strong>.</p>
-        <p>I profiled the live, multi-threaded C++ server to find where the time was actually going, before changing anything.</p>
-        <p class="note">Axis is logarithmic. The shape is illustrative; the p95 values are measured.</p>
-      </div>
-    </section>
-
-    <section id="after" data-ch="after">
-      <div class="panel">
-        <p class="eyebrow">02 · Performance · after</p>
-        <h2>The same requests, <em>eleven times faster.</em></h2>
-        <p>p95 fell from 747 ms to <strong>66 ms</strong>. Forty commits in five pull requests, each reviewed and merged by the project's founder.</p>
-        <ul class="facts">
-          <li><b>+27%</b> throughput, 210 to 266 requests per second</li>
-          <li><b>−25%</b> CPU per request in the project benchmark</li>
-          <li><b>30 → 1 min</b> CI runs, with ccache, vcpkg and cargo caching</li>
-          <li><b>~70%</b> of the Cloudflare bill traced to one Worker; moving downloads to R2 more than halved Worker costs</li>
+    <section class="scene f-ink" id="skills">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>What I know, and where I learned it.</h2>
+        <ul class="fig mosaic">
+            <li class="tile f-ochre xl" style="--c:4;--r:2"><b>Linux</b><small>Five years, every day: CachyOS on the desktop, four servers in production</small></li>
+            <li class="tile f-paper v" style="--c:1;--r:3;--mr:2"><b>BIOS</b></li>
+            <li class="tile f-kaki" style="--c:3;--r:1"><b>C++</b><small>A live game server, profiled and made faster</small></li>
+            <li class="tile f-moss" style="--c:4;--r:1;--mc:3"><b>Python</b><small>Ainulindale and Nargothrond Watch</small></li>
+            <li class="tile f-indigo xl" style="--c:4;--r:2"><b>Hardware</b><small>Six years at the bench: 25+ systems built, upgraded and repaired</small></li>
+            <li class="tile f-paper" style="--c:2;--r:1"><b>C</b><small>A mouse driver from USB captures</small></li>
+            <li class="tile f-ochre" style="--c:2;--r:1"><b>Rust</b><small>riptune, a terminal music client</small></li>
+            <li class="tile f-moss" style="--c:2;--r:1"><b>ZFS</b><small>TrueNAS, RAID 10, offsite snapshots</small></li>
+            <li class="tile f-kaki v" style="--c:1;--r:2"><b>Firmware</b></li>
+            <li class="tile f-indigo" style="--c:3;--r:1;--mc:4"><b>Ansible</b><small>Four hosts rebuilt from bare metal in under 30 minutes</small></li>
+            <li class="tile f-paper" style="--c:4;--r:1"><b>Networking</b><small>Zero-trust: tunnels, WireGuard, Tailscale, VLANs</small></li>
+            <li class="tile f-ochre" style="--c:2;--r:1"><b>Docker</b><small>The whole Nargothrond stack</small></li>
+            <li class="tile f-kaki" style="--c:3;--r:1"><b>TypeScript</b><small>This site, VALGO and whoami</small></li>
+            <li class="tile f-moss" style="--c:2;--r:1;--mc:3"><b>Java</b><small>Spring Boot, for the city simulator</small></li>
+            <li class="tile f-indigo" style="--c:2;--r:1"><b>Three.js</b><small>Particles and my own shaders</small></li>
+            <li class="tile f-paper" style="--c:3;--r:1;--mc:4"><b>GitHub Actions</b><small>CI from thirty minutes to one</small></li>
+            <li class="tile f-ochre" style="--c:3;--r:1"><b>Proxmox</b><small>Virtual machines and containers</small></li>
+            <li class="tile f-kaki" style="--c:4;--r:1;--mc:3"><b>Bash</b></li>
         </ul>
-        <p class="note">Checked by diffing 400 responses and the final database between versions. Founder's reference available on request.</p>
-      </div>
-    </section>
-
-    <section id="power" data-ch="power">
-      <div class="panel">
-        <p class="eyebrow">03 · Efficiency</p>
-        <h2>85 watts of idle, <em>cut to 17.</em></h2>
-        <p>One of my production servers, before and after. Each layer of cubes is one watt it draws while doing nothing.</p>
-        <p>The 80% came from BIOS voltage offsets, PL1/PL2 power limits and C-state tuning, then ASPM, powertop and drive spin-down. Every change was benchmarked and stability-tested before it stayed. About CHF 160 a year, from one machine.</p>
-        <p>The same habit goes into the hardware itself: more than 25 systems built, upgraded and repaired for private clients since 2020, down to board-level repairs.</p>
-      </div>
-    </section>
-
-    <section id="ports" data-ch="ports">
-      <div class="panel">
-        <p class="eyebrow">04 · Security</p>
-        <h2>65,536 ports. <em>None of them open.</em></h2>
-        <p>This wall is every port number there is. My network answers on none of them from the internet.</p>
-        <p>Four bare-metal servers run Proxmox VE, TrueNAS and Unraid for 12+ daily users. Traffic reaches them only through Cloudflare Zero-Trust and Tailscale, behind SSO, 2FA and mutual TLS, with VLANs and host firewalls inside.</p>
-        <ul class="facts">
-          <li><b>&lt; 30 min</b> to rebuild the cluster from bare metal with Ansible</li>
-          <li><b>24/7</b> watched by Grafana, Prometheus, Uptime Kuma and my own Python health checker</li>
+      </div></div></div>
+      <div class="container notes">
+        <p>I work from the solder joint up: component-level diagnostics and BIOS tuning at one end, a profiler on someone else’s C++ at the other, and the Linux, storage and networks in between. Each tile above names where the skill was used; the scenes that follow show the work.</p>
+        <ul class="stats">
+          <li><b>6</b> <span>years at the bench: hardware, diagnostics and repair for clients across Ticino</span></li>
+          <li><b>5</b> <span>years on Linux, on the desktop and on the servers</span></li>
+          <li><b>4</b> <span>servers in production, used by twelve people every day</span></li>
         </ul>
       </div>
     </section>
 
-    <section id="path" data-ch="path">
-      <div class="panel">
-        <p class="eyebrow">05 · Experience</p>
-        <h2>The whole path, <em>month by month.</em></h2>
-        <ol class="jobs">
-          <li>
-            <h3>Infrastructure and systems consultant <span>DEC Energy · July to August 2026</span></h3>
-            <p>Designed and built a startup's internal infrastructure from scratch: a two-node Kubernetes cluster on its own hardware, hosting local LLM inference, accounting software and Gitea. Chose, bought and assembled both servers and the engineering workstations, then provided Tier-2 and Tier-3 support.</p>
-          </li>
-          <li>
-            <h3>IT support and systems technician <span>Private clients, Ticino · 2020 to now</span></h3>
-            <p>Networks cabled and split into VLANs, DNS, DHCP and VPN access. A turnkey TrueNAS rack on ZFS RAID 10 with per-user permissions and automatic offsite copies. Documentation left with every client.</p>
-          </li>
-          <li>
-            <h3>Education <span>USI Lugano · Bellinzona</span></h3>
-            <p>BSc Economics at Università della Svizzera italiana, 2024 to now, after 66 ECTS of computer science there. AFC and commercial Maturità. Google IT Support and Data Analytics certificates, Microsoft Foundations of IT Systems and Networking.</p>
-          </li>
+    <section class="scene f-kaki" id="latency">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>747 milliseconds, now 66.</h2>
+        <div class="fig race">
+          <div class="lane" data-ms="747"><p class="lane__label">Before</p><p class="lane__ms"><span data-out>747</span> <small>ms</small></p><div class="lane__bar" aria-hidden="true"><i></i></div></div>
+          <div class="lane" data-ms="66"><p class="lane__label">Now</p><p class="lane__ms"><span data-out>66</span> <small>ms</small></p><div class="lane__bar" aria-hidden="true"><i></i></div></div>
+          <div class="race__ctl"><button class="btn btn--quiet" type="button" id="rerun">Send both again</button><p class="caption">Both bars fill in real time.</p></div>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p>I volunteered on <a href="https://bfrevive.net" target="_blank" rel="noopener">Brave Frontier Revival</a>, the community-run revival of the mobile game Brave Frontier, while its players grew from 2,500 to over 14,000. I profiled the live, multi-threaded C++ server first, then worked through it in small pull requests: the arena, colosseum and friend queries, a read pool, caches and sessions; libdeflate compression; VAES and AVX2 paths that check themselves against the proven code at start-up; and a per-thread RNG in place of a global lock. Founder’s reference available on request.</p>
+        <ul class="stats">
+          <li><b>+27%</b> <span>throughput, 210 to 266 requests per second</span></li>
+          <li><b>25%</b> <span>less CPU per request in the project benchmark</span></li>
+          <li><b>9.7 s</b> <span>to log in, down from 23 seconds</span></li>
+          <li><b>2.3 s</b> <span>to open the achievements screen, down from 7.2</span></li>
+          <li><b>14,000</b> <span>players and more, up from 2,500</span></li>
+          <li><b>40</b> <span>commits in five pull requests, reviewed by the founder</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-moss" id="ci">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>Thirty minutes of CI, now one.</h2>
+        <div class="fig ci" aria-hidden="true">
+          <div class="ci__num"><span class="mega" data-count="30,1" data-range="0.1,0.8">1</span><p class="unit">min a run</p></div>
+          <div class="ci__bar"><i></i></div>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p>The same project’s build: ccache, vcpkg and cargo caching took every run from half an hour to a minute. The bill got the same treatment.</p>
+        <ul class="stats">
+          <li><b>~70%</b> <span>of the Cloudflare bill traced to a single Worker</span></li>
+          <li><b>&gt; 50%</b> <span>off Worker costs after moving downloads to R2</span></li>
+          <li><b>400</b> <span>responses diffed between versions to prove nothing else changed</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-indigo" id="ports">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>65,536 ports. None of them open.</h2>
+        <div class="fig odo-fig" aria-hidden="true">
+          <div class="odo mega"><span class="d" data-from="6">0</span><span class="d" data-from="5">0</span><span class="comma">,</span><span class="d" data-from="5">0</span><span class="d" data-from="3">0</span><span class="d" data-from="6">0</span></div>
+          <p class="unit">ports answering from the internet</p>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p>Since 2020 my homelab has run on four bare-metal servers: Proxmox VE, TrueNAS and Unraid. Traffic reaches them only through Cloudflare Zero-Trust and Tailscale, behind SSO, 2FA and mutual TLS.</p>
+        <figure class="vis"><canvas class="mini" data-shape="rack" role="img" aria-label="A server rack drawn as a cloud of points, turning as the page scrolls"></canvas></figure>
+        <ul class="stats">
+          <li><b>12+</b> <span>people use it every day</span></li>
+          <li><b>&lt; 30 min</b> <span>to rebuild the cluster from bare metal with Ansible</span></li>
+          <li><b>24/7</b> <span>watched by Grafana, Prometheus and Nargothrond Watch, my own Python checker</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-ochre" id="watts">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>85 watts of idle, cut to 17.</h2>
+        <div class="fig watts" aria-hidden="true">
+          <div>
+            <span class="mega squeeze" data-count="85,17" data-range="0.1,0.8">17</span>
+            <p class="unit">watts, doing nothing</p>
+          </div>
+          <div class="tower"><p class="unit">85 W</p><div class="tower__box"><i></i></div></div>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p>One production Unraid server (Core Ultra 5 225, 48 GB DDR5, 10GbE), before and after: BIOS voltage offsets, PL1 and PL2 power limits and C-state tuning, then ASPM, powertop and drive spin-down. Every change was benchmarked and stability-tested before it stayed.</p>
+        <ul class="stats">
+          <li><b>80%</b> <span>less idle power, drawn to scale above</span></li>
+          <li><b>CHF 160</b> <span>saved a year, roughly, from one machine</span></li>
+          <li><b>25+</b> <span>systems built, upgraded and repaired for clients across Ticino since 2020</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-ink" id="nargothrond">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>One request’s trip through Nargothrond.</h2>
+        <div class="fig trip" aria-hidden="true">
+          <div class="hop"><span>Phone</span><span>Tunnel</span><span>Traefik</span><span>Immich</span><i></i></div>
+          <div class="hop hop--no"><span>Smart bulb</span><span class="vlan">VLAN boundary</span><span>Photos and passwords</span><i></i></div>
+          <p class="unit" id="trip-say">The VLAN boundary stops it.</p>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p><a href="https://github.com/Quinta0/Nargothrond" target="_blank" rel="noopener">Nargothrond</a> is the server from the last scene, drawing 17 watts in a closet. From outside, a request passes the Cloudflare or Pangolin tunnel into Traefik, which reads the hostname and routes it; the router opens no inbound port. From the couch, devices ask AdGuard Home first, then reach Traefik over the LAN. CrowdSec bans hostile addresses.</p>
+        <ul class="stats">
+          <li><b>0</b> <span>inbound ports open on the router</span></li>
+          <li><b>6</b> <span>networks the containers are split across, each talking only to what it needs</span></li>
+          <li><b>VLAN</b> <span>a compromised bulb cannot reach the containers that hold photos or passwords</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-paper" id="road">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>From commerce school to the server rack.</h2>
+        <div class="fig rail-wrap" tabindex="0" aria-label="The road so far, 2018 to 2024">
+          <ol class="rail">
+            <li><b class="year">2018</b><h3>Bellinzona</h3><p>Four years at the school of commerce, an AFC and a commercial Maturità. It is why I count what a system costs.</p></li>
+            <li><b class="year">2020</b><h3>The homelab and the bench</h3><p>The homelab starts, and so does a bench for private clients across Ticino: hardware, networks, a turnkey TrueNAS rack.</p></li>
+            <li><b class="year">2022</b><h3>Lugano</h3><p>Computer science at Università della Svizzera italiana: 66 ECTS, and a twelve-person Scrum team building a city simulation, where I owned the Spring Boot backend.</p></li>
+            <li><b class="year">2024</b><h3>Economics</h3><p>Over to the BSc in Economics at USI, which I am still reading for.</p></li>
+          </ol>
+        </div>
+      </div></div></div>
+    </section>
+
+    <section class="scene f-indigo" id="whoami">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>A portfolio that changes style.</h2>
+        <div class="fig fig--fill" aria-hidden="true">
+          <canvas class="cloud"></canvas>
+          <p class="unit">Rack, knot, globe, name. Redrawn here on a plain canvas.</p>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p>A single-page portfolio, <a href="https://me.quintahomelab.org" target="_blank" rel="noopener">whoami</a>, where a GPU particle cloud morphs between shapes as you scroll, and the whole CV can be re-dressed. Three.js with my own shaders, in React and TypeScript; it respects reduced motion and coarse pointers, and the three.js bundle ships as its own cached chunk.</p>
+        <ul class="vis styles" aria-label="The eight styles of whoami">
+          <li class="tile f-ink"><b>Terminal</b></li><li class="tile f-paper"><b>Swiss</b></li>
+          <li class="tile f-moss"><b>Blueprint</b></li><li class="tile f-ochre"><b>Studio</b></li>
+          <li class="tile f-paper"><b>Newsprint</b></li><li class="tile f-kaki"><b>Werkstatt</b></li>
+          <li class="tile f-ochre"><b>Arcade</b></li><li class="tile f-ink"><b>Remix</b></li>
+        </ul>
+        <ul class="stats">
+          <li><b>4</b> <span>shapes in the cloud: a server rack, a knot, a globe and text, with hover dioramas for single projects</span></li>
+          <li><b>8</b> <span>styles for one CV: Terminal, Swiss, Blueprint, Studio, Newsprint, Werkstatt, Arcade and a Remix that holds them all</span></li>
+          <li><b>1.6 s</b> <span>count-up counters on a cubic ease-out, one quiet fade per block</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-ochre" id="valgo">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>Sorting, narrated step by step.</h2>
+        <div class="fig fig--fill" aria-hidden="true">
+          <div class="sort"></div>
+          <p class="unit" id="say">Insertion sort, recorded once and replayed by your scroll.</p>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p><a href="https://quinta0.github.io/valgo/" target="_blank" rel="noopener">VALGO</a> visualises the classic sorting algorithms on a dark, grid-lined canvas, with a commentary track that says what is happening and why. Each algorithm runs once and records every compare, swap, pivot and merge; the player replays that record like a video, so you can pause, scrub and change speed. The bars above work the same way. Next.js, React, TypeScript and Tailwind.</p>
+        <figure class="vis">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Three growth curves: n squared climbs steeply, n log n less so, n plus k stays nearly flat">
+            <path class="axis" d="M30 10V270H390" />
+            <path d="M30 270Q250 270 300 10" /><path d="M30 270Q230 235 390 110" /><path d="M30 270L390 215" />
+            <text x="250" y="24">O(n²)</text><text x="300" y="118">O(n log n)</text><text x="318" y="206">O(n + k)</text>
+            <text x="30" y="292">array size</text>
+          </svg>
+        </figure>
+        <ul class="stats">
+          <li><b>10</b> <span>languages for the commentary panel</span></li>
+          <li><b>3</b> <span>growth curves side by side, O(n²), O(n log n) and O(n + k), with a live marker at the current array size</span></li>
+          <li><b>4</b> <span>colour-coded states: comparing, swapping, pivot and sorted, under a pointer that shows where the algorithm is looking</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-moss" id="benthic">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>Wallpapers that move, on screens that last.</h2>
+        <div class="fig fig--fill" aria-hidden="true">
+          <div class="wall"><span>Wallpaper one</span><span>Wallpaper two</span></div>
+          <p class="unit" id="bb-say">Idle dimming: the background fades until you are back.</p>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p><a href="https://github.com/Quinta0/benthicbloom" target="_blank" rel="noopener">BenthicBloom</a> is a GNOME Shell 50 extension that rotates wallpapers with a crossfade, plays looping video or GIF wallpapers and protects OLED screens from burn-in. Frames are decoded with GStreamer and drawn on GNOME Shell’s own Clutter stage; playback pauses on battery power or under a fullscreen window. Written in GJS, with a top-bar indicator and a libadwaita preferences window.</p>
+        <figure class="vis"><canvas class="mini" data-shape="bloom" role="img" aria-label="A bloom drawn as a cloud of points, turning as the page scrolls"></canvas></figure>
+        <ul class="stats">
+          <li><b>Shift</b> <span>the background drifts a few pixels on a slow cycle, so the same subpixels are not lit all day</span></li>
+          <li><b>Dim</b> <span>the background fades when the system sits idle, and a change is forced after a maximum static time</span></li>
+          <li><b>Fix</b> <span>the battery lookup made asynchronous, which removed a freeze at login</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="scene f-kaki" id="hitscan">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>From a USB capture to a Linux driver.</h2>
+        <div class="fig packet" aria-hidden="true">
+          <p class="bytes"><b class="k">08</b><b class="k">01</b><b>00</b><b>00</b><b>00</b><b class="k">08</b><b>00</b><b>00</b><b>00</b><b>00</b><b>00</b><b>00</b><b>00</b><b>00</b><b>00</b><b>00</b><b class="k">44</b></p>
+          <ol class="fields">
+            <li><b>08</b> report id</li>
+            <li><b>01</b> opcode, firmware version</li>
+            <li><b>08</b> constant for this opcode</li>
+            <li><b>44</b> checksum: all 17 bytes sum to 0x55</li>
+          </ol>
+          <p class="unit">The firmware-version request, as the driver sends it.</p>
+        </div>
+      </div></div></div>
+      <div class="container notes">
+        <p>The Hitscan Hyperlight is a gaming mouse with no Linux support. I took it from request to a working driver and a drawn device image. The driver and the drawing are submitted and under review.</p>
+        <figure class="vis"><canvas class="mini" data-shape="mouse" role="img" aria-label="A gaming mouse drawn as a cloud of points, turning as the page scrolls"></canvas></figure>
+        <ol class="stats">
+          <li><b>1</b> <span>Opened the support requests, <a href="https://github.com/libratbag/libratbag/issues/1744" target="_blank" rel="noopener">libratbag 1744</a> and <a href="https://github.com/libratbag/piper/issues/1056" target="_blank" rel="noopener">Piper 1056</a></span></li>
+          <li><b>2</b> <span>Rebuilt the undocumented USB protocol from Wireshark captures and wrote the driver in C, <a href="https://github.com/libratbag/libratbag/pull/1873" target="_blank" rel="noopener">libratbag PR 1873</a></span></li>
+          <li><b>3</b> <span>Drew the SVG of the mouse for the Piper configuration app, <a href="https://github.com/libratbag/piper/pull/1121" target="_blank" rel="noopener">Piper PR 1121</a></span></li>
         </ol>
-        <p class="tools">Italian, native · English, C2 · German, B1–B2</p>
       </div>
     </section>
 
-    <section id="year" data-ch="year">
-      <div class="panel">
-        <p class="eyebrow">06 · Open source</p>
-        <h2><span class="contribs">379</span> contributions, <em>and a driver written from a packet dump.</em></h2>
-        <p>The last year on GitHub. Every orange cube is one contribution, stacked on the day it happened.</p>
-        <ul class="items">
-          <li><a href="https://github.com/libratbag/libratbag/pull/1873" target="_blank" rel="noopener"><b>libratbag</b> PR #1873, merged</a><span>A Linux driver in C for a USB device with an undocumented protocol, reconstructed from Wireshark captures.</span></li>
-          <li><a href="https://github.com/Vysp3r/ProtonPlus/pull/1260" target="_blank" rel="noopener"><b>ProtonPlus</b> PR #1260, merged for v0.6.9</a><span>Diagnostics for broken Steam compatibility tools, after tracing runtime crash loops in <a href="https://github.com/ValveSoftware/steam-for-linux/issues/13248" target="_blank" rel="noopener">Valve's tracker</a>.</span></li>
-          <li><a href="https://github.com/Recol/DLSS-Updater/pull/283" target="_blank" rel="noopener"><b>DLSS-Updater</b> PRs #283, #252, #256</a><span>Bounded manifest parsing so DLSS, FSR and XeSS libraries survive DLL upgrades.</span></li>
-          <li><a href="https://github.com/Quinta0/ObsidianSetup" target="_blank" rel="noopener"><b>ObsidianSetup</b> · 27 stars</a><span>Cross-platform provisioning for Obsidian and its plugins.</span></li>
+    <section class="scene f-paper" id="labs">
+      <div class="container notes notes--works">
+        <h2>The rest of the bench.</h2>
+        <ul class="works">
+          <li class="works__lead"><a href="https://github.com/Quinta0/Ainulindale" target="_blank" rel="noopener">Ainulindale</a><p>The one I am proudest of: a fully self-hosted, automated music discovery and streaming system. Python.</p></li>
+          <li><b>City simulator</b><p>A USI group project. Coordinated a twelve-person Scrum team building a full-stack city simulation. Owned the Spring Boot backend and its integration with the web frontend. Java, Spring Boot, JavaScript.</p></li>
+          <li><b>Turnkey TrueNAS rack</b><p>A 19-inch cabinet for a private client: patch panels, nine drive bays, every cable run dressed and labelled. ZFS RAID 10, per-user ACLs and offsite snapshots.</p></li>
+          <li><b>Nargothrond Watch</b><p>Scheduled health checks for a home server: container status, ZFS pool health, CrowdSec events and Traefik routes, with email and Discord alerts. Python, no daemon.</p></li>
+          <li><a href="https://github.com/Quinta0/riptune" target="_blank" rel="noopener">riptune</a><p>A terminal-native music client in Rust for Subsonic-compatible servers.</p></li>
+          <li><a href="https://github.com/Quinta0/ObsidianSetup" target="_blank" rel="noopener">ObsidianSetup, 27 stars</a><p>Cross-platform provisioning for Obsidian and its plugins. PowerShell.</p></li>
+          <li><a href="https://github.com/Quinta0/gravity" target="_blank" rel="noopener">3D gravity simulator</a><p>Orbiting bodies with trajectories and a grid, in real time. C++, OpenGL, GLFW.</p></li>
+          <li><a href="https://github.com/Quinta0/forestfirecpp" target="_blank" rel="noopener">Forest fire simulation</a><p>Fire spreading over a grid of forest, with vegetation types, elevation, wind, humidity and spontaneous ignition; zoom and pan. C++ and SFML, after <a href="https://github.com/Quinta0/ForestFire" target="_blank" rel="noopener">a Python version</a> for Probability and Statistics at USI.</p></li>
+          <li><a href="https://github.com/Quinta0/BostonHousing" target="_blank" rel="noopener">Boston housing</a><p>A machine-learning model that predicts housing prices in Boston, for the same course at USI. Python, Jupyter.</p></li>
+          <li><a href="https://github.com/Quinta0/Mandelbrot" target="_blank" rel="noopener">Mandelbrot</a> <a href="https://github.com/Quinta0/MonteCarlo" target="_blank" rel="noopener">and Monte Carlo π</a><p>Generative visuals and a random-sampling estimate of pi. Python, NumPy, Matplotlib.</p></li>
+          <li><a href="https://github.com/Quinta0/dispatch" target="_blank" rel="noopener">Dispatch</a><p>A self-hosted RSS reader: three panes on desktop, a stacked view to swipe on mobile. React.</p></li>
+          <li><a href="https://github.com/Quinta0/PyColors" target="_blank" rel="noopener">PyColors</a><p>Helps people with colour blindness recognise the colours in an image. Python.</p></li>
+          <li><a href="https://github.com/Quinta0/Aurora-Twilight" target="_blank" rel="noopener">Obsidian themes</a><p>Light and dark themes with their own type and colour: Aurora-Twilight and Chiaroscuro Flow. CSS.</p></li>
+          <li><a href="https://github.com/Quinta0/dots" target="_blank" rel="noopener">dots</a><p>A Wayland desktop shell that mixes GNOME’s ease with KDE’s customisation. Quickshell and Niri.</p></li>
+          <li><b>CorrelateD</b><p>Seven markets and a drill-down correlation matrix, with loading, empty and error states. Private; a screen recording on request.</p></li>
         </ul>
-        <p class="tools">Linux · Proxmox VE · TrueNAS · ZFS · Unraid · Kubernetes · Docker · podman · Ansible · GitHub Actions · Bash · Python · PowerShell · C · C++ · Rust · WireGuard · Tailscale · Cloudflare Zero-Trust, Workers and R2 · Prometheus · Grafana · Gitea · llama.cpp</p>
       </div>
     </section>
 
-    <section id="contact" data-ch="contact">
-      <div class="panel">
-        <p class="eyebrow">07 · Contact</p>
-        <h2>Got something that should be <em>faster, cheaper or safer?</em></h2>
-        <p>I'm looking for infrastructure, DevOps or datacenter roles, on-site or hybrid. Based in Ticino and open to relocating to Zurich, Zug, Lucerne, Basel, Geneva or Lausanne. Italian national, Swiss Permit C.</p>
+    <section class="scene f-ink" id="github">
+      <div class="track"><div class="stage"><div class="container stage__in">
+        <h2>GitHub since 2023, one turn a year.</h2>
+        <div class="fig year-fig">
+          <div class="year-head">
+            <div aria-hidden="true"><span class="mega" id="total">365</span><p class="unit" id="total-unit">contributions in 2026</p></div>
+            <div class="years" role="group" aria-label="Choose a year"></div>
+          </div>
+          <div class="drum-box"><div class="drum" role="img" aria-label="Contribution calendars, one a year, one column a week"></div></div>
+        </div>
+      </div></div></div>
+      <div class="container notes notes--works">
+        <ul class="works">
+          <li><a href="https://github.com/Vysp3r/ProtonPlus/pull/1260" target="_blank" rel="noopener">ProtonPlus, PR 1260</a><p>Diagnostics for incomplete Steam compatibility tools, merged, after tracing crashes in the Steam Linux Runtime to unwritten manifest files.</p></li>
+          <li><a href="https://github.com/Recol/DLSS-Updater/pull/283" target="_blank" rel="noopener">DLSS-Updater, three PRs</a><p>Version chips for DLSS, FSR and XeSS on game cards, plus button, hover and alignment fixes, all merged.</p></li>
+          <li><a href="https://github.com/Sultech/simple-taskbar/pull/41" target="_blank" rel="noopener">Simple Taskbar, PR 41</a><p>Italian and German translations for the GNOME Shell taskbar, merged.</p></li>
+          <li><a href="https://github.com/wllclngn/PANDEMONIUM/issues/18" target="_blank" rel="noopener">scx_pandemonium, issue 18</a><p>A whole-system hang under a sched_ext scheduler, reported down to the starved per-CPU kworkers.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="contact f-indigo" id="contact">
+      <div class="container contact__in">
+        <h2>What should move next?</h2>
         <a class="mail" href="mailto:0pietroquintavalle0@gmail.com">0pietroquintavalle0@gmail.com</a>
-        <p class="links">
-          <a href="https://github.com/Quinta0" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/pietro-quintavalle" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://gitlab.com/Quinta0" target="_blank" rel="noopener">GitLab</a>
-          <a href="https://codeberg.org/Quinta" target="_blank" rel="noopener">Codeberg</a>
-        </p>
-        <p class="colophon">Drawn live in your browser: one mesh, 65,536 instances, no images.</p>
+        <p class="contact__lead">I’m looking for infrastructure, DevOps or datacenter roles, on-site or hybrid, and I build interactive motion in code. Based in Ticino and open to Zurich, Zug, Lucerne, Basel, Geneva or Lausanne. Italian national with a Swiss Permit C; Italian native, English C2, German B1 to B2. BSc Economics at USI Lugano, after 66 ECTS in computer science.</p>
+        <figure class="ascii"><pre aria-hidden="true"></pre><figcaption>A river coming down through the trees, drawn in characters.</figcaption></figure>
+        <ul class="links">
+          <li><a href="https://github.com/Quinta0" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/pietro-quintavalle" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://gitlab.com/Quinta0" target="_blank" rel="noopener">GitLab</a></li>
+          <li><a href="https://codeberg.org/Quinta" target="_blank" rel="noopener">Codeberg</a></li>
+        </ul>
+        <p class="tools">Linux, Proxmox VE, TrueNAS, ZFS, Unraid, Kubernetes, Docker, Ansible, GitHub Actions, Bash, Python, C, C++, Rust, WireGuard, Tailscale, Cloudflare, Prometheus, Grafana.</p>
+        <p class="tools">React, TypeScript, Three.js and custom shaders, CSS and SVG, Next.js, C++, OpenGL, Python, GStreamer and GNOME Shell extensions.</p>
+        <p class="tools">Off the clock: CachyOS on the desktop, the modern Doom trilogy, The Lord of the Rings, 3D printing and anime.</p>
+        <footer class="foot"><p>Built on CachyOS, btw. Set in Archivo and Hanken Grotesk.</p></footer>
       </div>
     </section>
   </main>
