@@ -68,7 +68,6 @@ h1 .line { display: block; white-space: nowrap; }
 .notes > h2 { grid-column: 1 / -1; }
 .notes > p { grid-column: 1 / span 5; font-size: var(--text-lead); }
 .notes a:hover { text-decoration-thickness: 2px; }
-#labs .notes { padding-top: var(--section-gap); }
 .stats { grid-column: 7 / -1; }
 .stats li { display: grid; grid-template-columns: minmax(0, 10rem) minmax(0, 1fr); column-gap: var(--space-lg); align-items: baseline; padding-block: var(--space-md); border-top: 2px solid var(--fg); }
 .stats b { font-size: var(--text-3xl); line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums lining-nums; }
@@ -170,10 +169,36 @@ html:not(.motion) .race__ctl { display: none; }
 .cal i[data-v="3"] { background: var(--color-cal-3); }
 .cal i[data-v="4"] { background: var(--color-cal-4); }
 .works { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gap-columns); }
-.works__lead { grid-column: 1 / -1; }
-.works__lead a { font: 800 var(--text-3xl)/1.1 var(--font-display); }
-.works li { display: grid; gap: var(--space-2xs); align-content: start; padding-block: var(--space-md) var(--space-lg); border-top: 2px solid var(--fg); }
-.works a, .works b { font: 600 var(--text-xl)/1.2 var(--font-body); }
+.works li { padding-block: var(--space-md) var(--space-lg); border-top: 2px solid var(--fg); }
+.works li > p { margin-top: var(--space-2xs); }
+.works h3 > a, .works h3 > b { font: 600 var(--text-xl)/1.2 var(--font-body); }
+.works li.works__lead { border-top-width: 6px; padding-bottom: var(--space-xl); }
+.works__lead h3 > a { font: 800 var(--text-3xl)/1.05 var(--font-display); letter-spacing: var(--tracking-display); }
+.works__tag { display: block; margin-bottom: var(--space-xs); font: 600 var(--text-sm)/1 var(--font-body); }
+#labs .stage__in { padding-top: var(--section-gap); }
+.bench__note { display: none; }
+
+/* labs, pinned on a wide screen: the whole bench as an index on the left, a marker that walks down it with the scroll,
+   and on the right a card for the piece under the marker. Narrow screens and reduced motion keep the plain two-column list. */
+@media (min-width: 60rem) {
+  .motion #labs .track { height: 420svh; }
+  .motion #labs .stage__in { padding-top: var(--space-3xl); grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto minmax(0, 1fr); column-gap: var(--space-2xl); }
+  .motion .bench > h2 { grid-column: 2; }
+  .motion .bench__note { display: block; grid-column: 2; align-self: end; max-width: 40rem; }
+  .motion .bench .works { display: block; grid-column: 1; grid-row: 1 / -1; align-self: center; counter-reset: bench; }
+  .motion .bench .works li { counter-increment: bench; padding: var(--space-3xs) 0; border: 0; }
+  .motion .bench .works li > p, .motion .bench .works__tag { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } /* still read out, just not drawn twice */
+  .motion .bench .works h3 { display: flex; align-items: baseline; gap: var(--space-sm); opacity: 0.32; transition: opacity 0.35s var(--ease-out), translate 0.5s var(--ease-out); }
+  .motion .bench .works h3::before { content: counter(bench, decimal-leading-zero); width: 2ch; font: 600 var(--text-xs)/1 var(--font-body); font-variant-numeric: tabular-nums; }
+  .motion .bench .works h3 > a, .motion .bench .works h3 > b { font: 600 var(--text-lg)/1.25 var(--font-body); letter-spacing: 0; }
+  .motion .bench .works__lead h3 > a { font: 800 var(--text-xl)/1.15 var(--font-display); letter-spacing: var(--tracking-display); }
+  .motion .bench .works li.is-on h3 { opacity: 1; translate: var(--space-lg) 0; }
+  .motion .bench .works li.is-on h3::after { content: ""; order: -1; align-self: center; width: var(--space-md); height: 3px; margin-left: calc(var(--space-lg) * -1); background: var(--fg); }
+  .bench__note .num { display: block; font: 800 var(--text-mega-s)/0.86 var(--font-display); letter-spacing: var(--tracking-display); font-variant-numeric: tabular-nums; }
+  .bench__note .tag { display: block; margin-top: var(--space-lg); font: 600 var(--text-sm)/1 var(--font-body); }
+  .bench__note .ttl { display: block; margin-top: var(--space-xs); font: 800 var(--text-3xl)/1.05 var(--font-display); letter-spacing: var(--tracking-display); }
+  .bench__note p { margin-top: var(--space-sm); font-size: var(--text-lead); }
+}
 .works a:hover { text-decoration-thickness: 2px; }
 
 /* the picture under each motion piece is drawn, not photographed: tiles, a chart, or a cloud of points that turns with the scroll */
@@ -229,6 +254,7 @@ html:not(.js) .ascii { display: none; }
   .hero__copy, .ledger, .notes > p, .stats, .vis { grid-column: 1 / -1; }
   .stats { grid-row: auto; }
   .works { grid-template-columns: minmax(0, 1fr); }
+  .motion #labs .track, .motion #labs .stage { height: auto; position: static; overflow: visible; } /* too long to pin on a phone: the plain list scrolls */
   .stats li { grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr); column-gap: var(--space-md); }
   .stage__in { gap: var(--space-lg); padding-bottom: var(--space-xl); }
 }
