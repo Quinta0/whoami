@@ -172,12 +172,30 @@ $$('.mosaic .tile').forEach((el, i) => { el.style.cssText += `--i:${i};--dx:${(r
 // hitscan: each byte and each decoded field needs its place in the queue
 $$('.bytes b, .fields li').forEach((el, i) => el.style.setProperty('--i', String(i)))
 
+// labs: the marker walks the index; the card on the right is rebuilt as text for the piece under it (the list itself stays the readable copy)
+const benchItems = $$('#labs .works li'), benchNote = $$('.bench__note')[0]
+let benchI = -1
+function bench(p: number) {
+  const i = Math.min(benchItems.length - 1, Math.floor(p * benchItems.length))
+  if (i === benchI) return
+  benchItems[benchI]?.classList.remove('is-on')
+  benchItems[benchI = i].classList.add('is-on')
+  const li = benchItems[i], tag = li.querySelector('.works__tag'), card = document.createElement('div')
+  const span = (cls: string, text: string) => { const el = document.createElement('span'); el.className = cls; el.textContent = text; return el }
+  const title = [...li.querySelector('h3')!.childNodes].filter(n => n !== tag).map(n => n.textContent).join('').trim()
+  card.append(span('num', String(i + 1).padStart(2, '0')), ...(tag ? [span('tag', tag.textContent!)] : []), span('ttl', title), li.querySelector('p')!.cloneNode(true))
+  card.querySelectorAll('a').forEach(a => a.replaceWith(a.textContent!)) // the card is a picture of the list item, not a second set of links
+  benchNote.replaceChildren(card)
+  if (motion) card.animate([{ opacity: 0, translate: '0 1.5rem' }, { opacity: 1, translate: '0 0' }], { duration: 450, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' })
+}
+
 const bbSay = $$('#bb-say')[0], tripSay = $$('#trip-say')[0]
 const on: Record<string, (p: number) => void> = {
   whoami: cloud,
   valgo: sort,
   benthic: p => tell(bbSay, p, [[.38, 'Crossfade to the next wallpaper.'], [.74, 'Pixel shifting: a slow drift, exaggerated here.'], [1, 'Idle dimming: the background fades until you are back.']]),
   nargothrond: p => tell(tripSay, p, [[.1, 'A phone outside the house asks for a photo backup.'], [.24, 'The request enters the Cloudflare or Pangolin tunnel.'], [.4, 'Traefik reads the hostname and picks the container.'], [.6, 'Immich answers. The router never opened a port.'], [.78, 'A compromised smart bulb tries for the photos and passwords.'], [1, 'The VLAN boundary stops it.']]),
+  labs: bench,
   github: p => { const x = seg(p, YEAR_A, YEAR_B) * last, k = Math.floor(x), f = seg(x - k, .25, .75); showYear(Math.min(last, k + f * f * (3 - 2 * f))) }, // each year rests a moment, then the drum turns on
 }
 Object.values(on).forEach(f => f(1)) // the finished frame, which is all there is without motion
@@ -233,4 +251,5 @@ if (motion) {
   $$('#rerun')[0].addEventListener('click', race)
   const seen = new IntersectionObserver(es => { if (es[0].isIntersecting) { race(); seen.disconnect() } }, { threshold: .9 })
   seen.observe($$('.race')[0])
+
 }
